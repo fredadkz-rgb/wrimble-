@@ -582,7 +582,9 @@ const EXAMPLES={
   society:["“Year 12s in regional NSW” beats “students”.","“My nan’s generation” beats “people back then”.","“Casual workers in hospitality” beats “society”."],
   ithink:["“Group work rewards the loudest, not the best.”","“Free public transport would pay for itself.”","“The ending fails because it explains too much.”"],
   technique:["“The ticking clock keeps coming back, so the reader feels every minute she’s losing.”","“Calling the city a ‘cage’ makes the reader feel trapped with him.”","“Short, flat sentences make the reader feel how numb she is.”"],
-  general:["“I fell off my bike” is fine. “I fell off my bike into Mrs Kelly’s roses” is a story.","One true detail beats three fancy words.","Small and specific wins: “a cold Milo” beats “a drink”."]
+  adverb:["Not “she said angrily”. “Get. Out.” she said.","Not “he said sadly”. “It's fine,” he said, and kept folding the same tea towel.","Not “I asked nervously”. “Is this… is this seat taken?” I said."],
+  tag:["“You're late,” Mum said. (Not “Mum barked.”)","“Righto,” he said, and left.","“Nice hat,” she said. That was all it took."],
+    general:["“I fell off my bike” is fine. “I fell off my bike into Mrs Kelly’s roses” is a story.","One true detail beats three fancy words.","Small and specific wins: “a cold Milo” beats “a drink”."]
 };
 const catOf=k=>{ k=[].concat(k)[0]||''; const c=k.split(':')[0]; return EXAMPLES[c]?c:({knob:'knob',warm:'warm'}[c]||'general'); };
 const pickEx=c=>{ const a=EXAMPLES[c]||EXAMPLES.general; return a[Math.floor(Math.random()*a.length)]; };
@@ -607,6 +609,8 @@ function walkHook(frag, all){
   if((m=tail.match(FEEL))) return pick('feel:'+m[1], "What did “"+m[1]+"” look like on you?", "Show it with your body: hands, face, stomach.");
   if((m=last.match(VAGUE))) return pick('vague:'+m[1], "“"+m[1]+"” how, exactly?", "Swap the blurry word for something we can picture.");
   if((m=last.match(/^(very|really|extremely|totally|literally|truly)$/))) return pick('knob', "Is there one word strong enough without “"+m[1]+"”?", "Strong words don’t need a volume knob.");
+  if((m=tail.match(/\b(said|says|asked|replied)\s+(\w+ly)$/))) return pick('adverb', "Can the words show “"+m[2]+"” on their own?", "If the line needs “"+m[2]+"”, the words aren't doing the job yet. Change the words, keep “said”.");
+  if((m=last.match(/^(exclaimed|barked|hissed|snapped|retorted|bellowed|uttered|stated|chuckled|growled)$/))) return pick('tag', "Would plain “said” work here?", "“Said” is invisible, so the reader hears the words, not the tag.");
   if(SAID.test(last)) return pick('said', "What were their exact words?", "Put them in quote marks. Real speech is funnier than a summary.");
   if(last==='because') return pick('why', "Is that the real reason, or the polite one?", "The honest reason is usually the interesting one.");
   if((m=last.match(PLACES)) && !SENSES.test(text)) return pick('place:'+m[1].toLowerCase(), "What can you hear or smell at the "+m[1].toLowerCase()+"?", "One sound or smell puts the reader right there.");

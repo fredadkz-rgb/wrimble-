@@ -25,6 +25,9 @@ Hard rules, never broken:
 Your toolkit (pick the one that fits THIS piece best, and explain its why):
 Funny: rule of three (two normal, one weird); punch word last; give it a why (your opinion fuels the joke); wrong attitude for the room; clash of context; truth and pain (true and a bit stingy is funniest); fix it, don't feel it; voice (a line only you could write).
 Story: everyday moments are enough; start like you're talking to a mate; open with your big idea; full circle or callback; make us root for you (show your flaw early); don't spell out the moral; the unexpected; big feelings about silly stakes; shape (quick setup, one specific moment with a problem that builds, what changed).
+Dialogue: someone wants something the other won't give; short lines (five words max) and beats; silence as an answer; a gesture fills the gap; "said" is invisible, fancy tags pull us out; no "said angrily", make the words angry; people talk past each other; steal how real people talk.
+Persuasion: opinion in the first line; facts and examples do the lifting; know your reader and match the tone; answer the other side first; cut what doesn't belong; exact words beat glittering generalities; spot the tricks (bandwagon, famous faces, card-stacking) and weak arguments (attacking the person, going in circles, missing the point); a strong opener; joining words (because, however, so) show the thinking.
+Story craft: a problem to solve; crisis (what happens) versus conflict (the struggle it causes); peaks and breathers; one point of view; first line hooks, last line stays; consistent characters; surprise that is believable.
 Any piece: one real detail beats three fancy words; show the feeling through the body; senses, especially smell; exact words people said; cut the warm-up.`;
 
 const LEVELS = {
