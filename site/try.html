@@ -610,9 +610,9 @@ async function walkCheck(){
   // rule-based pick (instant), then let the AI replace it if it answers fast
   let q=endsSentence ? questionFor(all[all.length-1], all) : walkHook(frag, done);
   if(aiOK){
-    const ai=await askAI({mode:'bubble', prompt:PROMPTS[pi].p, text:v.slice(-1500), asked:[...asked].slice(-12)}, 3500);
+    const ai=await askAI({mode:'bubble', prompt:PROMPTS[pi].p, text:v.slice(-1500), asked:[...asked].slice(-24)}, 3500);
     if(seq!==walkSeq || ta.value.length-v.length>25) return;
-    if(ai && ai.question){ q={k:'ai:'+ai.question.slice(0,40), q:ai.question, h:ai.idea||'', ex:ai.example||''}; }
+    if(ai && ai.question){ asked.add('q: '+ai.question); asked.add('ex: '+(ai.example||'').slice(0,60)); q={k:'ai:'+ai.question.slice(0,40), q:ai.question, h:ai.idea||'', ex:ai.example||''}; }
   }
   if(q) showBubble(q, Math.min(anchor, ta.value.replace(/\s+$/,'').length));
 }
@@ -712,7 +712,7 @@ const MISSIONS = {
   circle:{t:"End where you started: bring back something from your first line, with a twist.", ok:(x)=>!!hasCallback(sentences(x)), miss:()=>"Your last line doesn't come back to your first one yet."},
   cut:{t:"Cut a quarter of your words and keep the meaning.", ok:(x,prev)=>words(x).length<=Math.round(words(prev).length*0.8), miss:(x,prev)=>"You went from "+words(prev).length+" to "+words(x).length+" words. Keep cutting."}
 };
-let mission=null, aiMission=null, usedAiMission=false;
+let mission=null, aiMission=null, usedAiMission=false, pastMissions=[];
 function challengeCheck(text, ss){
   const n=words(text).length, P=PROMPTS[pi];
   if(/150 words/.test(P.p)) return n>165 ? "The challenge said 150 words. You wrote "+n+". The limit is the point: it forces you to choose." : (n<100 ? "The challenge said 150 words. You wrote "+n+", so you've got room for one more real detail." : null);
@@ -750,7 +750,7 @@ async function aiNotes(text, missionText){
   if(!aiOK) return;
   const P=PROMPTS[pi], L=LESSONS2[P.lesson], prev=versions.length>1?versions[versions.length-2]:'';
   const box=$('tw-notes'); const wait=document.createElement('p'); wait.className='aiwait'; wait.textContent='The coach is reading it properly…'; box.prepend(wait);
-  const r=await askAI({mode:'notes', prompt:P.p, rule:P.rule, lesson:L.name+': '+L.why, round, mission:missionText, text, previous:prev}, 20000);
+  const r=await askAI({mode:'notes', prompt:P.p, rule:P.rule, lesson:L.name+': '+L.why, round, mission:missionText, past_missions:pastMissions.slice(-10), text, previous:prev}, 20000);
   wait.remove(); if(!r || !r.next_mission || versions[versions.length-1]!==text) return;
   const n=[];
   if(missionText && r.mission_status!=='none') n.push([r.mission_status==='done'?'c':'', r.mission_status==='done'?'Mission done':'Mission not yet','<q>'+esc(missionText)+'</q>'+esc(r.mission_note)]);
@@ -759,7 +759,7 @@ async function aiNotes(text, missionText){
   const cc=challengeCheck(text, sentences(text)); if(cc) n.push(['','Challenge check',esc(cc)]);
   n.push(['c','Next mission',esc(r.next_mission)+(r.example?'<span class="exline"><b>Example from a different story:</b> '+esc(r.example)+'</span>':'')]);
   if(r.curious) n.push(['','Curious',esc(r.curious)]);
-  aiMission=r.next_mission;
+  aiMission=r.next_mission; pastMissions.push(r.next_mission);
   box.innerHTML=n.map(([c,t,h])=>'<div class="note2"><span class="tag '+c+'">'+t+'</span><div>'+h+'</div></div>').join('');
 }
 function renderVersions(){
