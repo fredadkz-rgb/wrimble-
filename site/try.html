@@ -271,6 +271,10 @@ footer small{color:var(--ink-soft)}
 .daycard{margin-top:24px;display:grid;grid-template-columns:1fr 300px;gap:24px;align-items:start}
 .panel{background:var(--card);border:2px solid var(--ink);border-radius:6px;padding:22px;min-width:0}
 .promptbox .p{font-family:var(--font-display);font-weight:800;font-size:clamp(1.5rem,3.4vw,2.2rem);line-height:1.15;margin-top:8px;text-wrap:balance}
+.levels{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:12px}
+.levels .eyebrow{margin-right:4px}
+.levels button{font:inherit;font-size:.9rem;font-weight:700;padding:6px 14px;border-radius:999px;border:2px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer}
+.levels button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
 .promptbox .rule{margin-top:10px;color:var(--ink-soft)}
 .row2{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:14px}
 .btn.sm{padding:8px 14px;font-size:.92rem}
@@ -335,6 +339,7 @@ footer small{color:var(--ink-soft)}
 
     <div class="daycard">
       <div style="min-width:0">
+        <div class="levels" id="tw-level" role="group" aria-label="Who is writing?"><span class="eyebrow">Who’s writing?</span><button type="button" data-l="everyday">Everyday</button><button type="button" data-l="hsc">HSC English</button><button type="button" data-l="uni">Uni</button></div>
         <div class="panel promptbox">
           <p class="eyebrow">Your challenge</p>
           <p class="p" id="tw-prompt"></p>
@@ -439,14 +444,30 @@ const PROMPTS = [
   {type:"funny", p:"Write three true complaints about Mondays.", rule:"Make the third one surprise us.", lesson:1, q:["What's the one thing that makes a Monday okay?","What would Monday say back to you?","Which complaint is the most you?"]},
   {type:"work", p:"Turn down a meeting without sounding like HR.", rule:"Be kind, be clear, be you. Three sentences max.", lesson:3, q:["What would you say to a friend instead?","What's the real reason you're saying no?","How would the other person feel reading it?"]},
   {type:"story", p:"Describe your kitchen to someone who has never seen it.", rule:"Use at least one sound and one smell.", lesson:0, q:["What's in the fridge that shouldn't be?","Who leaves the mess?","What's the best thing that ever happened in there?"]},
-  {type:"story", p:"Write the first paragraph of a story that starts at a bus stop.", rule:"Something has already gone wrong.", lesson:2, q:["Where is the bus?","What is your character holding?","What happens in the next sentence?"]}
+  {type:"story", p:"Write the first paragraph of a story that starts at a bus stop.", rule:"Something has already gone wrong.", lesson:2, q:["Where is the bus?","What is your character holding?","What happens in the next sentence?"]},
+  {lvl:"hsc", type:"story", p:"Write the opening of a story where one object tells us who a character is. 200 words.", rule:"Never say what the character feels. Let the object do the work.", lesson:4, q:["Who gave them the object?","What would they never throw away?","What does the object smell like?"]},
+  {lvl:"hsc", type:"reflect", p:"Write a 100-word reflection on one choice you made in something you've written.", rule:"Name the choice, say why you made it, and say what it does to the reader.", lesson:5, q:["What did you almost do instead?","Which reader were you writing for?","What would the piece lose without it?"]},
+  {lvl:"hsc", type:"persuade", p:"Persuade a room of Year 7s that being bored is good for them.", rule:"One real example from your own life. No rhetorical questions.", lesson:6, q:["When were you last properly bored?","What would a Year 7 roll their eyes at?","What's the one line they'd remember?"]},
+  {lvl:"hsc", type:"discursive", p:"Explore both sides of banning phones at school in 150 words.", rule:"Don't pick a side. Leave us thinking.", lesson:4, q:["What does a phone-free lunch actually look like?","Who loses most from the ban?","What question do you want us to leave with?"]},
+  {lvl:"uni", type:"essay", p:"Write one paragraph arguing whether lectures should always be recorded.", rule:"Topic sentence first. One piece of evidence. Then say what it means.", lesson:6, q:["Who is the paragraph really for?","What would someone who disagrees say?","What does your evidence not prove?"]},
+  {lvl:"uni", type:"essay", p:"Explain your degree to your nan in 100 words. Then write it again as one academic sentence.", rule:"Same idea, two voices. No jargon in the nan version.", lesson:3, q:["What would your nan ask first?","Which word in your degree do people get wrong?","What's the one idea that holds it together?"]},
+  {lvl:"uni", type:"essay", p:"Take a claim you've heard in a lecture or tutorial and push back on it in one paragraph.", rule:"Be fair to the other side first, then disagree.", lesson:7, q:["What's the strongest version of their claim?","What evidence would change your mind?","Where exactly does their argument slip?"]},
+  {lvl:"uni", type:"reflect", p:"Write a short reflection on a group assignment that went wrong.", rule:"What happened, what you learned, what you'd do differently. 150 words.", lesson:5, q:["What was the moment you knew it was going wrong?","What was your part in it?","What would you say to that group now?"]},
 ];
 const LESSONS2 = [
   {name:"Specific beats general", flat:"The food was really nice.", works:"The chips were so hot I had to blow on them like birthday candles.", why:"Your brain can't picture \u201cnice\u201d. It can picture hot chips."},
   {name:"Surprise makes it funny", flat:"I went to the gym. It was hard.", works:"I went to the gym. The gym won.", why:"Funny is when your brain expects one thing and gets another."},
   {name:"Start in the middle", flat:"This is a story about the day I got lost.", works:"The map was upside down and so was my day.", why:"Readers decide in one line whether to keep going."},
-  {name:"Short punches harder", flat:"I was feeling extremely nervous about the whole situation.", works:"I was terrified.", why:"Fewer words land faster."}
+  {name:"Short punches harder", flat:"I was feeling extremely nervous about the whole situation.", works:"I was terrified.", why:"Fewer words land faster."},
+  {name:"Show the big idea in a small moment", flat:"Loneliness is a big part of modern life.", works:"Mum texts me from the next room.", why:"Markers reward ideas they can see. A small, concrete moment carries a big idea further than saying it."},
+  {name:"Every choice has a purpose", flat:"I used imagery to make it more interesting.", works:"I never gave the bus driver a name, to show how invisible he was to everyone on the bus.", why:"A strong reflection says what you chose, why, and what it does to the reader. Not just that you chose it."},
+  {name:"Your first sentence does the arguing", flat:"There are many different views on working from home.", works:"Working from home lifts output but quietly hurts new staff.", why:"Your reader should know your claim after one sentence. Everything after it is proof."},
+  {name:"Evidence, then what it means", flat:"A 2021 survey found most students skip breakfast.", works:"A 2021 survey found most students skip breakfast, which points at 8am classes, not laziness.", why:"Quoting isn't arguing. The marks are in what you make the evidence mean."}
 ];
+let LEVEL = 'everyday'; try{ LEVEL = localStorage.getItem('wrimble-level') || 'everyday'; }catch(e){}
+const qLevel=new URLSearchParams(location.search).get('level'); if(['everyday','hsc','uni'].includes(qLevel)){ LEVEL=qLevel; try{ localStorage.setItem('wrimble-level', LEVEL); }catch(e){} }
+const inLevel = P => (P.lvl||'everyday')===LEVEL;
+function randPrompt(not){ const ids=PROMPTS.map((P,i)=>i).filter(i=>inLevel(PROMPTS[i]) && i!==not); return ids[Math.floor(Math.random()*ids.length)]; }
 let pi = 0, round = 1, versions = [], timerStart = null, timerId = null, lastStuck = -1;
 const $ = id => document.getElementById(id);
 function setPrompt(i){
@@ -454,8 +475,9 @@ function setPrompt(i){
   $('tw-prompt').textContent = P.p; $('tw-rule').textContent = P.rule;
   $('tw-l-name').textContent = L.name; $('tw-l-flat').textContent = L.flat; $('tw-l-works').textContent = L.works; $('tw-l-why').textContent = L.why;
 }
-setPrompt(Math.floor(Math.random()*PROMPTS.length));
-$('tw-new').addEventListener('click', ()=>{ let i; do{ i=Math.floor(Math.random()*PROMPTS.length); }while(i===pi); setPrompt(i); resetAll(); });
+setPrompt(randPrompt(-1));
+document.querySelectorAll('#tw-level button').forEach(b=>{ b.setAttribute('aria-pressed', b.dataset.l===LEVEL); b.addEventListener('click', ()=>{ LEVEL=b.dataset.l; try{ localStorage.setItem('wrimble-level', LEVEL); }catch(e){} document.querySelectorAll('#tw-level button').forEach(x=>x.setAttribute('aria-pressed', x===b)); setPrompt(randPrompt(-1)); resetAll(); }); });
+$('tw-new').addEventListener('click', ()=>{ setPrompt(randPrompt(pi)); resetAll(); });
 $('tw-stuck').addEventListener('click', ()=>{
   let i; do{ i=Math.floor(Math.random()*BUSTERS.length); }while(i===lastStuck); lastStuck=i;
   const [t,w,f]=BUSTERS[i]; const b=$('tw-stuckbox'); b.hidden=false;
@@ -525,7 +547,7 @@ function questionFor(sent, all){
   return null;
 }
 function showBubble(q, endPos){
-  const b=$('tw-bubble'); if(q.multi){ $('tw-bq').innerHTML=q.multi.map(x=>'<span style="display:block">'+esc(x)+'</span>').join(''); } else { $('tw-bq').textContent=q.q; } $('tw-bh').innerHTML=q.h?(q.go?'':'<b>Idea:</b> ')+esc(q.h):''; const ex=q.ex===null?'':(q.ex||pickEx(catOf(q.k))); $('tw-bgo').hidden=!q.go; $('tw-be').innerHTML=ex?'<b>Example from a different story:</b> '+esc(ex):''; b.hidden=false;
+  const b=$('tw-bubble'); if(q.multi){ $('tw-bq').innerHTML=q.multi.map(x=>'<span style="display:block">'+esc(x)+'</span>').join(''); } else { $('tw-bq').textContent=q.q; } $('tw-bh').innerHTML=q.h?(q.go?'':'<b>Idea:</b> ')+esc(q.h):''; const ex=q.ex===null?'':(q.ex||pickEx(catOf(q.k))); $('tw-bgo').hidden=!q.go; $('tw-be').innerHTML=ex?'<b>Example from a different '+(LEVEL==='everyday'?'story':'topic')+':</b> '+esc(ex):''; b.hidden=false;
   const xy=caretXY(ta, endPos); const wrapW=ta.offsetWidth;
   const bw=Math.min(340, wrapW-16); let left=Math.max(8, Math.min(xy.x-24, wrapW-bw-8));
   b.style.left=left+'px'; b.style.top=(xy.y+8)+'px'; b.style.setProperty('--tip', Math.max(10, Math.min(xy.x-left-8, bw-28))+'px');
@@ -556,6 +578,10 @@ const EXAMPLES={
   said:["“He said, ‘I’m not angry,’ while slamming every cupboard.”","“She just said, ‘Righto,’ and walked off.”","“The teacher said, ‘Interesting choice,’ which meant wrong.”"],
   why:["“…because I once saw a seagull steal a whole pie, and I’ve never trusted them since.”","“…because Mum said so, and Mum is never wrong, except about the GPS.”","“…because I panicked. Simple as that.”"],
   time:["“at 3am, which is when all bad ideas happen”","“the day before Christmas, so the shops were a war zone”","“halfway through a footy final”"],
+  claim:["“…which suggests the rule protects teachers more than students.”","“The empty chair at the dinner table shows the reader the grief nobody mentions.”","“…which suggests the council cares more about parking than parks.”"],
+  society:["“Year 12s in regional NSW” beats “students”.","“My nan’s generation” beats “people back then”.","“Casual workers in hospitality” beats “society”."],
+  ithink:["“Group work rewards the loudest, not the best.”","“Free public transport would pay for itself.”","“The ending fails because it explains too much.”"],
+  technique:["“The ticking clock keeps coming back, so the reader feels every minute she’s losing.”","“Calling the city a ‘cage’ makes the reader feel trapped with him.”","“Short, flat sentences make the reader feel how numb she is.”"],
   general:["“I fell off my bike” is fine. “I fell off my bike into Mrs Kelly’s roses” is a story.","One true detail beats three fancy words.","Small and specific wins: “a cold Milo” beats “a drink”."]
 };
 const catOf=k=>{ k=[].concat(k)[0]||''; const c=k.split(':')[0]; return EXAMPLES[c]?c:({knob:'knob',warm:'warm'}[c]||'general'); };
@@ -566,9 +592,15 @@ const WHEN=/\b(one day|once|yesterday|last (week|year|night)|this morning|when)\
 // Look only at the last few words: the coach "walks" along with you.
 function walkHook(frag, all){
   const w=words(frag); if(w.length<2) return null;
-  const tail=w.slice(-2).join(' ').toLowerCase(), last=w[w.length-1].toLowerCase();
+  const tail=w.slice(-3).join(' ').toLowerCase(), last=w[w.length-1].toLowerCase(); let m0;
   const text=all.join(' ')+' '+frag;
   const pick=(k,q,h)=>asked.has(k)?null:{k,q,h};
+  if(LEVEL!=='everyday'){
+    if((m0=last.match(/^(shows?|proves?|demonstrates?|suggests?|highlights?|reveals?)$/))) return pick('claim', "“"+m0[1]+"” how? What should the reader notice?", "Unpack it: point at the detail and say what it means.");
+    if((m0=tail.match(/\b(society|many people|some people|everyone|nowadays|throughout history|today's world)$/))) return pick('society', "Who exactly is “"+m0[1]+"”?", "Big vague groups weaken an argument. Name a real group, place or time.");
+    if(LEVEL==='uni' && /\bi (think|believe|feel that)$/.test(tail)) return pick('ithink', "Can you say it as a claim you’ll prove?", "Academic writing states the point, then backs it up.");
+    if((m0=last.match(/^(metaphor|imagery|simile|symbol|symbolism|motif|juxtaposition|repetition|personification|tone)$/))) return pick('technique', "What does that "+m0[1]+" do to the reader?", "Markers want the effect, not just the name of the technique.");
+  }
   const act=activity(frag);
   if(act && act.verb===last) return pick('where', "Where were you "+act.phrase+"?", "Add a place. Name the real spot, not just “somewhere”.");
   let m;
@@ -610,7 +642,7 @@ async function walkCheck(){
   // rule-based pick (instant), then let the AI replace it if it answers fast
   let q=endsSentence ? questionFor(all[all.length-1], all) : walkHook(frag, done);
   if(aiOK){
-    const ai=await askAI({mode:'bubble', prompt:PROMPTS[pi].p, text:v.slice(-1500), asked:[...asked].slice(-24)}, 3500);
+    const ai=await askAI({mode:'bubble', level:LEVEL, prompt:PROMPTS[pi].p, text:v.slice(-1500), asked:[...asked].slice(-24)}, 3500);
     if(seq!==walkSeq || ta.value.length-v.length>25) return;
     if(ai && ai.question){ asked.add('q: '+ai.question); asked.add('ex: '+(ai.example||'').slice(0,60)); q={k:'ai:'+ai.question.slice(0,40), q:ai.question, h:ai.idea||'', ex:ai.example||''}; }
   }
@@ -750,7 +782,7 @@ async function aiNotes(text, missionText){
   if(!aiOK) return;
   const P=PROMPTS[pi], L=LESSONS2[P.lesson], prev=versions.length>1?versions[versions.length-2]:'';
   const box=$('tw-notes'); const wait=document.createElement('p'); wait.className='aiwait'; wait.textContent='The coach is reading it properly…'; box.prepend(wait);
-  const r=await askAI({mode:'notes', prompt:P.p, rule:P.rule, lesson:L.name+': '+L.why, round, mission:missionText, past_missions:pastMissions.slice(-10), text, previous:prev}, 20000);
+  const r=await askAI({mode:'notes', level:LEVEL, prompt:P.p, rule:P.rule, lesson:L.name+': '+L.why, round, mission:missionText, past_missions:pastMissions.slice(-10), text, previous:prev}, 20000);
   wait.remove(); if(!r || !r.next_mission || versions[versions.length-1]!==text) return;
   const n=[];
   if(missionText && r.mission_status!=='none') n.push([r.mission_status==='done'?'c':'', r.mission_status==='done'?'Mission done':'Mission not yet','<q>'+esc(missionText)+'</q>'+esc(r.mission_note)]);

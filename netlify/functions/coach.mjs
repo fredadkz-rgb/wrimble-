@@ -27,6 +27,13 @@ Funny: rule of three (two normal, one weird); punch word last; give it a why (yo
 Story: everyday moments are enough; start like you're talking to a mate; open with your big idea; full circle or callback; make us root for you (show your flaw early); don't spell out the moral; the unexpected; big feelings about silly stakes; shape (quick setup, one specific moment with a problem that builds, what changed).
 Any piece: one real detail beats three fancy words; show the feeling through the body; senses, especially smell; exact words people said; cut the warm-up.`;
 
+const LEVELS = {
+  everyday: "The writer is an everyday adult writing for fun or work.",
+  hsc: "The writer is a NSW HSC English student (Year 11 or 12), likely practising for Module C: The Craft of Writing (imaginative, discursive, persuasive and informative writing, plus reflections on their own choices). Pitch at that level. Use the proper names of techniques (motif, characterisation, juxtaposition, tone, structure, voice) and always explain the effect on the reader, because markers reward purpose and effect. Push for a concrete moment that carries a big idea. Still plain words, still never write for them.",
+  uni: "The writer is a university student. Pitch at that level: a clear claim in the topic sentence, evidence followed by analysis of what it means, fair treatment of counter-arguments, signposting, concision, careful hedging, academic tone without padding, and putting ideas in their own words. Never write sentences for them, because academic integrity matters.",
+};
+const levelOf = (b) => LEVELS[b.level] || LEVELS.everyday;
+
 const Bubble = z.object({
   question: z.string().describe("One short question about the writer's own content, at the point where they are typing. Max 12 words."),
   idea: z.string().describe("What kind of thing they could add here and why it works. Max 18 words. No words for their piece."),
@@ -75,7 +82,7 @@ export default async (req, context) => {
         max_tokens: 400,
         thinking: { type: "disabled" },
         output_config: { effort: "low", format: zodOutputFormat(Bubble) },
-        system: RULES,
+        system: RULES + "\n\nWho you're coaching: " + levelOf(b),
         messages: [{ role: "user", content:
 `The writer is typing right now. Help at the END of their text, where their cursor is. It may stop mid-sentence.
 Challenge: ${clip(b.prompt, 300)}
@@ -94,7 +101,7 @@ Give one question, one idea and one example.` }],
         model: NOTES_MODEL,
         max_tokens: 3000,
         output_config: { effort: "low", format: zodOutputFormat(Notes) },
-        system: RULES,
+        system: RULES + "\n\nWho you're coaching: " + levelOf(b),
         messages: [{ role: "user", content:
 `Round ${Number(b.round) || 1}. The writer pressed Done. Give honest notes.
 Challenge: ${clip(b.prompt, 300)}
