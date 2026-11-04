@@ -290,6 +290,7 @@ footer small{color:var(--ink-soft)}
 .bubble .bh b,.bubble .be b{color:var(--paper);font-weight:700}
 .bubble .be{margin-top:8px;padding-top:8px;border-top:1px dashed color-mix(in srgb, var(--paper) 35%, transparent);font-size:.88rem;font-style:italic;color:color-mix(in srgb, var(--paper) 85%, transparent)}
 .bubble .be b{font-style:normal}
+.bubble .be:empty{display:none}
 .bubble{transition:left .25s ease, top .25s ease}
 .aiwait{font-size:.9rem;color:var(--muted,inherit);font-style:italic;margin-bottom:8px}
 .exline{display:block;margin-top:6px;font-size:.92rem;font-style:italic}
@@ -352,6 +353,7 @@ footer small{color:var(--ink-soft)}
               <p class="bq" id="tw-bq"></p>
               <p class="bh" id="tw-bh"></p>
               <p class="be" id="tw-be"></p>
+              <button class="btn sm pencil" id="tw-bgo" type="button" hidden style="margin-top:10px">See the why ↓</button>
             </div>
           </div>
           <label class="coachtoggle"><input type="checkbox" id="tw-coach" checked> Coach walks along with me (questions, ideas, examples)</label>
@@ -388,6 +390,7 @@ footer small{color:var(--ink-soft)}
       <div class="notes2" id="tw-notes"></div>
       <div class="row2" style="margin-top:20px">
         <button class="btn pencil" id="tw-again" type="button">Play again with the mission</button>
+        <button class="btn alt" id="tw-back" type="button">↑ Back to my writing</button>
         <a class="btn alt" href="./#join">Save my spot on the waitlist</a>
         <span class="badge2" id="tw-badge" hidden>Stuck With It</span>
       </div>
@@ -522,13 +525,15 @@ function questionFor(sent, all){
   return null;
 }
 function showBubble(q, endPos){
-  const b=$('tw-bubble'); if(q.multi){ $('tw-bq').innerHTML=q.multi.map(x=>'<span style="display:block">'+esc(x)+'</span>').join(''); } else { $('tw-bq').textContent=q.q; } $('tw-bh').innerHTML=q.h?'<b>Idea:</b> '+esc(q.h):''; const ex=q.ex||pickEx(catOf(q.k)); $('tw-be').innerHTML=ex?'<b>Example from a different story:</b> '+esc(ex):''; b.hidden=false;
+  const b=$('tw-bubble'); if(q.multi){ $('tw-bq').innerHTML=q.multi.map(x=>'<span style="display:block">'+esc(x)+'</span>').join(''); } else { $('tw-bq').textContent=q.q; } $('tw-bh').innerHTML=q.h?(q.go?'':'<b>Idea:</b> ')+esc(q.h):''; const ex=q.ex===null?'':(q.ex||pickEx(catOf(q.k))); $('tw-bgo').hidden=!q.go; $('tw-be').innerHTML=ex?'<b>Example from a different story:</b> '+esc(ex):''; b.hidden=false;
   const xy=caretXY(ta, endPos); const wrapW=ta.offsetWidth;
   const bw=Math.min(340, wrapW-16); let left=Math.max(8, Math.min(xy.x-24, wrapW-bw-8));
   b.style.left=left+'px'; b.style.top=(xy.y+8)+'px'; b.style.setProperty('--tip', Math.max(10, Math.min(xy.x-left-8, bw-28))+'px');
+  const br=b.getBoundingClientRect(); if(br.bottom>innerHeight-8||br.top<0) b.scrollIntoView({block:'nearest', behavior:'smooth'});
   [].concat(q.k).forEach(k=>asked.add(k)); lastBubbleAt=Date.now(); bubbleStartLen=ta.value.length;
 }
 function hideBubble(){ $('tw-bubble').hidden=true; }
+$('tw-bgo').addEventListener('click', ()=>{ hideBubble(); $('tw-results').scrollIntoView({behavior: matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'}); });
 $('tw-bx').addEventListener('click', ()=>{ hideBubble(); ta.focus(); });
 /* ---- walking coach: follows the caret, mid-sentence too ---- */
 // Examples are always from a DIFFERENT story, so the writer sees how, then writes their own.
@@ -770,8 +775,10 @@ $('tw-done').addEventListener('click', ()=>{
   showNotes(text); renderVersions();
   aiNotes(text, askedMission);
   $('tw-badge').hidden = round<10;
-  $('tw-results').hidden=false; $('tw-results').scrollIntoView({behavior: matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
+  $('tw-results').hidden=false;
+  showBubble({k:'done', q:(round===1?'Nice one. Your why is ready.':'Round '+round+' done. Your why is ready.'), h:'Your best line, the line that goes flat, and your next mission are just below.', ex:null, go:true}, ta.value.replace(/\s+$/,'').length);
 });
+$('tw-back').addEventListener('click', ()=>{ window.scrollTo({top: ta.getBoundingClientRect().top + scrollY - 140, behavior:'smooth'}); ta.focus({preventScroll:true}); });
 $('tw-again').addEventListener('click', ()=>{
   round++; ta.value=''; asked=new Set(); sentenceCount=0; hideBubble(); $('tw-count').textContent='0 words'; stopTimer();
   $('tw-label').textContent='Round '+round+' \u00b7 your mission: '+(aiMission||(mission?MISSIONS[mission].t:'try it a new way.'));
