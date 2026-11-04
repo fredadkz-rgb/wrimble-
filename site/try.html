@@ -1,0 +1,782 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Wrimble is a tool, not another AI. A 10-minute daily writing workout where you type every word and we teach you the why.">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Try a Wrimble</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Caveat:wght@600&display=swap">
+<style>
+/* Layout: a school exercise book. Blue ruled paper, one red margin line down the left, biro-blue ink, HB-pencil yellow for highlights. */
+:root{
+  --paper:#FBFBF6;
+  --paper-2:#F1F3EC;
+  --ink:#1D2858;
+  --ink-soft:#4B557F;
+  --rule:#D3DDEE;
+  --margin:#E0474C;
+  --pencil:#F6C51B;
+  --pencil-ink:#1D2858;
+  --card:#FFFFFF;
+  --good:#1F7A4D;
+  --flat:#9A5B00;
+  --font-display:"Bricolage Grotesque", "Arial Black", system-ui, sans-serif;
+  --font-body:"Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --font-hand:"Caveat", "Comic Sans MS", cursive;
+  --line:32px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#141932; --paper-2:#1B2140; --ink:#E9ECF8; --ink-soft:#A9B0D3;
+    --rule:#262E55; --margin:#FF6B6F; --pencil:#F6C51B; --pencil-ink:#141932;
+    --card:#1C2246; --good:#5CD39A; --flat:#F2B35B; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#141932; --paper-2:#1B2140; --ink:#E9ECF8; --ink-soft:#A9B0D3;
+  --rule:#262E55; --margin:#FF6B6F; --pencil:#F6C51B; --pencil-ink:#141932;
+  --card:#1C2246; --good:#5CD39A; --flat:#F2B35B; color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto} *{animation:none!important;transition:none!important}}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--font-body);
+  font-size:18px;
+  line-height:1.6;
+  background-image:
+    linear-gradient(to right, transparent calc(max(16px, env(safe-area-inset-left,0px)) + 18px), var(--margin) calc(max(16px, env(safe-area-inset-left,0px)) + 18px), var(--margin) calc(max(16px, env(safe-area-inset-left,0px)) + 20px), transparent calc(max(16px, env(safe-area-inset-left,0px)) + 20px)),
+    repeating-linear-gradient(to bottom, transparent 0, transparent calc(var(--line) - 1px), var(--rule) calc(var(--line) - 1px), var(--rule) var(--line));
+  background-attachment:local;
+}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--pencil);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px, env(safe-area-inset-left,0px));padding-right:max(16px, env(safe-area-inset-right,0px))}
+.inset{padding-left:28px}
+h1,h2,h3{font-family:var(--font-display);line-height:1.05;text-wrap:balance;margin:0;letter-spacing:-0.02em}
+h2{font-size:clamp(2rem, 4.6vw, 3.4rem);font-weight:800}
+h3{font-size:1.35rem;font-weight:700;letter-spacing:-0.01em}
+p{margin:0}
+.eyebrow{font-family:var(--font-body);font-weight:700;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
+.hand{font-family:var(--font-hand);font-weight:600;color:var(--margin);font-size:1.6rem;line-height:1.1}
+.hl{background:linear-gradient(transparent 55%, var(--pencil) 55%, var(--pencil) 92%, transparent 92%);padding:0 .08em;color:var(--pencil-ink)}
+section{padding-block:72px}
+.lede{font-size:1.2rem;max-width:62ch;color:var(--ink-soft)}
+
+/* nav */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:color-mix(in srgb, var(--paper) 92%, transparent);backdrop-filter:blur(6px);border-bottom:2px solid var(--ink)}
+.top .wrap{display:flex;align-items:center;gap:20px;min-height:64px;flex-wrap:wrap}
+.logo{font-family:var(--font-display);font-weight:800;font-size:1.7rem;text-decoration:none;letter-spacing:-0.03em;display:flex;align-items:center;gap:8px}
+.logo .squig{width:34px;height:20px}
+.top nav{display:flex;gap:14px;margin-left:auto;flex-wrap:wrap}
+.top nav a{text-decoration:none;font-weight:700;font-size:.88rem}
+.top nav a:hover{text-decoration:underline;text-decoration-color:var(--pencil);text-decoration-thickness:4px}
+.btn{display:inline-flex;align-items:center;gap:8px;font:700 1rem var(--font-body);padding:12px 20px;border-radius:999px;border:2px solid var(--ink);background:var(--ink);color:var(--paper);text-decoration:none;cursor:pointer;transition:transform .15s}
+.btn:hover{transform:translateY(-2px) rotate(-1deg)}
+.btn.alt{background:transparent;color:var(--ink)}
+.btn.pencil{background:var(--pencil);color:var(--pencil-ink);border-color:var(--pencil-ink)}
+@media (max-width:1180px){.top nav{display:none}.top .btn{margin-left:auto;padding:9px 16px}}
+
+/* hero */
+.hero{padding-block:56px 72px}
+.hero .grid{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center}
+.hero h1{font-size:clamp(3rem, 8.4vw, 6.4rem);font-weight:800;letter-spacing:-0.045em}
+.hero h1 .strike{position:relative;white-space:nowrap}
+.hero h1 .strike::after{content:"";position:absolute;left:-4%;right:-4%;top:52%;height:.11em;background:var(--margin);transform:rotate(-3deg);border-radius:4px;opacity:.9}
+.hero .sub{margin-top:24px;font-size:1.25rem;max-width:34ch}
+.hero .ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.hero .note{margin-top:22px}
+.draft{background:var(--card);border:2px solid var(--ink);border-radius:6px;box-shadow:8px 8px 0 var(--ink);padding:22px 22px 18px;transform:rotate(1.2deg);min-width:0}
+.draft .meta{display:flex;justify-content:space-between;font-size:.8rem;color:var(--ink-soft);font-weight:700;letter-spacing:.06em;text-transform:uppercase;gap:8px;flex-wrap:wrap}
+.draft .prompt{margin-top:10px;font-family:var(--font-display);font-weight:700;font-size:1.15rem;line-height:1.25}
+.draft .text{margin-top:14px;font-size:1rem;line-height:1.7;border-left:3px solid var(--rule);padding-left:12px}
+.draft .notes{margin-top:16px;display:grid;gap:10px}
+.why{display:grid;grid-template-columns:auto 1fr;gap:10px;font-size:.92rem;line-height:1.45;align-items:start}
+.why b{display:block}
+.why .tag{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;border-radius:999px;border:1.5px solid var(--ink);white-space:nowrap}
+.why .tag.c{background:var(--pencil);color:var(--pencil-ink);border-color:var(--pencil-ink)}
+.stamp{margin-top:14px;display:inline-block;font-family:var(--font-hand);font-size:1.25rem;color:var(--margin);border:2px solid var(--margin);padding:2px 10px;border-radius:6px;transform:rotate(-3deg)}
+@media (max-width:900px){.hero .grid{grid-template-columns:1fr}.draft{transform:none}}
+
+/* tool not AI */
+.notai{background:var(--ink);color:var(--paper);border-block:2px solid var(--ink)}
+.notai .wrap{display:grid;gap:40px}
+.notai h2{font-size:clamp(2.4rem, 6.4vw, 5rem);letter-spacing:-0.04em}
+.notai h2 .hl{background:linear-gradient(transparent 8%, var(--pencil) 8%, var(--pencil) 96%, transparent 96%);color:var(--pencil-ink)}
+.notai .eyebrow{color:color-mix(in srgb, var(--paper) 70%, transparent)}
+.notai .lede{color:color-mix(in srgb, var(--paper) 82%, transparent)}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.vs .col{border:2px solid color-mix(in srgb, var(--paper) 30%, transparent);border-radius:6px;padding:22px;min-width:0}
+.vs .col.us{border-color:var(--pencil);background:color-mix(in srgb, var(--pencil) 10%, transparent)}
+.vs h3{margin-bottom:14px;font-size:1.2rem}
+.vs ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+.vs li{display:grid;grid-template-columns:22px 1fr;gap:8px}
+.vs .them li::before{content:"×";font-weight:700;color:color-mix(in srgb, var(--paper) 60%, transparent)}
+.vs .us li::before{content:"✓";font-weight:700;color:var(--pencil)}
+.bonnet{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:start;border-top:2px dashed color-mix(in srgb, var(--paper) 30%, transparent);padding-top:28px}
+.bonnet .q{font-family:var(--font-display);font-weight:800;font-size:1.3rem;max-width:16ch}
+.bonnet p{max-width:66ch;color:color-mix(in srgb, var(--paper) 85%, transparent)}
+@media (max-width:760px){.vs{grid-template-columns:1fr}.bonnet{grid-template-columns:1fr}}
+
+/* why lesson */
+.whys .head{display:grid;gap:14px;margin-bottom:32px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.chip{font:700 .95rem var(--font-body);padding:8px 14px;border-radius:999px;border:2px solid var(--ink);background:var(--card);color:var(--ink);cursor:pointer}
+.chip[aria-selected="true"]{background:var(--ink);color:var(--paper)}
+.lesson{display:grid;grid-template-columns:1fr 1fr;gap:0;border:2px solid var(--ink);border-radius:6px;overflow:hidden;background:var(--card)}
+.lesson .ex{padding:24px;min-width:0}
+.lesson .ex + .ex{border-left:2px solid var(--ink)}
+.lesson .lbl{font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;display:flex;align-items:center;gap:8px}
+.lesson .lbl i{width:10px;height:10px;border-radius:50%;display:inline-block}
+.lesson .flat i{background:var(--flat)} .lesson .works i{background:var(--good)}
+.lesson .quote{margin-top:10px;font-family:var(--font-display);font-weight:700;font-size:clamp(1.25rem,2.4vw,1.6rem);line-height:1.25}
+.lesson .flat .quote{color:var(--ink-soft)}
+.lesson .explain{grid-column:1 / -1;border-top:2px solid var(--ink);padding:24px;display:grid;grid-template-columns:1fr 1fr;gap:24px;background:var(--paper-2)}
+.lesson .explain p{margin-top:6px}
+.lesson .turn{grid-column:1 / -1;border-top:2px dashed var(--rule);padding:18px 24px;display:flex;gap:12px;align-items:baseline;flex-wrap:wrap}
+@media (max-width:720px){.lesson{grid-template-columns:1fr}.lesson .ex + .ex{border-left:0;border-top:2px solid var(--ink)}.lesson .explain{grid-template-columns:1fr}}
+
+/* workout */
+.steps{list-style:none;margin:36px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:18px;counter-reset:s}
+.steps li{counter-increment:s;background:var(--card);border:2px solid var(--ink);border-radius:6px;padding:22px;min-width:0;display:grid;gap:8px;align-content:start}
+.steps li::before{content:counter(s);font-family:var(--font-display);font-weight:800;font-size:2.2rem;line-height:1;color:var(--margin)}
+.steps .time{font-size:.8rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft)}
+@media (max-width:900px){.steps{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.steps{grid-template-columns:1fr}}
+
+/* learning profile */
+.pgrid{margin-top:32px;display:grid;grid-template-columns:1.15fr .85fr;gap:24px;align-items:start}
+.pq{display:grid;gap:16px;min-width:0}
+.pq fieldset{margin:0;border:2px solid var(--ink);border-radius:6px;background:var(--card);padding:16px 18px 18px;min-width:0}
+.pq legend{font-family:var(--font-display);font-weight:700;font-size:1.1rem;padding:0 6px;line-height:1.25}
+.pq legend span{color:var(--margin);margin-right:6px}
+.opts{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.opts label{cursor:pointer}
+.opts input{position:absolute;opacity:0;pointer-events:none}
+.opts label span{display:inline-block;padding:7px 13px;border-radius:999px;border:2px solid var(--ink);font-weight:700;font-size:.92rem;background:var(--paper)}
+.opts input:checked + span{background:var(--ink);color:var(--paper)}
+.opts input:focus-visible + span{outline:3px solid var(--pencil);outline-offset:2px}
+.presult{position:sticky;top:calc(env(safe-area-inset-top,0px) + 84px);background:var(--ink);color:var(--paper);border-radius:6px;padding:24px;display:grid;gap:12px;min-width:0}
+.presult .eyebrow{color:color-mix(in srgb, var(--paper) 70%, transparent)}
+.pr-name{font-size:1.8rem;font-weight:800}
+.pr-sum{color:color-mix(in srgb, var(--paper) 85%, transparent)}
+.pr-list{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+.pr-list li{display:grid;grid-template-columns:22px 1fr;gap:8px;font-size:.95rem;line-height:1.45}
+.pr-list li::before{content:"✓";color:var(--pencil);font-weight:700}
+.pr-list b{display:block}
+.loop{border-top:2px dashed color-mix(in srgb, var(--paper) 30%, transparent);padding-top:14px;display:grid;gap:8px}
+.dots{display:flex;flex-wrap:wrap;gap:6px}
+.dots i{width:22px;height:22px;border-radius:50%;border:2px solid var(--pencil);display:inline-block}
+.dots i.f{background:var(--pencil)}
+.pr-priv{font-size:.82rem;color:color-mix(in srgb, var(--paper) 70%, transparent)}
+@media (max-width:900px){.pgrid{grid-template-columns:1fr}.presult{position:static}}
+
+/* rules */
+.rules .grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:48px;align-items:start}
+.rules ol{margin:0;padding:0;list-style:none;display:grid;gap:18px;counter-reset:r}
+.rules ol li{counter-increment:r;display:grid;grid-template-columns:44px 1fr;gap:12px}
+.rules ol li::before{content:counter(r);font-family:var(--font-display);font-weight:800;font-size:1.6rem;width:40px;height:40px;border:2px solid var(--ink);border-radius:50%;display:grid;place-items:center;line-height:1}
+.rules ol p{color:var(--ink-soft)}
+.mistake{margin-top:28px;background:var(--pencil);color:var(--pencil-ink);border:2px solid var(--pencil-ink);border-radius:6px;padding:22px;transform:rotate(-1deg)}
+.mistake h3{font-size:1.5rem}
+.mistake p{margin-top:8px}
+@media (max-width:860px){.rules .grid{grid-template-columns:1fr}}
+
+/* detector */
+.detector{background:var(--paper-2);border-block:2px solid var(--ink)}
+.det{display:grid;grid-template-columns:1fr 320px;gap:24px;margin-top:32px}
+.det textarea{width:100%;min-height:190px;font:1rem/1.6 var(--font-body);padding:16px;border:2px solid var(--ink);border-radius:6px;background:var(--card);color:var(--ink);resize:vertical}
+.det .out{margin-top:14px;background:var(--card);border:2px solid var(--ink);border-radius:6px;padding:16px;line-height:1.8;min-height:80px;overflow-wrap:anywhere}
+.det mark{background:color-mix(in srgb, var(--margin) 22%, transparent);color:inherit;border-bottom:2px solid var(--margin);padding:0 2px;border-radius:2px}
+.score{background:var(--ink);color:var(--paper);border-radius:6px;padding:22px;display:grid;gap:12px;align-content:start;min-width:0}
+.score .num{font-family:var(--font-display);font-weight:800;font-size:4.6rem;line-height:.9;font-variant-numeric:tabular-nums}
+.score .num small{font-size:1.4rem}
+.meter{height:12px;border-radius:999px;background:color-mix(in srgb, var(--paper) 22%, transparent);overflow:hidden}
+.meter span{display:block;height:100%;background:var(--pencil);transition:width .4s}
+.score .verdict{font-family:var(--font-display);font-weight:700;font-size:1.2rem;line-height:1.25}
+.score ul{margin:0;padding-left:18px;font-size:.92rem;color:color-mix(in srgb, var(--paper) 85%, transparent)}
+.det .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+@media (max-width:860px){.det{grid-template-columns:1fr}}
+
+/* stuck */
+.stuck .card{margin-top:28px;display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center;background:var(--card);border:2px solid var(--ink);border-radius:6px;padding:28px;box-shadow:6px 6px 0 var(--pencil)}
+.stuck .bigbtn{font:800 1.4rem var(--font-display);padding:26px 28px;border-radius:50%;aspect-ratio:1;width:150px;max-width:100%;border:3px solid var(--ink);background:var(--margin);color:#fff;cursor:pointer;transition:transform .15s}
+.stuck .bigbtn:hover{transform:rotate(-6deg) scale(1.04)}
+.stuck .task{font-family:var(--font-display);font-weight:700;font-size:clamp(1.3rem,2.6vw,1.8rem);line-height:1.2}
+.stuck .whyline{margin-top:10px;color:var(--ink-soft)}
+.stuck .fix{margin-top:10px;font-size:.85rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--margin)}
+@media (max-width:620px){.stuck .card{grid-template-columns:1fr;justify-items:start}}
+
+/* tracks */
+.tracks .list{margin-top:32px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:18px}
+.track{border-top:4px solid var(--ink);padding-top:14px;display:grid;gap:8px;align-content:start}
+.track .len{font-size:.8rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft)}
+.track .eg{font-family:var(--font-hand);font-size:1.45rem;line-height:1.15;color:var(--ink)}
+.skills{margin-top:48px;display:flex;flex-wrap:wrap;gap:10px}
+.skills span{border:2px solid var(--ink);border-radius:999px;padding:6px 14px;font-weight:700;font-size:.92rem;background:var(--card)}
+.skills span b{color:var(--margin);margin-right:6px;font-family:var(--font-display)}
+
+/* pile + schools */
+.moregrid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.moreitem{border-top:4px solid var(--margin);padding-top:14px;display:grid;gap:10px;align-content:start;min-width:0}
+.moreitem p:not(.eyebrow){color:var(--ink-soft)}
+@media (max-width:900px){.moregrid{grid-template-columns:1fr}}
+
+/* hsc */
+.hsc .box{display:grid;grid-template-columns:1.1fr .9fr;gap:36px;border:2px solid var(--ink);border-radius:6px;background:var(--card);padding:32px;align-items:center}
+.hsc .timer{font-family:var(--font-display);font-weight:800;font-size:clamp(4rem,11vw,7.5rem);line-height:.9;letter-spacing:-0.04em;font-variant-numeric:tabular-nums}
+.hsc ul{margin:14px 0 0;padding-left:20px;display:grid;gap:6px}
+@media (max-width:820px){.hsc .box{grid-template-columns:1fr;padding:22px}}
+
+/* pricing */
+.plans{margin-top:32px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.plan{background:var(--card);border:2px solid var(--ink);border-radius:6px;padding:24px;display:grid;gap:12px;align-content:start;min-width:0}
+.plan.pick{box-shadow:8px 8px 0 var(--pencil)}
+.plan .price{font-family:var(--font-display);font-weight:800;font-size:2.8rem;line-height:1;font-variant-numeric:tabular-nums}
+.plan .price small{font-size:1rem;font-weight:700;color:var(--ink-soft)}
+.plan ul{margin:0;padding-left:20px;display:grid;gap:4px;font-size:.98rem}
+.plan .for{font-size:.85rem;color:var(--ink-soft)}
+.extras{margin-top:18px;display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.extras .plan{grid-template-columns:1fr auto;align-items:center}
+.extras .price{font-size:1.9rem}
+@media (max-width:900px){.plans{grid-template-columns:1fr}.extras{grid-template-columns:1fr}}
+
+/* waitlist */
+.join{background:var(--pencil);color:var(--pencil-ink);border-block:2px solid var(--pencil-ink)}
+.join .wrap{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.join h2{font-size:clamp(2.2rem,5.4vw,4rem)}
+.join p{margin-top:14px;font-size:1.1rem}
+.join form{display:grid;gap:12px}
+.join label{font-weight:700;font-size:.95rem}
+.join input,.join select{font:1rem var(--font-body);padding:14px;border:2px solid var(--pencil-ink);border-radius:6px;background:#FFFDF2;color:#1D2858;width:100%}
+.join .btn{background:#1D2858;color:#FFFDF2;border-color:#1D2858;justify-content:center}
+.join .ok{font-family:var(--font-hand);font-size:1.6rem;line-height:1.2}
+.join .small{font-size:.85rem;margin-top:0}
+@media (max-width:820px){.join .wrap{grid-template-columns:1fr}}
+
+footer{padding-block:40px;border-top:2px solid var(--ink)}
+footer .wrap{display:flex;gap:20px;justify-content:space-between;align-items:center;flex-wrap:wrap}
+footer small{color:var(--ink-soft)}
+</style>
+<style>
+.tw{padding-block:40px 72px}
+.tw .top2{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.daycard{margin-top:24px;display:grid;grid-template-columns:1fr 300px;gap:24px;align-items:start}
+.panel{background:var(--card);border:2px solid var(--ink);border-radius:6px;padding:22px;min-width:0}
+.promptbox .p{font-family:var(--font-display);font-weight:800;font-size:clamp(1.5rem,3.4vw,2.2rem);line-height:1.15;margin-top:8px;text-wrap:balance}
+.promptbox .rule{margin-top:10px;color:var(--ink-soft)}
+.row2{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:14px}
+.btn.sm{padding:8px 14px;font-size:.92rem}
+.editor{margin-top:18px}
+.editor textarea{width:100%;min-height:240px;font:1.08rem/1.75 var(--font-body);padding:18px;border:2px solid var(--ink);border-radius:6px;background:var(--card);color:var(--ink);resize:vertical;background-image:repeating-linear-gradient(to bottom,transparent 0,transparent calc(1.75em - 1px),var(--rule) calc(1.75em - 1px),var(--rule) 1.75em);background-attachment:local;background-position:0 18px}
+.edbar{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center;margin-top:10px;font-size:.92rem;color:var(--ink-soft)}
+.timer2{font-family:var(--font-display);font-weight:800;font-size:2.4rem;font-variant-numeric:tabular-nums;line-height:1}
+.side{display:grid;gap:16px;align-content:start}
+.lessonmini .ex2{margin-top:10px;display:grid;gap:8px}
+.lessonmini .ex2 p{padding:10px 12px;border-radius:6px;border:2px solid var(--rule);font-size:.95rem}
+.lessonmini .ex2 .w{border-color:var(--good)}
+.edwrap{position:relative}
+.bubble{position:absolute;z-index:5;max-width:min(340px,calc(100% - 16px));background:var(--ink);color:var(--paper);border-radius:10px;padding:12px 34px 12px 14px;box-shadow:4px 4px 0 var(--pencil);animation:pop .22s ease-out}
+.bubble::before{content:"";position:absolute;top:-8px;left:var(--tip,18px);border:8px solid transparent;border-top:0;border-bottom-color:var(--ink)}
+.bubble .bq{font-family:var(--font-display);font-weight:700;font-size:1.05rem;line-height:1.25}
+.bubble .bh{margin-top:4px;font-size:.88rem;color:color-mix(in srgb, var(--paper) 80%, transparent)}
+.bubble .bh b,.bubble .be b{color:var(--paper);font-weight:700}
+.bubble .be{margin-top:8px;padding-top:8px;border-top:1px dashed color-mix(in srgb, var(--paper) 35%, transparent);font-size:.88rem;font-style:italic;color:color-mix(in srgb, var(--paper) 85%, transparent)}
+.bubble .be b{font-style:normal}
+.bubble{transition:left .25s ease, top .25s ease}
+.aiwait{font-size:.9rem;color:var(--muted,inherit);font-style:italic;margin-bottom:8px}
+.exline{display:block;margin-top:6px;font-size:.92rem;font-style:italic}
+.exline b{font-style:normal}
+.bubble .bx{position:absolute;top:6px;right:8px;background:none;border:0;color:inherit;font-size:1.2rem;cursor:pointer;line-height:1}
+@keyframes pop{from{transform:scale(.85);opacity:0}to{transform:scale(1);opacity:1}}
+.coachtoggle{display:inline-flex;gap:8px;align-items:center;margin-top:8px;font-size:.9rem;color:var(--ink-soft);cursor:pointer}
+.mark-hl{background:color-mix(in srgb, var(--pencil) 45%, transparent);border-radius:2px}
+.toast{font-size:.92rem;font-weight:700;color:var(--margin);min-height:1.4em}
+.stuckbox{background:var(--pencil);color:var(--pencil-ink);border:2px solid var(--pencil-ink);border-radius:6px;padding:16px}
+.stuckbox b{font-family:var(--font-display)}
+.notes2{margin-top:28px;display:grid;gap:12px}
+.note2{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;background:var(--card);border:2px solid var(--ink);border-radius:6px;padding:16px 18px}
+.note2 .tag{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:999px;border:1.5px solid var(--ink);white-space:nowrap}
+.note2 .tag.c{background:var(--pencil);color:var(--pencil-ink);border-color:var(--pencil-ink)}
+.note2 q{font-weight:700;display:block;margin-bottom:4px}
+.versions{margin-top:28px;display:grid;grid-auto-flow:column;grid-auto-columns:minmax(260px,1fr);gap:14px;overflow-x:auto;padding-bottom:8px}
+.ver{background:var(--card);border:2px solid var(--ink);border-radius:6px;padding:14px;font-size:.95rem;line-height:1.6;min-width:0}
+.ver .vh{display:flex;justify-content:space-between;font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:6px}
+.ver p{white-space:pre-wrap;overflow-wrap:anywhere}
+.badge2{display:inline-block;font-family:var(--font-hand);font-size:1.4rem;color:var(--margin);border:2px solid var(--margin);padding:2px 12px;border-radius:6px;transform:rotate(-3deg)}
+.demo-note{margin-top:28px;font-size:.88rem;color:var(--ink-soft);max-width:70ch}
+@media (max-width:860px){.daycard{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="./">Wrimble</a>
+    <a class="btn pencil" href="./#join" style="margin-left:auto">Join the waitlist</a>
+  </div>
+</header>
+<main class="tw">
+  <div class="wrap inset">
+    <div class="top2">
+      <div>
+        <p class="eyebrow">Try it · no sign-up · nothing gets saved</p>
+        <h1 style="font-size:clamp(2.4rem,6vw,4rem);font-weight:800;letter-spacing:-0.04em;margin-top:8px">Today's <span class="hl">Wrimble</span></h1>
+      </div>
+      <div class="hand">ugly is allowed. ugly is encouraged.</div>
+    </div>
+
+    <div class="daycard">
+      <div style="min-width:0">
+        <div class="panel promptbox">
+          <p class="eyebrow">Your challenge</p>
+          <p class="p" id="tw-prompt"></p>
+          <p class="rule" id="tw-rule"></p>
+          <div class="row2">
+            <button class="btn sm alt" id="tw-new" type="button">Give me a different one</button>
+            <button class="btn sm alt" id="tw-stuck" type="button">I'm stuck</button>
+          </div>
+        </div>
+        <div class="editor">
+          <label for="tw-text" class="eyebrow" id="tw-label">Round 1 · type it yourself (paste is switched off)</label>
+          <div class="edwrap">
+            <textarea id="tw-text" placeholder="Start anywhere. The first sentence is allowed to be terrible." style="margin-top:8px"></textarea>
+            <div class="bubble" id="tw-bubble" role="status" hidden>
+              <button class="bx" id="tw-bx" type="button" aria-label="Close question">×</button>
+              <p class="bq" id="tw-bq"></p>
+              <p class="bh" id="tw-bh"></p>
+              <p class="be" id="tw-be"></p>
+            </div>
+          </div>
+          <label class="coachtoggle"><input type="checkbox" id="tw-coach" checked> Coach walks along with me (questions, ideas, examples)</label>
+          <div class="edbar">
+            <span id="tw-count">0 words</span>
+            <span class="toast" id="tw-toast" role="status"></span>
+            <button class="btn" id="tw-done" type="button">Done. Show me the why</button>
+          </div>
+        </div>
+      </div>
+
+      <aside class="side">
+        <div class="panel" style="text-align:center">
+          <p class="eyebrow">Timer</p>
+          <p class="timer2" id="tw-timer">7:00</p>
+          <p style="font-size:.88rem;color:var(--ink-soft);margin-top:6px" id="tw-timer-note">Starts when you start typing. Run over? Keep going. Nobody's marking.</p>
+        </div>
+        <div class="panel lessonmini">
+          <p class="eyebrow">60-second warm-up</p>
+          <h3 style="margin-top:6px" id="tw-l-name"></h3>
+          <div class="ex2">
+            <p><b>Flat:</b> <span id="tw-l-flat"></span></p>
+            <p class="w"><b>Works:</b> <span id="tw-l-works"></span></p>
+          </div>
+          <p style="margin-top:10px;font-size:.95rem"><b>Why:</b> <span id="tw-l-why"></span></p>
+        </div>
+        <div class="stuckbox" id="tw-stuckbox" hidden></div>
+      </aside>
+    </div>
+
+    <section id="tw-results" hidden style="padding:0">
+      <h2 style="margin-top:40px" id="tw-res-h">Here's the why.</h2>
+      <p class="lede" style="margin-top:8px">Nothing here is marked wrong, and nothing in your draft has been changed. It's yours.</p>
+      <div class="notes2" id="tw-notes"></div>
+      <div class="row2" style="margin-top:20px">
+        <button class="btn pencil" id="tw-again" type="button">Play again with the mission</button>
+        <a class="btn alt" href="./#join">Save my spot on the waitlist</a>
+        <span class="badge2" id="tw-badge" hidden>Stuck With It</span>
+      </div>
+      <h3 style="margin-top:36px">Your versions, side by side</h3>
+      <div class="versions" id="tw-versions"></div>
+    </section>
+
+    <p class="demo-note">This is a demo. When the coach is switched on, your draft is sent to it so it can ask about your story and explain the why. When it isn't, simple rules in your browser do the job, a bit rougher. Either way, nothing ever writes or rewrites a word for you, the examples always come from a different story, and your draft isn't saved.</p>
+  </div>
+</main>
+<footer>
+  <div class="wrap inset">
+    <a class="logo" href="./">Wrimble</a>
+    <span class="stamp" style="margin-top:0">Typed by a human. Probably badly.</span>
+    <small>A tool, not another AI.</small>
+  </div>
+</footer>
+<script>
+const esc = s => s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const HABITS = [
+  {re:/\bnot (?:just|only|merely) (?:about )?[^.,;!?]{1,40}[,;]?\s*(?:it'?s|but|it is)\b/gi, label:"“Not just X, it's Y”", why:"The robot's favourite trick. It sounds deep and says nothing."},
+  {re:/\bin today'?s (?:fast-paced|ever-changing|digital|modern) (?:world|landscape|age)\b/gi, label:"“In today's fast-paced world”", why:"A warm-up nobody needs. Start with the actual thing."},
+  {re:/\b(?:delve|delving|embark(?:ed|ing)?|unlock(?:ing)?|elevate|leverag(?:e|ing)|harness(?:ing)?|navigat(?:e|ing) the|foster(?:ing)?|empower(?:ing)?)\b/gi, label:"Robot verbs", why:"Words people rarely say out loud. Real people “start” and “use” things."},
+  {re:/\b(?:journey|tapestry|landscape|realm|testament to|game[- ]changer|synergy|ecosystem)\b/gi, label:"Big empty nouns", why:"Fancy words standing in for a real detail."},
+  {re:/\b(?:seamless(?:ly)?|transformative|cutting-edge|robust|innovative|holistic|pivotal|vibrant|incredible|amazing)\b/gi, label:"Empty adjectives", why:"They tell us how to feel instead of showing us. Your brain can't picture “seamless”."},
+  {re:/\b(?:thrilled|excited|humbled|honou?red) to (?:announce|share)\b|\btruly humbled\b/gi, label:"Announcement voice", why:"Every post starts this way, so nobody reads past it."},
+  {re:/\b(?:it'?s (?:important|worth) (?:to note|noting)|in conclusion|furthermore|moreover|additionally|ultimately)\b/gi, label:"Essay glue", why:"Filler joins. If the ideas connect, the reader can tell."},
+  {re:/\b(?:really|very|truly|extremely)\b/gi, label:"Volume knobs", why:"Turning a weak word up doesn't make it strong. Find the strong word."}
+];
+
+const BUSTERS = [
+  ["Finish the sentence: “The worst thing about Mondays is…”","a started sentence is easier than a blank one.","not knowing where to start"],
+  ["Describe your shoe. One minute, any way you like.","an easy subject warms up your writing muscles.","not knowing where to start"],
+  ["Write the worst opening line ever. On purpose.","it kills the pressure to be perfect.","trying to be perfect on the first go"],
+  ["Tell your idea in exactly five words.","it forces you to find the heart of it.","not knowing where to start"],
+  ["Write it like a text to your best mate.","we're relaxed with friends, so the real voice comes out.","fear of being bad"],
+  ["Write the same idea set on a bus, at the beach, or in space.","a new setting shakes loose new ideas.","not knowing where to start"],
+  ["List 3 sounds, 3 smells and 3 things you can see right now.","your senses are a free idea machine.","not knowing where to start"],
+  ["Answer this: what would your cat say about you?","silly questions open the door your serious brain locked.","fear of being bad"],
+  ["Keep typing for 60 seconds. No stopping. “I don't know what to write” counts.","moving fingers wake up the brain.","trying to be perfect on the first go"],
+  ["Do a 30-second doodle, then write what's in it.","pictures come before words in your brain.","fear of being bad"]
+];
+const PROMPTS = [
+  {type:"funny", p:"Describe your worst customer in five sentences.", rule:"No adjectives allowed. Show it with what they do.", lesson:0, q:["What did they smell like?","What did you say to them in your head?","What happened right after they left?"]},
+  {type:"story", p:"Tell the story of a scar in 150 words.", rule:"Start in the middle of the moment it happened.", lesson:2, q:["Who was there?","What did it sound like?","What do you think when you see it now?"]},
+  {type:"funny", p:"Write three true complaints about Mondays.", rule:"Make the third one surprise us.", lesson:1, q:["What's the one thing that makes a Monday okay?","What would Monday say back to you?","Which complaint is the most you?"]},
+  {type:"work", p:"Turn down a meeting without sounding like HR.", rule:"Be kind, be clear, be you. Three sentences max.", lesson:3, q:["What would you say to a friend instead?","What's the real reason you're saying no?","How would the other person feel reading it?"]},
+  {type:"story", p:"Describe your kitchen to someone who has never seen it.", rule:"Use at least one sound and one smell.", lesson:0, q:["What's in the fridge that shouldn't be?","Who leaves the mess?","What's the best thing that ever happened in there?"]},
+  {type:"story", p:"Write the first paragraph of a story that starts at a bus stop.", rule:"Something has already gone wrong.", lesson:2, q:["Where is the bus?","What is your character holding?","What happens in the next sentence?"]}
+];
+const LESSONS2 = [
+  {name:"Specific beats general", flat:"The food was really nice.", works:"The chips were so hot I had to blow on them like birthday candles.", why:"Your brain can't picture \u201cnice\u201d. It can picture hot chips."},
+  {name:"Surprise makes it funny", flat:"I went to the gym. It was hard.", works:"I went to the gym. The gym won.", why:"Funny is when your brain expects one thing and gets another."},
+  {name:"Start in the middle", flat:"This is a story about the day I got lost.", works:"The map was upside down and so was my day.", why:"Readers decide in one line whether to keep going."},
+  {name:"Short punches harder", flat:"I was feeling extremely nervous about the whole situation.", works:"I was terrified.", why:"Fewer words land faster."}
+];
+let pi = 0, round = 1, versions = [], timerStart = null, timerId = null, lastStuck = -1;
+const $ = id => document.getElementById(id);
+function setPrompt(i){
+  pi = i; const P = PROMPTS[i], L = LESSONS2[P.lesson];
+  $('tw-prompt').textContent = P.p; $('tw-rule').textContent = P.rule;
+  $('tw-l-name').textContent = L.name; $('tw-l-flat').textContent = L.flat; $('tw-l-works').textContent = L.works; $('tw-l-why').textContent = L.why;
+}
+setPrompt(Math.floor(Math.random()*PROMPTS.length));
+$('tw-new').addEventListener('click', ()=>{ let i; do{ i=Math.floor(Math.random()*PROMPTS.length); }while(i===pi); setPrompt(i); resetAll(); });
+$('tw-stuck').addEventListener('click', ()=>{
+  let i; do{ i=Math.floor(Math.random()*BUSTERS.length); }while(i===lastStuck); lastStuck=i;
+  const [t,w,f]=BUSTERS[i]; const b=$('tw-stuckbox'); b.hidden=false;
+  b.innerHTML='<p class="eyebrow" style="color:inherit">60-second block buster</p><p style="margin-top:6px"><b>'+esc(t)+'</b></p><p style="margin-top:6px;font-size:.92rem">Why it works: '+esc(w)+'</p>';
+});
+const ta = $('tw-text');
+ta.addEventListener('paste', e=>{ e.preventDefault(); toast("Paste is switched off. Every word here is yours."); });
+ta.addEventListener('drop', e=>{ e.preventDefault(); toast("No dropping text in. Type it, ugly is fine."); });
+ta.addEventListener('input', ()=>{ const n=words(ta.value).length; $('tw-count').textContent=n+(n===1?' word':' words'); if(!timerStart && n>0) startTimer(); });
+
+/* ---- inline coach bubbles: questions at the line, never words ---- */
+const PLACES=/\b(shop|store|park|kitchen|bus|train|school|class|room|beach|office|car|street|pub|cafe|café|gym|house|home|backyard|footy|field|hospital|supermarket|stop|rink|pool|church|farm|airport|party|camp|library|playground|oval)\b/i;
+const PEOPLE=/\b(he|she|they|mum|mom|dad|nan|grandma|grandpa|boss|teacher|customer|man|woman|guy|kid|friend|mate|brother|sister|trainer|neighbour)\b/i;
+let lastBubbleAt=0, asked=new Set(), bubbleStartLen=0, pauseT=null, sentenceCount=0;
+function caretXY(el, pos){
+  const cs=getComputedStyle(el), m=document.createElement('div');
+  ['fontFamily','fontSize','fontWeight','lineHeight','letterSpacing','paddingTop','paddingRight','paddingBottom','paddingLeft','borderTopWidth','borderRightWidth','borderBottomWidth','borderLeftWidth','boxSizing','whiteSpace','wordWrap','overflowWrap','tabSize'].forEach(k=>m.style[k]=cs[k]);
+  m.style.position='absolute'; m.style.visibility='hidden'; m.style.whiteSpace='pre-wrap'; m.style.overflowWrap='break-word'; m.style.width=el.offsetWidth+'px';
+  m.textContent=el.value.slice(0,pos); const sp=document.createElement('span'); sp.textContent='​'; m.appendChild(sp);
+  document.body.appendChild(m); const x=sp.offsetLeft, y=sp.offsetTop+sp.offsetHeight; m.remove();
+  return {x: x, y: y - el.scrollTop + el.offsetTop};
+}
+
+const EVENT_V=/\b(fell|fall|tripped|slipped|crashed|broke|broken|lost|won|ran|hit|bit|threw|caught|found|met|saw|went|came|got|took|cried|laughed|screamed|kissed|moved|started|quit|left|arrived|walked|jumped|dropped|burnt|burned|cut|spilled|forgot|missed|stole|bought|sang|danced|drove|crashed|smashed|landed|\w{3,}ed)\b/i;
+const FALLS=/\b(fell|fall|tripped|slipped|crashed|landed|smashed|hit)\b/i;
+const NOT_ACT=new Set('something nothing anything everything morning evening thing king ring during being bring spring string ceiling wedding building pudding feeling'.split(' '));
+const ACT_STOP=new Set('i was were over while went go going been am is are the a an and of to at in on my his her their our we you he she they me us then just started love loved like liked'.split(' '));
+const GEAR={skating:'skates',skateboarding:'skateboard',riding:'bike',cycling:'bike',swimming:'togs',surfing:'board',fishing:'rod',cooking:'pan',dancing:'shoes',running:'shoes',driving:'car',playing:'gear',climbing:'shoes',skiing:'skis',camping:'tent',baking:'cake'};
+function activity(sent){
+  const w=words(sent.toLowerCase());
+  for(let i=0;i<w.length;i++){ if(/ing$/.test(w[i]) && w[i].length>4 && !NOT_ACT.has(w[i])){ const prev=w[i-1]; return {phrase:(prev && !ACT_STOP.has(prev)? prev+' ':'')+w[i], verb:w[i]}; } }
+  return null;
+}
+function thingIn(sent){
+  const ms=[...sent.matchAll(/\b(?:my|the|a|an|his|her|their|our)\s+(?:new\s+|old\s+|big\s+|little\s+)?([a-z]{3,})\b/gi)].map(m=>m[1].toLowerCase())
+    .filter(n=>!/^(time|way|day|moment|end|start|whole|first|last|same|other|only|kind|lot|bit)$/.test(n) && !PEOPLE.test(n) && !PLACES.test(n));
+  return ms.length ? ms[ms.length-1] : null;
+}
+function storyQuestions(sent, all){
+  const text=all.join(' '), qs=[];
+  const act=activity(sent), ev=EVENT_V.test(sent) || !!act;
+  if(!ev) return qs;
+  const hasWhere=PLACES.test(text) || /\b(at|in)\s+(the|my|our|a)\s+\w+/i.test(text);
+  const hasAge=/\b(\d+|years? old|year \d|when i was|aged?|grade|kindy|primary|high school|uni)\b/i.test(text);
+  const hasWho=PEOPLE.test(text.replace(/\bi\b/gi,'')) || /\bwith (my|a|the)\b/i.test(text);
+  if(!hasWhere && !asked.has('where')) qs.push({k:'where', q: act ? "Where were you "+act.phrase+"?" : "Where were you?"});
+  if(!hasAge && /\b(i|me|my)\b/i.test(sent) && !asked.has('age')) qs.push({k:'age', q:"How old were you?"});
+  const gear = act && GEAR[act.verb] ? GEAR[act.verb] : null;
+  const thing = gear || thingIn(sent);
+  if(thing && !asked.has('thing:'+thing)) qs.push({k:'thing:'+thing, q: gear ? "What colour "+(/s$/.test(gear)?"were":"was")+" your "+gear+"?" : "What did the "+thing+" look like?"});
+  if(FALLS.test(sent) && !asked.has('hurt')) qs.push({k:'hurt', q:"What hurt first?"});
+  if(!hasWho && !asked.has('who')) qs.push({k:'who', q:"Who saw it happen?"});
+  return qs.slice(0,3);
+}
+function questionFor(sent, all){
+  const low=sent.toLowerCase(); const pick=(k,q,h)=>asked.has(k)?null:{k,q,h};
+  const t=sent.match(TELL); if(t) return pick('tell:'+t[3], "How did you know you were "+t[3].toLowerCase()+"?", "Add what your body did, or what someone else saw. Then the reader feels it without being told.");
+  const v=sent.match(VAGUE); if(v) return pick('vague:'+v[0].toLowerCase(), "“"+v[0]+"” how? What could we see, hear or taste?", "Add one real detail right here.");
+  const k=sent.match(KNOBS); if(k) return pick('knob', "Is there a stronger word that wouldn't need “"+k[0].toLowerCase()+"”?", "Think of the word you'd use if you were angry, scared or delighted.");
+  if(all.length===1 && /^(this is|i am going to|i'm going to|once upon|it was a)/i.test(sent)) return pick('warm', "What's the exact moment it started?", "You could jump straight there. Readers like landing in the middle.");
+  const sq=storyQuestions(sent, all); if(sq.length) return {k:sq.map(x=>x.k), multi:sq.map(x=>x.q), h:"Pick one and add it, here or in your next sentence."};
+  const pl=sent.match(PLACES); if(pl && !SENSES.test(sent)) return pick('place:'+pl[0].toLowerCase(), "What can you hear in the "+pl[0].toLowerCase()+"?", "One sound or smell puts the reader right there with you.");
+  const pe=sent.match(PEOPLE); if(pe) return pick('person:'+pe[0].toLowerCase(), "What's one thing "+(/^(he|she|they)$/i.test(pe[0])?pe[0].toLowerCase():"the "+pe[0].toLowerCase())+" is holding or wearing?", "A tiny detail makes a person real. Add it after their name.");
+  if(all.length>=3 && !/["“”]/.test(all.join(' '))) return pick('dialogue', "What did someone actually say?", "Add their exact words in quote marks. Real speech brings a scene to life.");
+  if(all.length>=2 && !SENSES.test(all.join(' '))) return pick('senses', "What could you smell right then?", "Add a smell. It's the sense writers forget most.");
+  if(all.length>=4) return pick('turn', "What went wrong next?", "Stories need a problem. Add the moment it changes.");
+  return null;
+}
+function showBubble(q, endPos){
+  const b=$('tw-bubble'); if(q.multi){ $('tw-bq').innerHTML=q.multi.map(x=>'<span style="display:block">'+esc(x)+'</span>').join(''); } else { $('tw-bq').textContent=q.q; } $('tw-bh').innerHTML=q.h?'<b>Idea:</b> '+esc(q.h):''; const ex=q.ex||pickEx(catOf(q.k)); $('tw-be').innerHTML=ex?'<b>Example from a different story:</b> '+esc(ex):''; b.hidden=false;
+  const xy=caretXY(ta, endPos); const wrapW=ta.offsetWidth;
+  const bw=Math.min(340, wrapW-16); let left=Math.max(8, Math.min(xy.x-24, wrapW-bw-8));
+  b.style.left=left+'px'; b.style.top=(xy.y+8)+'px'; b.style.setProperty('--tip', Math.max(10, Math.min(xy.x-left-8, bw-28))+'px');
+  [].concat(q.k).forEach(k=>asked.add(k)); lastBubbleAt=Date.now(); bubbleStartLen=ta.value.length;
+}
+function hideBubble(){ $('tw-bubble').hidden=true; }
+$('tw-bx').addEventListener('click', ()=>{ hideBubble(); ta.focus(); });
+/* ---- walking coach: follows the caret, mid-sentence too ---- */
+// Examples are always from a DIFFERENT story, so the writer sees how, then writes their own.
+const EXAMPLES={
+  where:["“on the cracked footpath outside the servo”","“in the car park at Bunnings, between two utes”","“on Nan’s lino, which she’d just mopped”"],
+  age:["“I was seven, so the deep end might as well have been the ocean.”","“Year 9. Braces. Enough said.”","“I was 30 and still scared of the self-serve checkout.”"],
+  thing:["“a lunchbox with my brother’s name scratched off”","“a hat so old it had gone from navy to grey”","“runners held together with gaffer tape”"],
+  hurt:["“My knee found the only rock on the whole oval.”","“My pride hit the ground about a second before my elbow did.”","“First the sting, then the gravel I picked out for a week.”"],
+  who:["“The whole Year 4 class saw. Including Jessica.”","“A bloke at the bus stop clapped. Slowly.”","“Only the dog saw, and he looked disappointed.”"],
+  place:["“the trolley wheel that squeaked every second step”","“the hiss of the coffee machine and someone’s phone on full volume”","“the smell of sunscreen and hot chips”"],
+  person:["“Dad was folding the same tea towel over and over.”","“She had a pen behind each ear and was looking for a third.”","“He wore thongs to a wedding. Gold ones.”"],
+  tell:["“My ears went hot and I suddenly needed to tie my shoe.”","“I laughed so hard I had to put my Milo down.”","“I said ‘no worries’ in a voice that meant there were many worries.”"],
+  vague:["“The cake was good” tells us nothing. “The icing was still warm and slid off one side” shows us.","“It was a nice day” is blurry. “Hot enough that the car seatbelt burnt my arm” is a picture.","“Weird stuff” is blurry. “A shopping trolley in the creek, upside down” is a picture."],
+  knob:["Not “really big”. “Huge”, or better, “bigger than our car”.","Not “very tired”. “I fell asleep standing up in the shower.”","Not “really scared”. “Terrified” does the job alone."],
+  warm:["“So, the toaster caught fire at 6am.”","“The day I got stuck in the drive-thru started fine.”","“So, there I was, in my undies, locked out.”"],
+  dialogue:["Nan said, “Well, that’s one way to get off a horse.”","The checkout guy said, “You right there, mate?” I was not right.","Mum just said, “Mmm,” which was worse than yelling."],
+  senses:["“The whole room smelled like burnt toast and Lynx.”","“It smelled like a wet dog had been to a barbecue.”","“That chlorine smell that sticks to you for two days.”"],
+  turn:["“Then the bus driver said the bus wasn’t going to the city.”","“That’s when I noticed I’d been holding the wrong baby.”","“Then the lights went out.”"],
+  feel:["“My stomach did the thing it does at the top of a rollercoaster.”","“My face went the colour of a tomato sauce bottle.”","“I wanted to crawl under the table and live there.”"],
+  said:["“He said, ‘I’m not angry,’ while slamming every cupboard.”","“She just said, ‘Righto,’ and walked off.”","“The teacher said, ‘Interesting choice,’ which meant wrong.”"],
+  why:["“…because I once saw a seagull steal a whole pie, and I’ve never trusted them since.”","“…because Mum said so, and Mum is never wrong, except about the GPS.”","“…because I panicked. Simple as that.”"],
+  time:["“at 3am, which is when all bad ideas happen”","“the day before Christmas, so the shops were a war zone”","“halfway through a footy final”"],
+  general:["“I fell off my bike” is fine. “I fell off my bike into Mrs Kelly’s roses” is a story.","One true detail beats three fancy words.","Small and specific wins: “a cold Milo” beats “a drink”."]
+};
+const catOf=k=>{ k=[].concat(k)[0]||''; const c=k.split(':')[0]; return EXAMPLES[c]?c:({knob:'knob',warm:'warm'}[c]||'general'); };
+const pickEx=c=>{ const a=EXAMPLES[c]||EXAMPLES.general; return a[Math.floor(Math.random()*a.length)]; };
+const FEEL=/\b(scared|happy|sad|angry|nervous|excited|upset|embarrassed|worried|annoyed|proud|jealous|terrified|stoked|furious|shy|lonely)\b/i;
+const SAID=/\b(said|says|asked|yelled|told|shouted|whispered|goes|went like)\b/i;
+const WHEN=/\b(one day|once|yesterday|last (week|year|night)|this morning|when)\b/i;
+// Look only at the last few words: the coach "walks" along with you.
+function walkHook(frag, all){
+  const w=words(frag); if(w.length<2) return null;
+  const tail=w.slice(-2).join(' ').toLowerCase(), last=w[w.length-1].toLowerCase();
+  const text=all.join(' ')+' '+frag;
+  const pick=(k,q,h)=>asked.has(k)?null:{k,q,h};
+  const act=activity(frag);
+  if(act && act.verb===last) return pick('where', "Where were you "+act.phrase+"?", "Add a place. Name the real spot, not just “somewhere”.");
+  let m;
+  if((m=tail.match(FEEL))) return pick('feel:'+m[1], "What did “"+m[1]+"” look like on you?", "Show it with your body: hands, face, stomach.");
+  if((m=last.match(VAGUE))) return pick('vague:'+m[1], "“"+m[1]+"” how, exactly?", "Swap the blurry word for something we can picture.");
+  if((m=last.match(/^(very|really|extremely|totally|literally|truly)$/))) return pick('knob', "Is there one word strong enough without “"+m[1]+"”?", "Strong words don’t need a volume knob.");
+  if(SAID.test(last)) return pick('said', "What were their exact words?", "Put them in quote marks. Real speech is funnier than a summary.");
+  if(last==='because') return pick('why', "Is that the real reason, or the polite one?", "The honest reason is usually the interesting one.");
+  if((m=last.match(PLACES)) && !SENSES.test(text)) return pick('place:'+m[1].toLowerCase(), "What can you hear or smell at the "+m[1].toLowerCase()+"?", "One sound or smell puts the reader right there.");
+  if((m=last.match(PEOPLE)) && !/^(he|she|they)$/.test(last)) return pick('person:'+last, "What’s your "+last+" doing with their hands?", "One small action makes a person real.");
+  if(FALLS.test(last)) return pick('hurt', "What hit the ground first?", "Slow it down. One body part, one sound.");
+  if(WHEN.test(tail) && !/\b(\d+|years? old|year \d|grade|kindy|primary|high school)\b/i.test(text)) return pick('age', "How old were you?", "An age tells us how big this felt.");
+  const th=thingIn(frag); if(th && th===last) return pick('thing:'+th, "What does the "+th+" look like up close?", "Colour, a mark, a smell, how old it is.");
+  return null;
+}
+
+/* Optional real AI coach. If /api/coach isn't there (preview, Drop deploy, no key), we quietly use the built-in coach. */
+let aiOK = /netlify\.app$|wrimble\.com\.au$/.test(location.hostname);
+async function askAI(body, ms){
+  if(!aiOK) return null;
+  const ctl=new AbortController(); const t=setTimeout(()=>ctl.abort(), ms);
+  try{
+    const r=await fetch('/api/coach',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body),signal:ctl.signal});
+    if(r.status===404||r.status===501) aiOK=false;
+    if(!r.ok) return null; return await r.json();
+  }catch(e){ return null; } finally{ clearTimeout(t); }
+}
+let walkSeq=0;
+async function walkCheck(){
+  if(!$('tw-coach').checked) return;
+  const v=ta.value, pos=ta.selectionStart; if(pos!==v.length || !v.trim()) return;
+  if(Date.now()-lastBubbleAt<4500) return;
+  const all=sentences(v); const endsSentence=/[.!?]["”]?\s*$/.test(v);
+  const frag=endsSentence ? '' : v.slice(Math.max(v.search(/[^.!?]*$/),0));
+  const done=endsSentence ? all : all.slice(0,-1);
+  if(endsSentence && all.length===sentenceCount) return;
+  if(endsSentence) sentenceCount=all.length;
+  const anchor=v.replace(/\s+$/,'').length, seq=++walkSeq;
+  // rule-based pick (instant), then let the AI replace it if it answers fast
+  let q=endsSentence ? questionFor(all[all.length-1], all) : walkHook(frag, done);
+  if(aiOK){
+    const ai=await askAI({mode:'bubble', prompt:PROMPTS[pi].p, text:v.slice(-1500), asked:[...asked].slice(-12)}, 3500);
+    if(seq!==walkSeq || ta.value.length-v.length>25) return;
+    if(ai && ai.question){ q={k:'ai:'+ai.question.slice(0,40), q:ai.question, h:ai.idea||'', ex:ai.example||''}; }
+  }
+  if(q) showBubble(q, Math.min(anchor, ta.value.replace(/\s+$/,'').length));
+}
+
+ta.addEventListener('input', ()=>{
+  if(!$('tw-bubble').hidden && ta.value.length-bubbleStartLen>45) hideBubble();
+  clearTimeout(pauseT); pauseT=setTimeout(walkCheck, 1100);
+});
+ta.addEventListener('scroll', hideBubble);
+$('tw-coach').addEventListener('change', ()=>{ if(!$('tw-coach').checked) hideBubble(); });
+
+function toast(m){ $('tw-toast').textContent=m; clearTimeout(toast.t); toast.t=setTimeout(()=>$('tw-toast').textContent='',3500); }
+function words(s){ return s.match(/[A-Za-z0-9\u2019']+/g)||[]; }
+function startTimer(){ timerStart=Date.now(); timerId=setInterval(()=>{ const left=420-Math.floor((Date.now()-timerStart)/1000); const a=Math.abs(left); $('tw-timer').textContent=(left<0?'+':'')+Math.floor(a/60)+':'+String(a%60).padStart(2,'0'); if(left===0) toast("Time's up. Finish your sentence, then press Done."); },1000); }
+function stopTimer(){ clearInterval(timerId); timerId=null; timerStart=null; $('tw-timer').textContent='7:00'; }
+function resetAll(){ round=1; versions=[]; mission=null; asked=new Set(); sentenceCount=0; hideBubble(); ta.value=''; $('tw-count').textContent='0 words'; $('tw-results').hidden=true; $('tw-label').textContent='Round 1 \u00b7 type it yourself (paste is switched off)'; stopTimer(); }
+
+/* ---- the why notes: simple rules, never rewriting ---- */
+const SENSES = /\b(smell|smelled|smelt|stink|stank|sound|sounded|loud|quiet|whisper|hiss|crunch|sticky|cold|hot|warm|wet|sweat|taste|tasted|sour|sweet|salty|bitter|rough|soft|bright|dark|shiny|greasy|burnt|buzz|creak|bang|slam|drip|shout|yell|scream|shook|shiver|thud|clatter|ring)\w*/i;
+const VAGUE = /\b(nice|good|great|amazing|awesome|bad|interesting|stuff|things?|lovely|beautiful|wonderful|terrible)\b/i;
+const KNOBS = /\b(very|really|extremely|totally|literally|truly)\b/gi;
+function sentences(t){ return (t.replace(/\s+/g,' ').match(/[^.!?]+[.!?]*/g)||[]).map(s=>s.trim()).filter(s=>words(s).length>=2); }
+function bestLine(ss){
+  let best=null;
+  ss.forEach((s,idx)=>{
+    const w=words(s); let sc=0, why=[];
+    if(/\d/.test(s)){ sc+=3; why.push('num'); }
+    const caps=w.slice(1).filter(x=>/^[A-Z][a-z]/.test(x) && x!=='I').length; if(caps){ sc+=2*caps; why.push('name'); }
+    if(SENSES.test(s)){ sc+=3.5; why.push('sense'); }
+    if(w.length<=5 && idx===ss.length-1 && ss.length>1 && !WEAK_END.test(s) && !(s.match(KNOBS)||[]).length){ sc+=3; why.unshift('punch'); } else if(w.length<=8 && idx>0){ sc+=1; why.push('short'); }
+    if(/\b(like a|like an|as if|as though)\b/i.test(s)){ sc+=3; why.unshift('simile'); }
+    if(/\b(but|then|until|except|instead)\b/i.test(s) && idx===ss.length-1){ sc+=1; why.push('turn'); }
+    if(idx===ss.length-1 && hasCallback(ss)){ sc+=3; why.unshift('callback'); }
+    if(VAGUE.test(s)) sc-=3;
+    if(idx===0 && FORMAL.test(s)) sc-=5;
+    if(TELL.test(s)) sc-=3;
+    sc-=((s.match(KNOBS)||[]).length);
+    if(!best || sc>best.sc) best={s,sc,why};
+  });
+  return best;
+}
+const BEST_WHY = {
+  sense:"We can actually sense it. You didn't tell us how to feel, you gave us something to see, hear or smell, and our brain did the rest. That's showing, not telling.",
+  num:"That number makes it feel real. Numbers are proof. \u201cA lot\u201d is a guess, an exact number is something you noticed.",
+  name:"Using a real name or place makes it specific. Your reader trusts things they could look up.",
+  punch:"It's a short line at the end, so it lands like a punchline. Ending short is one of the oldest tricks there is: the reader stops, and the line sticks.",
+  callback:"Your ending brings back something from your first line. That's a callback: the reader recognises it, feels clever for noticing, and the piece feels finished. Comedians and storytellers use it all the time.",
+  simile:"You compared it to something unexpected. Your reader's brain has to join the two things up, and that little jump is what makes a line memorable.",
+  short:"It's short, so it lands fast. Short sentences hit harder because nothing gets in the way of the feeling.",
+  turn:"There's a turn at the end. Readers love it when a sentence goes somewhere they didn't expect.",
+  none:"It sounds like a person said it. That's the whole game, and you're already playing it."
+};
+function noticeNote(text, ss){
+  const hits=[]; HABITS.filter(h=>h.label!=='Volume knobs').forEach(h=>{ h.re.lastIndex=0; const m=h.re.exec(text); if(m) hits.push({h,m:m[0]}); });
+  if(hits.length) return {q:hits[0].m, t:"Robots love this one. "+hits[0].h.why+" Keep it or don't. Your call."};
+  const v=text.match(VAGUE); if(v) return {q:v[0], t:"See the word \u201c"+v[0]+"\u201d? Writers often swap words like this for a detail, because your reader can't picture \u201c"+v[0].toLowerCase()+"\u201d. What would it look like? Keep it or don't. Your call."};
+  const k=text.match(KNOBS); if(k && k.length>=2) return {q:k[0], t:"You use \u201c"+k[0].toLowerCase()+"\u201d"+(k.length>2?" a few times":" twice")+". Writers often leave these out, because turning a word up doesn't make it stronger. A stronger word does. Keep them or don't. Your call."};
+  const long=ss.find(s=>words(s).length>30); if(long) return {q:long.slice(0,60)+'\u2026', t:"This sentence is a long one. Long sentences can be great for a rush of feeling, but readers can lose the thread. Writers often break one up when they want a moment to land. Your call."};
+  const lens=ss.map(s=>words(s).length); if(lens.length>=3 && Math.max(...lens)-Math.min(...lens)<5) return {q:null, t:"Your sentences are all about the same length. Writers mix short and long on purpose, like a drum beat, so the reader doesn't drift off. Try one really short one and see how it feels."};
+  if(ss.length && /^(this is|i am going to|i'm going to|once upon)/i.test(ss[0])) return {q:ss[0], t:"You warm up before the story starts. That's normal, it helps the writer get going. Writers often cut the warm-up so the reader lands right in the action."};
+  return {q:null, t:"You didn't lean on any robot phrases or filler words. Writers spend years learning to do that. Notice which sentence you'd read out loud first, and ask yourself why."};
+}
+const TELL = /\b(felt|feel|feeling|was|were|am|is)\s+(so\s+|very\s+|really\s+)?(sad|happy|angry|scared|nervous|excited|upset|annoyed|bored|tired|frustrated|embarrassed|lonely|worried|amazing|awesome|terrible|beautiful|rude|mean|kind)\b/i;
+const STOP=new Set('about after again also because been before being could every their there these thing things think those through today where which while would really should'.split(' '));
+function content(s){ return words(s.toLowerCase()).filter(w=>w.length>=5 && !STOP.has(w)); }
+function hasCallback(ss){ if(ss.length<3) return null; const first=new Set(content(ss[0])); const hit=content(ss[ss.length-1]).find(w=>first.has(w)); return hit||null; }
+const WEAK_END=/\b(it|that|really|though|too|anyway|there|then|again|well|actually|now|lol|and stuff|or something)[.!?]*$/i;
+const FORMAL=/^((in|on|it was)\s+(january|february|march|april|may|june|july|august|september|october|november|december|\d{4})|\d{4}[.,])/i;
+function robotHit(t){ for(const h of HABITS){ if(h.label==='Volume knobs') continue; h.re.lastIndex=0; const m=h.re.exec(t); if(m) return {h,m:m[0]}; } return null; }
+function issues(text, ss){
+  const out=[];
+  const r=robotHit(text); if(r) out.push({k:'robot', q:r.m, why:"This is a robot habit. "+r.h.why});
+  const t=text.match(TELL); if(t) out.push({k:'tell', q:t[0], why:"This tells us the feeling instead of showing it. Your reader just nods and moves on. Show what someone did, and the reader feels it without being told."});
+  const v=text.match(VAGUE); if(v) out.push({k:'vague', q:v[0], why:"“"+v[0]+"” is doing no work. Your reader can't picture it, so the line goes blurry right there."});
+  const k=text.match(KNOBS)||[]; if(k.length) out.push({k:'knobs', q:k[0], why:"“"+k[0].toLowerCase()+"”"+(k.length>1?" (and "+(k.length-1)+" more like it)":"")+" turns the volume up on a weak word. It reads as trying hard. A stronger word wouldn't need it."});
+  const long=ss.find(s=>words(s).length>30); if(long) out.push({k:'long', q:long, why:"This sentence runs out of breath. By the end, your reader has forgotten the start."});
+  if(ss.length && /^(this is|i am going to|i'm going to|once upon|it was a)/i.test(ss[0])) out.push({k:'warm', q:ss[0], why:"This is a warm-up. It helps you get going, but your reader decides in one line whether to keep reading, and this line gives them nothing yet."});
+  if(ss.length && FORMAL.test(ss[0])) out.push({k:'formal', q:ss[0], why:"This opens like a report, with a date first. Nobody talks like that. When you tell a story to a mate, you just start: \u201cSo, I'm at the bus stop\u2026\u201d"});
+  const last=ss[ss.length-1]||''; const we=last.match(WEAK_END); if(ss.length>1 && we) out.push({k:'keyword', q:last, why:"Your last line ends on \u201c"+we[1]+"\u201d. The most surprising word should be the very last thing the reader hears, because that's where the laugh or the feeling lands. Here it fades out instead."});
+  if(!SENSES.test(text)) out.push({k:'senses', q:null, why:"There's nothing here we can hear, smell, taste or touch. It's all ideas, so it's hard to step inside."});
+  const lens=ss.map(s=>words(s).length); if(lens.length>=3 && Math.max(...lens)-Math.min(...lens)<5) out.push({k:'rhythm', q:null, why:"Every sentence is about the same length, so it drones a bit, like someone talking in one note."});
+  const ORDER=['robot','tell','formal','warm','keyword','vague','knobs','long','senses','rhythm'];
+  return out.sort((a,b)=>ORDER.indexOf(a.k)-ORDER.indexOf(b.k));
+}
+const MISSIONS = {
+  robot:{t:"Zero robot phrases. Say it the way you'd say it to a mate.", ok:(x)=>!robotHit(x), miss:(x)=>"The robot is still in there: “"+robotHit(x).m+"”."},
+  tell:{t:"Don't name the feeling. Show it with something someone does.", ok:(x)=>!TELL.test(x), miss:(x)=>"You still named it: “"+x.match(TELL)[0]+"”."},
+  vague:{t:"Swap every blurry word (nice, good, things) for something we can see.", ok:(x)=>!VAGUE.test(x), miss:(x)=>"“"+x.match(VAGUE)[0]+"” is still there."},
+  knobs:{t:"No “very”, “really” or “extremely”. Not one.", ok:(x)=>!(x.match(KNOBS)||[]).length, miss:(x)=>"Found “"+x.match(KNOBS)[0]+"”. These are habits, they sneak back in."},
+  long:{t:"No sentence longer than 20 words.", ok:(x)=>!sentences(x).some(s=>words(s).length>20), miss:()=>"One sentence is still over 20 words."},
+  warm:{t:"Start in the middle. Your first line should already be happening.", ok:(x)=>{const f=sentences(x)[0]||'';return !/^(this is|i am going to|i'm going to|once upon|it was a)/i.test(f);}, miss:()=>"You still warm up in the first line."},
+  senses:{t:"Put in one smell and one sound.", ok:(x)=>SENSES.test(x), miss:()=>"Still no smell or sound I could find."},
+  rhythm:{t:"Add one sentence of three words or fewer. Put it somewhere it hurts.", ok:(x)=>sentences(x).some(s=>words(s).length<=3), miss:()=>"No short sentence yet."},
+  formal:{t:"Start like you're telling a mate. Try beginning with \u201cSo,\u201d.", ok:(x)=>!FORMAL.test(sentences(x)[0]||''), miss:()=>"Still opens like a report."},
+  keyword:{t:"End your last sentence on its most surprising word. Move it to the very end.", ok:(x)=>{const ss=sentences(x);return !WEAK_END.test(ss[ss.length-1]||'');}, miss:(x)=>{const ss=sentences(x);return "Your last line still ends on \u201c"+(ss[ss.length-1].match(WEAK_END)||[,''])[1]+"\u201d.";}},
+  three:{t:"Rule of three: two normal things, then a third that surprises us.", ok:(x)=>{const ss=sentences(x);return ss.length>=3 || (x.match(/,/g)||[]).length>=2;}, miss:()=>"I can't find a list of three yet."},
+  circle:{t:"End where you started: bring back something from your first line, with a twist.", ok:(x)=>!!hasCallback(sentences(x)), miss:()=>"Your last line doesn't come back to your first one yet."},
+  cut:{t:"Cut a quarter of your words and keep the meaning.", ok:(x,prev)=>words(x).length<=Math.round(words(prev).length*0.8), miss:(x,prev)=>"You went from "+words(prev).length+" to "+words(x).length+" words. Keep cutting."}
+};
+let mission=null, aiMission=null, usedAiMission=false;
+function challengeCheck(text, ss){
+  const n=words(text).length, P=PROMPTS[pi];
+  if(/150 words/.test(P.p)) return n>165 ? "The challenge said 150 words. You wrote "+n+". The limit is the point: it forces you to choose." : (n<100 ? "The challenge said 150 words. You wrote "+n+", so you've got room for one more real detail." : null);
+  if(/Three sentences max/i.test(P.rule) && ss.length>3) return "The challenge said three sentences max. You wrote "+ss.length+". Which one could go?";
+  if(/three true complaints/.test(P.p) && ss.length<3) return "The challenge asked for three complaints. I count "+ss.length+".";
+  if(/five sentences/.test(P.p) && ss.length!==5) return "The challenge said five sentences. You wrote "+ss.length+".";
+  return null;
+}
+function showNotes(text){
+  const ss=sentences(text); const P=PROMPTS[pi]; const prev=versions.length>1?versions[versions.length-2]:null;
+  const b=bestLine(ss); const key=b ? (b.why.find(k=>BEST_WHY[k])||'none') : 'none';
+  const iss=issues(text, ss).filter(i=>!(b && i.q && b.s.includes(i.q) && ss.length>1));
+  const notes=[];
+  // mission check first, honestly
+  if(mission && prev && !usedAiMission){
+    const M=MISSIONS[mission];
+    const shrank = mission!=='cut' && words(text).length < words(prev).length*0.6;
+    notes.push(M.ok(text,prev) && shrank ? ['','Technically done','<q>'+esc(M.t)+'</q>The habit is gone, but so is most of your draft ('+words(prev).length+' words down to '+words(text).length+'). Leaving it out isn\u2019t the same as doing it. Have another go and keep the story in.'] : M.ok(text,prev) ? ['c','Mission done','<q>'+esc(M.t)+'</q>Done. Look at the two versions below and you can see the difference.'] : ['','Mission not yet','<q>'+esc(M.t)+'</q>'+esc(M.miss(text,prev))+' Have another go.']);
+  }
+  if(b && b.sc<=0) notes.push(['','Closest to working',(b?'<q>'+esc(b.s)+'</q>':'')+'Honestly, no line jumps out yet. '+(round===1?'That\u2019s normal for a first go.':'Keep going, it often clicks around here.')+' This one is closest because it has the least padding. The mission below is how you get a line that does jump out.']);
+  else notes.push(['c','Best line',(b?'<q>'+esc(b.s)+'</q>':'')+esc(BEST_WHY[key])]);
+  const flat = iss.find(i=>i.q) || iss[0];
+  if(flat) notes.push(['','Goes flat',(flat.q?'<q>'+esc(flat.q)+'</q>':'')+esc(flat.why)+' I won’t rewrite it. You decide what to do.']);
+  else notes.push(['c','Nothing goes flat','No robot phrases, no blurry words, no volume knobs. That’s rare. So the next mission is harder.']);
+  const cc=challengeCheck(text, ss); if(cc) notes.push(['','Challenge check',esc(cc)]);
+  // pick next mission: first issue that isn't the one just completed, else cut
+  const extra = P.type==='funny' ? ['three','keyword','cut'] : P.type==='story' ? ['circle','cut','rhythm'] : ['cut','rhythm'];
+  const nextK = (iss.find(i=>i.k!==mission)||{}).k || extra.find(k=>k!==mission && !(k==='circle' && hasCallback(ss)));
+  mission = nextK;
+  notes.push(['c','Next mission',esc(MISSIONS[nextK].t)]);
+  notes.push(['','Curious',esc(P.q[(round-1)%P.q.length])]);
+  $('tw-notes').innerHTML=notes.map(([c,t,h])=>'<div class="note2"><span class="tag '+c+'">'+t+'</span><div>'+h+'</div></div>').join('');
+}
+async function aiNotes(text, missionText){
+  if(!aiOK) return;
+  const P=PROMPTS[pi], L=LESSONS2[P.lesson], prev=versions.length>1?versions[versions.length-2]:'';
+  const box=$('tw-notes'); const wait=document.createElement('p'); wait.className='aiwait'; wait.textContent='The coach is reading it properly…'; box.prepend(wait);
+  const r=await askAI({mode:'notes', prompt:P.p, rule:P.rule, lesson:L.name+': '+L.why, round, mission:missionText, text, previous:prev}, 20000);
+  wait.remove(); if(!r || !r.next_mission || versions[versions.length-1]!==text) return;
+  const n=[];
+  if(missionText && r.mission_status!=='none') n.push([r.mission_status==='done'?'c':'', r.mission_status==='done'?'Mission done':'Mission not yet','<q>'+esc(missionText)+'</q>'+esc(r.mission_note)]);
+  n.push(['c','Best line',(r.best_line_quote?'<q>'+esc(r.best_line_quote)+'</q>':'')+esc(r.best_line_why)]);
+  if(r.flat_quote||r.flat_why) n.push(['','Goes flat',(r.flat_quote?'<q>'+esc(r.flat_quote)+'</q>':'')+esc(r.flat_why)+' I won’t rewrite it. You decide what to do.']);
+  const cc=challengeCheck(text, sentences(text)); if(cc) n.push(['','Challenge check',esc(cc)]);
+  n.push(['c','Next mission',esc(r.next_mission)+(r.example?'<span class="exline"><b>Example from a different story:</b> '+esc(r.example)+'</span>':'')]);
+  if(r.curious) n.push(['','Curious',esc(r.curious)]);
+  aiMission=r.next_mission;
+  box.innerHTML=n.map(([c,t,h])=>'<div class="note2"><span class="tag '+c+'">'+t+'</span><div>'+h+'</div></div>').join('');
+}
+function renderVersions(){
+  $('tw-versions').innerHTML = versions.map((v,i)=>'<div class="ver"><div class="vh"><span>Round '+(i+1)+'</span><span>'+words(v).length+' words</span></div><p>'+esc(v)+'</p></div>').join('');
+  $('tw-versions').scrollLeft = 99999;
+}
+$('tw-done').addEventListener('click', ()=>{
+  const text=ta.value.trim();
+  if(words(text).length<5){ toast("Give it at least a sentence or two. Ugly counts."); ta.focus(); return; }
+  versions.push(text); clearInterval(timerId); timerId=null; hideBubble();
+  $('tw-res-h').textContent = round===1 ? "Here's the why." : "Round "+round+". Here's the why this time.";
+  const askedMission = aiMission || (mission?MISSIONS[mission].t:''); usedAiMission=!!aiMission; aiMission=null;
+  showNotes(text); renderVersions();
+  aiNotes(text, askedMission);
+  $('tw-badge').hidden = round<10;
+  $('tw-results').hidden=false; $('tw-results').scrollIntoView({behavior: matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
+});
+$('tw-again').addEventListener('click', ()=>{
+  round++; ta.value=''; asked=new Set(); sentenceCount=0; hideBubble(); $('tw-count').textContent='0 words'; stopTimer();
+  $('tw-label').textContent='Round '+round+' \u00b7 your mission: '+(aiMission||(mission?MISSIONS[mission].t:'try it a new way.'));
+  ta.focus(); window.scrollTo({top: ta.getBoundingClientRect().top + scrollY - 140, behavior:'auto'});
+});
+</script>
+</body>
+</html>
