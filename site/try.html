@@ -304,6 +304,15 @@ footer small{color:var(--ink-soft)}
 .protip .tipt{margin-top:8px;padding:8px 10px;border-radius:6px;background:var(--paper-2);font-size:.92rem}
 .protip .tipt b{color:var(--margin)}
 .protip .tipbar{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:10px;font-size:.8rem;color:var(--ink-soft)}
+.caps{margin-top:18px;background:var(--ink);color:var(--paper);border-radius:12px;padding:14px 18px}
+.caps .capsh{margin:0;font-size:.98rem}
+.caps .capsh b{color:var(--pencil)}
+.caps ul{list-style:none;margin:10px 0 0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+.caps li{display:flex;gap:8px;align-items:flex-start;font-size:.85rem;line-height:1.3;color:color-mix(in srgb, var(--paper) 80%, transparent)}
+.caps li b{display:block;color:var(--paper);font-size:.92rem}
+.caps svg{flex:0 0 auto;width:22px;height:22px;color:var(--pencil)}
+@media (max-width:900px){.caps ul{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.caps ul{grid-template-columns:1fr}}
 .edwrap{position:relative}
 .bubble{position:absolute;z-index:5;max-width:min(340px,calc(100% - 16px));background:var(--ink);color:var(--paper);border-radius:10px;padding:12px 34px 12px 14px;box-shadow:4px 4px 0 var(--pencil);animation:pop .22s ease-out}
 .bubble::before{content:"";position:absolute;top:-8px;left:var(--tip,18px);border:8px solid transparent;border-top:0;border-bottom-color:var(--ink)}
@@ -372,6 +381,11 @@ footer small{color:var(--ink-soft)}
         <h1 style="font-size:clamp(2.4rem,6vw,4rem);font-weight:800;letter-spacing:-0.04em;margin-top:8px">Today's <span class="hl">Wrimble</span></h1>
       </div>
       <div class="hand">ugly is allowed. ugly is encouraged.</div>
+    </div>
+
+    <div class="caps" aria-label="What your coach does">
+      <p class="capsh">Your coach sits with you while you write. It <b>never writes for you</b>. It:</p>
+      <ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v10H9l-5 4z"/></svg><span><b>Asks you questions</b>as you write, one at a time</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9 10h.01M15 10h.01M8.5 15c1 1.2 2.2 1.8 3.5 1.8s2.5-.6 3.5-1.8"/></svg><span><b>Makes you think differently</b>and find the funny side</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12l5 5L20 6"/></svg><span><b>Notices your fixes</b>and pushes you one step further</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/><circle cx="12" cy="12" r="4"/></svg><span><b>Shows you why it works</b>your best line, and what goes flat</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19V5h16v14z"/><path d="M8 9h8M8 13h5"/></svg><span><b>Helps with words</b>tap a word to see its meaning</span></li></ul>
     </div>
 
     <div class="daycard">
@@ -736,6 +750,7 @@ async function walkCheck(){
   const anchor=v.replace(/\s+$/,'').length, seq=++walkSeq;
   // rule-based pick (instant), then let the AI replace it if it answers fast
   let q=endsSentence ? questionFor(all[all.length-1], all) : walkHook(frag, done);
+  if(endsSentence && (all.length%3===0 || !q)){ const t=THINK.find(t=>!asked.has('think:'+t[0])); if(t) q={k:'think:'+t[0], who:'Coach · think about it differently', q:t[0], h:t[1], ex:''}; }
   if(aiOK){
     const ai=await askAI({mode:'bubble', level:LEVEL, prompt:PROMPTS[pi].p, text:v.slice(-1500), asked:[...asked].slice(-24)}, 3500);
     if(seq!==walkSeq || ta.value.length-v.length>25) return;
@@ -746,6 +761,16 @@ async function walkCheck(){
 
 /* Editing an earlier line: notice fixes and keep pushing it further. */
 let prevVal=''; const deeperUsed=new Set();
+const THINK=[
+  ["What would the dog (or the pie, or the chair) say about this moment?","Flipping the point of view makes readers see something ordinary in a new way."],
+  ["What's secretly funny about this, even if it hurt at the time?","Comedy often hides in the gap between how big it felt and how small it was."],
+  ["What if this happened to the Prime Minister instead of you?","Moving a small moment into a big setting shows what's really odd about it."],
+  ["What did you think but never say out loud?","The unsaid thought is often the most honest and the funniest line."],
+  ["Make it ten times worse. What happens?","Blowing up the stakes is how writers find the joke or the drama."],
+  ["What's the opposite of what you'd expect someone to feel here?","A surprising reaction makes readers lean in and think."],
+  ["How would you explain this to an alien?","Describing the normal as strange makes readers notice it again."],
+  ["What tiny detail would only you notice?","The odd, specific detail is what makes writing sound like a real person."]
+];
 const DEEPER=[
   ["Can you cut one word from this line and keep the meaning?","Shorter lines usually hit harder."],
   ["Which word here could be more exact?","Swap a general word for a specific one: a brand, a name, a number."],
@@ -768,6 +793,7 @@ function editCheck(v,pos){
     return showBubble({k:'fix:'+sp.t.slice(0,30), who:'Coach', q:'Nice fix. That line is sharper now.', h:'Want to push it further? '+nxt[0], ex:''}, sp.end);
   }
   let q=questionFor(sp.t, all);
+  if(!q && deeperUsed.size%2===1){ const t=THINK.find(t=>!asked.has('think:'+t[0])); if(t){ deeperUsed.add('t'+t[0]); return showBubble({k:'think:'+t[0], who:'Coach · think about it differently', q:t[0], h:t[1], ex:''}, sp.end); } }
   if(!q){ const d=DEEPER.find(d=>!deeperUsed.has(d[0])); if(!d) return; deeperUsed.add(d[0]); q={k:'deep:'+d[0], who: before?'Coach · it can still get better':'Coach asks', q:d[0], h:d[1], ex:''}; }
   showBubble(q, sp.end);
 }
