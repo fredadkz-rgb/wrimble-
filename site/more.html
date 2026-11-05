@@ -286,6 +286,7 @@ footer{padding-block:40px;border-top:2px solid var(--ink)}
 footer .wrap{display:flex;gap:20px;justify-content:space-between;align-items:center;flex-wrap:wrap}
 footer small{color:var(--ink-soft)}
 </style>
+<style>.soon{display:inline-block;vertical-align:middle;margin-left:6px;padding:2px 8px;border-radius:99px;background:#fff3c4;color:#6b4e00;font:600 .68rem/1.5 system-ui,sans-serif;letter-spacing:.02em;white-space:nowrap}.planbanner{max-width:760px;margin:14px auto 0;padding:10px 14px;border:1.5px dashed currentColor;border-radius:10px;font-size:.92rem;text-align:center}</style>
 </head>
 <body>
 
@@ -311,6 +312,7 @@ footer small{color:var(--ink-soft)}
 </header>
 
 <main id="top">
+  <p class="planbanner">This page shows the whole Wrimble plan. Things marked <span class="soon" style="margin:0">Coming soon</span> aren't built yet. Everything else you can <a href="try.html">try now</a>.</p>
   <!-- HERO -->
   <section class="hero">
     <div class="wrap inset grid">
@@ -328,7 +330,7 @@ footer small{color:var(--ink-soft)}
       </div>
 
       <figure class="draft" aria-label="Example of a daily draft with why notes">
-        <div class="meta"><span>Today's Wrimble · Day 12</span><span>⏱ 7:42 · paste blocked</span></div>
+        <div class="meta"><span>Today's Wrimble · Day 12</span><span>⏱ 7:42</span></div>
         <p class="prompt">Describe your worst customer in five sentences. No adjectives.</p>
         <p class="text">He came in at 4:58. He held up one finger, which meant "wait", which meant twenty minutes. He asked if the pies were fresh. He asked again. He paid in five-cent coins and counted them out loud.</p>
         <div class="notes">
@@ -349,7 +351,7 @@ footer small{color:var(--ink-soft)}
       <p class="lede" style="margin-top:14px">In one line: you write, the coach asks questions, you rewrite, and you find out <b>why</b> it got better. Here's the loop you'll do every day.</p>
       <div class="loop">
         <div><i>1</i><b>Get a challenge</b><span>A short prompt and one idea to try, with two examples side by side.</span></div>
-        <div><i>2</i><b>Write it yourself</b><span>A timer and a blank page. Paste is blocked, so every word is yours.</span></div>
+        <div><i>2</i><b>Write it yourself</b><span>A timer and a blank page. You type every word.</span></div>
         <div><i>3</i><b>The coach asks</b><span>Questions pop up as you type. It points at your best line and explains why it works.</span></div>
         <div><i>4</i><b>Rewrite and see why</b><span>Have another go, as many as 10. Every version side by side.</span></div>
       </div>
@@ -359,17 +361,17 @@ footer small{color:var(--ink-soft)}
         <div class="feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v10H9l-5 4z"/><path d="M9 9h6"/></svg><span class="for">Everyone</span><h3>A coach that walks with you</h3><p>As you type, little bubbles pop up mid-sentence with a question, an idea, and an example from a different topic, so you can't just copy it.</p></div>
         <div class="feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h7v16H4zM13 4h7v16h-7z"/></svg><span class="for">Everyone</span><h3>Rewrite it up to 10 times</h3><p>Every version sits side by side so you can see yourself get better. Each round you say what you changed and why.</p></div>
         <div class="feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/></svg><span class="for">Everyone</span><h3>Unstuck, for writer's block</h3><p>Tell it what's wrong (blank page, boring, no ideas) and get a 60-second trick to get moving, plus why it works.</p></div>
-        <div class="feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6M12 3v3"/><circle cx="12" cy="14" r="7"/><path d="M12 14l3-2"/></svg><span class="for">HSC</span><h3>Timed exam practice</h3><p>Paper 1 style: one unseen image, 40 minutes. Then a rough band range with the reasons behind it. Never a rewrite.</p></div>
-        <div class="feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg><span class="for">HSC + Uni</span><h3>Bring your own task</h3><p>Add your school or uni task sheet. The coach explains what it's really asking and makes a plan to the due date. You still type every word.</p></div>
-        <div class="feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 1 0 3-6.2"/><path d="M4 4v4h4M12 8v4l3 2"/></svg><span class="for">Everyone</span><h3>Your writing history</h3><p>"How I wrote this" replays every round and every why, so your teacher can see how the piece grew. Print it, or download it as PDF or Word. Always follow your school's rules on AI.</p></div>
-        <div class="feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20h18M5 20V9l7-5 7 5v11"/><path d="M10 20v-5h4v5"/></svg><span class="for">Everyone</span><h3>Your own writing desk</h3><p>A personal space with themes, a streak, your proudest lines pinned up, and The Pile: every piece you've ever written.</p></div>
+        <div class="feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6M12 3v3"/><circle cx="12" cy="14" r="7"/><path d="M12 14l3-2"/></svg><span class="for">HSC</span><h3>Timed exam practice <span class="soon">Coming soon</span></h3><p>Paper 1 style: one unseen image, 40 minutes. Then a rough band range with the reasons behind it. Never a rewrite.</p></div>
+        <div class="feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg><span class="for">HSC + Uni</span><h3>Bring your own task <span class="soon">Coming soon</span></h3><p>Add your school or uni task sheet. The coach explains what it's really asking and makes a plan to the due date. You still type every word.</p></div>
+        <div class="feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 1 0 3-6.2"/><path d="M4 4v4h4M12 8v4l3 2"/></svg><span class="for">Everyone</span><h3>Your writing history <span class="soon">Coming soon</span></h3><p>"How I wrote this" will replay every round and every why, so your teacher can see how the piece grew. Print it, or download it as PDF or Word. Always follow your school's rules on AI.</p></div>
+        <div class="feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20h18M5 20V9l7-5 7 5v11"/><path d="M10 20v-5h4v5"/></svg><span class="for">Everyone</span><h3>Your own writing desk <span class="soon">Coming soon</span></h3><p>A personal space with themes, a streak, your proudest lines pinned up, and The Pile: every piece you've ever written.</p></div>
       </div>
       <h3 style="margin-top:46px;font-size:1.5rem">Who it's for</h3>
       <div class="people">
         <div><h3>HSC students</h3><p>Module C imaginative, discursive and persuasive writing, reflections, and unseen stimulus practice.</p></div>
         <div><h3>Uni students</h3><p>Essays and reflections that sound like you: claim, evidence, then what it means.</p></div>
         <div><h3>Anyone</h3><p>Emails, stories and posts that sound like a person, not a robot. Get your own voice back.</p></div>
-        <div><h3>Parents and teachers</h3><p>A weekly progress email for parents. A class view for schools. Effort and growth, never the writing itself without permission.</p></div>
+        <div><h3>Parents and teachers <span class="soon">Coming soon</span></h3><p>A weekly progress email for parents. A class view for schools. Effort and growth, never the writing itself without permission.</p></div>
       </div>
       <div class="ctas"><a class="btn pencil" href="try.html">Try today's Wrimble, no sign-up</a><a class="btn alt" href="#join">Join the waitlist</a></div>
     </div>
@@ -397,7 +399,7 @@ footer small{color:var(--ink-soft)}
         <div class="col us">
           <h3>Wrimble</h3>
           <ul>
-            <li>You write every word. Paste is blocked.</li>
+            <li>You write every word.</li>
             <li>It's your thinking, so you remember it</li>
             <li>Sounds like you, on a good day</li>
             <li>Never corrects. Explains the why instead.</li>
@@ -441,12 +443,12 @@ footer small{color:var(--ink-soft)}
       <h2 style="margin-top:12px">Ten minutes. One draft. Every day.</h2>
       <p class="lede" style="margin-top:14px">The rule that never bends: you write, nobody corrects, and every note explains the why. <a href="try.html"><b>Try one now, no sign-up.</b></a></p>
       <ol class="steps">
-        <li><span class="time">60 seconds</span><h3>Warm up</h3><p>A short, silly video teaches one idea with a side-by-side example. Then you get today's challenge.</p></li>
+        <li><span class="time">60 seconds</span><h3>Warm up <span class="soon">Coming soon</span></h3><p>A short, silly video teaches one idea with a side-by-side example. Then you get today's challenge.</p></li>
         <li><span class="time">60 seconds, if you need it</span><h3>Stuck? Tap the button</h3><p>Get a random writer's block buster or brainstorm trick, and the reason it works.</p></li>
-        <li><span class="time">5 to 8 minutes</span><h3>Write</h3><p>A plain page and a timer. Paste is blocked, so every word is really yours. The coach pops up with questions as you type (turn it off any time).</p></li>
+        <li><span class="time">5 to 8 minutes</span><h3>Write</h3><p>A plain page and a timer. Every word is really yours. The coach pops up with questions as you type (turn it off any time).</p></li>
         <li><span class="time">Instant</span><h3>Get your why notes</h3><p>Your best line and why it works, one thing to notice, and one curious question. Nothing marked wrong.</p></li>
         <li><span class="time">2 minutes, optional</span><h3>Play again, as many times as you need</h3><p>Rewrite it with the coach. Twice, or ten times. Every version sits side by side so you can see yourself improve.</p></li>
-        <li><span class="time">Forever</span><h3>Keep the streak</h3><p>A streak on your calendar, a "Typed by a human" stamp, and a monthly Cold Write that proves you're getting better.</p></li>
+        <li><span class="time">Forever</span><h3>Keep the streak</h3><p>A streak on your calendar, a "Typed by a human" stamp, and regular no-help rounds that show you're getting better.</p></li>
       </ol>
     </div>
   </section>
@@ -566,17 +568,17 @@ footer small{color:var(--ink-soft)}
       <div class="moregrid">
         <div class="moreitem">
           <p class="eyebrow">The Pile · community</p>
-          <h3>One weekly prompt. Everyone has a go.</h3>
+          <h3>One weekly prompt. Everyone has a go. <span class="soon">Coming soon</span></h3>
           <p>Members vote for the funniest or most human piece, and winners get featured. There's also Mistake of the Week: share a funny mistake (anonymously if you like) and the lesson behind it. We vote for the best lesson, not the best writing.</p>
         </div>
         <div class="moreitem">
           <p class="eyebrow">Proof you're improving</p>
-          <h3>Cold Writes and your Voice Profile</h3>
+          <h3>Cold Writes and your Voice Profile <span class="soon">Coming soon</span></h3>
           <p>Once a month you write a timed piece with no coach, charted against month one. Your Voice Profile shows your own habits: favourite words, sentence rhythm, and how funny you get. Then vs Now puts your first-week draft beside today's.</p>
         </div>
         <div class="moreitem">
           <p class="eyebrow">For schools</p>
-          <h3>Human writing practice, for a whole class</h3>
+          <h3>Human writing practice, for a whole class <span class="soon">Coming soon</span></h3>
           <p>Class codes, class challenges and a teacher view that shows effort, rounds and the class's weak spots. Teachers read only the pieces students choose to share, with the "How I wrote this" replay. From $1,500 a year for up to 150 students.</p>
         </div>
       </div>
@@ -589,7 +591,7 @@ footer small{color:var(--ink-soft)}
       <div class="box">
         <div>
           <p class="eyebrow">For NSW Year 11 and 12</p>
-          <h2 style="margin-top:12px">HSC Module C, written by you.</h2>
+          <h2 style="margin-top:12px">HSC Module C, written by you. <span class="soon">Coming soon</span></h2>
           <p style="margin-top:14px">The exam hands you an unseen stimulus and a clock. Exam Mode lets you practise exactly that, at home, until it feels normal. Then your creative piece stands out because it sounds like a person wrote it.</p>
           <ul>
             <li>20 timed, unseen stimuli with Module C-style why notes</li>
@@ -597,7 +599,6 @@ footer small{color:var(--ink-soft)}
             <li>Bring your own task sheet and get a plan to the due date</li>
             <li>Reflection prompts after every piece</li>
             <li>A progress email for parents</li>
-            <li>Checked against the syllabus by a NSW English teacher</li>
           </ul>
           <div class="ctas" style="display:flex;gap:12px;flex-wrap:wrap;margin-top:22px"><a class="btn" href="#pricing">HSC Season Pass · $79</a><a class="btn alt" href="try.html?level=hsc">Try an HSC workout</a></div>
         </div>

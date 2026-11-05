@@ -56,6 +56,11 @@ const Why = z.object({
   try_it: z.string().describe("One instruction for the writer to try on their own line. Never give them the words."),
   when_not: z.string().describe("When NOT to use this technique, one short sentence."),
 });
+const Teach = z.object({
+  verdict: z.enum(["got_it", "partly", "not_yet"]).describe("Does their explanation show they understand WHY the technique works on a reader?"),
+  got_right: z.string().describe("What they explained well, in their own words, one sentence. Quote at most a few of their words. Empty if nothing yet."),
+  nudge: z.string().describe("If partly or not_yet: one question that points them at the missing idea without giving it away. If got_it: one question that stretches them, like when breaking the technique works better."),
+});
 const Notes = z.object({
   mission_status: z.enum(["done", "not_yet", "none"]).describe("Did this round do the mission? 'none' if there was no mission."),
   mission_note: z.string().describe("One or two honest sentences about the mission. Empty if none."),
@@ -153,6 +158,25 @@ ${line}
 <whole_piece>
 ${text}
 </whole_piece>` }],
+      });
+      if (!r.parsed_output) return json({ error: "No answer" }, 502);
+      return json(r.parsed_output);
+    }
+    if (b.mode === "teach") {
+      const r = await client.messages.parse({
+        model: BUBBLE_MODEL,
+        max_tokens: 500,
+        thinking: { type: "disabled" },
+        output_config: { effort: "low", format: zodOutputFormat(Teach) },
+        system: RULES + "\n\nWho you're coaching: " + levelOf(b),
+        messages: [{ role: "user", content:
+`Teach It Back. The writer has just practised this technique and is explaining, in their own words, why it works.
+Technique: ${clip(b.technique, 120)}
+Question they were asked: ${clip(b.question, 200)}
+Judge understanding, not spelling or grammar. Reward their own words and examples over textbook phrasing. A good answer says what it does to the reader. Be honest but warm. Never write the explanation for them.
+<their_explanation>
+${clip(b.answer, 1200)}
+</their_explanation>` }],
       });
       if (!r.parsed_output) return json({ error: "No answer" }, 502);
       return json(r.parsed_output);
