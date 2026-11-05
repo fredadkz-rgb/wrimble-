@@ -69,6 +69,27 @@ p{margin:0}
 section{padding-block:72px}
 .lede{font-size:1.2rem;max-width:62ch;color:var(--ink-soft)}
 
+/* what wrimble does */
+.hero .who{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;padding:0;list-style:none}
+.hero .who li{font-weight:700;font-size:.92rem;padding:6px 12px;border-radius:999px;background:var(--paper-2);border:2px solid var(--ink)}
+.what{padding-block:24px 64px}
+.what .loop{margin-top:30px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.what .loop div{background:var(--ink);color:var(--paper);border-radius:14px;padding:18px;display:grid;gap:6px;align-content:start;position:relative}
+.what .loop b{font-family:var(--font-display);font-size:1.25rem}
+.what .loop span{font-size:.98rem;opacity:.9}
+.what .loop i{font-style:normal;font-family:var(--font-display);font-weight:800;font-size:1.8rem;color:var(--pencil);line-height:1}
+.what .feats{margin-top:34px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:16px}
+.what .feat{background:var(--card);border:2px solid var(--ink);border-radius:10px;padding:20px;display:grid;gap:8px;align-content:start;min-width:0}
+.what .feat svg{width:34px;height:34px;color:var(--margin)}
+.what .feat h3{font-size:1.15rem}
+.what .feat p{color:var(--ink-soft);margin:0}
+.what .feat .for{font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft)}
+.what .people{margin-top:34px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.what .people div{border-top:4px solid var(--pencil);padding-top:12px;display:grid;gap:6px;align-content:start}
+.what .people p{margin:0;color:var(--ink-soft)}
+.what .ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+@media (max-width:900px){.what .loop,.what .people{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.what .loop,.what .people{grid-template-columns:1fr}}
 /* nav */
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
 header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:color-mix(in srgb, var(--paper) 92%, transparent);backdrop-filter:blur(6px);border-bottom:2px solid var(--ink)}
@@ -276,12 +297,12 @@ footer small{color:var(--ink-soft)}
       Wrimble
     </a>
     <nav aria-label="Main">
+      <a href="#what">What it does</a>
       <a href="#not-ai">Not another AI</a>
-      <a href="#whys">The whys</a>
       <a href="#how">How it works</a>
-      <a href="#profile">How you learn</a>
       <a href="#detector">Robot Detector</a>
       <a href="#hsc">HSC</a>
+      <a href="#uni">Uni</a>
       <a href="#schools">Schools</a>
       <a href="#pricing">Pricing</a>
     </nav>
@@ -294,13 +315,14 @@ footer small{color:var(--ink-soft)}
   <section class="hero">
     <div class="wrap inset grid">
       <div>
-        <p class="eyebrow">Not another AI. The place that teaches you the why.</p>
+        <p class="eyebrow">A writing coach for HSC, uni and everyday writers</p>
         <h1 style="margin-top:14px">Write <span class="strike">badly.</span><br>Write it <span class="hl">yourself.</span></h1>
-        <p class="sub">Wrimble is a tool, not another AI. You type every word. We teach you <b>why</b> writing works and why writers do what they do, so you can think for yourself, get creative and write your own way.</p>
+        <p class="sub">Wrimble is a 10-minute daily writing workout. You type every word yourself. A coach asks questions as you go and shows you <b>why</b> your best lines work, so you get better at writing, not better at asking an AI.</p>
+        <ul class="who" aria-label="Who it's for"><li>HSC students</li><li>Uni students</li><li>Anyone who wants their own voice back</li></ul>
         <div class="ctas">
-          <a class="btn" href="#join">Join the waitlist</a>
           <a class="btn pencil" href="try.html">Try today's Wrimble</a>
-          <a class="btn alt" href="#detector">Try the free Robot Detector</a>
+          <a class="btn alt" href="#what">See what it does</a>
+          <a class="btn" href="#join">Join the waitlist</a>
         </div>
         <p class="hand note">psst. ugly first drafts are the whole point →</p>
       </div>
@@ -316,6 +338,40 @@ footer small{color:var(--ink-soft)}
         </div>
         <span class="stamp">Typed by a human. Probably badly.</span>
       </figure>
+    </div>
+  </section>
+
+  <!-- WHAT WRIMBLE DOES -->
+  <section class="what" id="what">
+    <div class="wrap inset">
+      <p class="eyebrow">What Wrimble does</p>
+      <h2 style="margin-top:12px">Your own writing space, with a coach that never writes for you.</h2>
+      <p class="lede" style="margin-top:14px">In one line: you write, the coach asks questions, you rewrite, and you find out <b>why</b> it got better. Here's the loop you'll do every day.</p>
+      <div class="loop">
+        <div><i>1</i><b>Get a challenge</b><span>A short prompt and one idea to try, with two examples side by side.</span></div>
+        <div><i>2</i><b>Write it yourself</b><span>A timer and a blank page. Paste is blocked, so every word is yours.</span></div>
+        <div><i>3</i><b>The coach asks</b><span>Questions pop up as you type. It points at your best line and explains why it works.</span></div>
+        <div><i>4</i><b>Rewrite and see why</b><span>Have another go, as many as 10. Every version side by side.</span></div>
+      </div>
+      <h3 style="margin-top:46px;font-size:1.5rem">What's inside</h3>
+      <div class="feats">
+        <div class="feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 6v6l4 2"/><circle cx="12" cy="12" r="9"/></svg><span class="for">Everyone</span><h3>A 10-minute workout every day</h3><p>A fresh challenge each day, and each day of the week trains a different skill: senses, dialogue, funny, persuading and more.</p></div>
+        <div class="feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v10H9l-5 4z"/><path d="M9 9h6"/></svg><span class="for">Everyone</span><h3>A coach that walks with you</h3><p>As you type, little bubbles pop up mid-sentence with a question, an idea, and an example from a different topic, so you can't just copy it.</p></div>
+        <div class="feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h7v16H4zM13 4h7v16h-7z"/></svg><span class="for">Everyone</span><h3>Rewrite it up to 10 times</h3><p>Every version sits side by side so you can see yourself get better. Each round you say what you changed and why.</p></div>
+        <div class="feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/></svg><span class="for">Everyone</span><h3>Unstuck, for writer's block</h3><p>Tell it what's wrong (blank page, boring, no ideas) and get a 60-second trick to get moving, plus why it works.</p></div>
+        <div class="feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6M12 3v3"/><circle cx="12" cy="14" r="7"/><path d="M12 14l3-2"/></svg><span class="for">HSC</span><h3>Timed exam practice</h3><p>Paper 1 style: one unseen image, 40 minutes. Then a rough band range with the reasons behind it. Never a rewrite.</p></div>
+        <div class="feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg><span class="for">HSC + Uni</span><h3>Bring your own task</h3><p>Add your school or uni task sheet. The coach explains what it's really asking and makes a plan to the due date. You still type every word.</p></div>
+        <div class="feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 1 0 3-6.2"/><path d="M4 4v4h4M12 8v4l3 2"/></svg><span class="for">Everyone</span><h3>Proof it's yours</h3><p>"How I wrote this" replays every round and every why. Print it, or download it as PDF or Word to show your teacher.</p></div>
+        <div class="feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20h18M5 20V9l7-5 7 5v11"/><path d="M10 20v-5h4v5"/></svg><span class="for">Everyone</span><h3>Your own writing desk</h3><p>A personal space with themes, a streak, your proudest lines pinned up, and The Pile: every piece you've ever written.</p></div>
+      </div>
+      <h3 style="margin-top:46px;font-size:1.5rem">Who it's for</h3>
+      <div class="people">
+        <div><h3>HSC students</h3><p>Module C imaginative, discursive and persuasive writing, reflections, and unseen stimulus practice.</p></div>
+        <div><h3>Uni students</h3><p>Essays and reflections that sound like you: claim, evidence, then what it means.</p></div>
+        <div><h3>Anyone</h3><p>Emails, stories and posts that sound like a person, not a robot. Get your own voice back.</p></div>
+        <div><h3>Parents and teachers</h3><p>A weekly progress email for parents. A class view for schools. Effort and growth, never the writing itself without permission.</p></div>
+      </div>
+      <div class="ctas"><a class="btn pencil" href="try.html">Try today's Wrimble, no sign-up</a><a class="btn alt" href="#join">Join the waitlist</a></div>
     </div>
   </section>
 
@@ -387,7 +443,7 @@ footer small{color:var(--ink-soft)}
       <ol class="steps">
         <li><span class="time">60 seconds</span><h3>Warm up</h3><p>A short, silly video teaches one idea with a side-by-side example. Then you get today's challenge.</p></li>
         <li><span class="time">60 seconds, if you need it</span><h3>Stuck? Tap the button</h3><p>Get a random writer's block buster or brainstorm trick, and the reason it works.</p></li>
-        <li><span class="time">5 to 8 minutes</span><h3>Write</h3><p>A plain page and a timer. Paste is blocked, so every word is really yours.</p></li>
+        <li><span class="time">5 to 8 minutes</span><h3>Write</h3><p>A plain page and a timer. Paste is blocked, so every word is really yours. The coach pops up with questions as you type (turn it off any time).</p></li>
         <li><span class="time">Instant</span><h3>Get your why notes</h3><p>Your best line and why it works, one thing to notice, and one curious question. Nothing marked wrong.</p></li>
         <li><span class="time">2 minutes, optional</span><h3>Play again, as many times as you need</h3><p>Rewrite it with the coach. Twice, or ten times. Every version sits side by side so you can see yourself improve.</p></li>
         <li><span class="time">Forever</span><h3>Keep the streak</h3><p>A streak on your calendar, a "Typed by a human" stamp, and a monthly Cold Write that proves you're getting better.</p></li>
@@ -521,7 +577,7 @@ footer small{color:var(--ink-soft)}
         <div class="moreitem">
           <p class="eyebrow">For schools</p>
           <h3>Human writing practice, for a whole class</h3>
-          <p>Class codes, assignments, progress and integrity reports. Teachers see a learning-style summary for the class (like "60% learn best from examples"), never individual answers without consent. From $1,500 a year for up to 150 students.</p>
+          <p>Class codes, class challenges and a teacher view that shows effort, rounds and the class's weak spots. Teachers read only the pieces students choose to share, with the "How I wrote this" replay. From $1,500 a year for up to 150 students.</p>
         </div>
       </div>
     </div>
@@ -537,6 +593,8 @@ footer small{color:var(--ink-soft)}
           <p style="margin-top:14px">The exam hands you an unseen stimulus and a clock. Exam Mode lets you practise exactly that, at home, until it feels normal. Then your creative piece stands out because it sounds like a person wrote it.</p>
           <ul>
             <li>20 timed, unseen stimuli with Module C-style why notes</li>
+            <li>A rough band range with reasons after each one, never a rewrite</li>
+            <li>Bring your own task sheet and get a plan to the due date</li>
             <li>Reflection prompts after every piece</li>
             <li>A progress email for parents</li>
             <li>Checked against the syllabus by a NSW English teacher</li>
