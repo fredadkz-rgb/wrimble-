@@ -378,7 +378,7 @@ footer small{color:var(--ink-soft)}
           </div>
         </div>
         <div class="editor">
-          <label for="tw-text" class="eyebrow" id="tw-label">Round 1 · type it yourself (paste is switched off)</label>
+          <label for="tw-text" class="eyebrow" id="tw-label">Round 1 · type it yourself</label>
           <div class="edwrap">
             <textarea id="tw-text" placeholder="Start anywhere. The first sentence is allowed to be terrible." style="margin-top:8px"></textarea>
             <div class="bubble" id="tw-bubble" role="status" hidden>
@@ -532,7 +532,8 @@ $('tw-stuck').addEventListener('click', ()=>{
   b.innerHTML='<p class="eyebrow" style="color:inherit">60-second block buster</p><p style="margin-top:6px"><b>'+esc(t)+'</b></p><p style="margin-top:6px;font-size:.92rem">Why it works: '+esc(w)+'</p>';
 });
 const ta = $('tw-text');
-ta.addEventListener('paste', e=>{ e.preventDefault(); toast("Paste is switched off. Every word here is yours."); });
+const ALLOW_PASTE = true; // frida 2026-11-05: paste on for now. Set false to block it again.
+ta.addEventListener('paste', e=>{ if(ALLOW_PASTE) return; e.preventDefault(); toast("Paste is switched off. Every word here is yours."); });
 ta.addEventListener('drop', e=>{ e.preventDefault(); toast("No dropping text in. Type it, ugly is fine."); });
 ta.addEventListener('input', ()=>{ const n=words(ta.value).length; $('tw-count').textContent=n+(n===1?' word':' words'); if(!timerStart && n>0) startTimer(); });
 
@@ -714,7 +715,7 @@ function toast(m){ $('tw-toast').textContent=m; clearTimeout(toast.t); toast.t=s
 function words(s){ return s.match(/[A-Za-z0-9\u2019']+/g)||[]; }
 function startTimer(){ timerStart=Date.now(); timerId=setInterval(()=>{ const left=420-Math.floor((Date.now()-timerStart)/1000); const a=Math.abs(left); $('tw-timer').textContent=(left<0?'+':'')+Math.floor(a/60)+':'+String(a%60).padStart(2,'0'); if(left===0) toast("Time's up. Finish your sentence, then press Done."); },1000); }
 function stopTimer(){ clearInterval(timerId); timerId=null; timerStart=null; $('tw-timer').textContent='7:00'; }
-function resetAll(){ closeWhy(); round=1; versions=[]; mission=null; asked=new Set(); sentenceCount=0; hideBubble(); ta.value=''; $('tw-count').textContent='0 words'; $('tw-results').hidden=true; $('tw-label').textContent='Round 1 \u00b7 type it yourself (paste is switched off)'; stopTimer(); }
+function resetAll(){ closeWhy(); round=1; versions=[]; mission=null; asked=new Set(); sentenceCount=0; hideBubble(); ta.value=''; $('tw-count').textContent='0 words'; $('tw-results').hidden=true; $('tw-label').textContent='Round 1 \u00b7 type it yourself'; stopTimer(); }
 
 /* ---- the why notes: simple rules, never rewriting ---- */
 const SENSES = /\b(smell|smelled|smelt|stink|stank|sound|sounded|loud|quiet|whisper|hiss|crunch|sticky|cold|hot|warm|wet|sweat|taste|tasted|sour|sweet|salty|bitter|rough|soft|bright|dark|shiny|greasy|burnt|buzz|creak|bang|slam|drip|shout|yell|scream|shook|shiver|thud|clatter|ring)\w*/i;
