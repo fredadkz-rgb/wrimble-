@@ -333,6 +333,12 @@ footer small{color:var(--ink-soft)}
 .s-price .p{font-family:var(--font-display);font-weight:800;font-size:2.2rem;line-height:1.1}
 .s-price .p small{font-size:1rem;font-weight:700}
 .s-price span{color:var(--ink-soft)}
+.heroform{margin-top:24px;display:grid;gap:8px;max-width:520px}
+.heroform .hrow{display:flex;gap:8px;flex-wrap:wrap}
+.heroform input[type=email]{flex:1 1 220px;min-width:0;font:inherit;padding:12px 16px;border:2px solid var(--ink);border-radius:999px;background:var(--card);color:var(--ink)}
+.heroform .btn{background:var(--pencil);color:var(--pencil-ink);border-color:var(--pencil-ink)}
+.heroform .hmsg{margin:0;font-size:.95rem;font-weight:700}
+.tryline{margin:12px 0 0;font-size:1.02rem}
 .s-more{margin-top:18px;font-weight:700}
 .s-why{padding-block:8px 8px}
 .s-why-line{margin:0;font-family:var(--font-display);font-weight:800;font-size:clamp(1.8rem,4vw,2.8rem);line-height:1.1;letter-spacing:-0.02em}
@@ -381,10 +387,15 @@ footer small{color:var(--ink-soft)}
         <h1>Write <span class="strike">badly.</span><br>Write it <span class="hl">yourself.</span></h1>
         <p class="big">A writing coach that never writes for you.</p>
         <p class="small-sub">10 minutes a day. You type. It asks questions and shows you why your writing works.</p>
-        <div class="ctas">
-          <a class="btn pencil" href="try.html">Try it free</a>
-          <a class="btn alt" href="#join">Join the waitlist</a>
-        </div>
+        <form class="heroform" name="waitlist" method="POST" action="/thanks.html" data-netlify="true" netlify-honeypot="bot-field">
+          <input type="hidden" name="form-name" value="waitlist">
+          <input type="hidden" name="interest" value="Signed up from the top of the page">
+          <p hidden><label>Leave this empty <input name="bot-field"></label></p>
+          <label for="hero-email" class="eyebrow">Join the waitlist · first 200 get year one for $59</label>
+          <div class="hrow"><input id="hero-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required><button class="btn" type="submit">Join the waitlist</button></div>
+          <p class="hmsg" role="status"></p>
+        </form>
+        <p class="tryline">Not sure yet? <a href="try.html"><b>Try a workout free, no sign-up →</b></a></p>
         <p class="who">For anyone who wants to be more creative, funnier, and never lose the skill. Students too.</p>
       </div>
       <figure class="mock demo" id="demo" aria-label="Animation: you write, the coach asks a question, you rewrite and see why it got better" style="margin:0">
