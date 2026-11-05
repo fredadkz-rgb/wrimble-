@@ -371,6 +371,28 @@ footer small{color:var(--ink-soft)}
 .tryline{margin:12px 0 0;font-size:1.02rem}
 .s-more{margin-top:18px;font-weight:700}
 .s-why{padding-block:8px 8px}
+.pk{position:absolute;z-index:3;pointer-events:none;overflow:visible}
+.pk.peek{width:116px;height:72px}
+.pk.sit{width:96px;height:120px}
+.pk .bob{animation:pkbob 4s ease-in-out infinite;transform-origin:45px 56px}
+.pk .legs{animation:pkswing 1.6s ease-in-out infinite;transform-origin:40px 70px}
+@keyframes pkbob{0%,70%,100%{transform:translateY(0)}78%{transform:translateY(-7px)}86%{transform:translateY(2px)}}
+@keyframes pkswing{0%,100%{transform:skewX(8deg)}50%{transform:skewX(-8deg)}}
+.ticket,.s-steps div,.s-tiles div,.s-price div,.join{position:relative}
+.s-hero .ticket{margin-top:56px}
+#pricing .s-more{margin-bottom:64px}
+@media (max-width:560px){.s-hero .ticket{margin-top:44px}#pricing .s-more{margin-bottom:44px}}
+.pk-ticket{left:26px;top:-68px}
+.pk-demo{right:34px;top:-92px}
+.pk-note{right:28px;top:-90px}
+.pk-step{right:22px;top:-68px}
+.pk-tile{right:14px;top:-68px}
+.pk-price{right:18px;top:-92px}
+.pk-join{left:12%;top:-70px}
+.pk-join2{right:12%;top:-70px}
+@media (max-width:560px){.pk.peek{width:66px;height:41px}.pk.sit{width:56px;height:70px}.pk-ticket{top:-38px}.pk-demo,.pk-note,.pk-price{top:-54px}.pk-step,.pk-tile,.pk-join,.pk-join2{top:-38px}}
+@media (prefers-reduced-motion:reduce){.pk .bob,.pk .legs{animation:none}}
+
 .s-learn .head{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
 .s-learn .wrim{width:110px;height:110px;flex:0 0 auto}
 .s-learn .wrim .wave{transform-origin:89px 62px;animation:wave 2.4s ease-in-out infinite}
@@ -435,7 +457,7 @@ footer small{color:var(--ink-soft)}
         <h1>Write <span class="strike">badly.</span><br>Write it <span class="hl">yourself.</span></h1>
         <p class="big">A writing coach that never writes for you.</p>
         <p class="small-sub">10 minutes a day. You type. It asks questions and shows you why your writing works.</p>
-        <div class="ticket">
+        <div class="ticket"><svg class="pk peek pk-ticket" viewBox="0 0 90 56" aria-hidden="true"><g class="bob"><path d="M14 56c0-30 13-48 31-48s31 18 31 48z" fill="#FF9F80" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="35" cy="24" r="5.5" fill="#fff" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><circle cx="55" cy="24" r="5.5" fill="#fff" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><circle cx="37" cy="25" r="2.6" fill="#1D2858"/><circle cx="57" cy="25" r="2.6" fill="#1D2858"/><path d="M40 36c3 2 7 2 10 0" fill="none" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></g><ellipse cx="18" cy="53" rx="7" ry="5" fill="#FF9F80" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><ellipse cx="72" cy="53" rx="7" ry="5" fill="#FF9F80" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           <span class="badge">Only 200 spots</span>
           <h3>Become a Founding Wrimbler</h3>
           <ul class="perks"><li>First year $59 (not $99)</li><li>In before everyone else</li><li>Founding badge on your desk</li><li>Help shape what we build</li></ul>
@@ -452,7 +474,7 @@ footer small{color:var(--ink-soft)}
         <p class="tryline">Not sure yet? <a href="try.html"><b>Try a workout free, no sign-up →</b></a></p>
         <p class="who">For anyone who wants to be more creative, funnier, and never lose the skill. Students too.</p>
       </div>
-      <figure class="mock demo" id="demo" aria-label="Animation: you write, the coach asks a question, you rewrite and see why it got better" style="margin:0">
+      <figure class="mock demo" id="demo" aria-label="Animation: you write, the coach asks a question, you rewrite and see why it got better" style="margin:0"><svg class="pk sit pk-demo" viewBox="0 0 80 100" aria-hidden="true"><g class="legs"><path d="M32 70v20M48 70v20" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5"/><ellipse cx="29" cy="92" rx="6" ry="3.5" fill="#1D2858"/><ellipse cx="51" cy="92" rx="6" ry="3.5" fill="#1D2858"/></g><path d="M40 22c11 0 19 7 20 18 1 10-1 22-6 28-5 3-23 3-28 0-5-6-7-18-6-28 1-11 9-18 20-18z" fill="#8FD3B6" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="33" cy="40" r="3.4" fill="#1D2858"/><circle cx="47" cy="40" r="3.4" fill="#1D2858"/><circle cx="34.2" cy="38.8" r="1.1" fill="#fff"/><circle cx="48.2" cy="38.8" r="1.1" fill="#fff"/><path d="M34 49c3 4 9 4 12 0" fill="none" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 54c6-3 12-3 18 1 6-4 12-4 18-1v12c-6-3-12-3-18 1-6-4-12-4-18-1z" fill="#fff" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M40 55v12" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         <ol class="dsteps" aria-hidden="true"><li data-s="1">1 You write</li><li data-s="2">2 Coach asks</li><li data-s="3">3 You rewrite</li></ol>
         <p class="prompt">Write about a time you fell over.</p>
         <p class="r1" id="d-r1"><span class="lbl">Round 1</span><span id="d-r1t"></span></p>
@@ -487,7 +509,7 @@ footer small{color:var(--ink-soft)}
 
   <section class="s-sec s-feel">
     <div class="wrap inset">
-      <div class="note">
+      <div class="note"><svg class="pk sit pk-note" viewBox="0 0 80 100" aria-hidden="true"><g class="legs"><path d="M32 70v20M48 70v20" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5"/><ellipse cx="29" cy="92" rx="6" ry="3.5" fill="#1D2858"/><ellipse cx="51" cy="92" rx="6" ry="3.5" fill="#1D2858"/></g><path d="M40 22c11 0 19 7 20 18 1 10-1 22-6 28-5 3-23 3-28 0-5-6-7-18-6-28 1-11 9-18 20-18z" fill="#F7A8C8" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="33" cy="40" r="3.4" fill="#1D2858"/><circle cx="47" cy="40" r="3.4" fill="#1D2858"/><circle cx="34.2" cy="38.8" r="1.1" fill="#fff"/><circle cx="48.2" cy="38.8" r="1.1" fill="#fff"/><path d="M34 49c3 4 9 4 12 0" fill="none" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M64 26V12l8-2v14" fill="none" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="61.5" cy="26" r="3" fill="#1D2858"/><circle cx="69.5" cy="24" r="3" fill="#1D2858"/></svg>
         <p class="q">Remember the first story you ever wrote?</p>
         <p class="p">Nobody marked it. No AI wrote it. It was weird and wonderful and completely yours. You were proud of it.</p>
         <p class="h">Wrimble brings that feeling back.</p>
@@ -501,7 +523,7 @@ footer small{color:var(--ink-soft)}
       <h2>How it works</h2>
       <div class="s-steps">
         <div><i>1</i><b>You write</b><span>Get a 10-minute challenge. Type it yourself.</span></div>
-        <div><i>2</i><b>The coach asks</b><span>Questions pop up as you type. It never writes for you.</span></div>
+        <div><svg class="pk peek pk-step" viewBox="0 0 90 56" aria-hidden="true"><g class="bob"><path d="M14 56c0-30 13-48 31-48s31 18 31 48z" fill="#A6E3A1" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="35" cy="24" r="5.5" fill="#fff" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><circle cx="55" cy="24" r="5.5" fill="#fff" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><circle cx="33" cy="25" r="2.6" fill="#1D2858"/><circle cx="53" cy="25" r="2.6" fill="#1D2858"/><path d="M40 36c3 2 7 2 10 0" fill="none" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M62 2h22a4 4 0 0 1 4 4v8a4 4 0 0 1-4 4H70l-5 4v-4h-3a4 4 0 0 1-4-4V6a4 4 0 0 1 4-4z" fill="#fff" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><circle cx="67" cy="10" r="1.5" fill="#1D2858"/><circle cx="72" cy="10" r="1.5" fill="#1D2858"/><circle cx="77" cy="10" r="1.5" fill="#1D2858"/></g><ellipse cx="18" cy="53" rx="7" ry="5" fill="#A6E3A1" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><ellipse cx="72" cy="53" rx="7" ry="5" fill="#A6E3A1" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg><i>2</i><b>The coach asks</b><span>Questions pop up as you type. It never writes for you.</span></div>
         <div><i>3</i><b>You rewrite</b><span>Try again and see why it got better.</span></div>
       </div>
     </div>
@@ -513,7 +535,7 @@ footer small{color:var(--ink-soft)}
       <div class="s-tiles">
         <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7v5l3 2"/><circle cx="12" cy="12" r="9"/></svg><p style="margin:0"><b>Daily challenges</b><span>A new 10-minute workout every day.</span></p></div>
         <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v4M12 17v4M3 12h4M17 12h4"/></svg><p style="margin:0"><b>Writer's block help</b><span>Stuck? Get a 60-second trick.</span></p></div>
-        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6M12 3v3"/><circle cx="12" cy="14" r="7"/><path d="M12 14l3-2"/></svg><p style="margin:0"><b>Learn to be funny</b><span>Jokes, surprises and stories, with the why.</span></p></div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6M12 3v3"/><circle cx="12" cy="14" r="7"/><path d="M12 14l3-2"/></svg><svg class="pk peek pk-tile" viewBox="0 0 90 56" aria-hidden="true"><g class="bob"><path d="M14 56c0-30 13-48 31-48s31 18 31 48z" fill="#FFD84D" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="35" cy="24" r="5.5" fill="#fff" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><circle cx="55" cy="24" r="5.5" fill="#fff" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><circle cx="37" cy="25" r="2.6" fill="#1D2858"/><circle cx="57" cy="25" r="2.6" fill="#1D2858"/><path d="M40 36c3 2 7 2 10 0" fill="none" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><text x="66" y="12" font-family="Bricolage Grotesque,sans-serif" font-weight="800" font-size="12" fill="#1D2858">ha!</text></g><ellipse cx="18" cy="53" rx="7" ry="5" fill="#FFD84D" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><ellipse cx="72" cy="53" rx="7" ry="5" fill="#FFD84D" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg><p style="margin:0"><b>Learn to be funny</b><span>Jokes, surprises and stories, with the why.</span></p></div>
         <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5"/></svg><p style="margin:0"><b>Help for school and uni</b><span>Exam practice (HSC first) and your own task sheets.</span></p></div>
         <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 1 0 3-6.2"/><path d="M4 4v4h4"/></svg><p style="margin:0"><b>Proof it's yours</b><span>Replay every draft. Print, PDF or Word.</span></p></div>
         <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.8.8 1 1.5 1 2.5h6c0-1 .2-1.7 1-2.5A6 6 0 0 0 12 3z"/></svg><p style="margin:0"><b>Pro tips</b><span>Shortcuts writers took years to learn.</span></p></div>
@@ -542,14 +564,14 @@ footer small{color:var(--ink-soft)}
       <h2>Pricing</h2>
       <div class="s-price">
         <div><b>Free</b><p class="p" style="margin:0">$0</p><span>One workout a week.</span></div>
-        <div class="pick"><b>Wrimble Plus</b><p class="p" style="margin:0">$12<small> /month</small></p><span>Everything, every day. Or $99 a year.</span></div>
+        <div class="pick"><svg class="pk sit pk-price" viewBox="0 0 80 100" aria-hidden="true"><g class="legs"><path d="M32 70v20M48 70v20" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5"/><ellipse cx="29" cy="92" rx="6" ry="3.5" fill="#1D2858"/><ellipse cx="51" cy="92" rx="6" ry="3.5" fill="#1D2858"/></g><path d="M40 22c11 0 19 7 20 18 1 10-1 22-6 28-5 3-23 3-28 0-5-6-7-18-6-28 1-11 9-18 20-18z" fill="#C8E68C" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="33" cy="40" r="3.4" fill="#1D2858"/><circle cx="47" cy="40" r="3.4" fill="#1D2858"/><circle cx="34.2" cy="38.8" r="1.1" fill="#fff"/><circle cx="48.2" cy="38.8" r="1.1" fill="#fff"/><path d="M34 49c3 4 9 4 12 0" fill="none" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 22l18-8 18 8-18 8z" fill="#1D2858" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M58 22v10" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="58" cy="34" r="2" fill="#F6C51B"/></svg><b>Wrimble Plus</b><p class="p" style="margin:0">$12<small> /month</small></p><span>Everything, every day. Or $99 a year.</span></div>
         <div><b>HSC Season Pass</b><p class="p" style="margin:0">$79<small> once</small></p><span>Year 11 Term 4 to the HSC exam.</span></div>
       </div>
       <p class="s-more"><a href="more.html">See everything Wrimble does</a> · <a href="more.html#detector">Try the free Robot Detector</a> · <a href="more.html#schools">For schools</a></p>
     </div>
   </section>
 
-  <section class="join" id="join">
+  <section class="join" id="join"><svg class="pk peek pk-join" viewBox="0 0 90 56" aria-hidden="true"><g class="bob"><path d="M14 56c0-30 13-48 31-48s31 18 31 48z" fill="#E0474C" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="35" cy="24" r="5.5" fill="#fff" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><circle cx="55" cy="24" r="5.5" fill="#fff" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><circle cx="37" cy="25" r="2.6" fill="#1D2858"/><circle cx="57" cy="25" r="2.6" fill="#1D2858"/><path d="M40 36c3 2 7 2 10 0" fill="none" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></g><ellipse cx="18" cy="53" rx="7" ry="5" fill="#E0474C" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><ellipse cx="72" cy="53" rx="7" ry="5" fill="#E0474C" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg><svg class="pk peek pk-join2" viewBox="0 0 90 56" aria-hidden="true"><g class="bob"><path d="M14 56c0-30 13-48 31-48s31 18 31 48z" fill="#9FD8FF" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="35" cy="24" r="5.5" fill="#fff" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><circle cx="55" cy="24" r="5.5" fill="#fff" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><circle cx="33" cy="25" r="2.6" fill="#1D2858"/><circle cx="53" cy="25" r="2.6" fill="#1D2858"/><path d="M40 36c3 2 7 2 10 0" fill="none" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M41 24h8" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></g><ellipse cx="18" cy="53" rx="7" ry="5" fill="#9FD8FF" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><ellipse cx="72" cy="53" rx="7" ry="5" fill="#9FD8FF" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
     <div class="wrap inset">
       <div>
         <p class="eyebrow" style="color:inherit">Opening soon</p>
