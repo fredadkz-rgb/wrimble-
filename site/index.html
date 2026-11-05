@@ -334,11 +334,30 @@ footer small{color:var(--ink-soft)}
 .s-price .p small{font-size:1rem;font-weight:700}
 .s-price span{color:var(--ink-soft)}
 .s-more{margin-top:18px;font-weight:700}
+.s-why{padding-block:8px 8px}
+.s-why-line{margin:0;font-family:var(--font-display);font-weight:800;font-size:clamp(1.8rem,4vw,2.8rem);line-height:1.1;letter-spacing:-0.02em}
+.s-why-sub{margin:10px 0 0;font-size:1.2rem;color:var(--ink-soft)}
 @media (max-width:900px){.s-hero .grid{grid-template-columns:1fr}.mock{transform:none}.s-steps,.s-tiles,.s-price{grid-template-columns:1fr}.s-faq{grid-template-columns:1fr}}
 @media (min-width:561px) and (max-width:900px){.s-tiles{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
+
+<style>
+.demo{min-height:400px}
+.dsteps{list-style:none;margin:0;padding:0;display:flex;gap:6px;flex-wrap:wrap}
+.dsteps li{font-size:.78rem;font-weight:700;padding:5px 10px;border-radius:999px;border:2px solid var(--ink);color:var(--ink);transition:background .3s,color .3s}
+.dsteps li.on{background:var(--ink);color:var(--paper)}
+.demo .lbl{display:block;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft)}
+.demo .slot{display:grid;align-items:start}.demo .slot>*{grid-area:1/1}
+.demo #d-r1t{text-decoration:line-through;text-decoration-color:var(--margin)}
+.demo .r1{margin:12px 0 0;font-size:.95rem;color:var(--ink-soft);opacity:0;max-height:0;overflow:hidden;transition:opacity .4s,max-height .4s}
+.demo .r1.show{opacity:.8;max-height:80px}
+.demo .bub,.demo .dwhy{opacity:0;transform:translateY(8px) scale(.97);transition:opacity .35s,transform .35s}
+.demo .bub.show,.demo .dwhy.show{opacity:1;transform:none}
+.demo .dwhy{margin-top:12px;border-left:4px solid var(--good);padding:8px 12px;background:var(--paper-2);font-size:.98rem;line-height:1.4}
+.demo .dwhy b{display:block;color:var(--good);font-family:var(--font-display)}
+</style>
 <header class="top">
   <div class="wrap">
     <a class="logo" href="#top" aria-label="Wrimble home">
@@ -366,15 +385,24 @@ footer small{color:var(--ink-soft)}
           <a class="btn pencil" href="try.html">Try it free</a>
           <a class="btn alt" href="#join">Join the waitlist</a>
         </div>
-        <p class="who">For HSC students, uni students and anyone who writes.</p>
+        <p class="who">For anyone who wants to be more creative, funnier, and never lose the skill. Students too.</p>
       </div>
-      <figure class="mock" aria-label="What writing in Wrimble looks like" style="margin:0">
-        <div class="bar"><span>Today's challenge</span><span>7:42 left</span></div>
+      <figure class="mock demo" id="demo" aria-label="Animation: you write, the coach asks a question, you rewrite and see why it got better" style="margin:0">
+        <ol class="dsteps" aria-hidden="true"><li data-s="1">1 You write</li><li data-s="2">2 Coach asks</li><li data-s="3">3 You rewrite</li></ol>
         <p class="prompt">Write about a time you fell over.</p>
-        <p class="typed">The rink smelled like hot chips and<span class="caret"></span></p>
-        <div class="bub"><b>What could you hear?</b>Add a sound. You write it, not me.</div>
+        <p class="r1" id="d-r1"><span class="lbl">Round 1</span><span id="d-r1t"></span></p>
+        <p class="typed" id="d-typedp"><span class="lbl" id="d-lbl">Round 1</span><span id="d-typed"></span><span class="caret"></span></p>
+        <div class="slot"><div class="bub" id="d-bub"><b>What did it smell like? What could you hear?</b>You write it, not me.</div>
+        <div class="dwhy" id="d-why"><b>Why it's better</b>Now we can smell it, hear it and feel the fall. You showed it instead of saying "embarrassing".</div></div>
         <span class="stamp">Typed by a human.</span>
       </figure>
+    </div>
+  </section>
+
+  <section class="s-sec s-why">
+    <div class="wrap inset">
+      <p class="s-why-line">AI is doing more of our writing. <span class="hl">Use it or lose it.</span></p>
+      <p class="s-why-sub">Creativity is a muscle. Wrimble keeps yours in shape, 10 minutes a day.</p>
     </div>
   </section>
 
@@ -395,8 +423,8 @@ footer small{color:var(--ink-soft)}
       <div class="s-tiles">
         <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7v5l3 2"/><circle cx="12" cy="12" r="9"/></svg><p style="margin:0"><b>Daily challenges</b><span>A new 10-minute workout every day.</span></p></div>
         <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v4M12 17v4M3 12h4M17 12h4"/></svg><p style="margin:0"><b>Writer's block help</b><span>Stuck? Get a 60-second trick.</span></p></div>
-        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6M12 3v3"/><circle cx="12" cy="14" r="7"/><path d="M12 14l3-2"/></svg><p style="margin:0"><b>HSC exam practice</b><span>Timed, with a rough band range.</span></p></div>
-        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5"/></svg><p style="margin:0"><b>Your school task</b><span>Add your task sheet. Get a plan.</span></p></div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6M12 3v3"/><circle cx="12" cy="14" r="7"/><path d="M12 14l3-2"/></svg><p style="margin:0"><b>Learn to be funny</b><span>Jokes, surprises and stories, with the why.</span></p></div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5"/></svg><p style="margin:0"><b>Help for HSC and uni</b><span>Exam practice and your own task sheets.</span></p></div>
         <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 1 0 3-6.2"/><path d="M4 4v4h4"/></svg><p style="margin:0"><b>Proof it's yours</b><span>Replay every draft. Print, PDF or Word.</span></p></div>
         <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20h18M5 20V9l7-5 7 5v11"/></svg><p style="margin:0"><b>Your own desk</b><span>Every piece you write, saved in one place.</span></p></div>
       </div>
@@ -410,11 +438,11 @@ footer small{color:var(--ink-soft)}
         <div><b>Does AI write it for me?</b><p><span class="no">No. Never.</span> You type every word and pasting is blocked. The coach only asks questions and explains why.</p></div>
         <div><b>Is it cheating?</b><p><span class="no">No.</span> It's all your own work, and "How I wrote this" shows every draft to prove it.</p></div>
         <div><b>How long does it take?</b><p>10 minutes a day. Do more if you like.</p></div>
-        <div><b>Who is it for?</b><p>HSC students, uni students, and anyone who wants to write better.</p></div>
+        <div><b>Who is it for?</b><p>Anyone who wants to be more creative or funnier, and keep the skill. Students get HSC and uni help too.</p></div>
         <div><b>What does it cost?</b><p>Free to start. Full access is $12 a month or $99 a year.</p></div>
         <div><b>Can I try it now?</b><p><span class="yes">Yes.</span> Try a workout now, no sign-up. The full app opens soon.</p></div>
         <div><b>Can parents and teachers see progress?</b><p><span class="yes">Yes.</span> Parents get a weekly email. Schools get a class view. Your writing stays private unless you share it.</p></div>
-        <div><b>Is it Australian?</b><p><span class="yes">Yes.</span> Made in Australia, built around the NSW HSC.</p></div>
+        <div><b>Is it Australian?</b><p><span class="yes">Yes.</span> Made in Australia, with Aussie examples. Students get NSW HSC help too.</p></div>
       </div>
     </div>
   </section>
@@ -446,10 +474,11 @@ footer small{color:var(--ink-soft)}
         <input id="join-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required>
         <label for="join-who">I'm mostly here for</label>
         <select id="join-who" name="interest">
+          <option>Being more creative</option>
+          <option>Being funnier</option>
           <option>Getting my own voice back at work</option>
           <option>HSC (I'm a student)</option>
           <option>HSC (I'm a parent)</option>
-          <option>Being funnier</option>
           <option>My school or class</option>
           <option>Improving my English</option>
         </select>
@@ -468,5 +497,34 @@ footer small{color:var(--ink-soft)}
   </div>
 </footer>
 
+<script>
+(()=>{
+  const $=id=>document.getElementById(id);
+  const R1="I fell over at the rink. It was embarrassing.";
+  const R2="The rink smelled like hot chips. The music was so loud my teeth buzzed. Then the floor came up fast.";
+  const steps=[...document.querySelectorAll('.dsteps li')];
+  const step=n=>steps.forEach(s=>s.classList.toggle('on',+s.dataset.s===n));
+  const show=(id,on)=>$(id).classList.toggle('show',on);
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches){
+    $('d-r1t').textContent=R1; show('d-r1',true); $('d-lbl').textContent='Round 2'; $('d-typed').textContent=R2;
+    show('d-bub',true); show('d-why',true); step(3); return;
+  }
+  const wait=ms=>new Promise(r=>setTimeout(r,ms));
+  async function type(text,speed){const el=$('d-typed');for(const ch of text){el.textContent+=ch;await wait(ch===' '?speed*1.6:speed);}}
+  async function loop(){
+    for(;;){
+      $('d-typed').textContent=''; $('d-lbl').textContent='Round 1';
+      show('d-r1',false); show('d-bub',false); show('d-why',false); step(1);
+      await wait(600); await type(R1,45); await wait(900);
+      step(2); show('d-bub',true); await wait(3000);
+      step(3); show('d-bub',false); $('d-r1t').textContent=R1; show('d-r1',true);
+      $('d-typed').textContent=''; $('d-lbl').textContent='Round 2'; await wait(500);
+      await type(R2,38); await wait(700);
+      show('d-why',true); await wait(5000);
+    }
+  }
+  loop();
+})();
+</script>
 </body>
 </html>
