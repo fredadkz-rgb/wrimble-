@@ -533,7 +533,32 @@ $('tw-stuck').addEventListener('click', ()=>{
 });
 const ta = $('tw-text');
 const ALLOW_PASTE = true; // frida 2026-11-05: paste on for now. Set false to block it again.
-ta.addEventListener('paste', e=>{ if(ALLOW_PASTE) return; e.preventDefault(); toast("Paste is switched off. Every word here is yours."); });
+ta.addEventListener('paste', e=>{ if(ALLOW_PASTE){ setTimeout(pasteReview, 60); return; } e.preventDefault(); toast("Paste is switched off. Every word here is yours."); });
+/* Pasted text: read the whole thing and question several lines, not just the last one. */
+async function pasteReview(){
+  if(!$('tw-coach').checked) return;
+  const v=ta.value, all=sentences(v); if(!all.length) return;
+  clearTimeout(pauseT); sentenceCount=all.length;
+  const items=[], seen=new Set();
+  const short=x=>{x=x.trim(); return x.length>48 ? x.slice(0,45).replace(/\s+\S*$/,'')+'…' : x;};
+  for(const sent of all){
+    if(items.length>=3) break;
+    const q=questionFor(sent, all); if(!q) continue;
+    const qs=q.multi ? q.multi[0] : q.q; const key=[].concat(q.k)[0].split(':')[0];
+    if(seen.has(key)) continue; seen.add(key);
+    items.push('\u201c'+short(sent)+'\u201d \u2192 '+qs); [].concat(q.k).forEach(k=>asked.add(k));
+  }
+  let head='I read what you pasted. Questions for you:';
+  if(aiOK){
+    const ai=await askAI({mode:'bubble', level:LEVEL, prompt:PROMPTS[pi].p, text:v.slice(-1500), asked:[...asked].slice(-24)}, 4000);
+    if(ai && ai.question && ta.value===v){ items.unshift(ai.question); asked.add('q: '+ai.question); }
+  }
+  if(ta.value!==v) return;
+  if(!items.length) items.push('Which line here is the most yours? Start your rewrite from that one.');
+  showBubble({k:'paste', multi:[head, ...items.slice(0,4)], h:'Answer one by adding to it in your own words.', ex:null}, v.replace(/\s+$/,'').length);
+  $('tw-bq').firstElementChild.style.cssText='display:block;font-size:.85rem;opacity:.8;margin-bottom:4px';
+  [...$('tw-bq').children].slice(1).forEach(x=>x.style.marginTop='6px');
+}
 ta.addEventListener('drop', e=>{ e.preventDefault(); toast("No dropping text in. Type it, ugly is fine."); });
 ta.addEventListener('input', ()=>{ const n=words(ta.value).length; $('tw-count').textContent=n+(n===1?' word':' words'); if(!timerStart && n>0) startTimer(); });
 
