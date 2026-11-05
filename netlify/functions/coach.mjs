@@ -47,6 +47,15 @@ const Bubble = z.object({
   example: z.string().describe("A short example, max 20 words, from a completely different story."),
 });
 
+const Why = z.object({
+  diagnosis: z.string().describe("What is going on in the writer's line, in plain words, 1-2 sentences. Quote at most a few of their words."),
+  technique: z.string().describe("Name of the writing technique that would help, 2-6 words."),
+  why_it_works: z.string().describe("Why the technique works on a reader, one sentence."),
+  example_flat: z.string().describe("A flat example line about a COMPLETELY different topic."),
+  example_works: z.string().describe("The same different-topic line using the technique."),
+  try_it: z.string().describe("One instruction for the writer to try on their own line. Never give them the words."),
+  when_not: z.string().describe("When NOT to use this technique, one short sentence."),
+});
 const Notes = z.object({
   mission_status: z.enum(["done", "not_yet", "none"]).describe("Did this round do the mission? 'none' if there was no mission."),
   mission_note: z.string().describe("One or two honest sentences about the mission. Empty if none."),
@@ -126,6 +135,27 @@ ${text}
       if (!text.includes(n.best_line_quote)) n.best_line_quote = "";
       if (n.flat_quote && !text.includes(n.flat_quote)) n.flat_quote = "";
       return json(n);
+    }
+    if (b.mode === "why") {
+      const line = clip(b.line, 600);
+      const r = await client.messages.parse({
+        model: BUBBLE_MODEL,
+        max_tokens: 700,
+        thinking: { type: "disabled" },
+        output_config: { effort: "low", format: zodOutputFormat(Why) },
+        system: RULES + "\n\nWho you're coaching: " + levelOf(b),
+        messages: [{ role: "user", content:
+`Why Lab. The writer highlighted one line and asked: "${clip(b.question, 80)}"
+Explain the craft reason honestly (if the line actually works, say why). Teach the technique, show it with an example from a completely different topic, and give them one thing to try. Never rewrite their line or suggest their words.
+<highlighted_line>
+${line}
+</highlighted_line>
+<whole_piece>
+${text}
+</whole_piece>` }],
+      });
+      if (!r.parsed_output) return json({ error: "No answer" }, 502);
+      return json(r.parsed_output);
     }
     return json({ error: "Unknown mode" }, 400);
   } catch (e) {

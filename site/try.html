@@ -347,6 +347,26 @@ footer small{color:var(--ink-soft)}
 .exline b{font-style:normal}
 .bubble .bx{position:absolute;top:6px;right:8px;background:none;border:0;color:inherit;font-size:1.2rem;cursor:pointer;line-height:1}
 @keyframes pop{from{transform:scale(.85);opacity:0}to{transform:scale(1);opacity:1}}
+.coachbar{display:flex;flex-wrap:wrap;align-items:center;gap:6px 16px;margin-top:8px}
+.coachbar .wopen{margin-left:0}
+.coachtoggle select{font:inherit;font-size:.88rem;font-weight:700;padding:3px 8px;border-radius:999px;border:2px solid var(--ink);background:var(--card);color:var(--ink);margin-left:6px}
+.whylab{margin-top:12px;border:2px solid var(--ink);border-radius:10px;background:var(--card);padding:14px 16px}
+.whylab .wlh{display:flex;justify-content:space-between;align-items:center}
+.whylab .bx{position:static}
+.whylab .wlline{margin:6px 0 0;font-family:var(--font-hand);font-size:1.35rem;line-height:1.2}
+.whylab .wlq{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.whylab .wlq button{font:inherit;font-size:.86rem;font-weight:700;padding:5px 12px;border-radius:999px;border:2px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer}
+.whylab .wlq button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.whylab .wla{margin-top:12px;display:grid;gap:8px;font-size:.95rem}
+.whylab .wla p{margin:0}
+.whylab .wla .ex{background:var(--paper-2);border-radius:8px;padding:8px 10px}
+.whylab .wla .ex s{color:var(--ink-soft)}
+.whylab .wla .tr{border-left:4px solid var(--margin);padding-left:10px}
+.whylab .wla .wn{font-size:.85rem;color:var(--ink-soft)}
+.solo{margin-top:12px;border:2px dashed var(--ink);border-radius:10px;padding:12px 14px;background:var(--paper-2);font-size:.95rem}
+.solo p{margin:0}
+.solo .row2{margin-top:8px}
+body.solomode #tw-words,body.solomode #tw-tip,body.solomode #tw-stuck,body.solomode #tw-ask,body.solomode #tw-why,body.solomode #tw-wopen,body.solomode .coachtoggle,body.solomode #tw-wl,body.solomode #tw-solobtn{display:none!important}
 .coachtoggle{display:inline-flex;gap:8px;align-items:center;margin-top:8px;font-size:.9rem;color:var(--ink-soft);cursor:pointer}
 .mark-hl{background:color-mix(in srgb, var(--pencil) 45%, transparent);border-radius:2px}
 .toast{font-size:.92rem;font-weight:700;color:var(--margin);min-height:1.4em}
@@ -413,7 +433,10 @@ footer small{color:var(--ink-soft)}
           <div class="row2">
             <button class="btn sm alt" id="tw-new" type="button">Give me a different one</button>
             <button class="btn sm alt" id="tw-stuck" type="button">I'm stuck</button>
+            <button class="btn sm alt" id="tw-solobtn" type="button">No-help round</button>
           </div>
+          <div class="solo" id="tw-solodue" hidden><p><b>Time for a no-help round.</b> <span id="tw-soloduet">Write this one with no coach, no hints and no word ideas. Wrimble compares it with your earlier no-help rounds so you can see you’re getting better on your own.</span></p><div class="row2"><button class="btn sm" id="tw-solostart" type="button">Start no-help round</button><button class="btn sm alt" id="tw-sololater" type="button">Not now</button></div></div>
+          <div class="solo" id="tw-soloon" hidden><p><b>No-help round.</b> Just you. No coach, no hints, no word ideas. Press Done when you’ve finished and see how you’ve grown. <button type="button" class="wopen" id="tw-solostop">Stop</button></p></div>
         </div>
         <div class="editor">
           <label for="tw-text" class="eyebrow" id="tw-label">Round 1 · type it yourself</label>
@@ -437,7 +460,19 @@ footer small{color:var(--ink-soft)}
             <div class="wchips" id="tw-wchips"></div>
             <p class="wmean" id="tw-wmean" hidden></p>
           </div>
-          <label class="coachtoggle"><input type="checkbox" id="tw-coach" checked> Coach asks me questions as I write</label><button type="button" class="wopen" id="tw-wopen">Look up a word</button>
+          <input type="checkbox" id="tw-coach" checked hidden>
+          <div class="coachbar">
+            <label class="coachtoggle">Coach<select id="tw-cmode" aria-label="When the coach helps"><option value="live">asks as I write</option><option value="para">waits till I finish a paragraph</option><option value="ask">only when I ask</option></select></label>
+            <button type="button" class="wopen" id="tw-ask">Ask the coach</button>
+            <button type="button" class="wopen" id="tw-why">Why Lab</button>
+            <button type="button" class="wopen" id="tw-wopen">Look up a word</button>
+          </div>
+          <div class="whylab" id="tw-wl" hidden aria-live="polite">
+            <div class="wlh"><p class="eyebrow">Why Lab · ask why about one line</p><button type="button" class="bx" id="tw-wlx" aria-label="Close Why Lab">×</button></div>
+            <p class="wlline" id="tw-wlline"></p>
+            <div class="wlq" id="tw-wlq"><button type="button" data-q="funny">Why isn’t this funny?</button><button type="button" data-q="boring">Why is this boring?</button><button type="button" data-q="weak">Why does this feel weak?</button><button type="button" data-q="confusing">Why is this confusing?</button><button type="button" data-q="works">Why does this work?</button></div>
+            <div class="wla" id="tw-wla" hidden></div>
+          </div>
           <div class="edbar">
             <span id="tw-count">0 words</span>
             <span class="toast" id="tw-toast" role="status"></span>
@@ -581,6 +616,7 @@ function setPrompt(i){
   $('tw-prompt').textContent = P.p; $('tw-rule').textContent = P.rule; $('tw-ptag').textContent='· '+SUBJ[P.type]+' · Level '+P.level;
   $('tw-l-name').textContent = L.name; $('tw-l-flat').textContent = L.flat; $('tw-l-works').textContent = L.works; $('tw-l-why').textContent = L.why;
   renderPicker();
+  if(window.__soloReady) soloCheckDue();
 }
 let round = 1, versions = [], timerStart = null, timerId = null, lastStuck = -1;
 setPrompt(randPrompt(-1));
@@ -772,20 +808,22 @@ async function askAI(body, ms){
   }catch(e){ return null; } finally{ clearTimeout(t); }
 }
 let walkSeq=0;
-async function walkCheck(){
+async function walkCheck(force){
   if(!$('tw-coach').checked) return;
+  if(!force && !autoCoach(ta.value)) return;
   const v=ta.value, pos=ta.selectionStart; if(!v.trim()) return;
   if(v.slice(pos).trim()){ return editCheck(v, pos); }
-  if(Date.now()-lastBubbleAt<3500) return;
+  if(!force && Date.now()-lastBubbleAt<3500) return;
   const all=sentences(v); const endsSentence=/[.!?]["”]?\s*$/.test(v);
   const frag=endsSentence ? '' : v.slice(Math.max(v.search(/[^.!?]*$/),0));
   const done=endsSentence ? all : all.slice(0,-1);
-  if(endsSentence && all.length===sentenceCount) return;
+  if(!force && endsSentence && all.length===sentenceCount) return;
   if(endsSentence) sentenceCount=all.length;
   const anchor=v.replace(/\s+$/,'').length, seq=++walkSeq;
   // rule-based pick (instant), then let the AI replace it if it answers fast
   let q=endsSentence ? questionFor(all[all.length-1], all) : walkHook(frag, done);
   if(endsSentence && (all.length%3===0 || !q)){ const t=THINK.find(t=>!asked.has('think:'+t[0])); if(t) q={k:'think:'+t[0], who:'Coach · think about it differently', q:t[0], h:t[1], ex:''}; }
+  if(force && !q){ const d=DEEPER.find(d=>!deeperUsed.has(d[0]))||THINK.find(t=>!asked.has('think:'+t[0]))||DEEPER[0]; deeperUsed.add(d[0]); q={k:'deep:'+d[0], who:'Coach', q:d[0], h:d[1], ex:''}; }
   if(q) showBubble(q, Math.min(anchor, ta.value.replace(/\s+$/,'').length));
   if(aiOK){
     const ai=await askAI({mode:'bubble', level:LEVEL, prompt:CUR.p, text:v.slice(-1500), asked:[...asked].slice(-24)}, 3500);
@@ -983,6 +1021,7 @@ $('tw-done').addEventListener('click', ()=>{
   if(words(text).length<5){ toast("Give it at least a sentence or two. Ugly counts."); ta.focus(); return; }
   versions.push(text); clearInterval(timerId); timerId=null; hideBubble();
   countProgress();
+  soloDone(text);
   $('tw-res-h').textContent = round===1 ? "Here's the why." : "Round "+round+". Here's the why this time.";
   const askedMission = aiMission || (mission?MISSIONS[mission].t:''); usedAiMission=!!aiMission; aiMission=null;
   showNotes(text); renderVersions();
@@ -997,6 +1036,7 @@ function countProgress(){
   saveProg(); renderPicker();
 }
 function showDoneBubble(){
+  if(soloMsg){ const m=soloMsg; soloMsg=null; showBubble({k:'solo', who:m.who, q:m.q, h:m.h, ex:null, go:true}, ta.value.replace(/\s+$/,'').length); $('tw-bgo').textContent='Play again with the coach'; return; }
   const w=lastWhy||{}; const up=leveledUp?('Level up! Level '+leveledUp+' ('+LVN[leveledUp]+') is unlocked. Your next challenge will be a bit harder. '):'';
   showBubble({k:'done', who:(leveledUp?'Coach · level up!':round===1?'Coach · nice one':'Coach · round '+round+' done'), q:w.best?('Best line: \u201c'+w.best+'\u201d'):'Good start.', h:up+(w.why||'')+(w.mission?' Next time try this: '+w.mission:''), ex:null, go:true}, ta.value.replace(/\s+$/,'').length);
   $('tw-bgo').textContent='Play again with this mission';
@@ -1080,6 +1120,115 @@ function showTip(){
 $('tw-tipnext').addEventListener('click', showTip);
 document.querySelectorAll('#tw-level button').forEach(b=>b.addEventListener('click',()=>setTimeout(showTip,0)));
 showTip();
+
+/* ---------- Coach timing: live, after a paragraph, or only when asked (saved per device). ---------- */
+function coachMode(){ return $('tw-cmode').value; }
+function autoCoach(v){ const m=coachMode(); return m==='live' ? true : m==='para' ? /\n\s*$/.test(v) : false; }
+try{ const m=localStorage.getItem('wrimble-coach'); if(m) $('tw-cmode').value=m; }catch(e){}
+$('tw-cmode').addEventListener('change', ()=>{ try{localStorage.setItem('wrimble-coach', coachMode());}catch(e){} hideBubble(); toast(coachMode()==='live'?'The coach will ask as you write.':coachMode()==='para'?'The coach waits until you press Enter at the end of a paragraph.':'The coach stays quiet until you press "Ask the coach".'); });
+$('tw-ask').addEventListener('click', async ()=>{ if(!ta.value.trim()){ toast('Write a line first, then ask.'); ta.focus(); return; } ta.focus(); await walkCheck(true); });
+
+/* ---------- Why Lab: highlight a line, ask why, learn the technique. Never rewrites the line. ---------- */
+const WHY={
+ funny:[
+  [t=>/\b(the|a|it|really|very|though|too|then|so|lol|haha)[.!?"”]*$/i.test(t.trim()), "The funny bit isn’t at the end. The line finishes on a small word, so the laugh leaks out early.", "Put the surprise last", "Readers laugh at the moment their guess is proven wrong, so that moment has to be the final word.", "I fell into the pool at my own party, which was embarrassing, in front of everyone.", "At my own party, in front of everyone, I fell into the pool. Holding the cake.", "Find the most surprising word in your line and move it to the very end.", "If this line is the set-up, it doesn’t need a surprise yet. Save it for the next line."],
+  [t=>VAGUE.test(t)||/\b(very|really|so)\b/i.test(t), "It uses general words. Funny lives in exact details, and “nice” or “really” can’t surprise anyone.", "Exaggerate, then be precise", "An oddly exact detail sounds real and ridiculous at the same time.", "Dad’s car is really old.", "Dad’s car has a cassette player and one door that opens from the inside.", "Swap one general word for a weirdly specific number, brand or name.", "Don’t stack ten details. One precise one is funnier than five."],
+  [t=>true, "There’s no expectation to break. Jokes need a set-up that points one way, then a turn the other way.", "Set up, then flip", "The brain predicts the ending. When the prediction fails in a way that still makes sense, we laugh.", "I tried yoga. It was hard.", "I tried yoga. The instructor asked if I wanted an ambulance.", "Write what the reader expects to happen next, then write the opposite.", "Not every line has to be a joke. A plain line before a funny one makes the funny one land."]],
+ boring:[
+  [t=>TELL.test(t)||FEEL.test(t), "It names the feeling instead of showing it. Telling us “nervous” gives us nothing to picture.", "Show it through the body", "Readers believe what they can see. A body reaction is proof; a feeling word is a label.", "I was really nervous before the speech.", "My cue cards went soft in my hands before the speech.", "Cut the feeling word. What did your hands, face or stomach do instead?", "If the feeling isn’t important to the scene, a quick label is fine. Don’t slow the story down."],
+  [t=>words(t).length>24, "It’s one long sentence with the same rhythm all the way through, so it starts to drone.", "Mix short and long", "A short sentence after a long one hits like a full stop on a drum.", "We walked for hours along the hot road with no shade and no water and nobody said anything at all.", "We walked for hours along the hot road with no shade and no water. Nobody spoke.", "Find the most important part of your line and give it its own short sentence.", "Too many short sentences in a row feel choppy. Use the short one where you want the punch."],
+  [t=>true, "Everything in it is expected. Readers skim lines they could have guessed.", "Add one odd, specific detail", "A detail only you would notice makes the reader trust you and keep reading.", "The kitchen was messy.", "There was a fork in the fruit bowl and nobody would admit to it.", "What’s one strange, true detail in this moment that nobody else would think of?", "One odd detail is enough. Five turns it into a list."]],
+ weak:[
+  [t=>/\b(maybe|i think|i feel|kind of|sort of|a bit|perhaps|probably|might)\b/i.test(t), "It hedges. Words like “maybe” and “I think” tell the reader you’re not sure, so they aren’t either.", "Say it like you mean it", "Confident claims persuade. You can still be fair; just be fair with evidence, not with wobbly words.", "I think school should maybe start a bit later.", "School should start an hour later.", "Cut the wobbly words and read the line out loud. Does it still say what you mean?", "In academic writing, careful words like “suggests” are right when the evidence is limited. Use them on purpose."],
+  [t=>!/\d|because|for example|for instance|such as|when\b/i.test(t), "It makes a claim with nothing to back it up. The reader is asked to just trust you.", "Claim, then proof", "A specific example or number turns an opinion into an argument.", "Phones are distracting in class.", "Phones are distracting in class: our maths test scores rose 12% the term we banned them.", "Add one real example, number or moment that proves your point.", "Don’t pile up five pieces of evidence. One strong example beats three weak ones."],
+  [t=>true, "The point arrives late, so the strongest part is buried in the middle.", "Lead with the claim", "Readers decide fast. If the first words carry the point, everything after feels like proof.", "There are many views, and after thinking about it, homework is mostly unhelpful.", "Homework mostly doesn’t help, and the research is surprisingly clear.", "Move your main point to the first five words of the line.", "In a story, holding back can build tension. Leading with the point is for arguments."]],
+ confusing:[
+  [t=>words(t).length>28, "It tries to do too much in one go, so the reader loses track of what matters.", "One idea per sentence", "Readers hold one idea at a time. Split ideas, and each one gets noticed.", "The bus was late which meant I missed the start of the exam which was the one I'd studied for all term.", "The bus was late. I missed the start of the exam. The one I’d studied for all term.", "Count the ideas in your line. Give the most important one its own sentence.", "Don’t split everything. Ideas that belong together can share a sentence."],
+  [t=>/^(it|this|that|they|these|those|he|she)\b/i.test(t.trim()), "It starts with a word like “it” or “this”, and the reader has to guess what it points to.", "Name the thing", "Clear writing names the subject. Readers shouldn’t have to scroll back to work it out.", "This made everything harder.", "The broken lift made everything harder.", "Replace the first word with the actual thing or person you mean.", "If the thing was named in the sentence right before, “it” is fine."],
+  [t=>true, "The words are general, so the reader can’t picture what you mean.", "Concrete beats abstract", "Brains picture things, not ideas. A concrete example makes the idea land.", "The situation impacted things negatively.", "The rain cancelled the final, and three months of training went nowhere.", "What would a camera see? Put that in instead of the general word.", "Big ideas are fine once you’ve shown a concrete example first."]],
+ works:[
+  [t=>/\d|[A-Z][a-z]+/.test(t.slice(1)), "It’s specific. Names and numbers make it feel real and true.", "Specific beats general", "We can picture an exact thing, and what we can picture we believe.", "She had a lot of shoes.", "She had 41 pairs of shoes and wore the same two.", "Can you find another line in your piece that could be this specific?", "Specifics in every single line can feel crowded. Let some lines breathe."],
+  [t=>words(t).length<=8, "It’s short, so it lands fast. Short lines feel certain and strong.", "Short punches harder", "Fewer words means less to wade through. The meaning hits at once.", "I was feeling extremely nervous about the whole situation.", "I was terrified.", "Is there a long line nearby that could set this short one up even better?", "A page of only short lines feels like a list. Contrast is what makes them punch."],
+  [t=>true, "The rhythm and the word choice carry it. It sounds like a real person, not a textbook.", "Voice", "Readers stay for a voice they’d listen to out loud.", "The holiday was enjoyable and relaxing.", "The holiday was so relaxing I forgot my own PIN.", "Read it out loud. Which word gives it your voice? Use more words like that.", "Voice isn’t slang everywhere. It’s choosing the word you’d really say."]]
+};
+let wlLine='';
+function wlPickLine(){
+  const a=ta.selectionStart, b=ta.selectionEnd, v=ta.value;
+  if(b>a && v.slice(a,b).trim()) return v.slice(a,b).trim();
+  const sp=spanAt(v,a); return sp?sp.t:'';
+}
+$('tw-why').addEventListener('click', ()=>{
+  const line=wlPickLine();
+  if(!line){ toast('Highlight a line in your writing first, or click inside it.'); ta.focus(); return; }
+  wlLine=line; $('tw-wlline').textContent='“'+(line.length>160?line.slice(0,157)+'…':line)+'”';
+  $('tw-wla').hidden=true; $('tw-wlq').querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed','false'));
+  hideBubble(); $('tw-wl').hidden=false; $('tw-wl').scrollIntoView({block:'nearest',behavior:'smooth'});
+});
+$('tw-wlx').addEventListener('click', ()=>{ $('tw-wl').hidden=true; ta.focus(); });
+function wlRender(a){
+  const box=$('tw-wla');
+  box.innerHTML='<p><b>What’s going on:</b> '+esc(a.diagnosis)+'</p>'+
+    '<p><b>The technique: '+esc(a.technique)+'.</b> '+esc(a.why_it_works)+'</p>'+
+    '<p class="ex"><b>Example from a different story:</b><br><s>'+esc(a.example_flat)+'</s><br>'+esc(a.example_works)+'</p>'+
+    '<p class="tr"><b>Try it:</b> '+esc(a.try_it)+' Rewrite your line above, in your own words.</p>'+
+    '<p class="wn"><b>When not to:</b> '+esc(a.when_not)+'</p>';
+  box.hidden=false;
+}
+$('tw-wlq').addEventListener('click', async e=>{
+  const b=e.target.closest('button'); if(!b) return; const q=b.dataset.q;
+  $('tw-wlq').querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed', x===b));
+  const rule=WHY[q].find(r=>r[0](wlLine));
+  wlRender({diagnosis:rule[1], technique:rule[2], why_it_works:rule[3], example_flat:rule[4], example_works:rule[5], try_it:rule[6], when_not:rule[7]});
+  if(aiOK){ const line=wlLine; const ai=await askAI({mode:'why', level:LEVEL, question:b.textContent, line, text:ta.value.slice(-2500)}, 7000);
+    if(ai && ai.diagnosis && line===wlLine && b.getAttribute('aria-pressed')==='true') wlRender(ai); }
+});
+
+/* ---------- Independence Mode: regular no-help rounds, compared with your earlier ones (saved per device). ---------- */
+let SOLO=false, soloMsg=null;
+const lsJ=(k,d)=>{ try{ return JSON.parse(localStorage.getItem(k)||'null')??d; }catch(e){ return d; } };
+const lsW=(k,v)=>{ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} };
+function soloHist(){ return lsJ('wrimble-solo',[]); }
+function soloCheckDue(){
+  if(SOLO) return; const since=lsJ('wrimble-solo-since',0), h=soloHist(), snoozed=lsJ('wrimble-solo-snooze',0);
+  const due = h.length===0 ? snoozed<1 : since>=3 && snoozed<since;
+  $('tw-soloduet').textContent = h.length===0
+    ? 'Start with one challenge on your own: no coach, no hints, no word ideas. It’s your starting point, so later you can see how far you’ve come.'
+    : 'Write this one with no coach, no hints and no word ideas. Wrimble compares it with your earlier no-help rounds so you can see you’re getting better on your own.';
+  $('tw-solodue').hidden=!due;
+}
+function startSolo(){ SOLO=true; document.body.classList.add('solomode'); $('tw-coach').checked=false; hideBubble(); $('tw-wl').hidden=true; $('tw-words').classList.add('quiet'); $('tw-solodue').hidden=true; $('tw-soloon').hidden=false; ta.focus(); }
+function endSolo(){ SOLO=false; document.body.classList.remove('solomode'); $('tw-coach').checked=true; $('tw-soloon').hidden=true; }
+$('tw-solobtn').addEventListener('click', startSolo);
+$('tw-solostart').addEventListener('click', startSolo);
+$('tw-sololater').addEventListener('click', ()=>{ lsW('wrimble-solo-snooze', soloHist().length===0?1:lsJ('wrimble-solo-since',0)); $('tw-solodue').hidden=true; });
+$('tw-solostop').addEventListener('click', endSolo);
+function soloStats(text){
+  const ss=sentences(text), lens=ss.map(s=>words(s).length), n=lens.length||1, avg=lens.reduce((a,b)=>a+b,0)/n;
+  const sd=Math.sqrt(lens.reduce((a,b)=>a+(b-avg)*(b-avg),0)/n);
+  const caps=ss.reduce((c,s)=>c+((s.slice(1).match(/\b[A-Z][a-z]+/g)||[]).filter(w=>w!=='I').length),0);
+  return { w:words(text).length,
+    spec:(text.match(/\d+/g)||[]).length+caps+(text.match(new RegExp(SENSES.source,'gi'))||[]).length,
+    vague:(text.match(new RegExp(VAGUE.source,'gi'))||[]).length+(text.match(KNOBS)||[]).length,
+    tell:(text.match(new RegExp(TELL.source,'gi'))||[]).length,
+    vary:Math.round(sd*10)/10 };
+}
+function soloDone(text){
+  if(!SOLO){ lsW('wrimble-solo-since', lsJ('wrimble-solo-since',0)+1); return; }
+  const st=soloStats(text), h=soloHist(), first=h[0], prev=h[h.length-1];
+  h.push(Object.assign({d:Date.now(), g:GROUP}, st)); lsW('wrimble-solo', h.slice(-60)); lsW('wrimble-solo-since',0); lsW('wrimble-solo-snooze',0);
+  endSolo();
+  if(!first){ soloMsg={who:'Coach · your starting point', q:'That’s your first no-help round. Nice work.', h:'It’s saved as your starting point. Every few challenges you’ll do another one, and Wrimble will show you what’s changed: more specific details, fewer vague words, more variety in your sentences.'}; return; }
+  const ups=[], per=x=>x.w?x:{w:1};
+  const r=(a,k)=>a[k]/Math.max(a.w,1)*100;
+  if(r(st,'spec')>r(first,'spec')+0.5) ups.push('more specific details ('+first.spec+' then, '+st.spec+' now)');
+  if(r(st,'vague')<r(first,'vague')-0.5) ups.push('fewer vague words ('+first.vague+' then, '+st.vague+' now)');
+  if(st.tell<first.tell) ups.push('less telling, more showing');
+  if(st.vary>first.vary+0.8) ups.push('more variety in your sentence lengths');
+  const nth=h.length;
+  soloMsg={who:'Coach · no-help round '+nth, q: ups.length?'You did that on your own, and it shows.':'Done, all on your own.',
+    h: ups.length ? 'Compared with your first no-help round: '+ups.slice(0,3).join(', ')+'. That’s you getting better without the coach.' : 'No big change from your first no-help round yet. That’s normal: independent skill grows over weeks, not days. Keep going.'};
+}
+window.__soloReady=true; soloCheckDue();
 </script>
 </body>
 </html>
