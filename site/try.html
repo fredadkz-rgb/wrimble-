@@ -325,6 +325,16 @@ footer small{color:var(--ink-soft)}
 .stuckbox{background:var(--pencil);color:var(--pencil-ink);border:2px solid var(--pencil-ink);border-radius:6px;padding:16px}
 .stuckbox b{font-family:var(--font-display)}
 .notes2{margin-top:28px;display:grid;gap:12px}
+.daycard.showwhy{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.daycard.showwhy .side>.panel:not(.whypanel),.daycard.showwhy .stuckbox{display:none!important}
+.whypanel{box-shadow:6px 6px 0 var(--pencil);border-color:var(--ink)}
+@media (min-width:861px){.whypanel{max-height:calc(100vh - 110px);overflow:auto}}
+.whypanel .wsub{margin-top:4px;font-size:.88rem;color:var(--ink-soft)}
+.whypanel .notes2{margin-top:12px}
+.whypanel .row2 #tw-back{display:none}
+.whypanel.flash{animation:flash 1s ease}
+@keyframes flash{0%,100%{box-shadow:6px 6px 0 var(--pencil)}40%{box-shadow:0 0 0 6px var(--pencil)}}
+.res-hide{display:none}
 .note2{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;background:var(--card);border:2px solid var(--ink);border-radius:6px;padding:16px 18px}
 .note2 .tag{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:999px;border:1.5px solid var(--ink);white-space:nowrap}
 .note2 .tag.c{background:var(--pencil);color:var(--pencil-ink);border-color:var(--pencil-ink)}
@@ -335,7 +345,7 @@ footer small{color:var(--ink-soft)}
 .ver p{white-space:pre-wrap;overflow-wrap:anywhere}
 .badge2{display:inline-block;font-family:var(--font-hand);font-size:1.4rem;color:var(--margin);border:2px solid var(--margin);padding:2px 12px;border-radius:6px;transform:rotate(-3deg)}
 .demo-note{margin-top:28px;font-size:.88rem;color:var(--ink-soft);max-width:70ch}
-@media (max-width:860px){.daycard{grid-template-columns:1fr}}
+@media (max-width:860px){.daycard,.daycard.showwhy{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -397,6 +407,11 @@ footer small{color:var(--ink-soft)}
       </div>
 
       <aside class="side">
+        <div class="panel whypanel" id="tw-whypanel" hidden aria-live="polite">
+          <p class="eyebrow" id="tw-whyh">Here's the why</p>
+          <p class="wsub">Nothing is marked wrong, and nothing in your draft has been changed.</p>
+          <div id="tw-whyslot"></div>
+        </div>
         <div class="panel" style="text-align:center">
           <p class="eyebrow">Timer</p>
           <p class="timer2" id="tw-timer">7:00</p>
@@ -588,7 +603,9 @@ function showBubble(q, endPos){
   [].concat(q.k).forEach(k=>asked.add(k)); lastBubbleAt=Date.now(); bubbleStartLen=ta.value.length;
 }
 function hideBubble(){ $('tw-bubble').hidden=true; }
-$('tw-bgo').addEventListener('click', ()=>{ hideBubble(); $('tw-results').scrollIntoView({behavior: matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'}); });
+$('tw-bgo').addEventListener('click', ()=>{ hideBubble(); const p=$('tw-whypanel'); const r=p.getBoundingClientRect();
+  if(r.top<0 || r.top>innerHeight-120) p.scrollIntoView({block:'start', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
+  p.classList.remove('flash'); void p.offsetWidth; p.classList.add('flash'); });
 $('tw-bx').addEventListener('click', ()=>{ hideBubble(); ta.focus(); });
 /* ---- walking coach: follows the caret, mid-sentence too ---- */
 // Examples are always from a DIFFERENT story, so the writer sees how, then writes their own.
@@ -697,7 +714,7 @@ function toast(m){ $('tw-toast').textContent=m; clearTimeout(toast.t); toast.t=s
 function words(s){ return s.match(/[A-Za-z0-9\u2019']+/g)||[]; }
 function startTimer(){ timerStart=Date.now(); timerId=setInterval(()=>{ const left=420-Math.floor((Date.now()-timerStart)/1000); const a=Math.abs(left); $('tw-timer').textContent=(left<0?'+':'')+Math.floor(a/60)+':'+String(a%60).padStart(2,'0'); if(left===0) toast("Time's up. Finish your sentence, then press Done."); },1000); }
 function stopTimer(){ clearInterval(timerId); timerId=null; timerStart=null; $('tw-timer').textContent='7:00'; }
-function resetAll(){ round=1; versions=[]; mission=null; asked=new Set(); sentenceCount=0; hideBubble(); ta.value=''; $('tw-count').textContent='0 words'; $('tw-results').hidden=true; $('tw-label').textContent='Round 1 \u00b7 type it yourself (paste is switched off)'; stopTimer(); }
+function resetAll(){ closeWhy(); round=1; versions=[]; mission=null; asked=new Set(); sentenceCount=0; hideBubble(); ta.value=''; $('tw-count').textContent='0 words'; $('tw-results').hidden=true; $('tw-label').textContent='Round 1 \u00b7 type it yourself (paste is switched off)'; stopTimer(); }
 
 /* ---- the why notes: simple rules, never rewriting ---- */
 const SENSES = /\b(smell|smelled|smelt|stink|stank|sound|sounded|loud|quiet|whisper|hiss|crunch|sticky|cold|hot|warm|wet|sweat|taste|tasted|sour|sweet|salty|bitter|rough|soft|bright|dark|shiny|greasy|burnt|buzz|creak|bang|slam|drip|shout|yell|scream|shook|shiver|thud|clatter|ring)\w*/i;
@@ -845,11 +862,24 @@ $('tw-done').addEventListener('click', ()=>{
   aiNotes(text, askedMission);
   $('tw-badge').hidden = round<10;
   $('tw-results').hidden=false;
-  showBubble({k:'done', q:(round===1?'Nice one. Your why is ready.':'Round '+round+' done. Your why is ready.'), h:'Your best line, the line that goes flat, and your next mission are just below.', ex:null, go:true}, ta.value.replace(/\s+$/,'').length);
+  openWhy();
+  const wide=matchMedia('(min-width: 861px)').matches;
+  showBubble({k:'done', q:(round===1?'Nice one. Your why is ready.':'Round '+round+' done. Your why is ready.'), h:wide?'It\u2019s right next to your writing \u2192 Your best line, the line that goes flat, and your next mission.':'Your best line, the line that goes flat, and your next mission.', ex:null, go:true}, ta.value.replace(/\s+$/,'').length);
+  $('tw-bgo').textContent = wide ? 'See the why \u2192' : 'See the why \u2193';
 });
+function openWhy(){
+  const slot=$('tw-whyslot');
+  if(!slot.contains($('tw-notes'))){ slot.appendChild($('tw-notes')); slot.appendChild($('tw-again').parentElement); }
+  $('tw-whyh').textContent=$('tw-res-h').textContent;
+  $('tw-res-h').textContent='Your versions, side by side';
+  $('tw-results').querySelectorAll('.lede, h3').forEach(x=>x.classList.add('res-hide'));
+  $('tw-whypanel').hidden=false; document.querySelector('.daycard').classList.add('showwhy');
+  if(matchMedia('(min-width: 861px)').matches){ const t=$('tw-whypanel').getBoundingClientRect().top; if(t<74||t>innerHeight*0.5) window.scrollTo({top:scrollY+t-84, behavior:'auto'}); }
+}
+function closeWhy(){ $('tw-whypanel').hidden=true; document.querySelector('.daycard').classList.remove('showwhy'); }
 $('tw-back').addEventListener('click', ()=>{ window.scrollTo({top: ta.getBoundingClientRect().top + scrollY - 140, behavior:'smooth'}); ta.focus({preventScroll:true}); });
 $('tw-again').addEventListener('click', ()=>{
-  round++; ta.value=''; asked=new Set(); sentenceCount=0; hideBubble(); $('tw-count').textContent='0 words'; stopTimer();
+  closeWhy(); round++; ta.value=''; asked=new Set(); sentenceCount=0; hideBubble(); $('tw-count').textContent='0 words'; stopTimer();
   $('tw-label').textContent='Round '+round+' \u00b7 your mission: '+(aiMission||(mission?MISSIONS[mission].t:'try it a new way.'));
   ta.focus(); window.scrollTo({top: ta.getBoundingClientRect().top + scrollY - 140, behavior:'auto'});
 });
