@@ -1,0 +1,210 @@
+funny|1|Write one sentence about a sock that wants to run away.|Give the sock a reason.
+funny|1|Describe your shoes as if they were very rude.|Two sentences. Make them say something cheeky.
+funny|1|Write a sign for the door of a dragon's bedroom.|It has to have one rule nobody would expect.
+funny|1|Tell us what your pet would complain about.|Three complaints. Make the last one the silliest.
+funny|1|Write the worst name ever for a superhero.|Then write one sentence about their worst power.
+funny|2|Write a short note from your lunchbox to you.|It is upset about something you did.
+funny|2|Describe a teacher who is secretly a robot.|Give three clues. Never say "robot".
+funny|2|Write instructions for how to brush a lion's teeth.|Five steps. Step five goes wrong.
+funny|2|Your pencil case has a meeting while you sleep. What do they argue about?|Give every item a different voice.
+funny|2|Write a weather report for a planet made of jelly.|Use a real weather word in a silly way.
+funny|3|Write a story about the day gravity took a lunch break.|About 100 words. Start the moment it stops.
+funny|3|A pigeon is trying to become school captain. Write its speech.|It promises three things. The third is about bread.
+funny|3|Write a review of your bedroom like it's a fancy hotel.|Give it stars out of five and explain why.
+funny|3|Your grandma accidentally joins a skateboarding team.|About 100 words. Show one trick she invents.
+funny|3|Write a diary entry from a fridge on the hottest day of the year.|Use "Dear Diary". Name one food it is worried about.
+funny|4|Write a story where the class goldfish is in charge for a day.|About 150 words. Every rule it makes is about water.
+funny|4|Write a funny story where everything goes wrong at a birthday party.|Each thing that goes wrong must be worse than the last.
+funny|4|Write a letter from a sandwich asking not to be eaten.|It must try three different ways to convince you.
+funny|4|Two vegetables are on a cooking show. Only one can win.|About 150 words. Make us care who wins.
+funny|4|Write about a ghost who is scared of people.|Show three things it does to hide. End with a surprise.
+funny|5|Write a funny story where the joke is only clear in the last line.|About 200 words. Don't give the ending away early.
+funny|5|Write a news report about a town where the cats took over.|Use quotes from two "witnesses". Keep a straight face.
+funny|5|A robot tries to understand a joke. Write the scene.|Show its thinking. Let it finally laugh at the end.
+funny|5|Write a funny story about a very small problem that becomes enormous.|About 200 words. Build it up in steps.
+funny|5|Write a guidebook page for aliens visiting your school.|Explain three normal things in a way that makes them sound strange.
+story|1|Write the first sentence of a story about a door that wasn't there yesterday.|Make us want to open it.
+story|1|Finish this in one sentence: "The map had a red X, but..."|Surprise us.
+story|1|Write one sentence about a kid who finds a key.|Say where they found it.
+story|1|Describe a monster under the bed in two sentences.|Make it more scared than you.
+story|1|Write the last line of an adventure story.|Then tell us what happened in one sentence.
+story|2|Write a short story about a lost dog finding its way home.|Use one thing the dog smells along the way.
+story|2|A box arrives with your name on it but no stamp. What's inside?|Short paragraph. Show how you open it.
+story|2|Write about a treehouse that can fly.|Say where it goes first.
+story|2|Your shadow starts doing things you don't do.|Write what happens at breakfast.
+story|2|Write a story that starts with "I wasn't supposed to press the button."|Keep it to one paragraph.
+story|3|Write a story about a kid who swaps places with their teacher for a day.|About 100 words. Show one thing that's harder than it looks.
+story|3|A tiny dragon hatches in your backyard. What do you do?|About 100 words. Give the dragon one habit.
+story|3|Write an adventure on a pirate ship where you are the youngest crew member.|Start in the middle of a storm.
+story|3|You find a door at the back of the library.|About 100 words. Use one sound and one smell.
+story|3|Write a story about the last day before a big move.|Show the feeling with something the character does.
+story|4|Write a mystery: who ate the class cake?|About 150 words. Give three clues and one trick.
+story|4|Write a story where the main character must make a hard choice.|Show both options. Don't tell us which is right.
+story|4|A kid builds a robot friend. Something goes wrong.|About 150 words. End with the robot learning something.
+story|4|Write a story about a storm from the point of view of a cat.|The cat doesn't understand what's happening.
+story|4|Write about a kid who is brave in a quiet way.|About 150 words. No fighting, no shouting.
+story|5|Write a story with a twist at the end.|About 200 words. Leave one small clue early on.
+story|5|Write the same moment twice: once by the hero, once by the villain.|About 100 words each.
+story|5|Write a story about two friends who fall out and make up.|Show it through what they do, not what they say.
+story|5|Write a story where the ending goes back to the beginning.|Use the same object in the first and last line.
+story|5|Write a story set in one room, in one minute.|About 200 words. Make every second count.
+describe|1|Describe your favourite food without saying its name.|Two sentences. We should guess it.
+describe|1|What does rain sound like on your roof?|One sentence. Don't use "pitter patter".
+describe|1|Describe the colour blue to someone who can't see.|Use touch, taste or sound.
+describe|1|Write one sentence about the smell of your school.|Be honest.
+describe|1|Describe a dog using only three words.|Make each word a surprise.
+describe|2|Describe your favourite place in your house.|Use one thing you see, hear and smell.
+describe|2|Describe a beach on a really hot day.|Show the heat without saying "hot".
+describe|2|Describe the playground at lunchtime.|Write it like a movie camera moving slowly.
+describe|2|Describe a thunderstorm from inside a tent.|Short paragraph. Include your feelings through your body.
+describe|2|Describe your grandparent's house, or a house you visit a lot.|Pick the one thing you always notice first.
+describe|3|Describe a market or shop that's very busy.|About 100 words. Use all five senses once.
+describe|3|Describe a creature nobody has ever seen.|About 100 words. Compare it to things we know.
+describe|3|Describe the moment just before a race starts.|Slow it down. Make it last 100 words.
+describe|3|Describe an old toy that you used to love.|Show why you loved it through one memory.
+describe|3|Describe a forest at night.|About 100 words. Make it spooky, not scary.
+describe|4|Describe the same street in the morning and at night.|Two short paragraphs. Show how it changes.
+describe|4|Describe a room so we know who lives there.|About 150 words. Never describe the person.
+describe|4|Describe the best meal you've ever eaten.|About 150 words. Make us hungry.
+describe|4|Describe a city floating in the sky.|About 150 words. Explain one thing about daily life there.
+describe|4|Describe a feeling as if it were the weather.|Pick one feeling. Make it a whole weather report.
+describe|5|Describe a place you love so a reader feels it too.|About 200 words. Use one comparison nobody else would use.
+describe|5|Describe a person by what they keep in their pockets.|About 200 words. Five objects, five clues.
+describe|5|Describe a tiny thing as if it were enormous.|Shrink yourself to the size of an ant.
+describe|5|Describe a sound so well we can hear it.|About 200 words. No naming the sound until the end.
+describe|5|Describe the moment a big wave hits you.|Slow motion. Every sense, every second.
+real|1|Write one sentence about the best thing that happened this week.|Say exactly when it happened.
+real|1|What is one thing you're really good at?|Two sentences. Prove it with an example.
+real|1|Write about your favourite smell in one sentence.|Say where you smell it.
+real|1|Write about a time you laughed so hard it hurt.|Two sentences. What started it?
+real|1|What's one thing that always makes you grumpy?|Two sentences. Be specific.
+real|2|Write about the first time you tried something new.|Short paragraph. How did your body feel?
+real|2|Write about a day you got lost or nearly lost.|Say what you saw around you.
+real|2|Write about your best friend without saying their name.|Tell one thing only they would do.
+real|2|Write about a time you were really proud of yourself.|Show what you did, not just that you were proud.
+real|2|Write about a family tradition you love.|Short paragraph. Use one sound.
+real|3|Write about a time something didn't go to plan.|About 100 words. What did you learn?
+real|3|Write about a pet you've had or wish you had.|About 100 words. One funny habit.
+real|3|Write about a time you were scared but did it anyway.|Start right before you did it.
+real|3|Write about the best present you ever got.|About 100 words. Why does it matter?
+real|3|Write about a time you helped someone.|About 100 words. Show their face when you helped.
+real|4|Write about a place you'll never forget.|About 150 words. Start with what you saw first.
+real|4|Write about a time you changed your mind.|About 150 words. What made you change it?
+real|4|Write about someone older who taught you something.|Show one moment, not their whole life.
+real|4|Write about a time you made a mistake and fixed it.|About 150 words. Be honest about how it felt.
+real|4|Write about a time you felt left out.|About 150 words. End with what you'd tell your younger self.
+real|5|Write about a moment that changed how you see something.|About 200 words. Show the before and after.
+real|5|Write about a day that started badly but ended well.|About 200 words. Find the turning point.
+real|5|Write about an object in your house that has a story.|About 200 words. Tell its story through one memory.
+real|5|Write about growing up, using three small moments.|One sentence or two each. Put them in order.
+real|5|Write a letter to yourself in five years.|About 200 words. Ask three questions.
+persuade|1|Convince your parents you need a pet.|Two sentences. One good reason.
+persuade|1|Why should ice cream be a breakfast food?|Two reasons. Make one funny.
+persuade|1|Tell us why your favourite animal is the best.|Three words that prove it.
+persuade|1|Convince your teacher to give no homework this week.|One sentence. Be polite.
+persuade|1|Why is your favourite season the best?|Two sentences. Use one sense.
+persuade|2|Write an ad for a toy that doesn't exist yet.|Say what it does and why kids need it.
+persuade|2|Convince a friend to read your favourite book.|Don't give away the ending.
+persuade|2|Why should kids get to choose dinner once a week?|Three reasons, short paragraph.
+persuade|2|Write a poster to save a tree in your street.|Use a heading and two reasons.
+persuade|2|Persuade a cat to take a bath.|Short paragraph. Think like a cat.
+persuade|3|Should school start later? Write your argument.|About 100 words. One fact, one feeling.
+persuade|3|Convince the principal to build something new at school.|About 100 words. Say who it helps.
+persuade|3|Write a speech for why kids should have a say in rules.|Start with a question.
+persuade|3|Persuade someone to try a food they think is gross.|Describe it so it sounds amazing.
+persuade|3|Should every class have a pet? Argue yes or no.|About 100 words. Answer one worry.
+persuade|4|Write a letter to the council asking for a better park.|About 150 words. Be specific about what you want.
+persuade|4|Argue that being bored is good for you.|About 150 words. Use an example from your life.
+persuade|4|Should kids have phones? Pick a side.|About 150 words. Say what the other side thinks first.
+persuade|4|Write an ad for your school to a new kid.|About 150 words. Be honest and still make it sound great.
+persuade|4|Persuade your family to go on a holiday you choose.|Three reasons, one for each family member.
+persuade|5|Write a speech to save an animal in danger.|About 200 words. End with something people can do.
+persuade|5|Argue that kids should help make the school rules.|About 200 words. Use a story and a reason.
+persuade|5|Write two short speeches: for and against school uniforms.|About 100 words each.
+persuade|5|Convince the world to stop wasting food.|About 200 words. Start with a surprising fact.
+persuade|5|Write a speech to run for class captain.|About 200 words. Make one promise you can actually keep.
+poem|1|Write a two-line poem about your breakfast.|Make the lines rhyme.
+poem|1|Write three words that describe the sea.|Make them sound like the sea.
+poem|1|Write a poem where every line starts with the letters of your name.|Each line says something true.
+poem|1|Write one line about the moon that nobody has written before.|Compare it to something in your house.
+poem|1|Write a poem about a cat in five words.|Make every word count.
+poem|2|Write a poem about rain, with a sound word in every line.|Four lines.
+poem|2|Write a shape poem about a tree.|Write the words in the shape of the tree.
+poem|2|Write a poem about your favourite colour.|Four lines. Use a smell, a taste and a sound.
+poem|2|Write a poem that's a list of things in your schoolbag.|Make the last thing a surprise.
+poem|2|Write a poem about a storm, using words that sound loud.|Four to six lines.
+poem|3|Write a poem about something small that matters to you.|Six lines. No rhyming allowed.
+poem|3|Write a poem from the point of view of the wind.|Six lines. Say where you've been today.
+poem|3|Write a poem about a feeling, as if it were an animal.|Six lines.
+poem|3|Write a poem that repeats one line three times.|Make the line mean something different each time.
+poem|3|Write a poem about your street at night.|Six lines. Use one comparison.
+poem|4|Write a poem about growing up.|Eight lines. Start small, end big.
+poem|4|Write a poem where the last line surprises us.|Eight lines.
+poem|4|Write a poem about a place that only exists in dreams.|Eight lines. Use colour and sound.
+poem|4|Write a poem about a friend, using three objects.|Eight lines. Never say "friend".
+poem|4|Write a poem in two voices: a kid and a grown-up.|Lines take turns.
+poem|5|Write a poem about the ocean without using "blue", "wave" or "water".|Ten lines.
+poem|5|Write a poem about time.|Make the poem feel fast at the start and slow at the end.
+poem|5|Write a poem about home that ends the way it begins.|Ten lines.
+poem|5|Write a poem that tells a tiny story.|Ten lines. Beginning, middle and end.
+poem|5|Write a poem about something you're scared of.|Ten lines. End with something brave.
+dialogue|1|Write what your dog would say if it could talk for ten seconds.|Two lines.
+dialogue|1|Two apples talk on a tree. Write two lines.|One is scared of falling.
+dialogue|1|Write one line a dragon says to a knight.|Make it unexpected.
+dialogue|1|Write a short chat between you and your shoes.|Three lines.
+dialogue|1|A kid asks for a biscuit. The parent says no. Write it.|Four lines. Nobody shouts.
+dialogue|2|Write a conversation between the sun and the moon.|Six lines. They argue about who's more important.
+dialogue|2|Two kids find a strange egg. Write what they say.|Six lines. One wants to keep it.
+dialogue|2|Write a phone call between a pirate and a pizza shop.|Six lines.
+dialogue|2|A kid tries to explain a video game to their nan.|Six lines. Nan keeps getting it wrong.
+dialogue|2|Write a chat between a teacher and a kid who forgot their homework.|The kid has a creative excuse.
+dialogue|3|Two friends both want the last seat on the bus.|About 100 words of talking. Find a solution.
+dialogue|3|Write a conversation where someone is trying not to laugh.|Show it with what they say and do.
+dialogue|3|A kid meets a time traveller. Write what they say.|About 100 words. One asks about the future.
+dialogue|3|Write a conversation between a cat and a dog who must share a bed.|About 100 words.
+dialogue|3|Write a chat where one person is hiding a surprise party.|They almost give it away.
+dialogue|4|Write a conversation where one person is upset but won't say why.|About 150 words. Show it through small clues.
+dialogue|4|Two kids are lost in the bush. Write how they decide what to do.|About 150 words. They disagree.
+dialogue|4|Write an interview with a famous animal.|Five questions and answers.
+dialogue|4|A kid asks a parent a really big question at bedtime.|About 150 words. The parent doesn't know the answer.
+dialogue|4|Write a conversation between two robots who just learned about feelings.|About 150 words.
+dialogue|5|Write a scene where friends say sorry without using the word "sorry".|About 200 words.
+dialogue|5|Write a conversation where each person wants something different.|About 200 words. Neither says it straight out.
+dialogue|5|Write a scene told only in dialogue, no "he said" or "she said".|We should still know who's talking.
+dialogue|5|A kid and a grandparent swap stories about being ten.|About 200 words. Show how they're the same.
+dialogue|5|Write a conversation that changes someone's mind.|About 200 words. Show the moment it changes.
+think|1|What would a tree think about kids climbing it?|Two sentences.
+think|1|If clouds could talk, what would they say about us?|One sentence.
+think|1|What would your schoolbag tell your parents about you?|Two sentences.
+think|1|What if dogs walked people? Write one sentence.|Make it funny.
+think|1|What does a puddle think about when no one's around?|One sentence.
+think|2|Describe your school from the point of view of an ant.|Short paragraph.
+think|2|What would happen if kids ran the country for a day?|Three things that change.
+think|2|Write about your bedroom as if it's a planet.|Name its moons.
+think|2|What if every lie made your nose glow?|Short paragraph. One day at school.
+think|2|Explain a rainbow to someone from a planet with no colours.|Short paragraph.
+think|3|What would the world look like if nobody could talk?|About 100 words. How do people say "hello"?
+think|3|Write about a normal morning from the point of view of your toothbrush.|About 100 words.
+think|3|What if you could hear what plants think?|About 100 words. Go to a garden.
+think|3|Imagine the opposite of your day today.|About 100 words. Everything flips.
+think|3|What would your future self want you to know?|About 100 words. Three tips.
+think|4|Write about a problem from both sides.|About 150 words. Two kids want the same thing.
+think|4|What if animals voted? Write about the election.|About 150 words. What do they argue about?
+think|4|Describe a day in 100 years.|About 150 words. One thing better, one thing worse.
+think|4|Write about the same playground fight from three people's views.|About 50 words each.
+think|4|What if a school subject came to life?|About 150 words. Which subject? What does it want?
+think|5|Write about something everyone thinks is boring and make it amazing.|About 200 words.
+think|5|What would happen if everyone told the truth for one day?|About 200 words. Show one big moment.
+think|5|Write a story where the villain is actually right.|About 200 words.
+think|5|Explain why grown-ups are strange, as if you are a scientist.|About 200 words. Three observations.
+think|5|Imagine the world without one ordinary thing.|About 200 words. Pick something tiny.
+funny|1|Write a menu for a café run by cats.|Three dishes. One has a fish joke.
+funny|1|What would a snail say if it got a speeding ticket?|One sentence.
+story|1|Write one sentence about a boot that's full of something strange.|Don't say what until the end.
+describe|1|Describe your favourite jumper in two sentences.|Use touch.
+real|1|What's the best smell in your house? One sentence.|Say which room.
+think|1|What would your bed say if you got up early?|One sentence.
+poem|1|Write a two-line poem about a lost tooth.|Make it rhyme.
+dialogue|1|A spider and a fly meet at a party. Write two lines.|
+persuade|1|Convince a goldfish to go for a walk.|Two sentences.
+think|1|If you shrank to the size of a pea, what would you do first?|One sentence.

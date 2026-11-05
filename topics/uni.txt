@@ -1,0 +1,200 @@
+essay|1|Write a topic sentence that makes a clear claim about remote learning.|One sentence. No "In today's society".
+essay|1|Turn this vague claim into a sharp one: "Social media has effects."|One sentence.
+essay|1|Write a thesis statement for an essay on whether cities should ban cars.|One sentence, arguable.
+essay|1|Write a sentence that introduces a counter-argument fairly.|
+essay|1|Write one sentence linking evidence to a claim using "which suggests".|
+essay|2|Write one paragraph arguing whether lectures should always be recorded.|Topic sentence, one piece of evidence, then what it means.
+essay|2|Write an introduction for an essay on four-day work weeks.|Short paragraph. Hook, context, thesis.
+essay|2|Write a conclusion that does more than repeat the essay.|Short paragraph. Add a "so what".
+essay|2|Write a paragraph comparing two approaches to studying.|Use "whereas" or "by contrast".
+essay|2|Write a paragraph that hedges carefully.|Use "may", "suggests" and "in some cases" with purpose.
+essay|3|Write a body paragraph using PEEL on a topic from your course.|About 150 words.
+essay|3|Write a paragraph that synthesises two sources that disagree.|About 150 words. Invent neutral placeholder sources.
+essay|3|Write an essay plan for "Is economic growth compatible with sustainability?"|Thesis plus three points.
+essay|3|Take a claim from a lecture and push back on it in one paragraph.|Be fair to the other side first.
+essay|3|Write a paragraph that defines a contested term before using it.|About 150 words.
+essay|4|Write a short argumentative essay on whether universities should be free.|About 300 words.
+essay|4|Write a paragraph that critiques the method of a study, not just its findings.|About 200 words.
+essay|4|Write a literature review paragraph on a topic you know.|About 200 words. Group ideas, don't list.
+essay|4|Write an essay section that uses a case study as evidence.|About 250 words.
+essay|4|Rewrite a padded paragraph from your old work at half the length.|Same meaning, half the words.
+essay|5|Write a 500-word essay with a clear thesis, two counter-arguments and a conclusion.|
+essay|5|Write an essay that argues a nuanced middle position.|About 500 words.
+essay|5|Write an essay introduction and conclusion that frame each other.|About 300 words.
+essay|5|Write a critical response to a common argument in your field.|About 500 words.
+essay|5|Write a policy recommendation paragraph backed by reasons.|About 400 words.
+explain|1|Explain your degree in one sentence to a ten-year-old.|
+explain|1|Explain a concept from your course using an everyday comparison.|One sentence.
+explain|1|Define a jargon term from your field in plain English.|One sentence.
+explain|1|Explain why your subject matters in ten words.|
+explain|1|Write a one-line summary of the last reading you did.|
+explain|2|Explain your degree to your nan in 100 words. Then write it again as one academic sentence.|Same idea, two voices.
+explain|2|Explain a process from your course step by step.|Short paragraph. Use signposts.
+explain|2|Write an abstract for a study you'd like to do.|Short paragraph. Aim, method, expected result.
+explain|2|Explain a graph or statistic you know in plain words.|Short paragraph.
+explain|2|Write instructions for a new student on surviving week one.|Short paragraph.
+explain|3|Explain a theory from your field and give an example.|About 150 words.
+explain|3|Write a summary of an article in your own words.|About 150 words. No quotes.
+explain|3|Explain a common misconception in your field.|About 150 words.
+explain|3|Write an explainer for the public on a research topic.|About 150 words.
+explain|3|Explain cause and effect in a topic you've studied.|About 150 words.
+explain|4|Write a short report section: findings and what they mean.|About 250 words.
+explain|4|Explain a complex idea three ways: academic, everyday, visual metaphor.|About 80 words each.
+explain|4|Write a blog post explaining your research or major.|About 250 words.
+explain|4|Explain a historical event's causes with careful hedging.|About 250 words.
+explain|4|Write a briefing for a busy decision-maker.|About 250 words. Lead with the answer.
+explain|5|Write a science communication piece that hooks a general reader.|About 500 words.
+explain|5|Explain a debate in your field and where you stand.|About 500 words.
+explain|5|Write a grant-style pitch for a project.|About 400 words. Problem, plan, impact.
+explain|5|Write an explainer that turns a dense reading into something enjoyable.|About 500 words.
+explain|5|Write a methods section that a stranger could follow.|About 400 words.
+reflect|1|Write one sentence about what you learned this week.|Make it specific.
+reflect|1|What's one study habit that works for you? One sentence, with why.|
+reflect|1|Name one piece of feedback you got and what you did with it.|
+reflect|1|What surprised you in your last class? One sentence.|
+reflect|1|Write one honest sentence about your last assignment.|
+reflect|2|Write a short reflection on a group assignment that went wrong.|What happened, what you learned, what you'd do differently.
+reflect|2|Reflect on a placement, job or volunteering shift.|Short paragraph. Use one moment.
+reflect|2|Reflect on a reading that changed your thinking.|Short paragraph.
+reflect|2|Reflect on a mistake in an assignment.|Short paragraph. Be practical.
+reflect|2|Reflect on how you manage your time.|Short paragraph. One change to try.
+reflect|3|Write a reflection using describe, interpret, evaluate, plan.|About 150 words.
+reflect|3|Reflect on how your views changed over a semester.|About 150 words.
+reflect|3|Reflect on a presentation you gave.|About 150 words.
+reflect|3|Reflect on feedback that stung.|About 150 words. What was true in it?
+reflect|3|Reflect on working with someone very different from you.|About 150 words.
+reflect|4|Write a professional reflection linking an experience to a theory.|About 250 words.
+reflect|4|Reflect on an ethical dilemma you faced or observed.|About 250 words.
+reflect|4|Reflect on your strengths and gaps as a learner.|About 250 words. Evidence for each.
+reflect|4|Reflect on how you'd teach your subject to first-years.|About 250 words.
+reflect|4|Reflect on a moment you felt out of your depth.|About 250 words.
+reflect|5|Write a reflective essay on your growth over your degree so far.|About 500 words.
+reflect|5|Reflect critically on an assumption you used to hold.|About 500 words.
+reflect|5|Write a reflective piece on what kind of professional you want to be.|About 500 words.
+reflect|5|Reflect on a failure and what it taught you about your field.|About 500 words.
+reflect|5|Write a reflection connecting your personal background to your studies.|About 500 words.
+persuade|1|Write a one-sentence pitch for a club you'd start.|
+persuade|1|Write a headline for an opinion piece on student housing.|
+persuade|1|Convince a flatmate to do the dishes, in one sentence.|
+persuade|1|Write one sentence arguing for library opening hours.|
+persuade|1|Write a strong first line for a cover letter.|No "I am writing to apply".
+persuade|2|Write a cover letter opening paragraph.|Short paragraph. Show, don't list.
+persuade|2|Write a short opinion piece for the student paper.|Short paragraph.
+persuade|2|Pitch an idea to your tutor for an assignment topic.|Short paragraph.
+persuade|2|Write a scholarship statement opening.|Short paragraph. One story.
+persuade|2|Argue for or against attendance marks.|Short paragraph.
+persuade|3|Write an op-ed on the cost of living for students.|About 150 words.
+persuade|3|Write a personal statement paragraph about why you chose your field.|About 150 words. No clichés.
+persuade|3|Write a proposal to improve something on campus.|About 150 words.
+persuade|3|Persuade a sceptical reader about a finding in your field.|About 150 words.
+persuade|3|Write a LinkedIn post about something you learned.|About 150 words. No humblebrag.
+persuade|4|Write an op-ed that uses data and a story together.|About 250 words.
+persuade|4|Write a submission to a public inquiry on an issue you care about.|About 250 words.
+persuade|4|Write a speech for a student protest or campaign.|About 250 words.
+persuade|4|Write a persuasive piece that answers the top three objections.|About 250 words.
+persuade|4|Write a cover letter for your dream job.|About 250 words.
+persuade|5|Write a feature-length op-ed with a strong voice and sound reasoning.|About 500 words.
+persuade|5|Write a persuasive essay aimed at people who disagree with you.|About 500 words.
+persuade|5|Write a manifesto for how your field should change.|About 400 words.
+persuade|5|Write a debate case: opening, three arguments, rebuttal.|About 500 words.
+persuade|5|Write a persuasive talk that uses one recurring image.|About 500 words.
+story|1|Write a one-sentence story set in a lecture theatre.|
+story|1|Write the first line of a story about a share house.|
+story|1|Write one sentence about a student who finds a note in a library book.|
+story|1|Write the last line of a story about graduation.|
+story|1|Write one sentence about the 3am kitchen.|
+story|2|Write a short scene in a share house kitchen.|Short paragraph. One argument about a cup.
+story|2|Write a story that starts with an email subject line.|Short paragraph.
+story|2|Write about someone moving to a new city to study.|Short paragraph. First night.
+story|2|Write a scene at a part-time job.|Short paragraph. One difficult customer.
+story|2|Write a scene in a tutorial where nobody wants to speak.|Short paragraph.
+story|3|Write a story about two flatmates who never meet.|About 150 words. Notes only.
+story|3|Write a story about a deadline.|About 150 words. Make it tense.
+story|3|Write a story about an international student's first week.|About 150 words. Specific details.
+story|3|Write a story set over one long night in a library.|About 150 words.
+story|3|Write a story where a lecture changes someone's life.|About 150 words.
+story|4|Write a story told through emails.|About 250 words.
+story|4|Write a story about choosing between two futures.|About 250 words.
+story|4|Write a story where a small lie at uni grows.|About 250 words.
+story|4|Write a story set at a graduation.|About 250 words. Someone is missing.
+story|4|Write a story about a friendship formed in an exam.|About 250 words.
+story|5|Write a literary short story about ambition.|About 500 words.
+story|5|Write a story that explores identity through language or accent.|About 500 words.
+story|5|Write a story where the structure mirrors a research paper.|About 500 words.
+story|5|Write a story about leaving home that avoids every cliché.|About 500 words.
+story|5|Write a story with an open ending that rewards rereading.|About 500 words.
+funny|1|Write a one-line review of your uni's coffee.|
+funny|1|Describe your bank account as a weather report.|One sentence.
+funny|1|Write a one-line apology email for being late to a tutorial.|Make it too honest.
+funny|1|Write the title of the essay you wish you could write.|
+funny|1|Describe group work in five words.|
+funny|2|Write the "about me" of a very tired postgrad.|Short paragraph.
+funny|2|Write a share house rules sheet that's clearly passive-aggressive.|Five rules.
+funny|2|Write a nature documentary about first-years at O-week.|Short paragraph.
+funny|2|Write an email to a lecturer that tries far too hard.|Short paragraph.
+funny|2|Describe a university as a theme park.|Short paragraph. Name three rides.
+funny|3|Write a satirical uni brochure.|About 150 words. Everything is "world-class".
+funny|3|Write a funny scene of a group assignment meeting.|About 150 words. Four types of people.
+funny|3|Write a fake research abstract on a silly topic.|About 150 words. Keep the academic tone.
+funny|3|Write a funny piece about job hunting.|About 150 words.
+funny|3|Write the diary of a reusable coffee cup.|About 150 words.
+funny|4|Write a satire about student debt that's funny and sharp.|About 250 words.
+funny|4|Write a comic monologue from someone defending their 2am essay.|About 250 words.
+funny|4|Write a funny piece about adulting for the first time.|About 250 words.
+funny|4|Write a mock academic paper about procrastination.|About 250 words. Include a "method".
+funny|4|Write a funny piece about a family asking what your degree is for.|About 250 words.
+funny|5|Write a humorous essay with a serious point.|About 500 words.
+funny|5|Write a satirical piece about workplace jargon.|About 500 words.
+funny|5|Write a comic short story with a perfectly timed reversal.|About 500 words.
+funny|5|Write a funny piece that uses footnotes as part of the joke.|About 400 words.
+funny|5|Write a humour column about modern life.|About 500 words.
+real|1|Write one sentence about why you chose your degree.|Be honest.
+real|1|Write about your first day at uni in one sentence.|
+real|1|Write one sentence about someone who believed in you.|
+real|1|What's one thing you wish you knew in Year 12? One sentence.|
+real|1|Describe your study spot in one sentence.|
+real|2|Write about leaving home or staying home to study.|Short paragraph.
+real|2|Write about a job you've had and what it taught you.|Short paragraph.
+real|2|Write about the moment you realised what you want to do.|Short paragraph.
+real|2|Write about a hard week.|Short paragraph. One detail that got you through.
+real|2|Write about a friend you made at uni.|Short paragraph.
+real|3|Write about a time you felt like an impostor.|About 150 words.
+real|3|Write about money and study.|About 150 words. Honest, not whiny.
+real|3|Write about a place on campus that matters to you.|About 150 words.
+real|3|Write about a person in your family who never got to study.|About 150 words.
+real|3|Write about a decision you're unsure of.|About 150 words.
+real|4|Write a personal essay about a turning point in your studies.|About 250 words.
+real|4|Write about your relationship with your first language or culture.|About 250 words.
+real|4|Write about balancing work, study and life.|About 250 words.
+real|4|Write about a mentor.|About 250 words. One scene.
+real|4|Write about failure and coming back.|About 250 words.
+real|5|Write a personal essay about the kind of life you want.|About 500 words.
+real|5|Write a memoir piece about a year that changed you.|About 500 words.
+real|5|Write a personal essay that braids two stories together.|About 500 words.
+real|5|Write about where you're from and where you're going.|About 500 words.
+real|5|Write a personal essay about a belief you've changed.|About 500 words.
+think|1|What would your laptop say about your study habits?|One sentence.
+think|1|If your degree were an animal, what would it be?|One sentence and why.
+think|1|What will people in 2100 find funny about us?|One sentence.
+think|1|What would a lecture theatre say at the end of semester?|One sentence.
+think|1|What's a rule everyone follows that makes no sense?|One sentence.
+think|2|Write about your field from the view of someone 200 years ago.|Short paragraph.
+think|2|What if exams were replaced by conversations?|Short paragraph.
+think|2|Write about the internet as a city.|Short paragraph.
+think|2|What if every job had to be explained to a child first?|Short paragraph.
+think|2|Write about your degree from the view of the textbook.|Short paragraph.
+think|3|What if AI could do every assignment? What should uni be for?|About 150 words.
+think|3|Write about a common belief in your field that might be wrong.|About 150 words.
+think|3|Write about a city from the view of its rubbish.|About 150 words.
+think|3|What would the world look like if everyone worked four days a week?|About 150 words.
+think|3|Write about knowledge as a place you can walk through.|About 150 words.
+think|4|Argue both sides of a question in your field as two characters.|About 250 words.
+think|4|Write about a problem using an analogy from a totally different field.|About 250 words.
+think|4|Write about the future of your profession in 30 years.|About 250 words.
+think|4|What would an alien conclude about us from a supermarket?|About 250 words.
+think|4|Write about something invisible that shapes your life.|About 250 words.
+think|5|Write a thought experiment and explore its consequences.|About 500 words.
+think|5|Write about a big idea through a small object on your desk.|About 500 words.
+think|5|Write a piece that changes the reader's view of something ordinary.|About 500 words.
+think|5|Write about what a good life looks like, from three perspectives.|About 500 words.
+think|5|Write about what we should never let machines do.|About 500 words.

@@ -276,6 +276,16 @@ footer small{color:var(--ink-soft)}
 .levels button{font:inherit;font-size:.9rem;font-weight:700;padding:6px 14px;border-radius:999px;border:2px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer}
 .levels button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
 .promptbox .rule{margin-top:10px;color:var(--ink-soft)}
+.levels button small{font-weight:400;opacity:.75;margin-left:4px}
+.pickrow{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:12px}
+.pickrow select{font:inherit;font-size:.9rem;font-weight:700;padding:6px 10px;border-radius:999px;border:2px solid var(--ink);background:var(--card);color:var(--ink)}
+.ladder{display:flex;gap:4px;align-items:center}
+.ladder button{font:inherit;font-size:.78rem;font-weight:700;width:30px;height:30px;border-radius:50%;border:2px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer;padding:0}
+.ladder button.done{background:var(--paper-2)}
+.ladder button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.ladder button:disabled{opacity:.35;cursor:not-allowed;border-style:dashed}
+.lvnote{font-size:.85rem;color:var(--ink-soft)}
+.promptbox .ptag{font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--margin)}
 .row2{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:14px}
 .btn.sm{padding:8px 14px;font-size:.92rem}
 .editor{margin-top:18px}
@@ -390,9 +400,14 @@ footer small{color:var(--ink-soft)}
 
     <div class="daycard">
       <div style="min-width:0">
-        <div class="levels" id="tw-level" role="group" aria-label="Who is writing?"><span class="eyebrow">Who’s writing?</span><button type="button" data-l="everyday">Everyday</button><button type="button" data-l="hsc">HSC English</button><button type="button" data-l="uni">Uni</button></div>
+        <div class="levels" id="tw-level" role="group" aria-label="Who is writing?"><span class="eyebrow">Who’s writing?</span><button type="button" data-g="kids">Kids<small>8–12</small></button><button type="button" data-g="teens">Teens<small>13–15</small></button><button type="button" data-g="senior">Senior school<small>16–18 · HSC</small></button><button type="button" data-g="uni">Uni</button><button type="button" data-g="adults">Adults</button></div>
+        <div class="pickrow">
+          <label><span class="eyebrow" style="margin-right:6px">Kind</span><select id="tw-subj" aria-label="Kind of writing"></select></label>
+          <span style="display:inline-flex;align-items:center;gap:8px"><span class="eyebrow">Level</span><div class="ladder" id="tw-ladder" role="group" aria-label="Level"></div></span>
+          <span class="lvnote" id="tw-lvnote"></span>
+        </div>
         <div class="panel promptbox">
-          <p class="eyebrow">Your challenge</p>
+          <p class="eyebrow">Your challenge <span class="ptag" id="tw-ptag"></span></p>
           <p class="p" id="tw-prompt"></p>
           <p class="rule" id="tw-rule"></p>
           <div class="row2">
@@ -486,6 +501,7 @@ footer small{color:var(--ink-soft)}
     <small>A tool, not another AI.</small>
   </div>
 </footer>
+<script src="topics.js"></script>
 <script>
 const esc = s => s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const HABITS = [
@@ -511,22 +527,6 @@ const BUSTERS = [
   ["Keep typing for 60 seconds. No stopping. “I don't know what to write” counts.","moving fingers wake up the brain.","trying to be perfect on the first go"],
   ["Do a 30-second doodle, then write what's in it.","pictures come before words in your brain.","fear of being bad"]
 ];
-const PROMPTS = [
-  {type:"funny", p:"Describe your worst customer in five sentences.", rule:"No adjectives allowed. Show it with what they do.", lesson:0, q:["What did they smell like?","What did you say to them in your head?","What happened right after they left?"]},
-  {type:"story", p:"Tell the story of a scar in 150 words.", rule:"Start in the middle of the moment it happened.", lesson:2, q:["Who was there?","What did it sound like?","What do you think when you see it now?"]},
-  {type:"funny", p:"Write three true complaints about Mondays.", rule:"Make the third one surprise us.", lesson:1, q:["What's the one thing that makes a Monday okay?","What would Monday say back to you?","Which complaint is the most you?"]},
-  {type:"work", p:"Turn down a meeting without sounding like HR.", rule:"Be kind, be clear, be you. Three sentences max.", lesson:3, q:["What would you say to a friend instead?","What's the real reason you're saying no?","How would the other person feel reading it?"]},
-  {type:"story", p:"Describe your kitchen to someone who has never seen it.", rule:"Use at least one sound and one smell.", lesson:0, q:["What's in the fridge that shouldn't be?","Who leaves the mess?","What's the best thing that ever happened in there?"]},
-  {type:"story", p:"Write the first paragraph of a story that starts at a bus stop.", rule:"Something has already gone wrong.", lesson:2, q:["Where is the bus?","What is your character holding?","What happens in the next sentence?"]},
-  {lvl:"hsc", type:"story", p:"Write the opening of a story where one object tells us who a character is. 200 words.", rule:"Never say what the character feels. Let the object do the work.", lesson:4, q:["Who gave them the object?","What would they never throw away?","What does the object smell like?"]},
-  {lvl:"hsc", type:"reflect", p:"Write a 100-word reflection on one choice you made in something you've written.", rule:"Name the choice, say why you made it, and say what it does to the reader.", lesson:5, q:["What did you almost do instead?","Which reader were you writing for?","What would the piece lose without it?"]},
-  {lvl:"hsc", type:"persuade", p:"Persuade a room of Year 7s that being bored is good for them.", rule:"One real example from your own life. No rhetorical questions.", lesson:6, q:["When were you last properly bored?","What would a Year 7 roll their eyes at?","What's the one line they'd remember?"]},
-  {lvl:"hsc", type:"discursive", p:"Explore both sides of banning phones at school in 150 words.", rule:"Don't pick a side. Leave us thinking.", lesson:4, q:["What does a phone-free lunch actually look like?","Who loses most from the ban?","What question do you want us to leave with?"]},
-  {lvl:"uni", type:"essay", p:"Write one paragraph arguing whether lectures should always be recorded.", rule:"Topic sentence first. One piece of evidence. Then say what it means.", lesson:6, q:["Who is the paragraph really for?","What would someone who disagrees say?","What does your evidence not prove?"]},
-  {lvl:"uni", type:"essay", p:"Explain your degree to your nan in 100 words. Then write it again as one academic sentence.", rule:"Same idea, two voices. No jargon in the nan version.", lesson:3, q:["What would your nan ask first?","Which word in your degree do people get wrong?","What's the one idea that holds it together?"]},
-  {lvl:"uni", type:"essay", p:"Take a claim you've heard in a lecture or tutorial and push back on it in one paragraph.", rule:"Be fair to the other side first, then disagree.", lesson:7, q:["What's the strongest version of their claim?","What evidence would change your mind?","Where exactly does their argument slip?"]},
-  {lvl:"uni", type:"reflect", p:"Write a short reflection on a group assignment that went wrong.", rule:"What happened, what you learned, what you'd do differently. 150 words.", lesson:5, q:["What was the moment you knew it was going wrong?","What was your part in it?","What would you say to that group now?"]},
-];
 const LESSONS2 = [
   {name:"Specific beats general", flat:"The food was really nice.", works:"The chips were so hot I had to blow on them like birthday candles.", why:"Your brain can't picture \u201cnice\u201d. It can picture hot chips."},
   {name:"Surprise makes it funny", flat:"I went to the gym. It was hard.", works:"I went to the gym. The gym won.", why:"Funny is when your brain expects one thing and gets another."},
@@ -537,19 +537,56 @@ const LESSONS2 = [
   {name:"Your first sentence does the arguing", flat:"There are many different views on working from home.", works:"Working from home lifts output but quietly hurts new staff.", why:"Your reader should know your claim after one sentence. Everything after it is proof."},
   {name:"Evidence, then what it means", flat:"A 2021 survey found most students skip breakfast.", works:"A 2021 survey found most students skip breakfast, which points at 8am classes, not laziness.", why:"Quoting isn't arguing. The marks are in what you make the evidence mean."}
 ];
-let LEVEL = 'everyday'; try{ LEVEL = localStorage.getItem('wrimble-level') || 'everyday'; }catch(e){}
-const qLevel=new URLSearchParams(location.search).get('level'); if(['everyday','hsc','uni'].includes(qLevel)){ LEVEL=qLevel; try{ localStorage.setItem('wrimble-level', LEVEL); }catch(e){} }
-const inLevel = P => (P.lvl||'everyday')===LEVEL;
-function randPrompt(not){ const ids=PROMPTS.map((P,i)=>i).filter(i=>inLevel(PROMPTS[i]) && i!==not); return ids[Math.floor(Math.random()*ids.length)]; }
-let pi = 0, round = 1, versions = [], timerStart = null, timerId = null, lastStuck = -1;
+/* ---------- Topic bank: 1000 topics by age group, kind and level (topics.js). Start easy, unlock harder. ---------- */
+const GROUPS={kids:'kids',teens:'teens',senior:'hsc',uni:'uni',adults:'everyday'};
+const SUBJ={funny:'Funny',story:'Stories',describe:'Describing',real:'True stories',persuade:'Persuading',poem:'Poems',dialogue:'Dialogue',think:'Think differently',discursive:'Discursive',reflect:'Reflections',essay:'Essays',explain:'Explaining'};
+const LVN=['','Warm-up','Easy','Getting there','Stretch','Pro'];
+const LESSON_OF={describe:0,real:0,funny:1,story:2,dialogue:2,poem:3,explain:3,think:4,discursive:4,reflect:5,persuade:6,essay:7};
+const UNLOCK=3;
+const lsGet=(k,d)=>{try{const v=localStorage.getItem(k);return v==null?d:v;}catch(e){return d;}};
+const lsSet=(k,v)=>{try{localStorage.setItem(k,v);}catch(e){}};
+let GROUP=lsGet('wrimble-group','');
+if(!TOPICS[GROUP]){ const old=lsGet('wrimble-level',''); GROUP=old==='hsc'?'senior':old==='uni'?'uni':'adults'; }
+const qs=new URLSearchParams(location.search), qg=qs.get('group')||({hsc:'senior',uni:'uni',everyday:'adults'}[qs.get('level')]||'');
+if(TOPICS[qg]) GROUP=qg;
+let LEVEL=GROUPS[GROUP], SUBJECT='any', CUR=null, countedThis=false, leveledUp=0;
+let PROG={}; try{PROG=JSON.parse(lsGet('wrimble-prog','{}'))||{};}catch(e){PROG={};}
+const prog=()=>PROG[GROUP]||(PROG[GROUP]={lv:1,max:1,done:0,seen:[]});
+const saveProg=()=>lsSet('wrimble-prog',JSON.stringify(PROG));
+function saveGroup(){ LEVEL=GROUPS[GROUP]; lsSet('wrimble-group',GROUP); lsSet('wrimble-level',LEVEL); }
+saveGroup();
+function randPrompt(not){
+  const T=TOPICS[GROUP], g=prog();
+  let pool=T.map((t,i)=>i).filter(i=>T[i][1]===g.lv && (SUBJECT==='any'||T[i][0]===SUBJECT) && i!==not);
+  if(!pool.length) pool=T.map((t,i)=>i).filter(i=>T[i][1]===g.lv && i!==not);
+  let left=pool.filter(i=>!g.seen.includes(i));
+  if(!left.length){ g.seen=g.seen.filter(i=>!pool.includes(i)); left=pool; }
+  const i=left[Math.floor(Math.random()*left.length)]; g.seen.push(i); saveProg(); return i;
+}
+function renderPicker(){
+  const g=prog();
+  document.querySelectorAll('#tw-level button').forEach(b=>b.setAttribute('aria-pressed', b.dataset.g===GROUP));
+  const kinds=[...new Set(TOPICS[GROUP].map(t=>t[0]))];
+  if(SUBJECT!=='any' && !kinds.includes(SUBJECT)) SUBJECT='any';
+  $('tw-subj').innerHTML='<option value="any">Any kind</option>'+kinds.map(k=>'<option value="'+k+'"'+(k===SUBJECT?' selected':'')+'>'+SUBJ[k]+'</option>').join('');
+  $('tw-ladder').innerHTML=[1,2,3,4,5].map(n=>'<button type="button" data-n="'+n+'" aria-pressed="'+(n===g.lv)+'"'+(n>g.max?' disabled title="Locked"':' title="Level '+n+': '+LVN[n]+'"')+(n<g.max?' class="done"':'')+' aria-label="Level '+n+', '+LVN[n]+(n>g.max?', locked':'')+'">'+n+'</button>').join('');
+  $('tw-lvnote').textContent = LVN[g.lv] + (g.max>=5 ? (g.lv===5?' · top level':'') : ' · '+(UNLOCK-g.done)+' more to unlock Level '+(g.max+1));
+}
+let pi = 0;
 const $ = id => document.getElementById(id);
 function setPrompt(i){
-  pi = i; const P = PROMPTS[i], L = LESSONS2[P.lesson];
-  $('tw-prompt').textContent = P.p; $('tw-rule').textContent = P.rule;
+  pi = i; const t=TOPICS[GROUP][i];
+  CUR = {type:t[0], p:t[2], rule:t[3], level:t[1], lesson:LESSON_OF[t[0]]||0};
+  const P=CUR, L = LESSONS2[P.lesson]; countedThis=false;
+  $('tw-prompt').textContent = P.p; $('tw-rule').textContent = P.rule; $('tw-ptag').textContent='· '+SUBJ[P.type]+' · Level '+P.level;
   $('tw-l-name').textContent = L.name; $('tw-l-flat').textContent = L.flat; $('tw-l-works').textContent = L.works; $('tw-l-why').textContent = L.why;
+  renderPicker();
 }
+let round = 1, versions = [], timerStart = null, timerId = null, lastStuck = -1;
 setPrompt(randPrompt(-1));
-document.querySelectorAll('#tw-level button').forEach(b=>{ b.setAttribute('aria-pressed', b.dataset.l===LEVEL); b.addEventListener('click', ()=>{ LEVEL=b.dataset.l; try{ localStorage.setItem('wrimble-level', LEVEL); }catch(e){} document.querySelectorAll('#tw-level button').forEach(x=>x.setAttribute('aria-pressed', x===b)); setPrompt(randPrompt(-1)); resetAll(); }); });
+document.querySelectorAll('#tw-level button').forEach(b=>b.addEventListener('click', ()=>{ GROUP=b.dataset.g; saveGroup(); setPrompt(randPrompt(-1)); resetAll(); }));
+$('tw-subj').addEventListener('change', e=>{ SUBJECT=e.target.value; setPrompt(randPrompt(-1)); resetAll(); });
+$('tw-ladder').addEventListener('click', e=>{ const b=e.target.closest('button'); if(!b||b.disabled) return; prog().lv=+b.dataset.n; saveProg(); setPrompt(randPrompt(-1)); resetAll(); });
 $('tw-new').addEventListener('click', ()=>{ setPrompt(randPrompt(pi)); resetAll(); });
 $('tw-stuck').addEventListener('click', ()=>{
   let i; do{ i=Math.floor(Math.random()*BUSTERS.length); }while(i===lastStuck); lastStuck=i;
@@ -575,7 +612,7 @@ async function pasteReview(){
   }
   let head='I read what you pasted. Questions for you:';
   if(aiOK){
-    const ai=await askAI({mode:'bubble', level:LEVEL, prompt:PROMPTS[pi].p, text:v.slice(-1500), asked:[...asked].slice(-24)}, 4000);
+    const ai=await askAI({mode:'bubble', level:LEVEL, prompt:CUR.p, text:v.slice(-1500), asked:[...asked].slice(-24)}, 4000);
     if(ai && ai.question && ta.value===v){ items.unshift(ai.question); asked.add('q: '+ai.question); }
   }
   if(ta.value!==v) return;
@@ -645,7 +682,7 @@ function questionFor(sent, all){
   return null;
 }
 function showBubble(q, endPos){
-  const b=$('tw-bubble'); if(q.multi){ $('tw-bq').innerHTML=q.multi.map(x=>'<span style="display:block">'+esc(x)+'</span>').join(''); } else { $('tw-bq').textContent=q.q; } $('tw-bh').innerHTML=q.h?(q.go?'':'<b>Idea:</b> ')+esc(q.h):''; const ex=q.ex===null?'':(q.ex||pickEx(catOf(q.k))); $('tw-bgo').hidden=!q.go; $('tw-be').innerHTML=ex?'<b>Example from a different '+(LEVEL==='everyday'?'story':'topic')+':</b> '+esc(ex):''; b.hidden=false;
+  const b=$('tw-bubble'); if(q.multi){ $('tw-bq').innerHTML=q.multi.map(x=>'<span style="display:block">'+esc(x)+'</span>').join(''); } else { $('tw-bq').textContent=q.q; } $('tw-bh').innerHTML=q.h?(q.go?'':'<b>Idea:</b> ')+esc(q.h):''; const ex=q.ex===null?'':(q.ex||pickEx(catOf(q.k))); $('tw-bgo').hidden=!q.go; $('tw-be').innerHTML=ex?'<b>Example from a different '+((LEVEL==='hsc'||LEVEL==='uni')?'topic':'story')+':</b> '+esc(ex):''; b.hidden=false;
   $('tw-bwho').textContent = q.who || (q.go ? 'Coach' : 'Coach asks');
   const hasHint = !q.go && (($('tw-bh').textContent||'').trim() || ($('tw-be').textContent||'').trim());
   b.classList.toggle('collapsed', !!hasHint); b.classList.toggle('nohint', !hasHint);
@@ -699,7 +736,7 @@ function walkHook(frag, all){
   const tail=w.slice(-3).join(' ').toLowerCase(), last=w[w.length-1].toLowerCase(); let m0;
   const text=all.join(' ')+' '+frag;
   const pick=(k,q,h)=>asked.has(k)?null:{k,q,h};
-  if(LEVEL!=='everyday'){
+  if(LEVEL==='hsc'||LEVEL==='uni'){
     if((m0=last.match(/^(shows?|proves?|demonstrates?|suggests?|highlights?|reveals?)$/))) return pick('claim', "“"+m0[1]+"” how? What should the reader notice?", "Unpack it: point at the detail and say what it means.");
     if((m0=tail.match(/\b(society|many people|some people|everyone|nowadays|throughout history|today's world)$/))) return pick('society', "Who exactly is “"+m0[1]+"”?", "Big vague groups weaken an argument. Name a real group, place or time.");
     if(LEVEL==='uni' && /\bi (think|believe|feel that)$/.test(tail)) return pick('ithink', "Can you say it as a claim you’ll prove?", "Academic writing states the point, then backs it up.");
@@ -751,7 +788,7 @@ async function walkCheck(){
   if(endsSentence && (all.length%3===0 || !q)){ const t=THINK.find(t=>!asked.has('think:'+t[0])); if(t) q={k:'think:'+t[0], who:'Coach · think about it differently', q:t[0], h:t[1], ex:''}; }
   if(q) showBubble(q, Math.min(anchor, ta.value.replace(/\s+$/,'').length));
   if(aiOK){
-    const ai=await askAI({mode:'bubble', level:LEVEL, prompt:PROMPTS[pi].p, text:v.slice(-1500), asked:[...asked].slice(-24)}, 3500);
+    const ai=await askAI({mode:'bubble', level:LEVEL, prompt:CUR.p, text:v.slice(-1500), asked:[...asked].slice(-24)}, 3500);
     if(seq!==walkSeq || ta.value.length-v.length>12) return;
     if(ai && ai.question){ asked.add('q: '+ai.question); asked.add('ex: '+(ai.example||'').slice(0,60)); showBubble({k:'ai:'+ai.question.slice(0,40), q:ai.question, h:ai.idea||'', ex:ai.example||''}, Math.min(anchor, ta.value.replace(/\s+$/,'').length)); }
   }
@@ -892,15 +929,15 @@ const MISSIONS = {
 };
 let mission=null, aiMission=null, usedAiMission=false, pastMissions=[];
 function challengeCheck(text, ss){
-  const n=words(text).length, P=PROMPTS[pi];
-  if(/150 words/.test(P.p)) return n>165 ? "The challenge said 150 words. You wrote "+n+". The limit is the point: it forces you to choose." : (n<100 ? "The challenge said 150 words. You wrote "+n+", so you've got room for one more real detail." : null);
+  const n=words(text).length, P=CUR;
+  const wm=(P.p+' '+P.rule).match(/(\d+)\s*words/); if(wm){ const tg=+wm[1]; if(n>tg*1.25) return "The challenge said about "+tg+" words. You wrote "+n+". The limit is the point: it forces you to choose."; if(n<tg*0.6) return "The challenge said about "+tg+" words. You wrote "+n+", so you've got room for one more real detail."; }
   if(/Three sentences max/i.test(P.rule) && ss.length>3) return "The challenge said three sentences max. You wrote "+ss.length+". Which one could go?";
   if(/three true complaints/.test(P.p) && ss.length<3) return "The challenge asked for three complaints. I count "+ss.length+".";
   if(/five sentences/.test(P.p) && ss.length!==5) return "The challenge said five sentences. You wrote "+ss.length+".";
   return null;
 }
 function showNotes(text){
-  const ss=sentences(text); const P=PROMPTS[pi]; const prev=versions.length>1?versions[versions.length-2]:null;
+  const ss=sentences(text); const P=CUR; const prev=versions.length>1?versions[versions.length-2]:null;
   const b=bestLine(ss); const key=b ? (b.why.find(k=>BEST_WHY[k])||'none') : 'none';
   const iss=issues(text, ss).filter(i=>!(b && i.q && b.s.includes(i.q) && ss.length>1));
   const notes=[];
@@ -925,7 +962,7 @@ function showNotes(text){
 }
 async function aiNotes(text, missionText){
   if(!aiOK) return;
-  const P=PROMPTS[pi], L=LESSONS2[P.lesson], prev=versions.length>1?versions[versions.length-2]:'';
+  const P=CUR, L=LESSONS2[P.lesson], prev=versions.length>1?versions[versions.length-2]:'';
   const box=$('tw-notes'); const wait=document.createElement('p'); wait.className='aiwait'; wait.textContent='The coach is reading it properly…'; box.prepend(wait);
   const r=await askAI({mode:'notes', level:LEVEL, prompt:P.p, rule:P.rule, lesson:L.name+': '+L.why, round, mission:missionText, past_missions:pastMissions.slice(-10), text, previous:prev}, 20000);
   wait.remove(); if(!r || !r.next_mission || versions[versions.length-1]!==text) return;
@@ -945,6 +982,7 @@ $('tw-done').addEventListener('click', ()=>{
   const text=ta.value.trim();
   if(words(text).length<5){ toast("Give it at least a sentence or two. Ugly counts."); ta.focus(); return; }
   versions.push(text); clearInterval(timerId); timerId=null; hideBubble();
+  countProgress();
   $('tw-res-h').textContent = round===1 ? "Here's the why." : "Round "+round+". Here's the why this time.";
   const askedMission = aiMission || (mission?MISSIONS[mission].t:''); usedAiMission=!!aiMission; aiMission=null;
   showNotes(text); renderVersions();
@@ -953,9 +991,14 @@ $('tw-done').addEventListener('click', ()=>{
   $('tw-results').hidden=false; $('tw-notes').hidden=true; $('tw-results').querySelectorAll('.lede').forEach(x=>x.classList.add('res-hide')); $('tw-res-h').textContent='Your versions, side by side';
   showDoneBubble();
 });
+function countProgress(){
+  if(countedThis) return; countedThis=true; leveledUp=0; const g=prog();
+  if(CUR.level===g.max && g.max<5){ g.done++; if(g.done>=UNLOCK){ g.max++; g.done=0; g.lv=g.max; leveledUp=g.max; } }
+  saveProg(); renderPicker();
+}
 function showDoneBubble(){
-  const w=lastWhy||{};
-  showBubble({k:'done', who:(round===1?'Coach · nice one':'Coach · round '+round+' done'), q:w.best?('Best line: \u201c'+w.best+'\u201d'):'Good start.', h:(w.why||'')+(w.mission?' Next time try this: '+w.mission:''), ex:null, go:true}, ta.value.replace(/\s+$/,'').length);
+  const w=lastWhy||{}; const up=leveledUp?('Level up! Level '+leveledUp+' ('+LVN[leveledUp]+') is unlocked. Your next challenge will be a bit harder. '):'';
+  showBubble({k:'done', who:(leveledUp?'Coach · level up!':round===1?'Coach · nice one':'Coach · round '+round+' done'), q:w.best?('Best line: \u201c'+w.best+'\u201d'):'Good start.', h:up+(w.why||'')+(w.mission?' Next time try this: '+w.mission:''), ex:null, go:true}, ta.value.replace(/\s+$/,'').length);
   $('tw-bgo').textContent='Play again with this mission';
 }
 function openWhy(){

@@ -34,6 +34,8 @@ Any piece: one real detail beats three fancy words; show the feeling through the
 
 const LEVELS = {
   everyday: "The writer is an everyday adult writing for fun or work.",
+  kids: "The writer is a child aged 8 to 12. Use very simple, warm, playful words and short sentences. Ask about senses, what happens next, and silly what-ifs. Never mention exams or marks. Keep every idea and example gentle and age-appropriate. Still never write for them.",
+  teens: "The writer is a teenager aged 13 to 15. Plain words, friendly and a little cheeky. You can name simple techniques (simile, dialogue, tension) but always say what they do for the reader. Keep examples age-appropriate. Still never write for them.",
   hsc: "The writer is a NSW HSC English student (Year 11 or 12), likely practising for Module C: The Craft of Writing (imaginative, discursive, persuasive and informative writing, plus reflections on their own choices). Pitch at that level. Use the proper names of techniques (motif, characterisation, juxtaposition, tone, structure, voice) and always explain the effect on the reader, because markers reward purpose and effect. Push for a concrete moment that carries a big idea. Still plain words, still never write for them.",
   uni: "The writer is a university student. Pitch at that level: a clear claim in the topic sentence, evidence followed by analysis of what it means, fair treatment of counter-arguments, signposting, concision, careful hedging, academic tone without padding, and putting ideas in their own words. Never write sentences for them, because academic integrity matters.",
 };

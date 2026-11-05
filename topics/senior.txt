@@ -1,0 +1,200 @@
+funny|1|Describe your study desk as a crime scene.|Two sentences. List the evidence.
+funny|1|Write the most passive-aggressive sticky note for a shared fridge.|One line.
+funny|1|Describe exam season in one sentence using a weather metaphor.|
+funny|1|Write a horoscope for someone who hasn't started their assignment.|Two sentences.
+funny|1|Write a one-line obituary for your motivation.|
+funny|2|Write a nature documentary about Year 12s in their natural habitat.|Short paragraph. The serious voice.
+funny|2|Write a formal apology from your future self to your present self.|Short paragraph.
+funny|2|Write the terms and conditions for borrowing your notes.|Five clauses. The last is unreasonable.
+funny|2|Describe a group assignment as a heist movie.|Short paragraph. Name the roles.
+funny|2|Write a motivational speech delivered by a very tired highlighter.|Short paragraph.
+funny|3|Write a satire of a school newsletter.|About 150 words. Keep the tone perfectly cheerful.
+funny|3|Write a scene where someone tries to explain their essay to a toddler.|About 150 words.
+funny|3|Write a tour of your brain the night before an exam.|About 150 words. Visit three rooms.
+funny|3|Write a funny piece about the gap between expectation and reality at formal.|About 150 words.
+funny|3|Write a product launch for a new pen that "guarantees" good marks.|About 150 words. Mock the hype.
+funny|4|Write a satirical piece about adults asking "What are you doing next year?"|About 200 words.
+funny|4|Write a comedy scene where the deadpan character is the funniest.|About 200 words.
+funny|4|Write a mock-epic about catching the bus.|About 200 words. Treat it like a legend.
+funny|4|Write a funny piece about a family holiday told through the car's GPS.|About 200 words.
+funny|4|Write a satirical guide to being the perfect student.|About 200 words. Every tip backfires.
+funny|5|Write a satire that criticises something serious while staying funny.|About 300 words. Pick a real issue.
+funny|5|Write a humorous piece with a callback that lands in the final line.|About 300 words.
+funny|5|Write a comic monologue that slowly reveals the speaker is the problem.|About 300 words.
+funny|5|Write a funny piece about a sad thing, without making fun of anyone hurting.|About 300 words.
+funny|5|Write a parody of a genre (spy, romance, horror) set in a school library.|About 300 words.
+story|1|Write an opening line that drops us into the middle of an argument.|
+story|1|Write one sentence that tells us a character is lonely without saying it.|
+story|1|Write the first line of a story about a letter that arrives 20 years late.|
+story|1|Write one sentence describing a character through what they're holding.|
+story|1|Write the last line of a story about leaving home.|Make it echo something.
+story|2|Write a paragraph where the setting tells us the mood.|Never name a feeling.
+story|2|Write a character introduction through one habit.|Short paragraph.
+story|2|Open a story with a sound.|Short paragraph. Make us need to know the source.
+story|2|Write a moment of hesitation before a big decision.|Short paragraph. Slow time down.
+story|2|Write the opening of a story set in a place you know well.|Short paragraph. Use local detail.
+story|3|Write a story where one object tells us who a character is.|About 150 words. Never say what they feel.
+story|3|Write a story about two people who once knew each other well.|About 150 words. They meet by chance.
+story|3|Write a story set in a single afternoon that changes a family.|About 150 words.
+story|3|Write a story where the weather mirrors the character's journey.|About 150 words.
+story|3|Write a story with a strong sense of place in rural or coastal Australia, or wherever you live.|About 150 words.
+story|4|Write a story with a motif that appears three times.|About 200 words. It means more each time.
+story|4|Write a story where the climax is a quiet moment.|About 200 words.
+story|4|Write a story with a non-linear structure.|About 200 words. Three time jumps.
+story|4|Write a story inspired by a single line of dialogue: "You kept it?"|About 200 words.
+story|4|Write a story that explores belonging through a small event.|About 200 words.
+story|5|Write an imaginative piece where form matches meaning.|About 400 words. Explain your structure in one line.
+story|5|Write a story that explores a big idea (memory, power, time) through one character.|About 400 words.
+story|5|Write a story with a symbolic ending that the reader has to interpret.|About 400 words.
+story|5|Write a story in second person ("you").|About 400 words. Make the choice of "you" matter.
+story|5|Write a story that uses a frame: a story inside a story.|About 400 words.
+describe|1|Describe the exam hall in one sentence.|Use one sound.
+describe|1|Describe a childhood bedroom in ten words.|
+describe|1|Describe the light at 6am in one sentence.|
+describe|1|Describe an old person's kitchen in two sentences.|
+describe|1|Describe heat in one sentence without using "hot".|
+describe|2|Describe a train carriage at peak hour.|Short paragraph. Pick one person to zoom in on.
+describe|2|Describe a place through what has been left behind.|Short paragraph.
+describe|2|Describe a landscape using a colour palette.|Short paragraph. Three colours only.
+describe|2|Describe waiting for results.|Short paragraph. Body, not feelings.
+describe|2|Describe a sports field after a storm.|Short paragraph.
+describe|3|Describe a setting that reflects a character's grief.|About 150 words. Don't say "grief".
+describe|3|Describe a crowded place from the view of someone invisible.|About 150 words.
+describe|3|Describe a house the night before it's sold.|About 150 words.
+describe|3|Describe a city through its sounds.|About 150 words.
+describe|3|Describe a moment using one extended metaphor.|About 150 words.
+describe|4|Describe a place in two time periods.|About 100 words each. Show what changed and what didn't.
+describe|4|Describe a person through three objects in their car.|About 200 words.
+describe|4|Describe the same scene through two characters' eyes.|About 100 words each.
+describe|4|Describe an ordinary routine so it becomes strange.|About 200 words.
+describe|4|Describe the ocean as a character with a mood.|About 200 words.
+describe|5|Describe a landscape that carries a culture's or a family's history.|About 300 words. Respectfully, with specific detail.
+describe|5|Describe a single photograph so well the reader sees the story behind it.|About 300 words.
+describe|5|Describe a moment of beauty in an ugly place.|About 300 words.
+describe|5|Describe a memory that feels blurred.|About 300 words. Let the style blur too.
+describe|5|Describe a place you've only imagined, with total conviction.|About 300 words.
+real|1|Write one sentence about the moment you knew you'd grown up a little.|
+real|1|Write about a smell that takes you somewhere, in one sentence.|
+real|1|Write one true sentence you'd never say out loud.|
+real|1|Describe your family in three words, then justify one.|
+real|1|Write about your hometown in one sentence.|Make it honest.
+real|2|Write about a moment you felt proud of where you come from.|Short paragraph.
+real|2|Write about a teacher who changed how you think.|Short paragraph. One moment.
+real|2|Write about something you lost.|Short paragraph. Small object, big meaning.
+real|2|Write about a time you were wrong.|Short paragraph. Be honest.
+real|2|Write about your first job or first responsibility.|Short paragraph.
+real|3|Write a personal piece about a turning point.|About 150 words. Show the moment.
+real|3|Write about a family story you've heard many times.|About 150 words. Retell it your way.
+real|3|Write about a place you belong.|About 150 words. Why there?
+real|3|Write about a friendship that ended.|About 150 words. No blaming.
+real|3|Write about a skill you learned the hard way.|About 150 words.
+real|4|Write a personal essay about what success means to you.|About 200 words. Use a story, not a definition.
+real|4|Write about an argument with someone you love.|About 200 words. Be fair to them.
+real|4|Write about how a place shaped who you are.|About 200 words.
+real|4|Write about a moment of kindness you've never forgotten.|About 200 words.
+real|4|Write about the person you were three years ago.|About 200 words.
+real|5|Write a personal essay that starts small and ends with a big idea.|About 400 words.
+real|5|Write about your culture, family or heritage through one ritual.|About 400 words.
+real|5|Write a personal piece about uncertainty about the future.|About 400 words. End without a neat answer.
+real|5|Write about a moment that showed you who you want to be.|About 400 words.
+real|5|Write a piece about home that someone from anywhere would recognise.|About 400 words.
+persuade|1|Write a one-line opening that makes an audience sit up.|
+persuade|1|Write a slogan for a campaign you believe in.|
+persuade|1|Write one sentence arguing that sleep is a study tool.|
+persuade|1|Write a rhetorical question that isn't cheesy.|
+persuade|1|Convince us in two sentences to read more books.|
+persuade|2|Persuade a room of Year 7s that being bored is good for them.|One example from your life. No rhetorical questions.
+persuade|2|Write an opening to a speech about mental health in schools.|Short paragraph.
+persuade|2|Argue for a later school start time.|Short paragraph. Use one statistic you'd look up.
+persuade|2|Write a letter to the editor about a local issue.|Short paragraph.
+persuade|2|Persuade your peers to vote.|Short paragraph. Speak to them, not at them.
+persuade|3|Write a persuasive speech about the value of the arts.|About 150 words. One story, one fact.
+persuade|3|Argue that young people should have more say in politics.|About 150 words.
+persuade|3|Write an opinion piece about fast fashion.|About 150 words.
+persuade|3|Persuade your school to add a new subject.|About 150 words.
+persuade|3|Argue for or against AI in classrooms.|About 150 words. Answer the strongest counter.
+persuade|4|Write a speech using anaphora (a repeated opening phrase).|About 200 words. Make it build.
+persuade|4|Write an opinion column that uses humour to persuade.|About 200 words.
+persuade|4|Argue a position you disagree with as well as you can.|About 200 words.
+persuade|4|Write a persuasive piece about protecting a place you love.|About 200 words.
+persuade|4|Write a speech for a school leadership role.|About 200 words. Avoid clichés.
+persuade|5|Write a persuasive speech for a specific audience on a global issue.|About 400 words. Name the audience.
+persuade|5|Write an op-ed that uses one personal anecdote as the backbone.|About 400 words.
+persuade|5|Write a persuasive piece that concedes a point and still wins.|About 400 words.
+persuade|5|Write a TED-style talk on something ordinary that matters.|About 400 words.
+persuade|5|Write a persuasive piece where the tone shifts from calm to urgent.|About 400 words.
+discursive|1|Write one sentence that opens a discussion without taking a side.|
+discursive|1|Write two sentences: one for and one against homework.|
+discursive|1|Write a question that has no easy answer.|
+discursive|1|Write one sentence that admits something is complicated.|Make it interesting.
+discursive|1|Name a topic people argue about and write both sides in one line each.|
+discursive|2|Explore both sides of banning phones at school.|Short paragraph. Don't pick a side.
+discursive|2|Write a reflective paragraph about whether technology connects or isolates us.|
+discursive|2|Explore what makes a good friend.|Short paragraph. Use two perspectives.
+discursive|2|Discuss whether it's better to be a big fish in a small pond.|Short paragraph.
+discursive|2|Explore whether nostalgia helps or hurts.|Short paragraph.
+discursive|3|Explore both sides of banning phones at school in 150 words.|Don't pick a side. Leave us thinking.
+discursive|3|Write a discursive piece on whether we should always tell the truth.|About 150 words.
+discursive|3|Explore what "home" means to different people.|About 150 words.
+discursive|3|Discuss whether kids today have it easier or harder.|About 150 words.
+discursive|3|Explore whether social media makes us more creative.|About 150 words.
+discursive|4|Write a discursive piece that moves between personal stories and big ideas.|About 200 words.
+discursive|4|Explore the idea of failure from three perspectives.|About 200 words.
+discursive|4|Discuss whether we're too busy.|About 200 words. Use humour.
+discursive|4|Explore whether places hold memories.|About 200 words.
+discursive|4|Write a discursive piece on fear: useful or harmful?|About 200 words.
+discursive|5|Write a discursive piece that ends with a question rather than an answer.|About 400 words.
+discursive|5|Explore the idea of "growing up" through anecdote, reflection and research.|About 400 words.
+discursive|5|Write a discursive piece that blends humour and seriousness.|About 400 words.
+discursive|5|Explore a contested idea (fairness, freedom, success) with nuance.|About 400 words.
+discursive|5|Write a discursive piece structured around one object.|About 400 words.
+reflect|1|Name one choice you made in a recent piece of writing.|One sentence.
+reflect|1|Why did you start your last piece the way you did?|One sentence.
+reflect|1|What's one word you changed in your last draft? Why?|
+reflect|1|Name the technique you used most in your last piece.|One sentence, plus its effect.
+reflect|1|What did you want your reader to feel? One sentence.|
+reflect|2|Write a short reflection on one choice you made in something you wrote.|Name the choice, why, and its effect.
+reflect|2|Reflect on why you chose your narrative voice.|Short paragraph.
+reflect|2|Reflect on how your setting supports your theme.|Short paragraph.
+reflect|2|Reflect on a draft you changed a lot.|Short paragraph. What changed and why?
+reflect|2|Reflect on your ending.|Short paragraph. What does it leave the reader with?
+reflect|3|Write a 100-word reflection on one choice you made in something you've written.|Name it, say why, say what it does.
+reflect|3|Reflect on how a text you studied influenced your writing.|About 150 words. Name the text and the specific influence.
+reflect|3|Reflect on your use of a motif or symbol.|About 150 words.
+reflect|3|Reflect on the audience you wrote for.|About 150 words.
+reflect|3|Reflect on your structure.|About 150 words. Why that order?
+reflect|4|Write a reflection linking your creative piece to a mentor text.|About 200 words.
+reflect|4|Reflect on what you'd change if you rewrote your piece.|About 200 words.
+reflect|4|Reflect on how you used language to shape meaning.|About 200 words. Two techniques with effect.
+reflect|4|Reflect on the purpose of your piece and whether it worked.|About 200 words.
+reflect|4|Reflect on a writing risk you took.|About 200 words.
+reflect|5|Write a full reflection statement on a piece you've written.|About 400 words. Purpose, audience, form, techniques.
+reflect|5|Reflect on how your writing process changed over a term.|About 400 words.
+reflect|5|Reflect on how form and meaning work together in your piece.|About 400 words.
+reflect|5|Reflect critically on your own voice as a writer.|About 400 words.
+reflect|5|Reflect on the decisions behind your title, opening and ending.|About 400 words.
+think|1|Write one sentence from the point of view of a pen during an exam.|
+think|1|What would your school uniform say about the people who wear it?|Two sentences.
+think|1|What would your future self say to you right now?|One sentence.
+think|1|What if marks were given for kindness? One sentence.|
+think|1|What does your bedroom know about you?|Two sentences.
+think|2|Write about exams from the point of view of the exam paper.|Short paragraph.
+think|2|What if you could only speak 100 words a day?|Short paragraph.
+think|2|Write about your suburb from the view of a bird.|Short paragraph.
+think|2|What if every decision you made was voted on by your friends?|Short paragraph.
+think|2|Write about a family dinner from the dog's point of view.|Short paragraph.
+think|3|Write about a world where memories can be sold.|About 150 words.
+think|3|Write about success from the point of view of someone who "failed".|About 150 words.
+think|3|What if the past could be edited like a document?|About 150 words.
+think|3|Write about time as if it were a person.|About 150 words.
+think|3|What if everyone wore a sign showing what they're worried about?|About 150 words.
+think|4|Write a piece that flips a fairy tale's villain into the hero.|About 200 words.
+think|4|Write about a big question (Who am I?) through a tiny moment.|About 200 words.
+think|4|What would an alien learn about us from one school day?|About 200 words.
+think|4|Write about the same event as a news report and as a poem.|About 100 words each.
+think|4|Write about technology from the point of view of the last person without a phone.|About 200 words.
+think|5|Write a piece that challenges something everyone agrees on.|About 400 words.
+think|5|Write about a familiar place as if it's the last time you'll see it.|About 400 words.
+think|5|Write a piece where the reader's opinion of the narrator flips.|About 400 words.
+think|5|Write about what we owe the future.|About 400 words.
+think|5|Write a piece that uses one metaphor to explore an entire life.|About 400 words.

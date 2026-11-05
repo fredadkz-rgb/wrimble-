@@ -1,0 +1,200 @@
+funny|1|Describe your inbox in one sentence.|Make it sound like a disaster movie.
+funny|1|Write three true complaints about Mondays.|Make the third one surprise us.
+funny|1|Write a one-line warning label for yourself before coffee.|
+funny|1|Describe your car as if it's a grumpy old man.|Two sentences.
+funny|1|Write a one-sentence review of your last meeting.|
+funny|2|Describe your worst customer in five sentences.|No adjectives. Show it with what they do.
+funny|2|Write the out-of-office reply you wish you could send.|Short paragraph.
+funny|2|Write a nature documentary about people at a self-checkout.|Short paragraph.
+funny|2|Write instructions for assembling flat-pack furniture, honestly.|Five steps. Step four is crying.
+funny|2|Write a restaurant review of your own cooking.|Short paragraph.
+funny|3|Write a funny piece about a family group chat.|About 150 words. Every member has a type.
+funny|3|Write about the gym like it's a war story.|About 150 words.
+funny|3|Write a funny letter from your houseplant.|About 150 words. It has demands.
+funny|3|Write about a small domestic argument as if it's a court case.|About 150 words.
+funny|3|Write a review of a very ordinary day out, like a travel critic.|About 150 words.
+funny|4|Write a funny piece about getting older.|About 200 words. Specific, not cliché.
+funny|4|Write a comedy scene at a kids' birthday party from the parents' view.|About 200 words.
+funny|4|Write a satirical job ad that's honest about the job.|About 200 words.
+funny|4|Write a funny piece about a holiday that went wrong.|About 200 words. Build in three steps.
+funny|4|Write a funny piece about neighbours.|About 200 words. Exaggerate, then be precise.
+funny|5|Write a humour column on something everyone does but nobody admits.|About 400 words.
+funny|5|Write a funny story with a callback ending.|About 400 words.
+funny|5|Write a comic monologue from someone at their own surprise party.|About 400 words.
+funny|5|Write something funny and moving about a family member.|About 400 words.
+funny|5|Write a satirical piece about modern work culture.|About 400 words.
+story|1|Write the first paragraph of a story that starts at a bus stop.|Something has already gone wrong.
+story|1|Write one sentence about a stranger on a train.|Give them a secret.
+story|1|Write the first line of a story set in a hardware store.|
+story|1|Write the last line of a love story that isn't sad.|
+story|1|Write a story in six words.|
+story|2|Write a story about a phone call at 3am.|Short paragraph.
+story|2|Write a story set in a small-town pub.|Short paragraph. One regular, one stranger.
+story|2|Write about someone returning to their childhood home.|Short paragraph.
+story|2|Write a story about a wrong delivery.|Short paragraph.
+story|2|Tell the story of a scar in 150 words.|Start in the middle of the moment it happened.
+story|3|Write a story about two old friends meeting after 20 years.|About 150 words.
+story|3|Write a story set during a power outage on the hottest night of the year.|About 150 words.
+story|3|Write a story about a secret kept in a family.|About 150 words.
+story|3|Write a story about a job interview that goes strangely.|About 150 words.
+story|3|Write a story about someone who finds a stranger's diary.|About 150 words.
+story|4|Write a story about a marriage told through five meals.|About 250 words.
+story|4|Write a story where the main character's flaw saves the day.|About 250 words.
+story|4|Write a story set in one car on one long drive.|About 250 words.
+story|4|Write a story about a parent and adult child who don't talk about the real thing.|About 250 words.
+story|4|Write a story with a twist the reader could have guessed.|About 250 words.
+story|5|Write a literary short story about regret.|About 500 words.
+story|5|Write a story that covers 50 years in 500 words.|
+story|5|Write a story where the narrator is not who we think.|About 500 words.
+story|5|Write a story with a quiet, unforgettable ending.|About 500 words.
+story|5|Write a story about an ordinary person on the most important day of their life.|About 500 words.
+describe|1|Describe your kitchen to someone who has never seen it.|At least one sound and one smell.
+describe|1|Describe your morning coffee in one sentence.|
+describe|1|Describe your street in ten words.|
+describe|1|Describe a hug from someone you miss.|Two sentences.
+describe|1|Describe the smell of rain on hot concrete.|One sentence.
+describe|2|Describe your workplace at 7am.|Short paragraph.
+describe|2|Describe a supermarket on Christmas Eve.|Short paragraph.
+describe|2|Describe the view from a window you look out of every day.|Short paragraph. Find something new.
+describe|2|Describe your grandparents' house.|Short paragraph.
+describe|2|Describe a long drive at night.|Short paragraph.
+describe|3|Describe a person you love by their hands.|About 150 words.
+describe|3|Describe a place you go to think.|About 150 words.
+describe|3|Describe a city you visited by one street.|About 150 words.
+describe|3|Describe a meal that tastes like childhood.|About 150 words.
+describe|3|Describe the moment a storm breaks.|About 150 words.
+describe|4|Describe a house during a family gathering and after everyone leaves.|About 125 words each.
+describe|4|Describe a place you'll never go back to.|About 250 words.
+describe|4|Describe someone's character through their garden or car.|About 250 words.
+describe|4|Describe an ordinary moment as if it's sacred.|About 250 words.
+describe|4|Describe a landscape that matches a hard time in your life.|About 250 words.
+describe|5|Describe a place so we feel its whole history.|About 400 words.
+describe|5|Describe one minute in great detail.|About 400 words.
+describe|5|Describe a person you've lost through the things they left.|About 400 words.
+describe|5|Describe a city at dawn as it wakes.|About 400 words. Move through it.
+describe|5|Describe a feeling without naming it, through a place.|About 400 words.
+real|1|Write one sentence about the best advice you ever got.|Who gave it?
+real|1|Write about your first car in one sentence.|
+real|1|Write one sentence about a smell from childhood.|
+real|1|What's a small thing that made you happy this week?|Two sentences.
+real|1|Write one sentence about your first job.|
+real|2|Write about a time you got lost.|Short paragraph.
+real|2|Write about a teacher you remember.|Short paragraph. One moment.
+real|2|Write about a meal that meant more than food.|Short paragraph.
+real|2|Write about the house you grew up in.|Short paragraph.
+real|2|Write about a time you were very brave.|Short paragraph.
+real|3|Write about a turning point in your career.|About 150 words.
+real|3|Write about a friendship that faded.|About 150 words.
+real|3|Write about a family recipe and who made it.|About 150 words.
+real|3|Write about a trip that changed you.|About 150 words.
+real|3|Write about something you're still learning.|About 150 words.
+real|4|Write about becoming a parent, carer or someone others rely on.|About 250 words.
+real|4|Write about a decision you're glad you made.|About 250 words.
+real|4|Write about something your parents got right.|About 250 words.
+real|4|Write about a hard conversation.|About 250 words. Fair to both sides.
+real|4|Write about a place that holds your history.|About 250 words.
+real|5|Write a memoir piece about a year you'll never forget.|About 500 words.
+real|5|Write a letter to your younger self.|About 500 words.
+real|5|Write about a person who shaped you, through three scenes.|About 500 words.
+real|5|Write a personal essay about what home means now.|About 500 words.
+real|5|Write about something you've forgiven.|About 500 words.
+persuade|1|Turn down a meeting without sounding like HR.|Kind, clear, you. Three sentences max.
+persuade|1|Write a one-line pitch for your favourite local café.|
+persuade|1|Convince a friend to take a day off.|Two sentences.
+persuade|1|Write a subject line people will actually open.|
+persuade|1|Write one sentence that would make someone try your hobby.|
+persuade|2|Write a short review that makes people want to visit somewhere.|Short paragraph.
+persuade|2|Ask for a pay rise in one paragraph.|Confident, not pushy.
+persuade|2|Write a community notice asking neighbours to help with something.|Short paragraph.
+persuade|2|Write a toast for a friend's birthday.|Short paragraph. One story.
+persuade|2|Convince your family to try a new holiday tradition.|Short paragraph.
+persuade|3|Write a letter to your council about a local issue.|About 150 words.
+persuade|3|Write a short speech for a work event.|About 150 words. No jargon.
+persuade|3|Write a fundraising appeal for a cause you care about.|About 150 words.
+persuade|3|Write a persuasive email to change a process at work.|About 150 words. Lead with the benefit.
+persuade|3|Argue for something unpopular you believe.|About 150 words.
+persuade|4|Write a wedding or farewell speech.|About 250 words. Funny then moving.
+persuade|4|Write an op-ed for your local paper.|About 250 words.
+persuade|4|Write a pitch for a business idea.|About 250 words.
+persuade|4|Write a persuasive piece about a change you'd make in your town.|About 250 words.
+persuade|4|Write a speech that uses one story to make one point.|About 250 words.
+persuade|5|Write a persuasive essay on how we should live.|About 500 words.
+persuade|5|Write a eulogy-style tribute to something that's disappearing.|About 400 words.
+persuade|5|Write a talk to inspire people in your industry.|About 500 words.
+persuade|5|Write an op-ed aimed at people who disagree with you.|About 500 words.
+persuade|5|Write a persuasive letter to a future generation.|About 500 words.
+poem|1|Write a haiku about your commute.|
+poem|1|Write a two-line poem about coffee.|
+poem|1|Write a four-word poem about the weekend.|
+poem|1|Write a one-line poem about your hometown.|
+poem|1|Write a rhyming couplet about doing taxes.|
+poem|2|Write a list poem of things you can't throw away.|Six lines.
+poem|2|Write a short poem about a season where you live.|Four lines.
+poem|2|Write a poem about your hands and the work they do.|Six lines.
+poem|2|Write a poem about a sound you love.|Four lines.
+poem|2|Write a poem about the first coffee of the day.|Six lines.
+poem|3|Write a poem about a family member using three objects.|Eight lines.
+poem|3|Write a poem about a place you used to live.|Eight lines.
+poem|3|Write a poem about work.|Eight lines. Specific details.
+poem|3|Write a poem about time passing.|Eight lines. No clocks.
+poem|3|Write a poem about something small you noticed today.|Eight lines.
+poem|4|Write a poem using one extended metaphor for your life.|Twelve lines.
+poem|4|Write a poem about love without using "love" or "heart".|Twelve lines.
+poem|4|Write a poem about the ocean.|Twelve lines. Find a new angle.
+poem|4|Write a poem with a repeated line.|Twelve lines.
+poem|4|Write a poem about a memory of a grandparent.|Twelve lines.
+poem|5|Write a poem about grief or loss.|Fourteen lines. Tender, precise.
+poem|5|Write a poem about the place you're from.|Fourteen lines.
+poem|5|Write a poem where form matches meaning.|Fourteen lines.
+poem|5|Write a poem about a turning point.|Fourteen lines.
+poem|5|Write a poem in conversation with another poem you love.|Fourteen lines. Your own words.
+dialogue|1|Write one line someone says at a funeral that makes everyone laugh.|
+dialogue|1|Write two lines between a couple choosing a paint colour.|
+dialogue|1|Write a one-line text from a mum that says too much.|
+dialogue|1|Write two lines at a job interview where something's off.|
+dialogue|1|Write a conversation between two strangers in a lift.|Three lines.
+dialogue|2|Write a conversation at a family dinner where someone has news.|Six lines.
+dialogue|2|Write a phone call with a call centre that goes in circles.|Six lines.
+dialogue|2|Write a conversation between neighbours about a fence.|Six lines.
+dialogue|2|Write a chat between two old friends who haven't talked in years.|Six lines.
+dialogue|2|Write a conversation where someone asks for help but won't admit it.|Six lines.
+dialogue|3|Write a conversation between a parent and a teenager in the car.|About 150 words.
+dialogue|3|Write a conversation where someone quits their job.|About 150 words.
+dialogue|3|Write a conversation where two people disagree about a memory.|About 150 words.
+dialogue|3|Write a first date where both people are nervous.|About 150 words.
+dialogue|3|Write a conversation at a hospital bedside.|About 150 words.
+dialogue|4|Write a scene where siblings divide up their parents' things.|About 250 words.
+dialogue|4|Write a conversation where someone lies to protect someone else.|About 250 words.
+dialogue|4|Write a scene where an apology goes wrong.|About 250 words.
+dialogue|4|Write a conversation between a boss and an employee where both are hiding something.|About 250 words.
+dialogue|4|Write a breakup that's kind.|About 250 words.
+dialogue|5|Write a scene where the real conflict is never mentioned.|About 400 words.
+dialogue|5|Write a reunion that's funny, awkward and moving.|About 400 words.
+dialogue|5|Write a conversation that reveals two people's whole history.|About 400 words.
+dialogue|5|Write a scene of three people where alliances shift.|About 400 words.
+dialogue|5|Write a conversation between someone and their older self.|About 400 words.
+think|1|What would your car say about your driving?|One sentence.
+think|1|What would your fridge say about your week?|Two sentences.
+think|1|If your job were a weather pattern, what would it be?|One sentence.
+think|1|What would your dog write in its diary today?|Two sentences.
+think|1|What will your grandkids find weird about how you live?|One sentence.
+think|2|Write about your workplace from the view of the office plant.|Short paragraph.
+think|2|What if everyone had to wear their salary on their shirt?|Short paragraph.
+think|2|Write about your suburb from the view of a possum.|Short paragraph.
+think|2|What if you could only own 50 things?|Short paragraph.
+think|2|Write about your morning from the view of your alarm clock.|Short paragraph.
+think|3|What if you swapped lives with your parent at your age?|About 150 words.
+think|3|Write about an argument from the view of the thing being argued over.|About 150 words.
+think|3|What would happen if nobody could lie for a week?|About 150 words.
+think|3|Write about money as if it were a person you know.|About 150 words.
+think|3|Write about modern life as a museum exhibit in 2200.|About 150 words.
+think|4|Make the case for something everyone hates.|About 250 words.
+think|4|Write the same day as a tragedy and as a comedy.|About 125 words each.
+think|4|Write about what your city would say if it could talk.|About 250 words.
+think|4|What would an alien learn about us from a dinner party?|About 250 words.
+think|4|Write about a big life decision through a small object.|About 250 words.
+think|5|Write about a big idea (fairness, time, home) through one tiny moment.|About 500 words.
+think|5|Argue with yourself about something you believe.|About 500 words. Two voices.
+think|5|Write a piece that makes the reader see an everyday object differently.|About 500 words.
+think|5|Write about what you'd keep if you could only keep one memory.|About 500 words.
+think|5|Write about the world 100 years after we're gone.|About 500 words.

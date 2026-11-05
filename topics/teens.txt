@@ -1,0 +1,210 @@
+funny|1|Write a one-line warning label for your little brother or sister (or any sibling you can imagine).|Make it sound official.
+funny|1|Describe Monday morning in exactly six words.|Make it funny and true.
+funny|1|Write the most dramatic text ever about a missing charger.|Two sentences.
+funny|1|Write a terrible motivational poster.|One line. It should make people want to give up.
+funny|1|Describe the school canteen as a five-star restaurant.|Two sentences. Keep a straight face.
+funny|2|Write a strongly worded complaint to your alarm clock.|Short paragraph. Three crimes it committed.
+funny|2|Write the group chat after someone posts a photo of their cat in a hat.|Six messages. Every person reacts differently.
+funny|2|Your phone gets a mind of its own and starts replying for you.|Short paragraph. One reply goes wrong.
+funny|2|Write a nature documentary voiceover about students before a test.|Use the calm, serious voice.
+funny|2|Write the user manual for a teenager.|Five instructions. Number five is "feed regularly".
+funny|3|Write a scene where someone tries to act cool and fails.|About 120 words. Fail in three stages.
+funny|3|Write an overly serious news report about a missing pencil.|About 120 words. Interview a witness.
+funny|3|Your school gets a new principal: a golden retriever.|About 120 words. Show the first assembly.
+funny|3|Write a review of a sport by someone who has never seen it.|About 120 words. Get everything wrong confidently.
+funny|3|Write about the worst possible way to meet your hero.|About 120 words. End on the most awkward line.
+funny|4|Write a scene where a small lie spirals out of control.|About 180 words. Each lie is bigger than the last.
+funny|4|Write a fake history lesson about the invention of homework.|About 180 words. Name the villain.
+funny|4|Write a family dinner where nobody is listening to anyone.|About 180 words. Everyone's talking about something different.
+funny|4|A superhero's powers are useless in everyday life. Show a normal day.|About 180 words.
+funny|4|Write a speech from the last slice of pizza.|About 180 words. Make it sound like a war movie.
+funny|5|Write a comedy scene where the funniest thing is what nobody says.|About 250 words. Use silence and reactions.
+funny|5|Write a funny piece where the last line flips the whole meaning.|About 250 words. Plant the setup early.
+funny|5|Write a mockumentary interview with a school vending machine.|About 250 words. It has feelings about everyone.
+funny|5|Write a funny story that also makes us a bit sad at the end.|About 250 words.
+funny|5|Take something you genuinely hate and write about it so it's funny.|About 250 words. Exaggerate, then be precise.
+story|1|Write the first line of a story set in a lift that won't stop.|Make us worry.
+story|1|Finish this in one sentence: "Nobody believed me about the lake."|Hint at what happened.
+story|1|Write one sentence about a stranger who knows your name.|Make it creepy, not scary.
+story|1|Write the opening line of a story where the power goes out.|Start mid-moment.
+story|1|Write the last line of a story about a long trip.|Make it feel like coming home.
+story|2|Someone leaves an anonymous note in your locker.|Short paragraph. What does it say? What do you do?
+story|2|Write about the night the whole town lost Wi-Fi.|Short paragraph. Focus on one family.
+story|2|A new kid arrives who seems to know the future.|Short paragraph. Show one small prediction.
+story|2|Write a story that starts at the bottom of a pool.|Short paragraph. Why are they there?
+story|2|Write about someone finding an old phone with messages from the future.|Short paragraph.
+story|3|Write a story about a road trip where the car breaks down.|About 120 words. Show who's annoyed and who's thrilled.
+story|3|Write about a character who must keep a secret for one day.|About 120 words. Make it hard.
+story|3|Write a story set during a bushfire, flood or storm.|About 120 words. Focus on one small detail.
+story|3|Two strangers are stuck at a train station overnight.|About 120 words. One of them is lying.
+story|3|Write a story where someone hears their name called in an empty house.|About 120 words. Build tension slowly.
+story|4|Write a story about the last day of primary school, from a grown-up looking back.|About 180 words.
+story|4|Write a story told in three text messages, one diary entry and one note.|About 180 words total.
+story|4|Write a story where the main character wants something they shouldn't.|About 180 words. Show the push and pull.
+story|4|Write a story about a sport final where the hero loses.|About 180 words. Make the loss feel like a win.
+story|4|Write a story where an object passes from person to person.|About 180 words. Three owners.
+story|5|Write a story where the reader knows something the character doesn't.|About 250 words. Build dramatic irony.
+story|5|Write a story with an unreliable narrator.|About 250 words. Let small details give them away.
+story|5|Write a story that starts at the end and goes backwards.|About 250 words. Five short scenes.
+story|5|Write a story about a decision, then the same story if they chose the other way.|About 125 words each.
+story|5|Write a story where the setting is basically a character.|About 250 words. The place affects everything.
+describe|1|Describe the sound of a school bell in one sentence.|Make it sound like something else.
+describe|1|Describe your phone screen at 2am.|Two sentences.
+describe|1|Describe the smell of a new book or new shoes.|One sentence. Be exact.
+describe|1|Describe your bedroom floor in one sentence.|Be honest.
+describe|1|Describe a crowded bus in exactly ten words.|
+describe|2|Describe a summer afternoon where nothing happens.|Short paragraph. Make nothing interesting.
+describe|2|Describe a concert or crowd from the very back.|Short paragraph. Use sound and touch.
+describe|2|Describe a hospital waiting room.|Short paragraph. Show the waiting.
+describe|2|Describe a fast food restaurant at midnight.|Short paragraph. One person tells us the mood.
+describe|2|Describe the walk to school without using "I".|Short paragraph.
+describe|3|Describe someone you know by how they move.|About 120 words. No face, no clothes.
+describe|3|Describe a city from the window of a plane landing.|About 120 words. Things getting closer.
+describe|3|Describe an empty classroom after everyone has left.|About 120 words. What's left behind?
+describe|3|Describe a storm rolling in over the ocean.|About 120 words. Slow it down.
+describe|3|Describe a family party from under the table.|About 120 words. Feet, voices and crumbs.
+describe|4|Describe a place you loved as a kid that has changed.|About 180 words. Then and now.
+describe|4|Describe a character's room so we can guess their biggest secret.|About 180 words.
+describe|4|Describe a meal that someone cooked with love.|About 180 words. Show the love, don't say it.
+describe|4|Describe a feeling of nerves as a place you're walking through.|About 180 words.
+describe|4|Describe the same beach for a happy person and a heartbroken one.|About 90 words each.
+describe|5|Describe a place so a reader can feel its history.|About 250 words. Use three old details.
+describe|5|Describe a person's hands and let us know their whole life.|About 250 words.
+describe|5|Describe a moment that lasts one second in 250 words.|Every sense, in slow motion.
+describe|5|Describe a city that only exists in your head.|About 250 words. Give it a smell, a rule and a problem.
+describe|5|Describe silence.|About 250 words. Make the quiet loud.
+real|1|Write one sentence about the most embarrassing moment of your year.|Keep it honest, keep it light.
+real|1|What's a song that takes you back somewhere? Two sentences.|Say where.
+real|1|Write about something you believed as a kid that wasn't true.|Two sentences.
+real|1|Write about your favourite hour of the day.|Two sentences. Why that hour?
+real|1|Write one sentence about something you're looking forward to.|Be specific.
+real|2|Write about a time you stood up for yourself.|Short paragraph. Show what you said.
+real|2|Write about the best day of your last holiday.|Short paragraph. One sound, one smell.
+real|2|Write about a friend who changed your life a little.|Short paragraph. One moment.
+real|2|Write about something you collect or used to collect.|Short paragraph. Why did you start?
+real|2|Write about a time you felt totally out of place.|Short paragraph. Where were you?
+real|3|Write about a time you failed at something.|About 120 words. What did it teach you?
+real|3|Write about a rule at home you think is unfair.|About 120 words. Be fair to the other side too.
+real|3|Write about a moment you realised you'd grown up a bit.|About 120 words.
+real|3|Write about the hardest goodbye you've said.|About 120 words. Show it with one detail.
+real|3|Write about something you made that you're proud of.|About 120 words. How did you make it?
+real|4|Write about a day you'll never forget, good or bad.|About 180 words. Start in the middle of it.
+real|4|Write about a person you've misjudged.|About 180 words. What changed your mind?
+real|4|Write about where your family comes from.|About 180 words. Use one family saying.
+real|4|Write about a habit you're trying to break.|About 180 words. Make it honest and a bit funny.
+real|4|Write about a time you were really brave and nobody noticed.|About 180 words.
+real|5|Write about a turning point in your life so far.|About 250 words. Before, the moment, after.
+real|5|Write about a place that feels like home and explain why.|About 250 words. Three senses.
+real|5|Write about something you used to love and grew out of.|About 250 words. Don't be too hard on younger you.
+real|5|Write a letter to someone you've never thanked properly.|About 250 words. Be specific.
+real|5|Write about who you are, using five objects you own.|About 50 words per object.
+persuade|1|Convince us your favourite snack is the best ever.|Two sentences. Be dramatic.
+persuade|1|Write a slogan for a school with no homework.|One line.
+persuade|1|Why should teens get to sleep in? One reason, one sentence.|Make it hard to argue with.
+persuade|1|Convince a friend to come to a movie they don't want to see.|Two sentences.
+persuade|1|Sell us a pencil in one sentence.|Make it sound life-changing.
+persuade|2|Write an ad for a club you'd love to start at school.|Short paragraph.
+persuade|2|Should there be a four-day school week?|Short paragraph. Pick a side.
+persuade|2|Persuade your parents to let you go to a party.|Three reasons. Answer one worry.
+persuade|2|Write a review telling people to watch your favourite show.|No spoilers.
+persuade|2|Convince the canteen to sell a new food.|Short paragraph. Mention price.
+persuade|3|Should phones be banned in class? Write your argument.|About 120 words. One fact, one story.
+persuade|3|Write a speech to convince your year group to recycle more.|About 120 words. Start with something surprising.
+persuade|3|Argue for or against school uniforms.|About 120 words. Answer the other side.
+persuade|3|Persuade someone older that social media isn't all bad.|About 120 words. Be fair.
+persuade|3|Should voting start at 16? Argue your view.|About 120 words.
+persuade|4|Write a speech for a school assembly about kindness online.|About 180 words. No preaching.
+persuade|4|Argue that video games can teach real skills.|About 180 words. Give two examples.
+persuade|4|Write a letter to your local MP about something in your area.|About 180 words. Ask for one clear thing.
+persuade|4|Argue that teens should help design school.|About 180 words. Use one rhetorical device.
+persuade|4|Should homework be banned? Argue the side you don't agree with.|About 180 words.
+persuade|5|Write a persuasive speech about climate action aimed at adults.|About 250 words. Use one story and one number.
+persuade|5|Argue that failure is more useful than success.|About 250 words. Use a personal example.
+persuade|5|Write an opinion piece about how adults talk about teenagers.|About 250 words.
+persuade|5|Convince a sceptical reader that reading fiction makes you smarter.|About 250 words.
+persuade|5|Write a speech where you change your audience's mind halfway through.|About 250 words.
+poem|1|Write a two-line poem about Wi-Fi.|Make it rhyme.
+poem|1|Write a haiku about a school day (5, 7, 5 syllables).|
+poem|1|Write a poem in one sentence about the last day of term.|
+poem|1|Write a four-word poem about the ocean.|Each word a new image.
+poem|1|Write a one-line poem about your shoes.|Use a comparison.
+poem|2|Write a poem about a city at night, four lines.|Use light and sound.
+poem|2|Write a list poem called "Things I Know for Sure".|Six lines, mix silly and serious.
+poem|2|Write a poem about your morning routine.|Four lines. Make it sound like a battle.
+poem|2|Write a poem about the colour of a feeling.|Four lines.
+poem|2|Write a poem that's a text message conversation.|Four to six lines.
+poem|3|Write a poem about a family member using only objects.|Eight lines.
+poem|3|Write a poem about change, set in one season.|Eight lines.
+poem|3|Write a poem where each line is a question.|Six lines.
+poem|3|Write a poem in the voice of an old building.|Eight lines.
+poem|3|Write a poem about a fear, but make it beautiful.|Eight lines.
+poem|4|Write a poem about growing up where the last line twists it.|Ten lines.
+poem|4|Write a poem using one extended metaphor.|Compare your life to something and keep going.
+poem|4|Write a poem about something tiny that means everything.|Ten lines. No "love".
+poem|4|Write a poem about your town for someone who's never been.|Ten lines.
+poem|4|Write a poem in two halves: day and night.|Five lines each.
+poem|5|Write a poem about identity, where you are many things at once.|Twelve lines.
+poem|5|Write a poem with a repeated line that changes meaning by the end.|Twelve lines.
+poem|5|Write a poem about the internet without using any tech words.|Twelve lines.
+poem|5|Write a poem about a memory you're not sure really happened.|Twelve lines.
+poem|5|Write a protest poem about something you care about.|Twelve lines. Make it sound, not preach.
+dialogue|1|Write two lines between a teen and their phone at 3% battery.|
+dialogue|1|Your mum asks "How was school?" Write a reply that says more than "fine".|One line.
+dialogue|1|Two seagulls argue over a chip. Write two lines.|
+dialogue|1|Write the shortest breakup between two friends over who gets the front seat.|Three lines.
+dialogue|1|Write one line someone says that ends a friendship.|
+dialogue|2|Write a conversation between two people stuck in a lift.|Six lines. One is very calm, one is not.
+dialogue|2|A teen tries to explain a meme to their dad.|Six lines.
+dialogue|2|Two friends plan a surprise and disagree on everything.|Six lines.
+dialogue|2|Write a job interview for the role of family pet.|Six lines.
+dialogue|2|Write a conversation where someone is clearly lying.|Six lines. Show the clues.
+dialogue|3|Two friends talk after one of them didn't get invited to a party.|About 120 words.
+dialogue|3|A teen asks a parent for something big.|About 120 words. The parent says no in a sneaky way.
+dialogue|3|Write a conversation between a teenager and their 80-year-old self.|About 120 words.
+dialogue|3|Two strangers talk at a bus stop and realise they're connected.|About 120 words.
+dialogue|3|Write an argument where both people are partly right.|About 120 words.
+dialogue|4|Write a conversation where someone gets bad news.|About 180 words. Don't let them cry or yell.
+dialogue|4|Write a scene where two people pretend everything's fine.|About 180 words. Show the cracks.
+dialogue|4|Write a conversation between a coach and an athlete before a final.|About 180 words.
+dialogue|4|Two siblings clean out a grandparent's room.|About 180 words. Use an object they both want.
+dialogue|4|Write a phone call where we only hear one side.|About 180 words. We should guess the other.
+dialogue|5|Write a scene where the real conversation happens under the words.|About 250 words. Subtext only.
+dialogue|5|Write a conversation that's funny at first and serious by the end.|About 250 words.
+dialogue|5|Write a scene where someone says goodbye without saying it.|About 250 words.
+dialogue|5|Write an argument where the person who's losing actually wins.|About 250 words.
+dialogue|5|Write a three-person conversation where each person wants something different.|About 250 words.
+think|1|What would your phone say about you if it could talk?|Two sentences.
+think|1|If your life had a soundtrack, what plays when you walk into school?|One sentence.
+think|1|What would a pigeon think about your city?|Two sentences.
+think|1|What would the last tree on earth say?|One sentence.
+think|1|Describe your day as a weather forecast.|Two sentences.
+think|2|Write about school from the point of view of the building.|Short paragraph.
+think|2|What if everyone could see each other's thoughts as subtitles?|Short paragraph. One awkward moment.
+think|2|Write about a party from the view of the person who didn't go.|Short paragraph.
+think|2|What if you had to swap lives with your pet for a week?|Short paragraph.
+think|2|Write about the same rainy day from a farmer and a kid on holiday.|Two short paragraphs.
+think|3|What would happen if money disappeared overnight?|About 120 words. One street, one morning.
+think|3|Write about your country from the view of someone visiting for the first time.|About 120 words.
+think|3|What would the world be like if nobody could forget anything?|About 120 words.
+think|3|Write about an argument from the view of the thing being argued over.|About 120 words.
+think|3|What if a social media app could only show one post a day?|About 120 words.
+think|4|Write about a villain who thinks they're the hero.|About 180 words. Let us understand them.
+think|4|What if your school was run by the students for a year?|About 180 words. One good change, one disaster.
+think|4|Write about the future from the point of view of a robot looking back at us.|About 180 words.
+think|4|Make the case for something everyone hates (Mondays, spiders, rain).|About 180 words.
+think|4|Write the same breakfast as a horror, a comedy and a romance.|About 60 words each.
+think|5|Write about a big world problem through one tiny moment.|About 250 words.
+think|5|Argue with yourself about something you believe.|About 250 words. Two voices.
+think|5|Write about a common thing as if you're an alien anthropologist.|About 250 words.
+think|5|What would you lose if you got everything you wanted?|About 250 words.
+think|5|Write about the same event from the past, present and future.|About 80 words each.
+funny|1|Write a one-line excuse for being late that's too creative.|
+funny|1|Describe your school bag as a haunted house.|Two sentences.
+story|1|Write the first line of a story set at a sleepover.|Something is off.
+describe|1|Describe the sound of a can of soft drink opening.|One sentence. Make us thirsty.
+real|1|Write one sentence about your favourite place to be alone.|
+think|1|What would a vending machine think about your school?|Two sentences.
+poem|1|Write a haiku about the bus home.|
+dialogue|1|Write two lines between a cat and the vacuum cleaner.|
+persuade|1|Convince your teacher to hold class outside today.|Two sentences.
+think|1|If your shadow could talk, what would it complain about?|One sentence.
