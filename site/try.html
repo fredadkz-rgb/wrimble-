@@ -13,6 +13,10 @@
 .tib .tibfb.ok{border-left-color:#2e7d32}.tib .tibfb.part{border-left-color:#c79100}
 .tib .tibmodel{margin-top:10px;font-size:.93rem}
 body.solomode .tib{display:none!important}
+.tib .tibline{margin:0 0 6px}.tib .tibsoft{color:var(--ink-soft);font-size:.88rem;margin:0}
+.tib .tibtick{display:inline-block;padding:2px 10px;border-radius:99px;background:#e5f4e4;color:#1b5e20;font:700 .78rem/1.6 system-ui,sans-serif}
+.tib .tibname{display:block;font-size:1.15rem;margin:8px 0 4px}.tib .tibdone p{margin:6px 0}.tib .tibcount{font-size:.82rem;color:var(--ink-soft)}
+
 </style>
 <title>Try a Wrimble</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -532,8 +536,8 @@ body.solomode #tw-words,body.solomode #tw-tip,body.solomode #tw-stuck,body.solom
         <h4 id="tw-tibh"></h4>
         <p id="tw-tibq" style="margin:0"></p>
         <textarea id="tw-tiba" placeholder="Explain it like you're telling a mate. Your own words, no wrong answers."></textarea>
-        <div class="tibrow"><button class="btn sm" id="tw-tibgo" type="button">Check my understanding</button><button class="btn sm alt" id="tw-tibshow" type="button" hidden>How a writer explains it</button><button class="btn sm alt" id="tw-tibskip" type="button">Skip for now</button></div>
         <div class="tibfb" id="tw-tibfb" hidden></div>
+        <div class="tibrow"><button class="btn sm" id="tw-tibgo" type="button">Check my understanding</button><button class="btn sm alt" id="tw-tibshow" type="button" hidden>How a writer explains it</button><button class="btn sm alt" id="tw-tibskip" type="button">Skip for now</button></div>
         <p class="tibmodel" id="tw-tibm" hidden></p>
       </div>
       <div class="row2" style="margin-top:20px">
@@ -1056,31 +1060,49 @@ function setupTeach(k){
   tibKey=k; tibTries=0;
   $('tw-tibh').textContent='Today’s technique: '+T[0];
   $('tw-tibq').textContent=T[1]+' Explain it in your own words before you play again.';
-  $('tw-tiba').value=''; $('tw-tibfb').hidden=true; $('tw-tibm').hidden=true; $('tw-tibshow').hidden=true; $('tw-tibgo').disabled=false;
+  $('tw-tiba').value=''; $('tw-tiba').hidden=false; $('tw-tibgo').hidden=false; $('tw-tibgo').textContent='Check my understanding'; $('tw-tibskip').hidden=false; $('tw-tibq').hidden=false; $('tw-tibfb').hidden=true; $('tw-tibm').hidden=true; $('tw-tibshow').hidden=true; $('tw-tibgo').disabled=false;
   box.hidden=false;
 }
 function tibShowModel(){ const T=TEACH[tibKey]; $('tw-tibm').innerHTML='<b>How a writer explains it:</b> '+esc(T[3])+'<br><b>Break it when:</b> '+esc(T[5]); $('tw-tibm').hidden=false; $('tw-tibshow').hidden=true; }
 function tibFeedback(cls, html){ const f=$('tw-tibfb'); f.className='tibfb '+cls; f.innerHTML=html; f.hidden=false; }
+function tibResult(verdict, got, missing){
+  const T=TEACH[tibKey];
+  if(verdict==='got_it'){
+    const t=lsTaught(); if(!t.includes(tibKey)){ t.push(tibKey); try{ localStorage.setItem('wrimble-taught', JSON.stringify(t)); }catch(e){} }
+    $('tw-tiba').hidden=true; $('tw-tibgo').hidden=true; $('tw-tibskip').hidden=true; $('tw-tibq').hidden=true;
+    tibFeedback('ok','<div class="tibdone"><span class="tibtick">✓ Technique understood</span><b class="tibname">'+esc(T[0])+'</b>'
+      +'<p>'+esc(got)+'</p>'
+      +'<p class="tibstretch"><b>Stretch:</b> '+esc(missing||'When might breaking this rule work better?')+'</p>'
+      +'<p class="tibnext"><b>Next challenge:</b> use this technique on your own, in a different story.</p>'
+      +'<div class="tibrow"><button class="btn sm" type="button" id="tw-tibnew">Give me a different story</button></div>'
+      +'<p class="tibcount">Techniques you’ve understood: '+lsTaught().length+' of '+Object.keys(TEACH).length+'</p></div>');
+    $('tw-tibnew').addEventListener('click', ()=>{ const k=tibKey; setPrompt(randPrompt(pi)); resetAll(); mission=k; $('tw-label').textContent='Round 1 · use it on your own: '+MISSIONS[k].t; ta.focus(); window.scrollTo({top: ta.getBoundingClientRect().top + scrollY - 140, behavior:'auto'}); });
+    $('tw-tibshow').hidden=false;
+  } else {
+    tibFeedback(verdict==='partly'?'part':'',
+      '<p class="tibline"><b>What you’ve got:</b> '+esc(got||'You’ve started thinking about it. That counts.')+'</p>'
+      +'<p class="tibline"><b>What’s missing:</b> '+esc(missing)+'</p>'
+      +'<p class="tibline tibsoft">Add to your answer above and try again.</p>');
+    $('tw-tibgo').textContent='Try again'; $('tw-tibshow').hidden = tibTries<2;
+    $('tw-tiba').focus();
+  }
+}
 $('tw-tibgo').addEventListener('click', async ()=>{
   const T=TEACH[tibKey]; const a=$('tw-tiba').value.trim(); if(!T) return;
   if(words(a).length<6){ tibFeedback('part','Give it a sentence or two. Pretend you’re explaining it to a friend who missed the lesson.'); return; }
   tibTries++;
-  const hit=T[2].filter(([re])=>re.test(a)), miss=T[2].filter(([re])=>!re.test(a));
-  if(hit.length===T[2].length) tibFeedback('ok','<b>You’ve got it.</b> You explained that '+esc(hit.map(h=>h[1].trim()).join(' and '))+'. Now stretch it: when might breaking this rule work better?');
-  else if(hit.length) tibFeedback('part','<b>Halfway there.</b> You explained that '+esc(hit[0][1].trim())+'. One more thing to think about: '+esc(T[4]));
-  else tibFeedback('','<b>Not quite yet, and that’s fine.</b> Think about this: '+esc(T[4])+' Then have another go.');
-  $('tw-tibshow').hidden = hit.length===T[2].length ? false : tibTries<2;
-  if(hit.length===T[2].length){ const t=lsTaught(); if(!t.includes(tibKey)){ t.push(tibKey); try{ localStorage.setItem('wrimble-taught', JSON.stringify(t)); }catch(e){} } }
+  const k=tibKey, ans=a;
   if(aiOK){
-    const k=tibKey, ans=a; $('tw-tibgo').disabled=true;
+    $('tw-tibgo').disabled=true; tibFeedback('','The coach is reading your explanation…');
     const r=await askAI({mode:'teach', level:LEVEL, technique:T[0], question:T[1], answer:ans, text:ans}, 8000);
     $('tw-tibgo').disabled=false;
-    if(r && r.verdict && k===tibKey && $('tw-tiba').value.trim()===ans){
-      const head={got_it:'<b>You’ve got it.</b> ',partly:'<b>Halfway there.</b> ',not_yet:'<b>Not quite yet, and that’s fine.</b> '}[r.verdict]||'';
-      tibFeedback(r.verdict==='got_it'?'ok':r.verdict==='partly'?'part':'', head+(r.got_right?esc(r.got_right)+' ':'')+esc(r.nudge||''));
-      $('tw-tibshow').hidden = r.verdict==='got_it' ? false : tibTries<2;
-    }
+    if(k!==tibKey) return;
+    if(r && r.verdict){ tibResult(r.verdict, r.got_right, r.nudge); return; }
   }
+  const hit=T[2].filter(([re])=>re.test(ans));
+  const got=hit.length ? 'You explained that '+hit.map(h=>h[1].trim()).join(' and ')+'.' : '';
+  const verdict = hit.length===T[2].length ? 'got_it' : hit.length ? 'partly' : 'not_yet';
+  tibResult(verdict, got, verdict==='got_it' ? 'When might breaking this rule work better? Think of one, then tap “How a writer explains it” to compare.' : T[4]);
 });
 $('tw-tibshow').addEventListener('click', tibShowModel);
 $('tw-tibskip').addEventListener('click', ()=>{ $('tw-tib').hidden=true; });
