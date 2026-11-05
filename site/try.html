@@ -286,6 +286,19 @@ footer small{color:var(--ink-soft)}
 .lessonmini .ex2{margin-top:10px;display:grid;gap:8px}
 .lessonmini .ex2 p{padding:10px 12px;border-radius:6px;border:2px solid var(--rule);font-size:.95rem}
 .lessonmini .ex2 .w{border-color:var(--good)}
+.wordbox{margin-top:12px;border:2px dashed var(--ink);border-radius:8px;padding:12px 14px;background:var(--paper-2)}
+.wordbox .wtop{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.wordbox .wh{font-weight:700;font-size:.95rem}
+.wordbox .wh q{font-family:var(--font-display);quotes:"“" "”"}
+.wordbox form{display:flex;gap:6px}
+.wordbox input{font:inherit;font-size:.9rem;padding:6px 10px;border:2px solid var(--ink);border-radius:999px;background:var(--card);color:var(--ink);width:150px}
+.wchips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.wchips button{font:inherit;font-size:.92rem;font-weight:700;padding:5px 12px;border-radius:999px;border:2px solid var(--ink);background:var(--card);color:var(--ink);cursor:pointer}
+.wchips button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.wmean{margin-top:8px;font-size:.95rem;line-height:1.45}
+.wmean b{font-family:var(--font-display)}
+.wmean .wnote{display:block;margin-top:4px;font-size:.85rem;color:var(--ink-soft)}
+.wordbox .whint{margin-top:6px;font-size:.85rem;color:var(--ink-soft)}
 .edwrap{position:relative}
 .bubble{position:absolute;z-index:5;max-width:min(340px,calc(100% - 16px));background:var(--ink);color:var(--paper);border-radius:10px;padding:12px 34px 12px 14px;box-shadow:4px 4px 0 var(--pencil);animation:pop .22s ease-out}
 .bubble::before{content:"";position:absolute;top:-8px;left:var(--tip,18px);border:8px solid transparent;border-top:0;border-bottom-color:var(--ink)}
@@ -360,6 +373,14 @@ footer small{color:var(--ink-soft)}
               <p class="be" id="tw-be"></p>
               <button class="btn sm pencil" id="tw-bgo" type="button" hidden style="margin-top:10px">See the why ↓</button>
             </div>
+          </div>
+          <div class="wordbox" id="tw-words" aria-live="polite">
+            <div class="wtop">
+              <p class="wh" id="tw-wh">Word ideas show up here as you type. Double-click any word in your writing to look it up.</p>
+              <form id="tw-wform" role="search"><label class="sr" for="tw-wq" style="position:absolute;left:-9999px">Look up a word</label><input id="tw-wq" placeholder="Look up a word" autocomplete="off"><button class="btn sm alt" type="submit">Look up</button></form>
+            </div>
+            <div class="wchips" id="tw-wchips"></div>
+            <p class="wmean" id="tw-wmean" hidden></p>
           </div>
           <label class="coachtoggle"><input type="checkbox" id="tw-coach" checked> Coach walks along with me (questions, ideas, examples)</label>
           <div class="edbar">
@@ -820,6 +841,52 @@ $('tw-again').addEventListener('click', ()=>{
   $('tw-label').textContent='Round '+round+' \u00b7 your mission: '+(aiMission||(mission?MISSIONS[mission].t:'try it a new way.'));
   ta.focus(); window.scrollTo({top: ta.getBoundingClientRect().top + scrollY - 140, behavior:'auto'});
 });
+
+/* ---------- Word ideas (thesaurus + meanings). Suggests options, never types them in. ---------- */
+const WORDS = {"said": [["whispered", "said very quietly, so only one person hears"], ["muttered", "said quietly and grumpily, half to yourself"], ["snapped", "said quickly and sharply, because you're annoyed"], ["blurted", "said suddenly, before you could stop yourself"], ["mumbled", "said unclearly, with your mouth half shut"], ["yelled", "said very loudly, often from far away or in anger"]], "walked": [["strolled", "walked slowly and relaxed, in no hurry"], ["trudged", "walked heavily and slowly, like you're tired or sad"], ["stomped", "walked with hard, loud steps, usually angry"], ["crept", "walked slowly and quietly so no one notices"], ["wandered", "walked with no plan or destination"], ["marched", "walked with strong, steady steps, like you mean business"]], "ran": [["sprinted", "ran as fast as you possibly can, for a short way"], ["dashed", "ran quickly for a short distance, in a hurry"], ["bolted", "ran off suddenly, often because you're scared"], ["jogged", "ran slowly and steadily"], ["scrambled", "moved fast and messily, using hands too"]], "looked": [["glanced", "looked quickly, for a second"], ["stared", "looked for a long time without looking away"], ["peered", "looked closely, like it's hard to see"], ["glared", "looked at someone angrily"], ["squinted", "looked with your eyes half closed, against light or to see better"]], "went": [["headed", "went towards somewhere on purpose"], ["rushed", "went quickly because you're short on time"], ["slipped", "went somewhere quietly, without being noticed"], ["drove", "went there by car"], ["wandered", "went with no clear plan"]], "got": [["grabbed", "took it quickly"], ["earned", "got it because you worked for it"], ["received", "was given it"], ["became", "changed into (got angry = became angry)"], ["caught", "got hold of it, or got sick with it"]], "nice": [["kind", "caring and good to other people"], ["cosy", "warm, small and comfortable"], ["friendly", "easy to talk to and welcoming"], ["delicious", "tastes really good"], ["peaceful", "calm and quiet"]], "good": [["brilliant", "really clever or really excellent"], ["useful", "helps you do something"], ["tasty", "has a lot of good flavour"], ["skilled", "able to do it well because of practice"], ["honest", "tells the truth"]], "bad": [["awful", "very unpleasant"], ["rotten", "gone off, or mean and nasty"], ["clumsy", "not careful, likely to break or drop things"], ["harmful", "causes damage or hurt"], ["disappointing", "not as good as you hoped"]], "big": [["huge", "very, very big"], ["towering", "very tall, looks down on you"], ["bulky", "big and awkward to carry"], ["vast", "wide and stretching a long way"], ["massive", "big and heavy"]], "small": [["tiny", "very, very small"], ["cramped", "too small for what's in it"], ["narrow", "not very wide"], ["pocket-sized", "small enough to fit in a pocket"], ["slight", "small and thin, or not much"]], "happy": [["stoked", "really pleased (Aussie slang)"], ["relieved", "happy because something bad didn't happen"], ["proud", "happy about something you did"], ["cheerful", "happy in a bright, chatty way"], ["content", "quietly happy with what you have"]], "sad": [["gutted", "really disappointed (Aussie slang)"], ["lonely", "sad because you're on your own"], ["homesick", "sad because you miss home"], ["heartbroken", "very sad, usually about love or loss"], ["glum", "quiet and a bit down"]], "angry": [["furious", "very, very angry"], ["annoyed", "a bit angry, irritated"], ["fuming", "so angry you're almost steaming"], ["cranky", "grumpy and easy to upset"], ["livid", "extremely angry, pale with it"]], "scared": [["terrified", "extremely scared"], ["nervous", "worried about something about to happen"], ["jumpy", "easily startled"], ["uneasy", "a little worried, something feels wrong"], ["petrified", "so scared you can't move"]], "funny": [["hilarious", "so funny you can't stop laughing"], ["cheeky", "a bit rude in a fun way"], ["silly", "funny in a childish, goofy way"], ["witty", "funny in a clever way with words"], ["ridiculous", "so silly it's hard to believe"]], "amazing": [["incredible", "hard to believe"], ["stunning", "so beautiful it surprises you"], ["unforgettable", "you'll remember it forever"], ["thrilling", "exciting in a heart-racing way"], ["impressive", "makes you admire it"]], "beautiful": [["gorgeous", "very beautiful"], ["glowing", "bright and warm-looking"], ["elegant", "stylish and graceful"], ["striking", "beautiful in a way that grabs your eye"], ["delicate", "fine and easily broken"]], "interesting": [["fascinating", "so interesting you can't look away"], ["strange", "unusual, a bit odd"], ["surprising", "not what you expected"], ["curious", "makes you want to know more"], ["unusual", "not common"]], "loud": [["deafening", "so loud you can't hear anything else"], ["booming", "loud and deep"], ["shrill", "loud and high-pitched, hurts your ears"], ["rowdy", "noisy and out of control (people)"], ["thunderous", "loud like thunder"]], "quiet": [["silent", "no sound at all"], ["hushed", "quiet on purpose, like in a library"], ["muffled", "sound blocked, hard to hear"], ["still", "calm and not moving"], ["soft", "gentle and low"]], "cold": [["freezing", "very cold"], ["chilly", "a bit cold"], ["icy", "cold like ice, or unfriendly"], ["frosty", "covered in frost, or unfriendly"], ["bitter", "cold that really bites"]], "hot": [["boiling", "very hot"], ["scorching", "hot enough to burn"], ["muggy", "hot and sticky, damp air"], ["sweltering", "so hot you're sweating"], ["toasty", "warm in a nice way"]], "fast": [["speedy", "quick"], ["rapid", "happening very quickly"], ["swift", "quick and smooth"], ["hurried", "done fast because of no time"], ["sudden", "happening quickly with no warning"]], "slow": [["sluggish", "slow and low on energy"], ["gradual", "happening a little at a time"], ["leisurely", "slow and relaxed, on purpose"], ["dawdling", "slow because you're wasting time"], ["crawling", "moving very slowly"]], "ate": [["gobbled", "ate fast and greedily"], ["nibbled", "ate in small bites"], ["munched", "ate noisily and steadily"], ["devoured", "ate all of it hungrily"], ["picked at", "ate a little, without wanting to"]], "laughed": [["giggled", "laughed in a light, silly way"], ["snorted", "laughed with a noise through your nose"], ["chuckled", "laughed quietly"], ["cackled", "laughed loudly, a bit wickedly"], ["cracked up", "started laughing hard"]], "cried": [["sobbed", "cried loudly with big breaths"], ["wept", "cried, often quietly and for a while"], ["sniffled", "cried a little, with a runny nose"], ["teared up", "eyes filled with tears"], ["bawled", "cried very loudly"]], "thing": [["gadget", "small handy machine or tool"], ["object", "something you can see and touch"], ["idea", "something you think of"], ["moment", "a short time when something happens"], ["problem", "something that needs fixing"]], "stuff": [["gear", "the equipment you need"], ["belongings", "the things you own"], ["junk", "old things you don't need"], ["clothes", "what you wear"], ["supplies", "things you need for a job"]], "very": [["(cut it)", "often the sentence is stronger without it"], ["(pick a stronger word)", "very cold = freezing, very big = huge"]], "really": [["(cut it)", "often the sentence is stronger without it"], ["(pick a stronger word)", "really tired = exhausted, really happy = stoked"]], "shows": [["suggests", "hints at something without saying it straight"], ["reveals", "uncovers something hidden"], ["highlights", "draws attention to it"], ["conveys", "gets a feeling or idea across"], ["illustrates", "gives a clear example of it"]], "important": [["significant", "big enough to matter"], ["crucial", "so important everything depends on it"], ["central", "at the heart of it"], ["essential", "you can't do without it"], ["meaningful", "has real meaning or value"]], "think": [["believe", "think something is true"], ["argue", "give reasons for your view"], ["suspect", "think it's probably true, without proof"], ["wonder", "think about it with curiosity"], ["reckon", "think (Aussie, casual)"]], "use": [["employ", "use (formal, for techniques)"], ["rely on", "depend on it"], ["draw on", "use something you already have"], ["apply", "put it to work"], ["adopt", "start using it"]]};
+const WALIAS = {"says": "said", "say": "said", "walk": "walked", "walking": "walked", "walks": "walked", "run": "ran", "running": "ran", "runs": "ran", "look": "looked", "looking": "looked", "looks": "looked", "go": "went", "going": "went", "goes": "went", "get": "got", "getting": "got", "gets": "got", "show": "shows", "showed": "shows", "shown": "shows", "great": "good", "awesome": "amazing", "lovely": "nice", "terrible": "bad", "things": "thing", "eat": "ate", "eating": "ate", "laugh": "laughed", "laughing": "laughed", "cry": "cried", "crying": "cried", "uses": "use", "used": "use", "thinks": "think", "excited": "happy", "upset": "sad", "mad": "angry", "afraid": "scared", "frightened": "scared", "pretty": "beautiful"};
+const wBox=$('tw-words'), wH=$('tw-wh'), wChips=$('tw-wchips'), wMean=$('tw-wmean');
+let wCur='', wTimer=null;
+const wKey=w=>{w=(w||'').toLowerCase().replace(/[^a-z'-]/g,''); return WORDS[w]?w:(WALIAS[w]||'');};
+const wEsc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+async function fetchJSON(u,ms){const c=new AbortController();const t=setTimeout(()=>c.abort(),ms||4000);try{const r=await fetch(u,{signal:c.signal});return r.ok?await r.json():null;}catch(e){return null;}finally{clearTimeout(t);}}
+async function defineWord(w){
+  const d=await fetchJSON('https://api.dictionaryapi.dev/api/v2/entries/en/'+encodeURIComponent(w));
+  const m=d&&d[0]&&d[0].meanings&&d[0].meanings[0]; const def=m&&m.definitions&&m.definitions[0];
+  return def?{pos:m.partOfSpeech, def:def.definition, ex:def.example||''}:null;
+}
+async function showMeaning(word, local){
+  [...wChips.children].forEach(b=>b.setAttribute('aria-pressed', b.dataset.w===word?'true':'false'));
+  wMean.hidden=false;
+  if(local){ wMean.innerHTML='<b>'+wEsc(word)+'</b>: '+wEsc(local)+(word.startsWith('(')?'':'<span class="wnote">Like it? Type it in yourself. Only use it if it fits what you mean.</span>'); return; }
+  wMean.innerHTML='<b>'+wEsc(word)+'</b>: looking it up…';
+  const d=await defineWord(word);
+  wMean.innerHTML = d ? '<b>'+wEsc(word)+'</b> <i>('+wEsc(d.pos)+')</i>: '+wEsc(d.def)+(d.ex?'<span class="wnote">e.g. “'+wEsc(d.ex)+'”</span>':'')+'<span class="wnote">Like it? Type it in yourself. Only use it if it fits what you mean.</span>'
+                      : '<b>'+wEsc(word)+'</b>: I couldn’t find a meaning right now. Try a dictionary, or ask: what picture does this word put in your head?';
+}
+async function showWord(raw, why){
+  const w=(raw||'').toLowerCase().replace(/[^a-z'-]/g,''); if(!w || w===wCur) return; wCur=w;
+  const k=wKey(w); wMean.hidden=true; wChips.innerHTML='';
+  if(k){
+    wH.innerHTML=(why==='typed'?'Instead of <q>'+wEsc(w)+'</q>, you could try:':'Other words for <q>'+wEsc(w)+'</q>:')+' <span style="font-weight:400;color:var(--ink-soft)">(tap one to see what it means)</span>';
+    WORDS[k].forEach(([a,m])=>{const b=document.createElement('button');b.type='button';b.textContent=a;b.dataset.w=a;b.setAttribute('aria-pressed','false');b.onclick=()=>showMeaning(a,m);wChips.appendChild(b);});
+    return;
+  }
+  if(why==='typed') return;
+  wH.innerHTML='Other words for <q>'+wEsc(w)+'</q>: <span style="font-weight:400;color:var(--ink-soft)">(tap one to see what it means)</span>';
+  showMeaning(w);
+  const syn=await fetchJSON('https://api.datamuse.com/words?max=8&ml='+encodeURIComponent(w));
+  if(wCur!==w) return;
+  (syn||[]).map(x=>x.word).filter(x=>/^[a-z' -]+$/.test(x)).slice(0,6).forEach(a=>{const b=document.createElement('button');b.type='button';b.textContent=a;b.dataset.w=a;b.setAttribute('aria-pressed','false');b.onclick=()=>showMeaning(a);wChips.appendChild(b);});
+  if(!wChips.children.length) wH.innerHTML='What <q>'+wEsc(w)+'</q> means:';
+}
+ta.addEventListener('input',()=>{clearTimeout(wTimer);wTimer=setTimeout(()=>{
+  const before=ta.value.slice(0,ta.selectionStart); const m=before.match(/([A-Za-z'-]+)[\s.,!?;:]*$/);
+  if(m && wKey(m[1])) showWord(m[1],'typed');
+},500);});
+ta.addEventListener('dblclick',()=>{const s=ta.value.slice(ta.selectionStart,ta.selectionEnd).trim(); if(s && !/\s/.test(s)){wCur='';showWord(s,'picked');}});
+ta.addEventListener('select',()=>{const s=ta.value.slice(ta.selectionStart,ta.selectionEnd).trim(); if(s && !/\s/.test(s) && s.length<30){wCur='';showWord(s,'picked');}});
+$('tw-wform').addEventListener('submit',e=>{e.preventDefault();const q=$('tw-wq').value.trim().split(/\s+/)[0]; if(q){wCur='';showWord(q,'picked');}});
 </script>
 </body>
 </html>
