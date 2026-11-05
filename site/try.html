@@ -656,9 +656,7 @@ function showBubble(q, endPos){
   [].concat(q.k).forEach(k=>asked.add(k)); lastBubbleAt=Date.now(); bubbleStartLen=ta.value.length;
 }
 function hideBubble(){ $('tw-bubble').hidden=true; }
-$('tw-bgo').addEventListener('click', ()=>{ hideBubble(); const p=$('tw-whypanel'); const r=p.getBoundingClientRect();
-  if(r.top<0 || r.top>innerHeight-120) p.scrollIntoView({block:'start', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
-  p.classList.remove('flash'); void p.offsetWidth; p.classList.add('flash'); });
+$('tw-bgo').addEventListener('click', ()=>{ hideBubble(); $('tw-again').click(); });
 $('tw-bhint').addEventListener('click', ()=>{ $('tw-bubble').classList.remove('collapsed'); });
 $('tw-bx').addEventListener('click', ()=>{ hideBubble(); ta.focus(); });
 /* ---- walking coach: follows the caret, mid-sentence too ---- */
@@ -741,7 +739,7 @@ async function walkCheck(){
   if(!$('tw-coach').checked) return;
   const v=ta.value, pos=ta.selectionStart; if(!v.trim()) return;
   if(v.slice(pos).trim()){ return editCheck(v, pos); }
-  if(Date.now()-lastBubbleAt<4500) return;
+  if(Date.now()-lastBubbleAt<3500) return;
   const all=sentences(v); const endsSentence=/[.!?]["”]?\s*$/.test(v);
   const frag=endsSentence ? '' : v.slice(Math.max(v.search(/[^.!?]*$/),0));
   const done=endsSentence ? all : all.slice(0,-1);
@@ -751,16 +749,16 @@ async function walkCheck(){
   // rule-based pick (instant), then let the AI replace it if it answers fast
   let q=endsSentence ? questionFor(all[all.length-1], all) : walkHook(frag, done);
   if(endsSentence && (all.length%3===0 || !q)){ const t=THINK.find(t=>!asked.has('think:'+t[0])); if(t) q={k:'think:'+t[0], who:'Coach · think about it differently', q:t[0], h:t[1], ex:''}; }
+  if(q) showBubble(q, Math.min(anchor, ta.value.replace(/\s+$/,'').length));
   if(aiOK){
     const ai=await askAI({mode:'bubble', level:LEVEL, prompt:PROMPTS[pi].p, text:v.slice(-1500), asked:[...asked].slice(-24)}, 3500);
-    if(seq!==walkSeq || ta.value.length-v.length>25) return;
-    if(ai && ai.question){ asked.add('q: '+ai.question); asked.add('ex: '+(ai.example||'').slice(0,60)); q={k:'ai:'+ai.question.slice(0,40), q:ai.question, h:ai.idea||'', ex:ai.example||''}; }
+    if(seq!==walkSeq || ta.value.length-v.length>12) return;
+    if(ai && ai.question){ asked.add('q: '+ai.question); asked.add('ex: '+(ai.example||'').slice(0,60)); showBubble({k:'ai:'+ai.question.slice(0,40), q:ai.question, h:ai.idea||'', ex:ai.example||''}, Math.min(anchor, ta.value.replace(/\s+$/,'').length)); }
   }
-  if(q) showBubble(q, Math.min(anchor, ta.value.replace(/\s+$/,'').length));
 }
 
 /* Editing an earlier line: notice fixes and keep pushing it further. */
-let prevVal=''; const deeperUsed=new Set();
+let prevVal=''; let lastWhy={}; const deeperUsed=new Set();
 const THINK=[
   ["What would the dog (or the pie, or the chair) say about this moment?","Flipping the point of view makes readers see something ordinary in a new way."],
   ["What's secretly funny about this, even if it hurt at the time?","Comedy often hides in the gap between how big it felt and how small it was."],
@@ -799,7 +797,7 @@ function editCheck(v,pos){
 }
 ta.addEventListener('input', ()=>{
   if(!$('tw-bubble').hidden && ta.value.length-bubbleStartLen>45) hideBubble();
-  clearTimeout(pauseT); pauseT=setTimeout(async()=>{ await walkCheck(); prevVal=ta.value; }, 1100);
+  clearTimeout(pauseT); pauseT=setTimeout(async()=>{ const pv=ta.value; await walkCheck(); prevVal=pv; }, 700);
 });
 ta.addEventListener('scroll', hideBubble);
 $('tw-coach').addEventListener('change', ()=>{ if(!$('tw-coach').checked) hideBubble(); });
@@ -914,6 +912,7 @@ function showNotes(text){
   }
   if(b && b.sc<=0) notes.push(['','Closest to working',(b?'<q>'+esc(b.s)+'</q>':'')+'Honestly, no line jumps out yet. '+(round===1?'That\u2019s normal for a first go.':'Keep going, it often clicks around here.')+' This one is closest because it has the least padding. The mission below is how you get a line that does jump out.']);
   else notes.push(['c','Best line',(b?'<q>'+esc(b.s)+'</q>':'')+esc(BEST_WHY[key])]);
+  lastWhy={best:b&&b.sc>0?b.s:'', why:b&&b.sc>0?BEST_WHY[key]:'No line jumps out yet. That\u2019s normal. Keep going.'};
   const flat = iss.find(i=>i.q) || iss[0];
   if(flat) notes.push(['','Goes flat',(flat.q?'<q>'+esc(flat.q)+'</q>':'')+esc(flat.why)+' I won’t rewrite it. You decide what to do.']);
   else notes.push(['c','Nothing goes flat','No robot phrases, no blurry words, no volume knobs. That’s rare. So the next mission is harder.']);
@@ -921,7 +920,7 @@ function showNotes(text){
   const extra = P.type==='funny' ? ['three','keyword','cut'] : P.type==='story' ? ['circle','cut','rhythm'] : ['cut','rhythm'];
   const nextK = (iss.find(i=>i.k!==mission)||{}).k || extra.find(k=>k!==mission && !(k==='circle' && hasCallback(ss)));
   mission = nextK;
-  notes.push(['c','Next mission',esc(MISSIONS[nextK].t)]);
+  notes.push(['c','Next mission',esc(MISSIONS[nextK].t)]); lastWhy.mission=MISSIONS[nextK].t;
   $('tw-notes').innerHTML=notes.map(([c,t,h])=>'<div class="note2"><span class="tag '+c+'">'+t+'</span><div>'+h+'</div></div>').join('');
 }
 async function aiNotes(text, missionText){
@@ -951,12 +950,14 @@ $('tw-done').addEventListener('click', ()=>{
   showNotes(text); renderVersions();
   aiNotes(text, askedMission);
   $('tw-badge').hidden = round<10;
-  $('tw-results').hidden=false;
-  openWhy();
-  const wide=matchMedia('(min-width: 861px)').matches;
-  showBubble({k:'done', q:(round===1?'Nice one. Your why is ready.':'Round '+round+' done. Your why is ready.'), h:wide?'It\u2019s right next to your writing \u2192 Your best line, the line that goes flat, and your next mission.':'Your best line, the line that goes flat, and your next mission.', ex:null, go:true}, ta.value.replace(/\s+$/,'').length);
-  $('tw-bgo').textContent = wide ? 'See the why \u2192' : 'See the why \u2193';
+  $('tw-results').hidden=false; $('tw-notes').hidden=true; $('tw-results').querySelectorAll('.lede').forEach(x=>x.classList.add('res-hide')); $('tw-res-h').textContent='Your versions, side by side';
+  showDoneBubble();
 });
+function showDoneBubble(){
+  const w=lastWhy||{};
+  showBubble({k:'done', who:(round===1?'Coach · nice one':'Coach · round '+round+' done'), q:w.best?('Best line: \u201c'+w.best+'\u201d'):'Good start.', h:(w.why||'')+(w.mission?' Next time try this: '+w.mission:''), ex:null, go:true}, ta.value.replace(/\s+$/,'').length);
+  $('tw-bgo').textContent='Play again with this mission';
+}
 function openWhy(){
   const slot=$('tw-whyslot');
   if(!slot.contains($('tw-notes'))){ slot.appendChild($('tw-notes')); slot.appendChild($('tw-again').parentElement); }
