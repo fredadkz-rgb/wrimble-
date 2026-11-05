@@ -299,6 +299,11 @@ footer small{color:var(--ink-soft)}
 .wmean b{font-family:var(--font-display)}
 .wmean .wnote{display:block;margin-top:4px;font-size:.85rem;color:var(--ink-soft)}
 .wordbox .whint{margin-top:6px;font-size:.85rem;color:var(--ink-soft)}
+.protip .tipq{margin-top:6px;font-family:var(--font-display);font-weight:800;font-size:1.2rem;line-height:1.2}
+.protip .tipw{margin-top:8px;font-size:.95rem}
+.protip .tipt{margin-top:8px;padding:8px 10px;border-radius:6px;background:var(--paper-2);font-size:.92rem}
+.protip .tipt b{color:var(--margin)}
+.protip .tipbar{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:10px;font-size:.8rem;color:var(--ink-soft)}
 .edwrap{position:relative}
 .bubble{position:absolute;z-index:5;max-width:min(340px,calc(100% - 16px));background:var(--ink);color:var(--paper);border-radius:10px;padding:12px 34px 12px 14px;box-shadow:4px 4px 0 var(--pencil);animation:pop .22s ease-out}
 .bubble::before{content:"";position:absolute;top:-8px;left:var(--tip,18px);border:8px solid transparent;border-top:0;border-bottom-color:var(--ink)}
@@ -405,6 +410,13 @@ footer small{color:var(--ink-soft)}
             <p class="w"><b>Works:</b> <span id="tw-l-works"></span></p>
           </div>
           <p style="margin-top:10px;font-size:.95rem"><b>Why:</b> <span id="tw-l-why"></span></p>
+        </div>
+        <div class="panel protip" id="tw-tip" aria-live="polite">
+          <p class="eyebrow">Pro tip · took writers years to learn</p>
+          <p class="tipq" id="tw-tipq"></p>
+          <p class="tipw" id="tw-tipw"></p>
+          <p class="tipt"><b>Try it:</b> <span id="tw-tipt"></span></p>
+          <div class="tipbar"><span id="tw-tipn"></span><button class="btn sm alt" id="tw-tipnext" type="button">Another tip</button></div>
         </div>
         <div class="stuckbox" id="tw-stuckbox" hidden></div>
       </aside>
@@ -887,6 +899,22 @@ ta.addEventListener('input',()=>{clearTimeout(wTimer);wTimer=setTimeout(()=>{
 ta.addEventListener('dblclick',()=>{const s=ta.value.slice(ta.selectionStart,ta.selectionEnd).trim(); if(s && !/\s/.test(s)){wCur='';showWord(s,'picked');}});
 ta.addEventListener('select',()=>{const s=ta.value.slice(ta.selectionStart,ta.selectionEnd).trim(); if(s && !/\s/.test(s) && s.length<30){wCur='';showWord(s,'picked');}});
 $('tw-wform').addEventListener('submit',e=>{e.preventDefault();const q=$('tw-wq').value.trim().split(/\s+/)[0]; if(q){wCur='';showWord(q,'picked');}});
+
+/* ---------- Pro tips (our own words). Rotates, never repeats until all are seen. ---------- */
+const TIPS = [["Write first, fix later.", "Writing and editing use different parts of your brain. Doing both at once is why the page feels stuck.", "Write this round without deleting anything. Fix it next round.", "all"], ["Cut your first paragraph.", "Most writers warm up on paper. The real start is usually paragraph two.", "Look at your draft. Could it start at your second sentence?", "all"], ["Put the strongest word last.", "The end of a sentence is where readers pause, so the last word rings loudest.", "Rearrange one sentence so it ends on its best word.", "all"], ["Read it out loud.", "Your ear catches clunky bits your eye skips. If you trip, the reader will too.", "Whisper your draft. Mark every spot you stumble.", "all"], ["Use the rule of three.", "Two feels like a pair, four feels like a list. Three feels complete, and the third can be a surprise.", "Write a list of three where the third one is unexpected.", "all"], ["Swap a feeling for a body reaction.", "\"Nervous\" is a label. Sweaty hands are proof. Readers trust proof.", "Find one feeling word and show what the body did instead.", "all"], ["Name the brand, the street, the dog.", "Specific names make it real. \"A car\" is nothing; \"Dad's dented Corolla\" is a whole story.", "Replace one general noun with a specific name.", "all"], ["Mix short and long sentences.", "Same-length sentences sound like a drone. A short one after long ones hits hard.", "Follow your longest sentence with a three-word one.", "all"], ["End a scene early.", "Leave before everything is explained. The reader fills the gap and feels clever.", "Cut your last line. Is it stronger without it?", "all"], ["Start with someone doing something.", "Action pulls readers in faster than description or background.", "Make your first sentence a person in the middle of an action.", "all"], ["People rarely say what they mean.", "Real dialogue dodges. The gap between what's said and what's meant is where the drama is.", "Write a line of dialogue where someone avoids the real question.", "all"], ["Use \"said\" and get out of the way.", "Fancy tags like \"exclaimed\" pull focus. \"Said\" disappears, so the words do the work.", "Swap one fancy speech tag for \"said\".", "all"], ["Funny lives in the last word.", "A joke's surprise has to come at the very end, or the laugh leaks out early.", "Rewrite a funny line so the surprise is the final word.", "all"], ["Exaggerate, then be precise.", "\"I waited forever\" is flat. \"I waited 47 minutes and aged visibly\" is funny because it's oddly exact.", "Replace one vague exaggeration with a weirdly specific number.", "all"], ["Steal the structure, not the words.", "Pros copy the shape of writing they love (how it opens, where it turns) and fill it with their own stuff.", "Pick a story you love. Copy only how it starts, using your own life.", "all"], ["Write the ending first.", "If you know where you're landing, every sentence can lean towards it.", "Write your last line now, then write towards it.", "all"], ["One idea per paragraph.", "Readers can hold one thing at a time. New idea, new paragraph.", "Find a paragraph doing two jobs and split it.", "all"], ["Kill your favourite line if it doesn't fit.", "Pros cut lines they love when they don't serve the piece. Save them in a file for later.", "Is there a line you're keeping just because you like it?", "all"], ["Sleep on it.", "After a break you read what you wrote, not what you meant to write. Mistakes jump out.", "Come back to this draft tomorrow before you change it.", "all"], ["Verbs do the heavy lifting.", "A strong verb saves you an adverb. \"Ran quickly\" becomes \"bolted\".", "Find one adverb ending in -ly and swap in a stronger verb.", "all"], ["Use the five senses, but not all at once.", "Sight is the default. A smell or a sound makes a scene feel lived-in.", "Add one smell or one sound to your draft.", "all"], ["Give the reader one small mystery.", "A question in the reader's head keeps them reading to find the answer.", "Hint at something in your first lines that you explain later.", "all"], ["Bring the opening back at the end.", "Echoing your first image at the end feels satisfying, like a circle closing.", "Can your last line mention something from your first line, changed?", "all"], ["Say it to a mate first.", "If you can explain it in one sentence out loud, you can write it clearly.", "Say your main point out loud in one sentence before you write.", "all"], ["Topic sentence first, always.", "Markers skim. If your first sentence says the point, they know where you're going.", "Check every paragraph: does sentence one say the point?", "hsc uni"], ["Quote short, explain long.", "A few words of evidence plus your explanation beats a long quote with no analysis.", "Cut a quote down to the five words that matter, then explain them.", "hsc uni"], ["Name the technique, then its effect.", "Saying \"metaphor\" earns little. Saying what it makes the reader feel earns the marks.", "After naming a technique, add: \"This makes the reader…\"", "hsc uni"], ["Answer the actual question.", "Most lost marks come from a good answer to a different question.", "Underline the key words in the question. Does every paragraph link back?", "hsc uni"], ["Argue with yourself.", "Showing the other side, then pushing back, makes your argument look stronger, not weaker.", "Add one sentence that starts \"Some might argue…\" and answer it.", "hsc uni"], ["Plan for five minutes, even in an exam.", "Five minutes of planning saves fifteen of wandering. Pros never start cold.", "Before writing, jot three dot points: start, turn, ending.", "hsc uni"]];
+let tipSeen=[]; try{tipSeen=JSON.parse(localStorage.getItem('wrimble-tips')||'[]');}catch(e){}
+function tipLevel(){ try{return localStorage.getItem('wrimble-level')||'everyday';}catch(e){return 'everyday';} }
+function showTip(){
+  const lv=tipLevel(); const pool=TIPS.map((t,i)=>i).filter(i=>TIPS[i][3]==='all'||TIPS[i][3].includes(lv));
+  let left=pool.filter(i=>!tipSeen.includes(i)); if(!left.length){ tipSeen=tipSeen.filter(i=>!pool.includes(i)); left=pool; }
+  const i=left[Math.floor(Math.random()*left.length)]; tipSeen.push(i);
+  try{localStorage.setItem('wrimble-tips',JSON.stringify(tipSeen));}catch(e){}
+  const [q,w,t]=TIPS[i]; $('tw-tipq').textContent=q; $('tw-tipw').textContent=w; $('tw-tipt').textContent=t;
+  $('tw-tipn').textContent='Tip '+(pool.filter(j=>tipSeen.includes(j)).length)+' of '+pool.length;
+}
+$('tw-tipnext').addEventListener('click', showTip);
+document.querySelectorAll('#tw-level button').forEach(b=>b.addEventListener('click',()=>setTimeout(showTip,0)));
+showTip();
 </script>
 </body>
 </html>
