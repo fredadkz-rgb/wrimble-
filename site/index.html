@@ -286,10 +286,59 @@ footer{padding-block:40px;border-top:2px solid var(--ink)}
 footer .wrap{display:flex;gap:20px;justify-content:space-between;align-items:center;flex-wrap:wrap}
 footer small{color:var(--ink-soft)}
 </style>
+
+<style>
+/* short home page */
+.s-hero{padding-block:48px 56px}
+.s-hero .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+.s-hero h1{font-size:clamp(2.8rem,7.4vw,5.6rem);font-weight:800;letter-spacing:-0.045em}
+.s-hero h1 .strike{position:relative;white-space:nowrap}
+.s-hero h1 .strike::after{content:"";position:absolute;left:-4%;right:-4%;top:52%;height:.11em;background:var(--margin);transform:rotate(-3deg);border-radius:4px;opacity:.9}
+.s-hero .big{margin:22px 0 0;font-family:var(--font-display);font-weight:700;font-size:clamp(1.4rem,2.6vw,1.9rem);line-height:1.2;max-width:22ch}
+.s-hero .small-sub{margin:10px 0 0;font-size:1.15rem;color:var(--ink-soft);max-width:36ch}
+.s-hero .ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+.s-hero .who{margin-top:16px;font-weight:700;color:var(--ink-soft);font-size:.98rem}
+.mock{background:var(--card);border:2px solid var(--ink);border-radius:8px;padding:26px 24px 30px;box-shadow:8px 8px 0 var(--ink);position:relative;transform:rotate(1deg)}
+.mock .bar{display:flex;justify-content:space-between;font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft)}
+.mock .prompt{margin:12px 0 0;font-family:var(--font-display);font-weight:700;font-size:1.15rem;line-height:1.25}
+.mock .typed{margin:14px 0 0;font-size:1.15rem;line-height:1.6}
+.mock .caret{display:inline-block;width:2px;height:1.1em;background:var(--ink);vertical-align:-3px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.mock .bub{margin-top:14px;background:var(--pencil);color:var(--pencil-ink);border-radius:14px;padding:12px 14px;position:relative;font-size:1rem;line-height:1.35;max-width:300px}
+.mock .bub::before{content:"";position:absolute;top:-9px;left:28px;border:9px solid transparent;border-top:0;border-bottom-color:var(--pencil)}
+.mock .bub b{display:block;font-family:var(--font-display);font-size:1.1rem}
+.mock .stamp{position:absolute;right:14px;bottom:-16px}
+.s-sec{padding-block:40px}
+.s-sec h2{font-size:clamp(2rem,4.4vw,3rem)}
+.s-steps{margin-top:26px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.s-steps div{background:var(--ink);color:var(--paper);border-radius:14px;padding:22px;display:grid;gap:6px;align-content:start}
+.s-steps i{font-style:normal;font-family:var(--font-display);font-weight:800;font-size:2.2rem;line-height:1;color:var(--pencil)}
+.s-steps b{font-family:var(--font-display);font-size:1.45rem;line-height:1.15}
+.s-steps span{font-size:1.05rem;opacity:.92}
+.s-tiles{margin-top:26px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.s-tiles div{background:var(--card);border:2px solid var(--ink);border-radius:10px;padding:18px;display:flex;gap:14px;align-items:center;min-width:0}
+.s-tiles svg{flex:0 0 auto;width:34px;height:34px;color:var(--margin)}
+.s-tiles b{display:block;font-family:var(--font-display);font-size:1.15rem;line-height:1.2}
+.s-tiles span{display:block;color:var(--ink-soft);font-size:.98rem;line-height:1.35}
+.s-faq{margin-top:26px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 28px}
+.s-faq div{border-top:3px solid var(--ink);padding-top:12px}
+.s-faq b{display:block;font-family:var(--font-display);font-size:1.2rem;line-height:1.25}
+.s-faq p{margin:4px 0 0;color:var(--ink-soft)}
+.s-faq .yes{color:var(--good);font-weight:700}
+.s-faq .no{color:var(--margin);font-weight:700}
+.s-price{margin-top:26px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.s-price div{background:var(--card);border:2px solid var(--ink);border-radius:10px;padding:20px;display:grid;gap:4px;align-content:start}
+.s-price div.pick{box-shadow:6px 6px 0 var(--pencil)}
+.s-price b{font-family:var(--font-display);font-size:1.2rem}
+.s-price .p{font-family:var(--font-display);font-weight:800;font-size:2.2rem;line-height:1.1}
+.s-price .p small{font-size:1rem;font-weight:700}
+.s-price span{color:var(--ink-soft)}
+.s-more{margin-top:18px;font-weight:700}
+@media (max-width:900px){.s-hero .grid{grid-template-columns:1fr}.mock{transform:none}.s-steps,.s-tiles,.s-price{grid-template-columns:1fr}.s-faq{grid-template-columns:1fr}}
+@media (min-width:561px) and (max-width:900px){.s-tiles{grid-template-columns:1fr 1fr}}
+</style>
 </head>
 <body>
-
-
 <header class="top">
   <div class="wrap">
     <a class="logo" href="#top" aria-label="Wrimble home">
@@ -297,379 +346,97 @@ footer small{color:var(--ink-soft)}
       Wrimble
     </a>
     <nav aria-label="Main">
-      <a href="#what">What it does</a>
-      <a href="#not-ai">Not another AI</a>
       <a href="#how">How it works</a>
-      <a href="#detector">Robot Detector</a>
-      <a href="#hsc">HSC</a>
-      <a href="#uni">Uni</a>
-      <a href="#schools">Schools</a>
+      <a href="#faq">Questions</a>
       <a href="#pricing">Pricing</a>
+      <a href="try.html">Try it</a>
     </nav>
     <a class="btn pencil" href="#join">Join the waitlist</a>
   </div>
 </header>
 
 <main id="top">
-  <!-- HERO -->
-  <section class="hero">
+  <section class="s-hero">
     <div class="wrap inset grid">
       <div>
-        <p class="eyebrow">A writing coach for HSC, uni and everyday writers</p>
-        <h1 style="margin-top:14px">Write <span class="strike">badly.</span><br>Write it <span class="hl">yourself.</span></h1>
-        <p class="sub">Wrimble is a 10-minute daily writing workout. You type every word yourself. A coach asks questions as you go and shows you <b>why</b> your best lines work, so you get better at writing, not better at asking an AI.</p>
-        <ul class="who" aria-label="Who it's for"><li>HSC students</li><li>Uni students</li><li>Anyone who wants their own voice back</li></ul>
+        <h1>Write <span class="strike">badly.</span><br>Write it <span class="hl">yourself.</span></h1>
+        <p class="big">A writing coach that never writes for you.</p>
+        <p class="small-sub">10 minutes a day. You type. It asks questions and shows you why your writing works.</p>
         <div class="ctas">
-          <a class="btn pencil" href="try.html">Try today's Wrimble</a>
-          <a class="btn alt" href="#what">See what it does</a>
-          <a class="btn" href="#join">Join the waitlist</a>
+          <a class="btn pencil" href="try.html">Try it free</a>
+          <a class="btn alt" href="#join">Join the waitlist</a>
         </div>
-        <p class="hand note">psst. ugly first drafts are the whole point →</p>
+        <p class="who">For HSC students, uni students and anyone who writes.</p>
       </div>
-
-      <figure class="draft" aria-label="Example of a daily draft with why notes">
-        <div class="meta"><span>Today's Wrimble · Day 12</span><span>⏱ 7:42 · paste blocked</span></div>
-        <p class="prompt">Describe your worst customer in five sentences. No adjectives.</p>
-        <p class="text">He came in at 4:58. He held up one finger, which meant "wait", which meant twenty minutes. He asked if the pies were fresh. He asked again. He paid in five-cent coins and counted them out loud.</p>
-        <div class="notes">
-          <div class="why"><span class="tag c">Best line</span><span><b>"He paid in five-cent coins and counted them out loud."</b>We can hear every coin. You never said he was annoying, and we still feel it. That's the trick.</span></div>
-          <div class="why"><span class="tag">Notice</span><span>You repeat "He asked". Repeats make a rhythm, like a drum. Here it makes the wait feel longer. Keep it or don't. Your call.</span></div>
-          <div class="why"><span class="tag">Curious</span><span>What did the shop smell like at 4:58?</span></div>
-        </div>
-        <span class="stamp">Typed by a human. Probably badly.</span>
+      <figure class="mock" aria-label="What writing in Wrimble looks like" style="margin:0">
+        <div class="bar"><span>Today's challenge</span><span>7:42 left</span></div>
+        <p class="prompt">Write about a time you fell over.</p>
+        <p class="typed">The rink smelled like hot chips and<span class="caret"></span></p>
+        <div class="bub"><b>What could you hear?</b>Add a sound. You write it, not me.</div>
+        <span class="stamp">Typed by a human.</span>
       </figure>
     </div>
   </section>
 
-  <!-- WHAT WRIMBLE DOES -->
-  <section class="what" id="what">
+  <section class="s-sec" id="how">
     <div class="wrap inset">
-      <p class="eyebrow">What Wrimble does</p>
-      <h2 style="margin-top:12px">Your own writing space, with a coach that never writes for you.</h2>
-      <p class="lede" style="margin-top:14px">In one line: you write, the coach asks questions, you rewrite, and you find out <b>why</b> it got better. Here's the loop you'll do every day.</p>
-      <div class="loop">
-        <div><i>1</i><b>Get a challenge</b><span>A short prompt and one idea to try, with two examples side by side.</span></div>
-        <div><i>2</i><b>Write it yourself</b><span>A timer and a blank page. Paste is blocked, so every word is yours.</span></div>
-        <div><i>3</i><b>The coach asks</b><span>Questions pop up as you type. It points at your best line and explains why it works.</span></div>
-        <div><i>4</i><b>Rewrite and see why</b><span>Have another go, as many as 10. Every version side by side.</span></div>
-      </div>
-      <h3 style="margin-top:46px;font-size:1.5rem">What's inside</h3>
-      <div class="feats">
-        <div class="feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 6v6l4 2"/><circle cx="12" cy="12" r="9"/></svg><span class="for">Everyone</span><h3>A 10-minute workout every day</h3><p>A fresh challenge each day, and each day of the week trains a different skill: senses, dialogue, funny, persuading and more.</p></div>
-        <div class="feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v10H9l-5 4z"/><path d="M9 9h6"/></svg><span class="for">Everyone</span><h3>A coach that walks with you</h3><p>As you type, little bubbles pop up mid-sentence with a question, an idea, and an example from a different topic, so you can't just copy it.</p></div>
-        <div class="feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h7v16H4zM13 4h7v16h-7z"/></svg><span class="for">Everyone</span><h3>Rewrite it up to 10 times</h3><p>Every version sits side by side so you can see yourself get better. Each round you say what you changed and why.</p></div>
-        <div class="feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/></svg><span class="for">Everyone</span><h3>Unstuck, for writer's block</h3><p>Tell it what's wrong (blank page, boring, no ideas) and get a 60-second trick to get moving, plus why it works.</p></div>
-        <div class="feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6M12 3v3"/><circle cx="12" cy="14" r="7"/><path d="M12 14l3-2"/></svg><span class="for">HSC</span><h3>Timed exam practice</h3><p>Paper 1 style: one unseen image, 40 minutes. Then a rough band range with the reasons behind it. Never a rewrite.</p></div>
-        <div class="feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg><span class="for">HSC + Uni</span><h3>Bring your own task</h3><p>Add your school or uni task sheet. The coach explains what it's really asking and makes a plan to the due date. You still type every word.</p></div>
-        <div class="feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 1 0 3-6.2"/><path d="M4 4v4h4M12 8v4l3 2"/></svg><span class="for">Everyone</span><h3>Proof it's yours</h3><p>"How I wrote this" replays every round and every why. Print it, or download it as PDF or Word to show your teacher.</p></div>
-        <div class="feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20h18M5 20V9l7-5 7 5v11"/><path d="M10 20v-5h4v5"/></svg><span class="for">Everyone</span><h3>Your own writing desk</h3><p>A personal space with themes, a streak, your proudest lines pinned up, and The Pile: every piece you've ever written.</p></div>
-      </div>
-      <h3 style="margin-top:46px;font-size:1.5rem">Who it's for</h3>
-      <div class="people">
-        <div><h3>HSC students</h3><p>Module C imaginative, discursive and persuasive writing, reflections, and unseen stimulus practice.</p></div>
-        <div><h3>Uni students</h3><p>Essays and reflections that sound like you: claim, evidence, then what it means.</p></div>
-        <div><h3>Anyone</h3><p>Emails, stories and posts that sound like a person, not a robot. Get your own voice back.</p></div>
-        <div><h3>Parents and teachers</h3><p>A weekly progress email for parents. A class view for schools. Effort and growth, never the writing itself without permission.</p></div>
-      </div>
-      <div class="ctas"><a class="btn pencil" href="try.html">Try today's Wrimble, no sign-up</a><a class="btn alt" href="#join">Join the waitlist</a></div>
-    </div>
-  </section>
-
-  <!-- NOT ANOTHER AI -->
-  <section class="notai" id="not-ai">
-    <div class="wrap inset">
-      <div style="display:grid;gap:18px">
-        <p class="eyebrow">The most important thing on this page</p>
-        <h2>Wrimble is a tool,<br><span class="hl">not another AI.</span></h2>
-        <p class="lede">Every other app wants to write for you. Wrimble is where we teach you the whys: why writing works, why writers do certain things, why that line got a laugh and this one went flat. Once you know the why, you start thinking like a writer and making your own creative choices.</p>
-      </div>
-      <div class="vs">
-        <div class="col them">
-          <h3>The AI writing apps</h3>
-          <ul>
-            <li>Write the draft for you</li>
-            <li>You can't remember a sentence of it later</li>
-            <li>Sound like everyone else using the same app</li>
-            <li>Fix your words without telling you why</li>
-            <li>Get better. You don't.</li>
-          </ul>
-        </div>
-        <div class="col us">
-          <h3>Wrimble</h3>
-          <ul>
-            <li>You write every word. Paste is blocked.</li>
-            <li>It's your thinking, so you remember it</li>
-            <li>Sounds like you, on a good day</li>
-            <li>Never corrects. Explains the why instead.</li>
-            <li>You get better. That's the whole product.</li>
-          </ul>
-        </div>
-      </div>
-      <div class="bonnet">
-        <p class="q">So is there any AI in it at all?</p>
-        <p>A small one, under the bonnet, and we'll always tell you. It reads your draft and points at the line that works, then explains why. That's it. It's never allowed to write, rewrite or "fix" a single word of yours, and a filter strips out anything that looks like it tried. We use a robot to make you less robotic.</p>
+      <h2>How it works</h2>
+      <div class="s-steps">
+        <div><i>1</i><b>You write</b><span>Get a 10-minute challenge. Type it yourself.</span></div>
+        <div><i>2</i><b>The coach asks</b><span>Questions pop up as you type. It never writes for you.</span></div>
+        <div><i>3</i><b>You rewrite</b><span>Try again and see why it got better.</span></div>
       </div>
     </div>
   </section>
 
-  <!-- THE WHYS -->
-  <section class="whys" id="whys">
+  <section class="s-sec">
     <div class="wrap inset">
-      <div class="head">
-        <p class="eyebrow">Where we teach you the whys</p>
-        <h2>No red pen. Just the why.</h2>
-        <p class="lede">Every lesson asks two questions: why does this work, and why do we do it this way? You get one idea, two examples side by side, and the why in plain words. Then it's your turn to think, play and make something new. Pick one and see.</p>
-      </div>
-      <div class="chips" role="tablist" aria-label="Example lessons" id="chips"></div>
-      <div class="lesson" id="lesson" role="tabpanel" aria-live="polite">
-        <div class="ex flat"><p class="lbl"><i></i>Doesn't work</p><p class="quote" id="l-flat"></p></div>
-        <div class="ex works"><p class="lbl"><i></i>Works</p><p class="quote" id="l-works"></p></div>
-        <div class="explain">
-          <div><p class="eyebrow">The why</p><p id="l-why"></p></div>
-          <div><p class="eyebrow">Why we did it the first way</p><p id="l-first"></p></div>
-        </div>
-        <div class="turn"><span class="hand">Your turn:</span><span id="l-turn"></span></div>
-        <div class="turn"><span class="hand">Think about it:</span><span id="l-think"></span></div>
+      <h2>What you get</h2>
+      <div class="s-tiles">
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7v5l3 2"/><circle cx="12" cy="12" r="9"/></svg><p style="margin:0"><b>Daily challenges</b><span>A new 10-minute workout every day.</span></p></div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v4M12 17v4M3 12h4M17 12h4"/></svg><p style="margin:0"><b>Writer's block help</b><span>Stuck? Get a 60-second trick.</span></p></div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6M12 3v3"/><circle cx="12" cy="14" r="7"/><path d="M12 14l3-2"/></svg><p style="margin:0"><b>HSC exam practice</b><span>Timed, with a rough band range.</span></p></div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5"/></svg><p style="margin:0"><b>Your school task</b><span>Add your task sheet. Get a plan.</span></p></div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 1 0 3-6.2"/><path d="M4 4v4h4"/></svg><p style="margin:0"><b>Proof it's yours</b><span>Replay every draft. Print, PDF or Word.</span></p></div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20h18M5 20V9l7-5 7 5v11"/></svg><p style="margin:0"><b>Your own desk</b><span>Every piece you write, saved in one place.</span></p></div>
       </div>
     </div>
   </section>
 
-  <!-- HOW IT WORKS -->
-  <section id="how" style="padding-top:24px">
+  <section class="s-sec" id="faq">
     <div class="wrap inset">
-      <p class="eyebrow">How it works</p>
-      <h2 style="margin-top:12px">Ten minutes. One draft. Every day.</h2>
-      <p class="lede" style="margin-top:14px">The rule that never bends: you write, nobody corrects, and every note explains the why. <a href="try.html"><b>Try one now, no sign-up.</b></a></p>
-      <ol class="steps">
-        <li><span class="time">60 seconds</span><h3>Warm up</h3><p>A short, silly video teaches one idea with a side-by-side example. Then you get today's challenge.</p></li>
-        <li><span class="time">60 seconds, if you need it</span><h3>Stuck? Tap the button</h3><p>Get a random writer's block buster or brainstorm trick, and the reason it works.</p></li>
-        <li><span class="time">5 to 8 minutes</span><h3>Write</h3><p>A plain page and a timer. Paste is blocked, so every word is really yours. The coach pops up with questions as you type (turn it off any time).</p></li>
-        <li><span class="time">Instant</span><h3>Get your why notes</h3><p>Your best line and why it works, one thing to notice, and one curious question. Nothing marked wrong.</p></li>
-        <li><span class="time">2 minutes, optional</span><h3>Play again, as many times as you need</h3><p>Rewrite it with the coach. Twice, or ten times. Every version sits side by side so you can see yourself improve.</p></li>
-        <li><span class="time">Forever</span><h3>Keep the streak</h3><p>A streak on your calendar, a "Typed by a human" stamp, and a monthly Cold Write that proves you're getting better.</p></li>
-      </ol>
-    </div>
-  </section>
-
-  <!-- LEARNING PROFILE -->
-  <section class="profile" id="profile" style="padding-top:24px">
-    <div class="wrap inset">
-      <p class="eyebrow">Your learning profile · 5 questions, 1 minute</p>
-      <h2 style="margin-top:12px">Everyone learns differently. Tell us how you do.</h2>
-      <p class="lede" style="margin-top:14px">Some people get it from one example. Some need pictures. Some need to write it ten times with a coach before it clicks, and that's completely normal. Answer five quick questions (under a minute, no wrong answers, change them any time) and Wrimble shapes your practice around you.</p>
-      <div class="pgrid">
-        <form id="pq" class="pq"></form>
-        <aside class="presult" aria-live="polite">
-          <p class="eyebrow" id="pr-eyebrow">Example profile</p>
-          <h3 class="pr-name" id="pr-name"></h3>
-          <p id="pr-sum" class="pr-sum"></p>
-          <ul id="pr-list" class="pr-list"></ul>
-          <div class="loop" aria-label="Practice rounds">
-            <p class="eyebrow" style="color:inherit;opacity:.8">Your practice loop</p>
-            <div class="dots" id="pr-dots"></div>
-            <p class="hand" id="pr-loop" style="color:var(--pencil);font-size:1.35rem"></p>
-          </div>
-          <p class="pr-priv">Your answers are private, kept in Australia, and never used to train AI. Wrimble suggests an update if your habits change.</p>
-        </aside>
+      <h2>Quick answers</h2>
+      <div class="s-faq">
+        <div><b>Does AI write it for me?</b><p><span class="no">No. Never.</span> You type every word and pasting is blocked. The coach only asks questions and explains why.</p></div>
+        <div><b>Is it cheating?</b><p><span class="no">No.</span> It's all your own work, and "How I wrote this" shows every draft to prove it.</p></div>
+        <div><b>How long does it take?</b><p>10 minutes a day. Do more if you like.</p></div>
+        <div><b>Who is it for?</b><p>HSC students, uni students, and anyone who wants to write better.</p></div>
+        <div><b>What does it cost?</b><p>Free to start. Full access is $12 a month or $99 a year.</p></div>
+        <div><b>Can I try it now?</b><p><span class="yes">Yes.</span> Try a workout now, no sign-up. The full app opens soon.</p></div>
+        <div><b>Can parents and teachers see progress?</b><p><span class="yes">Yes.</span> Parents get a weekly email. Schools get a class view. Your writing stays private unless you share it.</p></div>
+        <div><b>Is it Australian?</b><p><span class="yes">Yes.</span> Made in Australia, built around the NSW HSC.</p></div>
       </div>
     </div>
   </section>
 
-  <!-- RULES + MISTAKES -->
-  <section class="rules">
-    <div class="wrap inset grid">
-      <div>
-        <p class="eyebrow">How we teach</p>
-        <h2 style="margin-top:12px">The only red line here is the margin.</h2>
-        <p class="lede" style="margin-top:14px">Six rules for how we teach. They're there to get you thinking and creating, not memorising rules.</p>
-        <div class="mistake">
-          <h3>Mistakes are the best part.</h3>
-          <p>Your brain learns most when it gets something a bit wrong and then notices. A mistake is your brain doing push-ups. Try something brave that doesn't quite land and you'll earn a <b>Best Mistake</b> badge, with a note on why it was still a smart try.</p>
-        </div>
+  <section class="s-sec" id="pricing">
+    <div class="wrap inset">
+      <h2>Pricing</h2>
+      <div class="s-price">
+        <div><b>Free</b><p class="p" style="margin:0">$0</p><span>One workout a week.</span></div>
+        <div class="pick"><b>Wrimble Plus</b><p class="p" style="margin:0">$12<small> /month</small></p><span>Everything, every day. Or $99 a year.</span></div>
+        <div><b>HSC Season Pass</b><p class="p" style="margin:0">$79<small> once</small></p><span>Year 11 Term 4 to the HSC exam.</span></div>
       </div>
-      <ol>
-        <li><div><h3>Fun first</h3><p>If you're laughing, you're learning. Every lesson opens with a joke, a silly example or a funny challenge.</p></div></li>
-        <li><div><h3>You write. We never correct.</h3><p>No red pen, no crossed-out words, no marks out of 10 on your daily drafts. Your draft is yours. We never touch it.</p></div></li>
-        <li><div><h3>Teach the why</h3><p>We don't say "fix this". We show why one line works and another goes flat, and why writers make the choices they do. Knowing the why gets you thinking, and thinking gets you creative.</p></div></li>
-        <li><div><h3>Make them think, then let them play</h3><p>Every lesson ends with a question or a challenge with no right answer. Once you know the why, you can break the rule on purpose. That's where creativity starts.</p></div></li>
-        <li><div><h3>Show, with examples</h3><p>Every idea comes with a version that works, one that doesn't, and what's going on in the reader's head.</p></div></li>
-        <li><div><h3>Talk like a good teacher</h3><p>Short sentences, everyday words, no jargon. If a 12-year-old wouldn't get it, we rewrite it.</p></div></li>
-      </ol>
+      <p class="s-more"><a href="more.html">See everything Wrimble does</a> · <a href="more.html#detector">Try the free Robot Detector</a> · <a href="more.html#schools">For schools</a></p>
     </div>
   </section>
 
-  <!-- ROBOT DETECTOR -->
-  <section class="detector" id="detector">
-    <div class="wrap inset">
-      <p class="eyebrow">Free tool · no login</p>
-      <h2 style="margin-top:12px">The Robot Detector</h2>
-      <p class="lede" style="margin-top:14px">Paste any text and we'll highlight the habits that make writing sound like a robot wrote it. It doesn't rewrite anything. It shows you what to look for, and why.</p>
-      <div class="det">
-        <div style="min-width:0">
-          <label for="det-in" class="eyebrow">Your text (we've loaded a LinkedIn post to start)</label>
-          <textarea id="det-in" style="margin-top:8px">I'm thrilled to announce that I've embarked on an incredible new journey! In today's fast-paced world, it's not just about working hard, it's about working smart. This role is a testament to the power of collaboration, and I'm truly humbled to leverage my skills to unlock seamless, transformative growth. Let's delve in!</textarea>
-          <div class="row">
-            <button class="btn" id="det-run" type="button">Check for robots</button>
-            <button class="btn alt" id="det-clear" type="button">Clear</button>
-          </div>
-          <div class="out" id="det-out" aria-live="polite"></div>
-        </div>
-        <aside class="score" aria-live="polite">
-          <p class="eyebrow" style="color:inherit;opacity:.75">Robot Score</p>
-          <p class="num" id="det-num">0<small>%</small></p>
-          <div class="meter"><span id="det-bar" style="width:0%"></span></div>
-          <p class="verdict" id="det-verdict"></p>
-          <ul id="det-list"></ul>
-        </aside>
-      </div>
-    </div>
-  </section>
-
-  <!-- STUCK -->
-  <section class="stuck">
-    <div class="wrap inset">
-      <p class="eyebrow">60-second writer's block busters</p>
-      <h2 style="margin-top:12px">Stuck? Good. Press the button.</h2>
-      <div class="card">
-        <button class="bigbtn" id="stuck-btn" type="button">I'm stuck</button>
-        <div style="min-width:0">
-          <p class="task" id="stuck-task">Finish the sentence: "The worst thing about Mondays is…"</p>
-          <p class="whyline" id="stuck-why"><b>Why it works:</b> a started sentence is easier than a blank one.</p>
-          <p class="fix" id="stuck-fix">Fixes: not knowing where to start</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- TRACKS -->
-  <section class="tracks" id="tracks" style="padding-top:24px">
-    <div class="wrap inset">
-      <p class="eyebrow">Tracks</p>
-      <h2 style="margin-top:12px">Pick what you want to get good at.</h2>
-      <div class="list">
-        <div class="track"><span class="len">30 days, repeatable</span><h3>Everyday &amp; Work</h3><p>Emails, posts, messages and apologies that sound like a person.</p><p class="eg">"Turn down a meeting without sounding like HR."</p></div>
-        <div class="track"><span class="len">30 days</span><h3>Funny</h3><p>Joke structure, observation, and roasts (kind ones).</p><p class="eg">"Write three true complaints about Mondays. Make the third one surprise us."</p></div>
-        <div class="track"><span class="len">30 days</span><h3>Storytelling</h3><p>Personal stories, pitches and toasts.</p><p class="eg">"Tell the story of a scar in 150 words."</p></div>
-        <div class="track"><span class="len">Year 11 Term 4 to the exam</span><h3>HSC Module C</h3><p>Imaginative, discursive and persuasive pieces, reflection, and unseen stimulus.</p><p class="eg">"Use this image. 40 minutes. Go."</p></div>
-        <div class="track"><span class="len">30 days</span><h3>English for Life</h3><p>Natural, everyday written English for learners.</p><p class="eg">"Text your neighbour about a parcel. Make it friendly."</p></div>
-      </div>
-      <p class="eyebrow" style="margin-top:56px">The 8 human skills every track trains</p>
-      <div class="skills" style="margin-top:14px">
-        <span><b>1</b>Start ugly</span><span><b>2</b>Notice</span><span><b>3</b>Say one thing</span><span><b>4</b>Sound like you</span><span><b>5</b>Be specific</span><span><b>6</b>Be funny</span><span><b>7</b>Tell it as a story</span><span><b>8</b>Cut the robot</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- THE PILE + SCHOOLS -->
-  <section class="more" id="schools" style="padding-top:24px">
-    <div class="wrap inset">
-      <div class="moregrid">
-        <div class="moreitem">
-          <p class="eyebrow">The Pile · community</p>
-          <h3>One weekly prompt. Everyone has a go.</h3>
-          <p>Members vote for the funniest or most human piece, and winners get featured. There's also Mistake of the Week: share a funny mistake (anonymously if you like) and the lesson behind it. We vote for the best lesson, not the best writing.</p>
-        </div>
-        <div class="moreitem">
-          <p class="eyebrow">Proof you're improving</p>
-          <h3>Cold Writes and your Voice Profile</h3>
-          <p>Once a month you write a timed piece with no coach, charted against month one. Your Voice Profile shows your own habits: favourite words, sentence rhythm, and how funny you get. Then vs Now puts your first-week draft beside today's.</p>
-        </div>
-        <div class="moreitem">
-          <p class="eyebrow">For schools</p>
-          <h3>Human writing practice, for a whole class</h3>
-          <p>Class codes, class challenges and a teacher view that shows effort, rounds and the class's weak spots. Teachers read only the pieces students choose to share, with the "How I wrote this" replay. From $1,500 a year for up to 150 students.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- HSC -->
-  <section class="hsc" id="hsc" style="padding-top:24px">
-    <div class="wrap inset">
-      <div class="box">
-        <div>
-          <p class="eyebrow">For NSW Year 11 and 12</p>
-          <h2 style="margin-top:12px">HSC Module C, written by you.</h2>
-          <p style="margin-top:14px">The exam hands you an unseen stimulus and a clock. Exam Mode lets you practise exactly that, at home, until it feels normal. Then your creative piece stands out because it sounds like a person wrote it.</p>
-          <ul>
-            <li>20 timed, unseen stimuli with Module C-style why notes</li>
-            <li>A rough band range with reasons after each one, never a rewrite</li>
-            <li>Bring your own task sheet and get a plan to the due date</li>
-            <li>Reflection prompts after every piece</li>
-            <li>A progress email for parents</li>
-            <li>Checked against the syllabus by a NSW English teacher</li>
-          </ul>
-          <div class="ctas" style="display:flex;gap:12px;flex-wrap:wrap;margin-top:22px"><a class="btn" href="#pricing">HSC Season Pass · $79</a><a class="btn alt" href="try.html?level=hsc">Try an HSC workout</a></div>
-        </div>
-        <div style="text-align:center">
-          <p class="timer">40:00</p>
-          <p class="hand">one image. no AI. go.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section class="hsc" id="uni" style="padding-top:0">
-    <div class="wrap inset">
-      <div class="box">
-        <div>
-          <p class="eyebrow">For uni students</p>
-          <h2 style="margin-top:12px">Essays that sound like you, and still get the marks.</h2>
-          <p style="margin-top:14px">Uni writing has rules nobody explains: claim first, evidence, then what it means. Wrimble's uni workouts teach the why behind each one. The coach asks the questions your tutor would, and it never writes a sentence for you, so everything you hand in is really yours.</p>
-          <ul>
-            <li>Paragraph workouts: topic sentences, evidence and analysis</li>
-            <li>Push-back drills: be fair to the other side, then disagree</li>
-            <li>Plain words over padding, without losing the academic tone</li>
-            <li>Typed by you, start to finish, so it's honestly yours</li>
-          </ul>
-          <div class="ctas" style="display:flex;gap:12px;flex-wrap:wrap;margin-top:22px"><a class="btn alt" href="try.html?level=uni">Try a uni workout</a></div>
-        </div>
-        <div style="text-align:center">
-          <p class="timer">1 ¶</p>
-          <p class="hand">one claim. one proof. yours.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PRICING -->
-  <section id="pricing" style="padding-top:24px">
-    <div class="wrap inset">
-      <p class="eyebrow">Pricing · AUD, GST included</p>
-      <h2 style="margin-top:12px">Cheaper than a tutor. Funnier, too.</h2>
-      <div class="plans">
-        <div class="plan">
-          <h3>Free</h3>
-          <p class="price">$0</p>
-          <ul><li>The Robot Detector</li><li>Your learning profile</li><li>One Wrimble a week</li><li>Read The Pile</li></ul>
-          <p class="for">For everyone. Start here.</p>
-        </div>
-        <div class="plan pick">
-          <h3>Wrimble Plus</h3>
-          <p class="price">$12<small> / month</small></p>
-          <p class="for">or <b>$99 a year</b> (about 30% off)</p>
-          <ul><li>A Wrimble every day</li><li>All tracks</li><li>Why notes on every draft</li><li>Monthly Cold Writes</li><li>Your Voice Profile</li><li>Enter The Pile</li></ul>
-        </div>
-        <div class="plan">
-          <h3>HSC Season Pass</h3>
-          <p class="price">$79<small> one-off</small></p>
-          <ul><li>Year 11 Term 4 to the HSC exam</li><li>HSC track and Exam Mode</li><li>20 timed unseen stimuli</li><li>Parent progress email</li></ul>
-          <p class="for">For parents of Year 11 and 12.</p>
-        </div>
-      </div>
-      <div class="extras">
-        <div class="plan"><div><h3>Family</h3><p class="for">Up to 4 accounts, for households with teens</p></div><p class="price">$149<small>/yr</small></p></div>
-        <div class="plan"><div><h3>Schools</h3><p class="for">Teacher dashboard, class codes, up to 150 students</p></div><p class="price"><small>from </small>$1,500<small>/yr</small></p></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- WAITLIST -->
   <section class="join" id="join">
     <div class="wrap inset">
       <div>
-        <p class="eyebrow" style="color:inherit">Founding Wrimblers</p>
+        <p class="eyebrow" style="color:inherit">Opening soon</p>
         <h2 style="margin-top:12px">Be one of the first 200.</h2>
-        <p>Join the waitlist and the first 200 Founding Wrimblers get their first year for <b>$59</b> instead of $99.</p>
+        <p>The first 200 get their first year for <b>$59</b> instead of $99.</p>
       </div>
       <form id="join-form" name="waitlist" method="POST" action="/thanks.html" data-netlify="true" netlify-honeypot="bot-field">
         <input type="hidden" name="form-name" value="waitlist">
@@ -687,7 +454,6 @@ footer small{color:var(--ink-soft)}
           <option>Improving my English</option>
         </select>
         <button class="btn" type="submit">Save my spot</button>
-        <p class="small">If you filled in the learning profile above, your answers come along too, so your first lessons fit how you learn.</p>
         <p class="small" id="join-msg" role="status"></p>
       </form>
     </div>
@@ -701,174 +467,6 @@ footer small{color:var(--ink-soft)}
     <small>A tool, not another AI. Made in Australia.</small>
   </div>
 </footer>
-
-<script>
-/* ---------- Why lessons ---------- */
-const LESSONS = [
-  {name:"Specific beats general", flat:"The food was really nice.", works:"The chips were so hot I had to blow on them like birthday candles.", why:"Your brain can't picture “nice”. It can picture hot chips and birthday candles. When readers can see it, they feel it.", first:"We write “nice” because it's safe and quick. Everyone does it. That's normal, not bad.", turn:"Describe your lunch today without using the words nice, good or yum.", think:"When would \u201cnice\u201d be the right word?"},
-  {name:"Surprise makes it funny", flat:"I went to the gym. It was hard.", works:"I went to the gym. The gym won.", why:"Funny is when your brain expects one thing and gets another.", first:"We tell it straight because straight feels safe. Safe is fine. It's just not funny.", turn:"Write one sentence about your morning. Make the last three words a surprise.", think:"Why does the surprise work better at the end of the sentence than the start?"},
-  {name:"Short punches harder", flat:"I was feeling extremely nervous about the whole situation.", works:"I was terrified.", why:"Fewer words land faster. Long sentences let the feeling leak out.", first:"Long sentences feel grown-up and careful. When we're nervous, we pad.", turn:"Take a long sentence you wrote this week and say it in four words.", think:"When might a long, rambling sentence be exactly what you want?"},
-  {name:"Real details feel true", flat:"My grandma was a kind person.", works:"My grandma kept Minties in her handbag for any kid who looked sad.", why:"We trust what we can see. Details are proof.", first:"“Kind” is the summary in our head. We skip straight to it and forget the reader needs the proof.", turn:"Pick someone you love. Prove they're funny without saying “funny”.", think:"Which detail would your grandma pick to describe you?"},
-  {name:"Robots sound like robots", flat:"It's not just a meal, it's an experience.", works:"I licked the plate. Don't tell anyone.", why:"AI uses the same safe patterns over and over. People can feel when no one's really there.", first:"We've read so much robot writing lately that the patterns sneak into our own. Nobody's immune.", turn:"Review your last takeaway in two sentences. One of them has to be a confession.", think:"Why do you think robots love \u201cnot just X, it\u2019s Y\u201d so much?"},
-  {name:"Start in the middle", flat:"This is a story about the day I got lost.", works:"The map was upside down and so was my day.", why:"Readers decide in one line whether to keep going. Skip the warm-up.", first:"Warming up helps the writer get going. The reader doesn't need to see it.", turn:"Write the first line of a story that starts halfway through something going wrong.", think:"Is there ever a story that should start at the very beginning?"}
-];
-const chips = document.getElementById('chips');
-function showLesson(i){
-  const l = LESSONS[i];
-  document.getElementById('l-flat').textContent = "“"+l.flat+"”";
-  document.getElementById('l-works').textContent = "“"+l.works+"”";
-  document.getElementById('l-why').textContent = l.why;
-  document.getElementById('l-first').textContent = l.first;
-  document.getElementById('l-turn').textContent = l.turn;
-  document.getElementById('l-think').textContent = l.think;
-  [...chips.children].forEach((c,j)=>c.setAttribute('aria-selected', j===i ? 'true':'false'));
-}
-LESSONS.forEach((l,i)=>{
-  const b=document.createElement('button');
-  b.className='chip'; b.type='button'; b.id='chip-'+i; b.setAttribute('role','tab'); b.textContent=l.name;
-  b.addEventListener('click',()=>showLesson(i));
-  chips.appendChild(b);
-});
-showLesson(0);
-
-/* ---------- Robot Detector ---------- */
-const HABITS = [
-  {re:/\bnot (?:just|only|merely) (?:about )?[^.,;!?]{1,40}[,;]?\s*(?:it'?s|but|it is)\b/gi, label:"“Not just X, it's Y”", why:"The robot's favourite trick. It sounds deep and says nothing."},
-  {re:/\bin today'?s (?:fast-paced|ever-changing|digital|modern) (?:world|landscape|age)\b/gi, label:"“In today's fast-paced world”", why:"A warm-up nobody needs. Start with the actual thing."},
-  {re:/\b(?:delve|delving|embark(?:ed|ing)?|unlock(?:ing)?|elevate|leverag(?:e|ing)|harness(?:ing)?|navigat(?:e|ing) the|foster(?:ing)?|empower(?:ing)?)\b/gi, label:"Robot verbs", why:"Words people rarely say out loud. Real people “start” and “use” things."},
-  {re:/\b(?:journey|tapestry|landscape|realm|testament to|game[- ]changer|synergy|ecosystem)\b/gi, label:"Big empty nouns", why:"Fancy words standing in for a real detail."},
-  {re:/\b(?:seamless(?:ly)?|transformative|cutting-edge|robust|innovative|holistic|pivotal|vibrant|incredible|amazing)\b/gi, label:"Empty adjectives", why:"They tell us how to feel instead of showing us. Your brain can't picture “seamless”."},
-  {re:/\b(?:thrilled|excited|humbled|honou?red) to (?:announce|share)\b|\btruly humbled\b/gi, label:"Announcement voice", why:"Every post starts this way, so nobody reads past it."},
-  {re:/\b(?:it'?s (?:important|worth) (?:to note|noting)|in conclusion|furthermore|moreover|additionally|ultimately)\b/gi, label:"Essay glue", why:"Filler joins. If the ideas connect, the reader can tell."},
-  {re:/\b(?:really|very|truly|extremely)\b/gi, label:"Volume knobs", why:"Turning a weak word up doesn't make it strong. Find the strong word."}
-];
-const esc = s => s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-function runDetector(){
-  const text = document.getElementById('det-in').value;
-  const ranges = []; const found = new Map();
-  HABITS.forEach(h=>{
-    h.re.lastIndex = 0; let m;
-    while((m = h.re.exec(text))){ ranges.push([m.index, m.index+m[0].length]); found.set(h.label,(found.get(h.label)||{h,n:0})); found.get(h.label).n++; if(m[0].length===0) h.re.lastIndex++; }
-  });
-  ranges.sort((a,b)=>a[0]-b[0]);
-  const merged=[]; ranges.forEach(r=>{ const last=merged[merged.length-1]; if(last && r[0]<=last[1]) last[1]=Math.max(last[1],r[1]); else merged.push([...r]); });
-  let html='', pos=0;
-  merged.forEach(([a,b])=>{ html+=esc(text.slice(pos,a))+'<mark>'+esc(text.slice(a,b))+'</mark>'; pos=b; });
-  html+=esc(text.slice(pos));
-  const out=document.getElementById('det-out');
-  out.innerHTML = text.trim() ? html.replace(/\n/g,'<br>') : '<span style="color:var(--ink-soft)">Paste something above, like a work email or a post you liked.</span>';
-  const words = (text.match(/\b[\w']+\b/g)||[]).length;
-  const hits = ranges.length;
-  const score = words ? Math.min(99, Math.round((hits / Math.max(words,20)) * 420)) : 0;
-  document.getElementById('det-num').innerHTML = score+'<small>%</small>';
-  document.getElementById('det-bar').style.width = score+'%';
-  let v;
-  if(!words) v="Nothing to check yet.";
-  else if(score<10) v="Smells like a human. Probably you.";
-  else if(score<35) v="A few robot habits snuck in. Happens to the best of us.";
-  else if(score<65) v="Half human, half toaster.";
-  else v="Beep boop. This text has never touched grass.";
-  document.getElementById('det-verdict').textContent = v;
-  const list=document.getElementById('det-list'); list.innerHTML='';
-  [...found.values()].sort((a,b)=>b.n-a.n).forEach(({h,n})=>{
-    const li=document.createElement('li'); li.innerHTML='<b>'+esc(h.label)+'</b> ×'+n+'. '+esc(h.why); list.appendChild(li);
-  });
-}
-document.getElementById('det-run').addEventListener('click', runDetector);
-document.getElementById('det-clear').addEventListener('click', ()=>{ document.getElementById('det-in').value=''; runDetector(); document.getElementById('det-in').focus(); });
-runDetector();
-
-/* ---------- I'm stuck ---------- */
-const BUSTERS = [
-  ["Finish the sentence: “The worst thing about Mondays is…”","a started sentence is easier than a blank one.","not knowing where to start"],
-  ["Describe your shoe. One minute, any way you like.","an easy subject warms up your writing muscles.","not knowing where to start"],
-  ["Write the worst opening line ever. On purpose.","it kills the pressure to be perfect.","trying to be perfect on the first go"],
-  ["Tell your idea in exactly five words.","it forces you to find the heart of it.","not knowing where to start"],
-  ["Write it like a text to your best mate.","we're relaxed with friends, so the real voice comes out.","fear of being bad"],
-  ["Write the same idea set on a bus, at the beach, or in space.","a new setting shakes loose new ideas.","not knowing where to start"],
-  ["List 3 sounds, 3 smells and 3 things you can see right now.","your senses are a free idea machine.","not knowing where to start"],
-  ["Answer this: what would your cat say about you?","silly questions open the door your serious brain locked.","fear of being bad"],
-  ["Keep typing for 60 seconds. No stopping. “I don't know what to write” counts.","moving fingers wake up the brain.","trying to be perfect on the first go"],
-  ["Do a 30-second doodle, then write what's in it.","pictures come before words in your brain.","fear of being bad"]
-];
-let lastB = 0;
-document.getElementById('stuck-btn').addEventListener('click', ()=>{
-  let i; do { i = Math.floor(Math.random()*BUSTERS.length); } while(i===lastB); lastB=i;
-  const [t,w,f]=BUSTERS[i];
-  document.getElementById('stuck-task').textContent=t;
-  document.getElementById('stuck-why').innerHTML='<b>Why it works:</b> '+esc(w);
-  document.getElementById('stuck-fix').textContent='Fixes: '+f;
-});
-
-/* ---------- Learning profile ---------- */
-const PQ = [
-  {id:"see", multi:true, q:"When you learn something new, what helps most? (pick any)", opts:[
-    ["visual","Seeing pictures and diagrams"],["examples","Seeing lots of examples"],["hear","Hearing it explained"],["try","Just trying it"]]},
-  {id:"goes", q:"How many tries does it usually take before something clicks?", opts:[
-    ["2","Once or twice"],["5","A few times"],["10","Lots, sometimes 10 or more"]]},
-  {id:"help", q:"How do you like help while you write?", opts:[
-    ["alone","Leave me alone until I'm done"],["hint","A hint if I'm stuck"],["coach","A coach beside me the whole way"]]},
-  {id:"feel", q:"How do you feel about writing right now?", opts:[
-    ["avoid","I avoid it"],["ok","It's okay"],["rusty","I like it but I'm rusty"],["love","I love it"]]},
-  {id:"want", q:"What do you most want writing for?", opts:[
-    ["hsc","School or HSC"],["work","Work"],["funny","Being funny"],["stories","Telling stories"],["english","Everyday English"]]}
-];
-const EXAMPLE = {see:["visual","examples"], goes:"10", help:"coach", feel:"rusty", want:"stories"};
-const pq = document.getElementById('pq');
-PQ.forEach((item,qi)=>{
-  const fs=document.createElement('fieldset');
-  fs.innerHTML='<legend><span>'+(qi+1)+'</span>'+esc(item.q)+'</legend><div class="opts">'+
-    item.opts.map(([v,l])=>'<label><input type="'+(item.multi?'checkbox':'radio')+'" name="'+item.id+'" id="pq-'+item.id+'-'+v+'" value="'+v+'"'+([].concat(EXAMPLE[item.id]).includes(v)?' checked':'')+'><span>'+esc(l)+'</span></label>').join('')+'</div>';
-  pq.appendChild(fs);
-});
-let touched=false;
-function renderProfile(){
-  const a={}; PQ.forEach(p=>{ const cs=[...pq.querySelectorAll('input[name="'+p.id+'"]:checked')].map(c=>c.value); a[p.id]=p.multi?cs:(cs[0]||null); });
-  const names={visual:"The Picture Thinker",examples:"The Example Collector",hear:"The Listener",try:"The Have-a-Go"};
-  const goes=+a.goes||5;
-  let name = a.see.length>1 ? (a.see.length===2&&a.see.includes("visual")&&a.see.includes("examples") ? "The Show-Me Learner" : "The All-Rounder") : (names[a.see[0]]||"The Wrimbler");
-  document.getElementById('pr-eyebrow').textContent = touched ? "Your profile · change it any time" : "Example profile · change any answer";
-  document.getElementById('pr-name').textContent = name + (goes>=10 ? " who Practises" : "");
-  document.getElementById('pr-sum').textContent = goes>=10
-    ? "You get there by doing it again and again. That's how most real writers work, so Play again is unlimited and we cheer every round."
-    : "No wrong answers. Here's how Wrimble would set up your daily practice.";
-  const L=[];
-  const see={visual:["Lessons start with a picture","Each idea comes with a simple drawing or diagram before any words."],
-    examples:["Three or four examples, not one","You'll see the same idea done several ways (funny, sad, short, long) so you can spot what they share."],
-    hear:["Read-aloud lessons","Every lesson and why note has an audio button, so you can listen first and read after."],
-    try:["Write first, lesson after","You get the challenge straight away. The lesson pops up once you've had a go."]};
-  a.see.forEach(k=>L.push(see[k]));
-  if(goes>=10) L.push(["Unlimited Play again rounds","Each try sits beside the last, so you can watch the idea get clearer. Try 10 earns a Stuck With It badge, and even then the coach never rewrites a word."]);
-  else if(goes>=5) L.push(["A few rounds per lesson","Try the idea three or four ways before moving on."]);
-  else L.push(["Quick rounds, then move on","One or two goes, then a fresh challenge so you don't get bored."]);
-  const hp={alone:["Quiet mode","No pop-ups while you write. Your why notes arrive when you press Done."],
-    hint:["Hints on tap","Press “I'm stuck” for a nudge or a 60-second warm-up. Otherwise we stay out of the way."],
-    coach:["A coach beside you the whole way","The coach walks you through the challenge step by step, asking a question at each step instead of giving answers."]}[a.help];
-  if(hp) L.push(hp);
-  const fl={avoid:["Tiny starts","Your first week is 3-minute drafts that begin with a sentence to finish. No blank pages."],
-    ok:["Steady 10-minute workouts","The standard daily draft, with a streak to keep you going."],
-    rusty:["A warm-up week","Easy, fun prompts to get the muscles moving before the harder stuff."],
-    love:["Harder challenges sooner","Stretch prompts and The Pile from week one."]}[a.feel];
-  if(fl) L.push(fl);
-  const wt={hsc:["HSC Module C track","Unseen stimulus practice, building up to 40-minute Exam Mode."],
-    work:["Everyday & Work track","Emails, posts and messages that sound like you."],
-    funny:["Funny track","Surprise, timing and kind roasts."],
-    stories:["Storytelling track","Personal stories, pitches and toasts."],
-    english:["English for Life track","Natural, everyday written English."]}[a.want];
-  if(wt) L.push(wt);
-  document.getElementById('pr-list').innerHTML = L.map(([t,d])=>'<li><span><b>'+esc(t)+'</b>'+esc(d)+'</span></li>').join('');
-  const n=Math.min(goes,10); const filled=Math.max(1,Math.round(n*0.6));
-  document.getElementById('pr-dots').innerHTML = Array.from({length:n},(_,i)=>'<i class="'+(i<filled?'f':'')+'"></i>').join('');
-  document.getElementById('pr-loop').textContent = goes>=10 ? "round "+filled+". keep going, as many as you need." : "round "+filled+" of "+n+".";
-}
-pq.addEventListener('change',()=>{touched=true;renderProfile();});
-renderProfile();
-/* ---------- Waitlist (Netlify Forms) ---------- */
-document.getElementById('join-form').addEventListener('submit', ()=>{
-  // Plain form post to Netlify. Just attach the learning profile answers first.
-  document.getElementById('join-profile').value = touched ? PQ.map(p=>p.id+': '+[...pq.querySelectorAll('input[name="'+p.id+'"]:checked')].map(c=>c.value).join('+')).join('; ') : 'not answered';
-});
-</script>
 
 </body>
 </html>
