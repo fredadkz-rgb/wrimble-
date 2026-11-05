@@ -313,6 +313,15 @@ footer small{color:var(--ink-soft)}
 .bubble .be{margin-top:8px;padding-top:8px;border-top:1px dashed color-mix(in srgb, var(--paper) 35%, transparent);font-size:.88rem;font-style:italic;color:color-mix(in srgb, var(--paper) 85%, transparent)}
 .bubble .be b{font-style:normal}
 .bubble .be:empty{display:none}
+.bubble .bwho{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--pencil);margin-bottom:4px;display:flex;align-items:center;gap:6px}
+.bubble .bwho::before{content:"";flex:0 0 auto;width:20px;height:20px;border-radius:50%;background:var(--pencil) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 34 20'%3E%3Cpath d='M2 14 C6 2, 10 2, 12 10 S18 18, 21 8 S28 2, 32 12' fill='none' stroke='%23E0474C' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E") center/14px no-repeat}
+.bubble .bq{font-size:1.15rem}
+.bubble .bhint{margin-top:8px;font:inherit;font-size:.85rem;font-weight:700;background:none;border:0;padding:0;color:var(--pencil);text-decoration:underline;cursor:pointer}
+.bubble.collapsed .bh,.bubble.collapsed .be{display:none}
+.bubble:not(.collapsed) .bhint,.bubble.nohint .bhint{display:none}
+.wordbox.quiet{display:none}
+.wopen{font:inherit;font-size:.88rem;font-weight:700;background:none;border:0;padding:0;margin-left:12px;color:var(--ink);text-decoration:underline;cursor:pointer}
+.lessonmini{display:none!important}
 .bubble{transition:left .25s ease, top .25s ease}
 .aiwait{font-size:.9rem;color:var(--muted,inherit);font-style:italic;margin-bottom:8px}
 .exline{display:block;margin-top:6px;font-size:.92rem;font-style:italic}
@@ -383,13 +392,15 @@ footer small{color:var(--ink-soft)}
             <textarea id="tw-text" placeholder="Start anywhere. The first sentence is allowed to be terrible." style="margin-top:8px"></textarea>
             <div class="bubble" id="tw-bubble" role="status" hidden>
               <button class="bx" id="tw-bx" type="button" aria-label="Close question">×</button>
+              <p class="bwho" id="tw-bwho">Coach asks</p>
               <p class="bq" id="tw-bq"></p>
               <p class="bh" id="tw-bh"></p>
               <p class="be" id="tw-be"></p>
+              <button class="bhint" id="tw-bhint" type="button">Need a hint?</button>
               <button class="btn sm pencil" id="tw-bgo" type="button" hidden style="margin-top:10px">See the why ↓</button>
             </div>
           </div>
-          <div class="wordbox" id="tw-words" aria-live="polite">
+          <div class="wordbox quiet" id="tw-words" aria-live="polite">
             <div class="wtop">
               <p class="wh" id="tw-wh">Word ideas show up here as you type. Double-click any word in your writing to look it up.</p>
               <form id="tw-wform" role="search"><label class="sr" for="tw-wq" style="position:absolute;left:-9999px">Look up a word</label><input id="tw-wq" placeholder="Look up a word" autocomplete="off"><button class="btn sm alt" type="submit">Look up</button></form>
@@ -397,7 +408,7 @@ footer small{color:var(--ink-soft)}
             <div class="wchips" id="tw-wchips"></div>
             <p class="wmean" id="tw-wmean" hidden></p>
           </div>
-          <label class="coachtoggle"><input type="checkbox" id="tw-coach" checked> Coach walks along with me (questions, ideas, examples)</label>
+          <label class="coachtoggle"><input type="checkbox" id="tw-coach" checked> Coach asks me questions as I write</label><button type="button" class="wopen" id="tw-wopen">Look up a word</button>
           <div class="edbar">
             <span id="tw-count">0 words</span>
             <span class="toast" id="tw-toast" role="status"></span>
@@ -542,7 +553,7 @@ async function pasteReview(){
   const items=[], seen=new Set();
   const short=x=>{x=x.trim(); return x.length>48 ? x.slice(0,45).replace(/\s+\S*$/,'')+'…' : x;};
   for(const sent of all){
-    if(items.length>=3) break;
+    if(items.length>=2) break;
     const q=questionFor(sent, all); if(!q) continue;
     const qs=q.multi ? q.multi[0] : q.q; const key=[].concat(q.k)[0].split(':')[0];
     if(seen.has(key)) continue; seen.add(key);
@@ -555,9 +566,8 @@ async function pasteReview(){
   }
   if(ta.value!==v) return;
   if(!items.length) items.push('Which line here is the most yours? Start your rewrite from that one.');
-  showBubble({k:'paste', multi:[head, ...items.slice(0,4)], h:'Answer one by adding to it in your own words.', ex:null}, v.replace(/\s+$/,'').length);
-  $('tw-bq').firstElementChild.style.cssText='display:block;font-size:.85rem;opacity:.8;margin-bottom:4px';
-  [...$('tw-bq').children].slice(1).forEach(x=>x.style.marginTop='6px');
+  showBubble({k:'paste', who:'Coach read your paste', multi:items.slice(0,2), h:'Answer one by adding to it in your own words.', ex:null}, v.replace(/\s+$/,'').length);
+  [...$('tw-bq').children].forEach((x,i)=>{ if(i) x.style.marginTop='8px'; });
 }
 ta.addEventListener('drop', e=>{ e.preventDefault(); toast("No dropping text in. Type it, ugly is fine."); });
 ta.addEventListener('input', ()=>{ const n=words(ta.value).length; $('tw-count').textContent=n+(n===1?' word':' words'); if(!timerStart && n>0) startTimer(); });
@@ -612,7 +622,7 @@ function questionFor(sent, all){
   const v=sent.match(VAGUE); if(v) return pick('vague:'+v[0].toLowerCase(), "“"+v[0]+"” how? What could we see, hear or taste?", "Add one real detail right here.");
   const k=sent.match(KNOBS); if(k) return pick('knob', "Is there a stronger word that wouldn't need “"+k[0].toLowerCase()+"”?", "Think of the word you'd use if you were angry, scared or delighted.");
   if(all.length===1 && /^(this is|i am going to|i'm going to|once upon|it was a)/i.test(sent)) return pick('warm', "What's the exact moment it started?", "You could jump straight there. Readers like landing in the middle.");
-  const sq=storyQuestions(sent, all); if(sq.length) return {k:sq.map(x=>x.k), multi:sq.map(x=>x.q), h:"Pick one and add it, here or in your next sentence."};
+  const sq=storyQuestions(sent, all); if(sq.length) return {k:sq[0].k, q:sq[0].q, h:"Add it here or in your next sentence, in your own words."};
   const pl=sent.match(PLACES); if(pl && !SENSES.test(sent)) return pick('place:'+pl[0].toLowerCase(), "What can you hear in the "+pl[0].toLowerCase()+"?", "One sound or smell puts the reader right there with you.");
   const pe=sent.match(PEOPLE); if(pe) return pick('person:'+pe[0].toLowerCase(), "What's one thing "+(/^(he|she|they)$/i.test(pe[0])?pe[0].toLowerCase():"the "+pe[0].toLowerCase())+" is holding or wearing?", "A tiny detail makes a person real. Add it after their name.");
   if(all.length>=3 && !/["“”]/.test(all.join(' '))) return pick('dialogue', "What did someone actually say?", "Add their exact words in quote marks. Real speech brings a scene to life.");
@@ -622,6 +632,9 @@ function questionFor(sent, all){
 }
 function showBubble(q, endPos){
   const b=$('tw-bubble'); if(q.multi){ $('tw-bq').innerHTML=q.multi.map(x=>'<span style="display:block">'+esc(x)+'</span>').join(''); } else { $('tw-bq').textContent=q.q; } $('tw-bh').innerHTML=q.h?(q.go?'':'<b>Idea:</b> ')+esc(q.h):''; const ex=q.ex===null?'':(q.ex||pickEx(catOf(q.k))); $('tw-bgo').hidden=!q.go; $('tw-be').innerHTML=ex?'<b>Example from a different '+(LEVEL==='everyday'?'story':'topic')+':</b> '+esc(ex):''; b.hidden=false;
+  $('tw-bwho').textContent = q.who || (q.go ? 'Coach' : 'Coach asks');
+  const hasHint = !q.go && (($('tw-bh').textContent||'').trim() || ($('tw-be').textContent||'').trim());
+  b.classList.toggle('collapsed', !!hasHint); b.classList.toggle('nohint', !hasHint);
   const xy=caretXY(ta, endPos); const wrapW=ta.offsetWidth;
   const bw=Math.min(340, wrapW-16); let left=Math.max(8, Math.min(xy.x-24, wrapW-bw-8));
   b.style.left=left+'px'; b.style.top=(xy.y+8)+'px'; b.style.setProperty('--tip', Math.max(10, Math.min(xy.x-left-8, bw-28))+'px');
@@ -632,6 +645,7 @@ function hideBubble(){ $('tw-bubble').hidden=true; }
 $('tw-bgo').addEventListener('click', ()=>{ hideBubble(); const p=$('tw-whypanel'); const r=p.getBoundingClientRect();
   if(r.top<0 || r.top>innerHeight-120) p.scrollIntoView({block:'start', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
   p.classList.remove('flash'); void p.offsetWidth; p.classList.add('flash'); });
+$('tw-bhint').addEventListener('click', ()=>{ $('tw-bubble').classList.remove('collapsed'); });
 $('tw-bx').addEventListener('click', ()=>{ hideBubble(); ta.focus(); });
 /* ---- walking coach: follows the caret, mid-sentence too ---- */
 // Examples are always from a DIFFERENT story, so the writer sees how, then writes their own.
@@ -711,7 +725,8 @@ async function askAI(body, ms){
 let walkSeq=0;
 async function walkCheck(){
   if(!$('tw-coach').checked) return;
-  const v=ta.value, pos=ta.selectionStart; if(pos!==v.length || !v.trim()) return;
+  const v=ta.value, pos=ta.selectionStart; if(!v.trim()) return;
+  if(v.slice(pos).trim()){ return editCheck(v, pos); }
   if(Date.now()-lastBubbleAt<4500) return;
   const all=sentences(v); const endsSentence=/[.!?]["”]?\s*$/.test(v);
   const frag=endsSentence ? '' : v.slice(Math.max(v.search(/[^.!?]*$/),0));
@@ -729,9 +744,36 @@ async function walkCheck(){
   if(q) showBubble(q, Math.min(anchor, ta.value.replace(/\s+$/,'').length));
 }
 
+/* Editing an earlier line: notice fixes and keep pushing it further. */
+let prevVal=''; const deeperUsed=new Set();
+const DEEPER=[
+  ["Can you cut one word from this line and keep the meaning?","Shorter lines usually hit harder."],
+  ["Which word here could be more exact?","Swap a general word for a specific one: a brand, a name, a number."],
+  ["Could this line end on its strongest word?","The last word is the one readers remember."],
+  ["Can you add one sound, smell or texture here?","Sight is the default. Another sense makes it feel real."],
+  ["What would someone watching have noticed?","An outside detail can prove what you felt."],
+  ["Is there a more surprising way to say this?","Expected words slide past. A surprise makes readers stop."],
+  ["Could a verb do more work here?","A strong verb can replace a word like very or really."],
+  ["Read it out loud. Where do you trip?","Your ear finds clunky bits your eye skips."]
+];
+function spanAt(v,pos){ const re=/[^.!?\n]+[.!?]*["\u201d]?/g; let m; while((m=re.exec(v))){ if(pos>=m.index && pos<=m.index+m[0].length) return {t:m[0].trim(), end:m.index+m[0].replace(/\s+$/,'').length, i:m.index}; } return null; }
+function hadIssue(t){ return TELL.test(t)||VAGUE.test(t)||!!t.match(KNOBS); }
+function editCheck(v,pos){
+  const sp=spanAt(v,pos); if(!sp || words(sp.t).length<3) return;
+  const old=spanAt(prevVal, Math.min(sp.i+1, prevVal.length)); const before=old?old.t:null;
+  if(before===sp.t) return;
+  const all=sentences(v);
+  if(before && hadIssue(before) && !hadIssue(sp.t)){
+    const nxt=DEEPER.find(d=>!deeperUsed.has(d[0]))||DEEPER[0]; deeperUsed.add(nxt[0]);
+    return showBubble({k:'fix:'+sp.t.slice(0,30), who:'Coach', q:'Nice fix. That line is sharper now.', h:'Want to push it further? '+nxt[0], ex:''}, sp.end);
+  }
+  let q=questionFor(sp.t, all);
+  if(!q){ const d=DEEPER.find(d=>!deeperUsed.has(d[0])); if(!d) return; deeperUsed.add(d[0]); q={k:'deep:'+d[0], who: before?'Coach · it can still get better':'Coach asks', q:d[0], h:d[1], ex:''}; }
+  showBubble(q, sp.end);
+}
 ta.addEventListener('input', ()=>{
   if(!$('tw-bubble').hidden && ta.value.length-bubbleStartLen>45) hideBubble();
-  clearTimeout(pauseT); pauseT=setTimeout(walkCheck, 1100);
+  clearTimeout(pauseT); pauseT=setTimeout(async()=>{ await walkCheck(); prevVal=ta.value; }, 1100);
 });
 ta.addEventListener('scroll', hideBubble);
 $('tw-coach').addEventListener('change', ()=>{ if(!$('tw-coach').checked) hideBubble(); });
@@ -849,13 +891,11 @@ function showNotes(text){
   const flat = iss.find(i=>i.q) || iss[0];
   if(flat) notes.push(['','Goes flat',(flat.q?'<q>'+esc(flat.q)+'</q>':'')+esc(flat.why)+' I won’t rewrite it. You decide what to do.']);
   else notes.push(['c','Nothing goes flat','No robot phrases, no blurry words, no volume knobs. That’s rare. So the next mission is harder.']);
-  const cc=challengeCheck(text, ss); if(cc) notes.push(['','Challenge check',esc(cc)]);
   // pick next mission: first issue that isn't the one just completed, else cut
   const extra = P.type==='funny' ? ['three','keyword','cut'] : P.type==='story' ? ['circle','cut','rhythm'] : ['cut','rhythm'];
   const nextK = (iss.find(i=>i.k!==mission)||{}).k || extra.find(k=>k!==mission && !(k==='circle' && hasCallback(ss)));
   mission = nextK;
   notes.push(['c','Next mission',esc(MISSIONS[nextK].t)]);
-  notes.push(['','Curious',esc(P.q[(round-1)%P.q.length])]);
   $('tw-notes').innerHTML=notes.map(([c,t,h])=>'<div class="note2"><span class="tag '+c+'">'+t+'</span><div>'+h+'</div></div>').join('');
 }
 async function aiNotes(text, missionText){
@@ -868,9 +908,7 @@ async function aiNotes(text, missionText){
   if(missionText && r.mission_status!=='none') n.push([r.mission_status==='done'?'c':'', r.mission_status==='done'?'Mission done':'Mission not yet','<q>'+esc(missionText)+'</q>'+esc(r.mission_note)]);
   n.push(['c','Best line',(r.best_line_quote?'<q>'+esc(r.best_line_quote)+'</q>':'')+esc(r.best_line_why)]);
   if(r.flat_quote||r.flat_why) n.push(['','Goes flat',(r.flat_quote?'<q>'+esc(r.flat_quote)+'</q>':'')+esc(r.flat_why)+' I won’t rewrite it. You decide what to do.']);
-  const cc=challengeCheck(text, sentences(text)); if(cc) n.push(['','Challenge check',esc(cc)]);
   n.push(['c','Next mission',esc(r.next_mission)+(r.example?'<span class="exline"><b>Example from a different story:</b> '+esc(r.example)+'</span>':'')]);
-  if(r.curious) n.push(['','Curious',esc(r.curious)]);
   aiMission=r.next_mission; pastMissions.push(r.next_mission);
   box.innerHTML=n.map(([c,t,h])=>'<div class="note2"><span class="tag '+c+'">'+t+'</span><div>'+h+'</div></div>').join('');
 }
@@ -934,7 +972,7 @@ async function showMeaning(word, local){
 }
 async function showWord(raw, why){
   const w=(raw||'').toLowerCase().replace(/[^a-z'-]/g,''); if(!w || w===wCur) return; wCur=w;
-  const k=wKey(w); wMean.hidden=true; wChips.innerHTML='';
+  const k=wKey(w); wMean.hidden=true; wChips.innerHTML=''; wBox.classList.remove('quiet');
   if(k){
     wH.innerHTML=(why==='typed'?'Instead of <q>'+wEsc(w)+'</q>, you could try:':'Other words for <q>'+wEsc(w)+'</q>:')+' <span style="font-weight:400;color:var(--ink-soft)">(tap one to see what it means)</span>';
     WORDS[k].forEach(([a,m])=>{const b=document.createElement('button');b.type='button';b.textContent=a;b.dataset.w=a;b.setAttribute('aria-pressed','false');b.onclick=()=>showMeaning(a,m);wChips.appendChild(b);});
@@ -954,6 +992,7 @@ ta.addEventListener('input',()=>{clearTimeout(wTimer);wTimer=setTimeout(()=>{
 },500);});
 ta.addEventListener('dblclick',()=>{const s=ta.value.slice(ta.selectionStart,ta.selectionEnd).trim(); if(s && !/\s/.test(s)){wCur='';showWord(s,'picked');}});
 ta.addEventListener('select',()=>{const s=ta.value.slice(ta.selectionStart,ta.selectionEnd).trim(); if(s && !/\s/.test(s) && s.length<30){wCur='';showWord(s,'picked');}});
+$('tw-wopen').addEventListener('click',()=>{ wBox.classList.remove('quiet'); wH.textContent='Type a word to see what it means and other words you could use.'; $('tw-wq').focus(); });
 $('tw-wform').addEventListener('submit',e=>{e.preventDefault();const q=$('tw-wq').value.trim().split(/\s+/)[0]; if(q){wCur='';showWord(q,'picked');}});
 
 /* ---------- Pro tips (our own words). Rotates, never repeats until all are seen. ---------- */
