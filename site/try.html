@@ -549,7 +549,7 @@ let GROUP=lsGet('wrimble-group','');
 if(!TOPICS[GROUP]){ const old=lsGet('wrimble-level',''); GROUP=old==='hsc'?'senior':old==='uni'?'uni':'adults'; }
 const qs=new URLSearchParams(location.search), qg=qs.get('group')||({hsc:'senior',uni:'uni',everyday:'adults'}[qs.get('level')]||'');
 if(TOPICS[qg]) GROUP=qg;
-let LEVEL=GROUPS[GROUP], SUBJECT='any', CUR=null, countedThis=false, leveledUp=0;
+let LEVEL=GROUPS[GROUP], SUBJECT=(qs.get('kind')||'any').replace(/[^a-z]/g,'')||'any', CUR=null, countedThis=false, leveledUp=0;
 let PROG={}; try{PROG=JSON.parse(lsGet('wrimble-prog','{}'))||{};}catch(e){PROG={};}
 const prog=()=>PROG[GROUP]||(PROG[GROUP]={lv:1,max:1,done:0,seen:[]});
 const saveProg=()=>lsSet('wrimble-prog',JSON.stringify(PROG));

@@ -290,6 +290,25 @@ footer small{color:var(--ink-soft)}
 <style>
 /* short home page */
 .s-hero{padding-block:36px 56px}
+.s-learn{padding-block:28px 40px}
+.s-learn .tag{font-family:var(--font-display);font-weight:800;font-size:clamp(1.9rem,4.2vw,3rem);letter-spacing:-0.035em;line-height:1.05;margin:0}
+.s-learn .tag .hl{color:var(--margin)}
+.s-learn .sub{margin:8px 0 0;font-size:1.1rem;color:var(--ink-soft)}
+.chars{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;margin-top:22px;padding:0;list-style:none}
+.chars a{display:flex;flex-direction:column;align-items:flex-start;gap:4px;height:100%;box-sizing:border-box;padding:14px;border:2px solid #1D2858;border-radius:14px;color:#1D2858;text-decoration:none;box-shadow:3px 3px 0 #1D2858;transition:transform .15s,box-shadow .15s}
+.chars a:hover,.chars a:focus-visible{transform:translate(-2px,-2px) rotate(-1deg);box-shadow:5px 5px 0 #1D2858}
+.chars svg{width:84px;height:84px;margin:-6px 0 0 -6px}
+.chars a:hover svg{animation:wob .5s ease-in-out}
+@keyframes wob{0%,100%{transform:rotate(0)}30%{transform:rotate(-8deg)}70%{transform:rotate(6deg)}}
+.chars b{font-family:var(--font-display);font-size:1.08rem;line-height:1.15}
+.chars span{font-size:.88rem;line-height:1.35}
+.chars .c1{background:#FFF3C4}.chars .c2{background:#FFE1D6}.chars .c3{background:#DDF3EA}.chars .c4{background:#ECE6FF}.chars .c5{background:#DCEFFD}
+.chars .c6{background:#FDE3EE}.chars .c7{background:#E3F6E1}.chars .c8{background:#FFEBCF}.chars .c9{background:#E1F2FF}.chars .c10{background:#EEF6DC}
+.s-learn .ages{margin:14px 0 0;font-size:.95rem;color:var(--ink-soft)}
+@media (max-width:900px){.chars{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:560px){.chars{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.chars a{padding:12px}.chars svg{width:52px;height:52px}}
+@media (prefers-reduced-motion:reduce){.chars a,.chars a:hover svg{transition:none;animation:none}}
+
 .s-hero .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
 .s-hero h1{font-size:clamp(2.6rem,5.6vw,4.3rem);font-weight:800;letter-spacing:-0.045em}
 .s-hero h1 .strike{position:relative;white-space:nowrap}
@@ -352,6 +371,23 @@ footer small{color:var(--ink-soft)}
 .tryline{margin:12px 0 0;font-size:1.02rem}
 .s-more{margin-top:18px;font-weight:700}
 .s-why{padding-block:8px 8px}
+.s-learn .head{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.s-learn .wrim{width:110px;height:110px;flex:0 0 auto}
+.s-learn .wrim .wave{transform-origin:89px 62px;animation:wave 2.4s ease-in-out infinite}
+@keyframes wave{0%,60%,100%{transform:rotate(0)}70%{transform:rotate(-14deg)}80%{transform:rotate(10deg)}90%{transform:rotate(-8deg)}}
+.s-learn .say{position:relative;background:var(--card);border:2px solid var(--ink);border-radius:16px;padding:10px 16px;font-family:var(--font-hand);font-size:1.45rem;line-height:1.15;max-width:420px;margin:0}
+.s-learn .say::before{content:"";position:absolute;left:-11px;top:24px;border:10px solid transparent;border-right-color:var(--ink);border-left:0}
+.chars i{font-style:normal;font-family:var(--font-hand);font-weight:700;font-size:1.15rem;color:#E0474C;line-height:1;margin-top:-6px}
+.s-feel{padding-block:24px 8px}
+.s-feel .note{position:relative;max-width:760px;margin:0 auto;background:#FFF1B8;color:#1D2858;border-radius:6px;padding:30px 30px 26px;transform:rotate(-1deg);box-shadow:0 10px 24px rgba(0,0,0,.12)}
+.s-feel .note::before{content:"";position:absolute;top:-12px;left:50%;width:110px;height:24px;margin-left:-55px;background:rgba(255,255,255,.65);transform:rotate(2deg)}
+.s-feel .q{margin:0;font-family:var(--font-display);font-weight:800;font-size:clamp(1.7rem,3.8vw,2.5rem);line-height:1.1;letter-spacing:-0.02em}
+.s-feel .p{margin:12px 0 0;font-size:1.15rem;line-height:1.5}
+.s-feel .h{margin:14px 0 0;font-family:var(--font-hand);font-size:1.8rem;line-height:1.1;color:#C2373C}
+.s-feel .s{margin:10px 0 0;font-size:.95rem;opacity:.8}
+@media (prefers-reduced-motion:reduce){.s-learn .wrim .wave{animation:none}}
+@media (max-width:560px){.s-learn .say::before{display:none}.chars svg{width:64px;height:64px}}
+
 .s-why-line{margin:0;font-family:var(--font-display);font-weight:800;font-size:clamp(1.8rem,4vw,2.8rem);line-height:1.1;letter-spacing:-0.02em}
 .s-why-sub{margin:10px 0 0;font-size:1.2rem;color:var(--ink-soft)}
 @media (max-width:900px){.s-hero .grid{grid-template-columns:1fr}.mock{transform:none}.s-steps,.s-tiles,.s-price{grid-template-columns:1fr}.s-faq{grid-template-columns:1fr}}
@@ -395,6 +431,7 @@ footer small{color:var(--ink-soft)}
   <section class="s-hero">
     <div class="wrap inset grid">
       <div>
+        <p class="hand" style="margin:0 0 6px">Where creativity takes over.</p>
         <h1>Write <span class="strike">badly.</span><br>Write it <span class="hl">yourself.</span></h1>
         <p class="big">A writing coach that never writes for you.</p>
         <p class="small-sub">10 minutes a day. You type. It asks questions and shows you why your writing works.</p>
@@ -427,10 +464,35 @@ footer small{color:var(--ink-soft)}
     </div>
   </section>
 
-  <section class="s-sec s-why">
+  <section class="s-learn" aria-labelledby="learn-h">
     <div class="wrap inset">
-      <p class="s-why-line">AI is doing more of our writing. <span class="hl">Use it or lose it.</span></p>
-      <p class="s-why-sub">Creativity is a muscle. Wrimble keeps yours in shape, 10 minutes a day.</p>
+      <p class="tag" id="learn-h">Wrimble. <span class="hl">Where creativity takes over.</span></p>
+      <div class="head"><svg class="wrim" viewBox="0 0 120 120" aria-hidden="true"><path d="M60 22c18 0 30 12 31 30 1 17-3 34-12 40-9 6-29 6-38 0-9-6-13-23-12-40 1-18 13-30 31-30z" fill="#E0474C" stroke="#1D2858" stroke-width="3"/><path d="M40 20c5-8 10-8 12 0s8 8 10 0 9-8 12 0" fill="none" stroke="#1D2858" stroke-width="3.5" stroke-linecap="round"/><circle cx="49" cy="56" r="7" fill="#fff" stroke="#1D2858" stroke-width="2.5"/><circle cx="71" cy="56" r="7" fill="#fff" stroke="#1D2858" stroke-width="2.5"/><circle cx="50" cy="57" r="3.2" fill="#1D2858"/><circle cx="72" cy="57" r="3.2" fill="#1D2858"/><path d="M47 72c5 7 21 7 26 0" fill="none" stroke="#1D2858" stroke-width="3" stroke-linecap="round"/><circle cx="40" cy="70" r="4" fill="#FF9FA2"/><circle cx="80" cy="70" r="4" fill="#FF9FA2"/><g class="wave"><path d="M89 62c8-4 13-12 14-20" fill="none" stroke="#1D2858" stroke-width="3.5" stroke-linecap="round"/><circle cx="104" cy="38" r="5.5" fill="#E0474C" stroke="#1D2858" stroke-width="3"/></g><path d="M31 66c-7 4-10 10-10 16" fill="none" stroke="#1D2858" stroke-width="3.5" stroke-linecap="round"/><path d="M50 95v10M70 95v10" stroke="#1D2858" stroke-width="3.5" stroke-linecap="round"/></svg><p class="say">Hi, I’m Wrim! I’ll never write a word for you. But I’ll cheer like mad when you do.</p></div>
+      <p class="sub">Whatever you want to write, learn it here. You write every word.</p>
+      <ul class="chars">
+        <li><a class="c1" href="try.html?kind=funny"><svg viewBox="0 0 80 80" aria-hidden="true"><path d="M40 22c11 0 19 7 20 18 1 10-2 22-8 26-6 3-18 3-24 0-6-4-9-16-8-26 1-11 9-18 20-18z" fill="#FFD84D" stroke="#1D2858" stroke-width="2.5"/><path d="M30 41c2-3 5-3 7 0M43 41c2-3 5-3 7 0" fill="none" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round"/><path d="M32 47h16c0 6-4 9-8 9s-8-3-8-9z" fill="#1D2858"/><path d="M36 53c2-2 6-2 8 0" fill="none" stroke="#E0474C" stroke-width="2"/><path d="M26 44c-2 3-2 5 0 6 2-1 2-3 0-6zM54 44c-2 3-2 5 0 6 2-1 2-3 0-6z" fill="#6EC1E4"/><text x="58" y="22" font-family="Bricolage Grotesque,sans-serif" font-weight="800" font-size="11" fill="#1D2858">HA</text><text x="8" y="28" font-family="Bricolage Grotesque,sans-serif" font-weight="800" font-size="9" fill="#1D2858">ha</text></svg><i>Gigi</i><b>Write funny</b><span>Make people laugh on purpose.</span></a></li>
+        <li><a class="c2" href="try.html?kind=funny&amp;group=adults"><svg viewBox="0 0 80 80" aria-hidden="true"><path d="M40 22c11 0 19 7 20 18 1 10-2 22-8 26-6 3-18 3-24 0-6-4-9-16-8-26 1-11 9-18 20-18z" fill="#FF9F80" stroke="#1D2858" stroke-width="2.5"/><circle cx="33" cy="40" r="3.4" fill="#1D2858"/><circle cx="47" cy="40" r="3.4" fill="#1D2858"/><circle cx="34.2" cy="38.8" r="1.1" fill="#fff"/><circle cx="48.2" cy="38.8" r="1.1" fill="#fff"/><path d="M33 49c3 4 11 4 14 0" fill="none" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round"/><path d="M60 50l8-14" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/><circle cx="69" cy="33" r="5" fill="#9AA3C7" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M56 52c2 1 4 0 4-2" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg><i>Mick</i><b>Tell jokes</b><span>Set-ups, punchlines and timing.</span></a></li>
+        <li><a class="c3" href="try.html?kind=story"><svg viewBox="0 0 80 80" aria-hidden="true"><path d="M40 22c11 0 19 7 20 18 1 10-2 22-8 26-6 3-18 3-24 0-6-4-9-16-8-26 1-11 9-18 20-18z" fill="#8FD3B6" stroke="#1D2858" stroke-width="2.5"/><circle cx="33" cy="40" r="3.4" fill="#1D2858"/><circle cx="47" cy="40" r="3.4" fill="#1D2858"/><circle cx="34.2" cy="38.8" r="1.1" fill="#fff"/><circle cx="48.2" cy="38.8" r="1.1" fill="#fff"/><path d="M35 50c2 2 8 2 10 0" fill="none" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round"/><path d="M20 60c7-3 14-3 20 1 6-4 13-4 20-1v12c-7-3-14-3-20 1-6-4-13-4-20-1z" fill="#fff" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M40 61v12" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M60 18l2 5 5 1-5 2-2 5-2-5-5-2 5-1z" fill="#FFD84D" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/></svg><i>Paige</i><b>Write a story</b><span>Openings, twists and endings.</span></a></li>
+        <li><a class="c4" href="try.html?kind=story&amp;group=adults"><svg viewBox="0 0 80 80" aria-hidden="true"><path d="M40 22c11 0 19 7 20 18 1 10-2 22-8 26-6 3-18 3-24 0-6-4-9-16-8-26 1-11 9-18 20-18z" fill="#B9A6F2" stroke="#1D2858" stroke-width="2.5"/><circle cx="33" cy="40" r="3.4" fill="#1D2858"/><circle cx="47" cy="40" r="3.4" fill="#1D2858"/><circle cx="34.2" cy="38.8" r="1.1" fill="#fff"/><circle cx="48.2" cy="38.8" r="1.1" fill="#fff"/><ellipse cx="40" cy="51" rx="3.5" ry="4" fill="#1D2858"/><rect x="58" y="44" width="16" height="28" rx="2" fill="#fff" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M61 50h10M61 55h10M61 60h10M61 65h7" stroke="#1D2858" stroke-width="1.5"/><path d="M52 18l10 6-2 3-10-6z" fill="#F6C51B" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg><i>Chapter</i><b>Write a novel</b><span>One scene a day, chapter by chapter.</span></a></li>
+        <li><a class="c5" href="try.html?kind=dialogue"><svg viewBox="0 0 80 80" aria-hidden="true"><path d="M40 22c11 0 19 7 20 18 1 10-2 22-8 26-6 3-18 3-24 0-6-4-9-16-8-26 1-11 9-18 20-18z" fill="#7FC8F8" stroke="#1D2858" stroke-width="2.5"/><circle cx="33" cy="40" r="3.4" fill="#1D2858"/><circle cx="47" cy="40" r="3.4" fill="#1D2858"/><circle cx="34.2" cy="38.8" r="1.1" fill="#fff"/><circle cx="48.2" cy="38.8" r="1.1" fill="#fff"/><path d="M31 50c3-3 6-1 9-1s6-2 9 1" fill="none" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M26 25h28M30 25l2-13h16l2 13" fill="#1D2858" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M31 21h18" stroke="#E0474C" stroke-width="3"/></svg><i>Mr Hat</i><b>Create characters</b><span>People readers can’t forget.</span></a></li>
+        <li><a class="c6" href="try.html?kind=poem"><svg viewBox="0 0 80 80" aria-hidden="true"><path d="M40 22c11 0 19 7 20 18 1 10-2 22-8 26-6 3-18 3-24 0-6-4-9-16-8-26 1-11 9-18 20-18z" fill="#F7A8C8" stroke="#1D2858" stroke-width="2.5"/><circle cx="33" cy="40" r="3.4" fill="#1D2858"/><circle cx="47" cy="40" r="3.4" fill="#1D2858"/><circle cx="34.2" cy="38.8" r="1.1" fill="#fff"/><circle cx="48.2" cy="38.8" r="1.1" fill="#fff"/><path d="M35 50c2 2 8 2 10 0" fill="none" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round"/><path d="M62 30V16l8-2v14" fill="none" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="59.5" cy="30" r="3" fill="#1D2858"/><circle cx="67.5" cy="28" r="3" fill="#1D2858"/><path d="M14 22v10" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="11.5" cy="32" r="2.6" fill="#1D2858"/></svg><i>Lyra</i><b>Poems and lyrics</b><span>Rhythm, rhyme and the perfect word.</span></a></li>
+        <li><a class="c7" href="try.html?kind=dialogue"><svg viewBox="0 0 80 80" aria-hidden="true"><path d="M40 22c11 0 19 7 20 18 1 10-2 22-8 26-6 3-18 3-24 0-6-4-9-16-8-26 1-11 9-18 20-18z" fill="#A6E3A1" stroke="#1D2858" stroke-width="2.5"/><circle cx="33" cy="40" r="3.4" fill="#1D2858"/><circle cx="47" cy="40" r="3.4" fill="#1D2858"/><circle cx="34.2" cy="38.8" r="1.1" fill="#fff"/><circle cx="48.2" cy="38.8" r="1.1" fill="#fff"/><ellipse cx="40" cy="51" rx="3.5" ry="4" fill="#1D2858"/><path d="M52 10h22a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4h-14l-6 5v-5h-2a4 4 0 0 1-4-4V14a4 4 0 0 1 4-4z" fill="#fff" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><circle cx="58" cy="19" r="1.6" fill="#1D2858"/><circle cx="63" cy="19" r="1.6" fill="#1D2858"/><circle cx="68" cy="19" r="1.6" fill="#1D2858"/></svg><i>Chatter</i><b>Write dialogue</b><span>Real talk, with what’s not said.</span></a></li>
+        <li><a class="c8" href="try.html?kind=persuade"><svg viewBox="0 0 80 80" aria-hidden="true"><path d="M40 22c11 0 19 7 20 18 1 10-2 22-8 26-6 3-18 3-24 0-6-4-9-16-8-26 1-11 9-18 20-18z" fill="#FFC46B" stroke="#1D2858" stroke-width="2.5"/><circle cx="33" cy="40" r="3.4" fill="#1D2858"/><circle cx="47" cy="40" r="3.4" fill="#1D2858"/><circle cx="34.2" cy="38.8" r="1.1" fill="#fff"/><circle cx="48.2" cy="38.8" r="1.1" fill="#fff"/><path d="M32 47h16c0 6-4 9-8 9s-8-3-8-9z" fill="#1D2858"/><path d="M36 53c2-2 6-2 8 0" fill="none" stroke="#E0474C" stroke-width="2"/><path d="M58 44l14-8v22l-14-8z" fill="#E0474C" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><rect x="54" y="43" width="5" height="8" rx="1" fill="#fff" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><path d="M75 42l4-2M75 47h5M75 52l4 2" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg><i>Boomer</i><b>Speeches</b><span>Persuade a room, win the argument.</span></a></li>
+        <li><a class="c9" href="try.html?group=senior"><svg viewBox="0 0 80 80" aria-hidden="true"><path d="M40 22c11 0 19 7 20 18 1 10-2 22-8 26-6 3-18 3-24 0-6-4-9-16-8-26 1-11 9-18 20-18z" fill="#9FD8FF" stroke="#1D2858" stroke-width="2.5"/><circle cx="33" cy="40" r="6" fill="#fff" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><circle cx="47" cy="40" r="6" fill="#fff" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><path d="M39 40h2" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/><circle cx="33" cy="40" r="2.4" fill="#1D2858"/><circle cx="47" cy="40" r="2.4" fill="#1D2858"/><path d="M35 50c2 2 8 2 10 0" fill="none" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round"/><rect x="24" y="58" width="32" height="16" rx="2" fill="#E0474C" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><text x="40" y="70" text-anchor="middle" font-family="Bricolage Grotesque,sans-serif" font-weight="800" font-size="10" fill="#fff">HSC</text></svg><i>Swotty</i><b>HSC English</b><span>Module C, discursive and reflections.</span></a></li>
+        <li><a class="c10" href="try.html?group=uni"><svg viewBox="0 0 80 80" aria-hidden="true"><path d="M40 22c11 0 19 7 20 18 1 10-2 22-8 26-6 3-18 3-24 0-6-4-9-16-8-26 1-11 9-18 20-18z" fill="#C8E68C" stroke="#1D2858" stroke-width="2.5"/><circle cx="33" cy="40" r="3.4" fill="#1D2858"/><circle cx="47" cy="40" r="3.4" fill="#1D2858"/><circle cx="34.2" cy="38.8" r="1.1" fill="#fff"/><circle cx="48.2" cy="38.8" r="1.1" fill="#fff"/><path d="M33 49c3 4 11 4 14 0" fill="none" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round"/><path d="M22 22l18-8 18 8-18 8z" fill="#1D2858" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M30 26v6c6 3 14 3 20 0v-6" fill="#1D2858" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M58 22v10" stroke="#1D2858" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="58" cy="34" r="2" fill="#F6C51B"/></svg><i>Prof</i><b>Uni essays</b><span>Clear claims, sharp paragraphs.</span></a></li>
+      </ul>
+      <p class="ages">For kids (8+), teens, HSC, uni and grown-ups. 1,000+ challenges that start easy and get harder.</p>
+    </div>
+  </section>
+
+  <section class="s-sec s-feel">
+    <div class="wrap inset">
+      <div class="note">
+        <p class="q">Remember the first story you ever wrote?</p>
+        <p class="p">Nobody marked it. No AI wrote it. It was weird and wonderful and completely yours. You were proud of it.</p>
+        <p class="h">Wrimble brings that feeling back.</p>
+        <p class="s">AI is writing more of the world’s words every day. Keep yours. Use it or lose it.</p>
+      </div>
     </div>
   </section>
 
