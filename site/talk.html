@@ -64,6 +64,14 @@ h1{font:800 clamp(1.9rem,6vw,2.6rem)/1.05 var(--font-display);margin:18px 0 6px}
 .notes li{display:flex;justify-content:space-between;gap:10px;align-items:center}
 .notes button{font:700 .78rem var(--font-body);white-space:nowrap;border:1.5px solid #1D2858;background:#fff;color:#1D2858;border-radius:99px;padding:3px 10px;cursor:pointer}
 .write textarea{width:100%;min-height:220px;font:inherit;line-height:32px;padding:0 12px;border:2px solid var(--ink);border-radius:12px;background:var(--card);color:var(--ink)}
+.mic{font-size:1.25rem;line-height:1;padding:11px 14px}
+.mic.on{background:var(--margin);border-color:var(--margin);color:#fff;animation:pulse 1.2s infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 6px rgba(224,71,76,.25)}}
+.voicebar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;margin:4px 0 8px;font-size:.88rem;color:var(--ink-soft)}
+.voicebar label{display:flex;gap:6px;align-items:center}
+.voicebar select{font:inherit;font-size:.85rem;max-width:210px;padding:3px 6px;border-radius:6px;border:1.5px solid var(--ink-soft);background:var(--paper);color:var(--ink)}
+.spoken{font-weight:400;text-transform:none;letter-spacing:0;margin-left:6px}
+.timing{display:block;margin-top:4px;font-size:.75rem;color:var(--ink-soft)}
 .care{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(20,24,48,.45)}
 .care .carebox{max-width:460px;width:100%;max-height:90vh;overflow:auto;background:#fff;color:#1D2858;border-radius:16px;padding:22px;border:2px solid #1D2858}
 .care h3{margin:0 0 8px;font-size:1.3rem}.care p{margin:0 0 12px}.care ul{list-style:none;padding:0;margin:0 0 12px}
@@ -91,9 +99,17 @@ h1{font:800 clamp(1.9rem,6vw,2.6rem)/1.05 var(--font-display);margin:18px 0 6px}
   <p class="nudge" id="nudge" hidden></p>
 
   <div class="composer">
-    <textarea id="say" placeholder="Type to Wrimble…" aria-label="Your message"></textarea>
+    <textarea id="say" placeholder="Type or tap the mic and talk…" aria-label="Your message"></textarea>
+    <button class="btn alt mic" id="mic" type="button" aria-label="Talk out loud" title="Talk out loud">🎤</button>
     <button class="btn" id="send" type="button">Send</button>
   </div>
+  <div class="voicebar" id="voicebar">
+    <label><input type="checkbox" id="aloud" checked> Wrimble talks back</label>
+    <label>Voice <select id="voice"></select></label>
+    <label><input type="checkbox" id="autosend" checked> Send when I stop talking</label>
+    <button class="btn alt" id="vlog" type="button" style="padding:4px 10px;font-size:.8rem" disabled>Download voice test log</button>
+  </div>
+  <p class="small" id="voicenote">Voice test: uses the speech built into your browser (best in Chrome or Safari). Your browser may send the audio to Google or Apple to turn it into text. For adult testing only.</p>
 
   <section class="ideas" id="ideas">
     <h2>Your ideas</h2>
@@ -132,7 +148,7 @@ function addMsg(role, text, extra){
   const d=document.createElement('div'); d.className='msg '+(role==='user'?'u':'w');
   if(role==='user'){
     const i=history.length-1;
-    d.innerHTML='<span class="who">You</span>'+esc(text)+'<br><button class="pin" type="button">Keep this idea</button>';
+    d.innerHTML='<span class="who">You'+(extra&&extra.spoken?'<span class="spoken">· 🎤 spoken</span>':'')+'</span>'+esc(text)+'<br><button class="pin" type="button">Keep this idea</button>';
     d.querySelector('.pin').onclick=e=>togglePin(i, e.currentTarget);
   } else {
     const mv = extra && extra.move && MOVES[extra.move] ? '<span class="move">· '+MOVES[extra.move]+'</span>' : '';
@@ -168,7 +184,8 @@ async function send(){
   const text=$('say').value.trim(); if(!text || busy) return;
   if(CARE_RX.test(text)){ showCare(); return; }
   busy=true; $('send').disabled=true; $('say').value='';
-  history.push({role:'user', text}); userTurns++; const mine=addMsg('user', text); renderIdeas();
+  const wasSpoken=spokenTurn; spokenTurn=false; const listenMs=wasSpoken?Math.round(micEnd-micStart):null; const tAsk=performance.now();
+  history.push({role:'user', text}); userTurns++; const mine=addMsg('user', text, {spoken:wasSpoken}); renderIdeas();
   const th=document.createElement('div'); th.className='thinking'; th.textContent='Wrimble is thinking…'; $('chat').appendChild(th);
   let r=null, status=0;
   try{
@@ -181,7 +198,12 @@ async function send(){
   if(r && r.care==='wellbeing'){ history.pop(); userTurns--; mine.remove(); showCare(r); }
   else if(r && r.reply){
     history.push({role:'assistant', text:r.reply});
-    addMsg('assistant', r.reply, {move:r.move, note:(r.care && r.care!=='none') ? r.care_note : ''});
+    const aiMs=Math.round(performance.now()-tAsk);
+    const wd=addMsg('assistant', r.reply, {move:r.move, note:(r.care && r.care!=='none') ? r.care_note : ''});
+    const entry={turn:userTurns, spoken:wasSpoken, listen_ms:listenMs, you:text, wrimble:r.reply, move:r.move, ai_ms:aiMs, speech_start_ms:null};
+    vlog.push(entry); $('vlog').disabled=false;
+    const tm=document.createElement('span'); tm.className='timing'; tm.textContent='reply in '+(aiMs/1000).toFixed(1)+'s'; wd.appendChild(tm);
+    speak(((r.care && r.care!=='none' && r.care_note) ? r.care_note+' ' : '')+r.reply, ms=>{ entry.speech_start_ms=ms; if(ms!=null) tm.textContent+=' · started speaking '+(ms/1000).toFixed(1)+'s later'; });
     if(r.ready_to_write){ $('start').disabled=false; $('start').textContent='Start writing ✨'; $('nudge').hidden=false; $('nudge').textContent='Sounds like you’ve got enough to start. Keep the ideas that are yours, then press Start writing.'; }
   } else {
     history.pop(); userTurns--; mine.remove();
@@ -191,6 +213,50 @@ async function send(){
   if(userTurns>=12 && $('write').hidden){ $('nudge').hidden=false; $('nudge').textContent='Lots of good talking. Writing is where it gets real: start with what you’ve got, even if it’s messy.'; }
   busy=false; $('send').disabled=false; $('say').focus();
 }
+
+/* ---- Voice test: browser speech in, browser speech out. Nothing new signed up for. ---- */
+const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+const synth = window.speechSynthesis;
+const vlog = []; let rec=null, listening=false, heardText='', micStart=0, micEnd=0, spokenTurn=false;
+if(!SR){ $('mic').hidden=true; $('voicenote').textContent='This browser can\u2019t listen. Try Chrome or Safari for the voice test. Wrimble can still talk back.'; }
+if(!synth){ $('aloud').checked=false; $('aloud').disabled=true; }
+function pickVoices(){
+  if(!synth) return;
+  const vs=synth.getVoices().filter(v=>/^en/i.test(v.lang));
+  const score=v=>(/en-AU/i.test(v.lang)?4:/en-GB/i.test(v.lang)?2:0)+(/natural|enhanced|premium|neural|google/i.test(v.name)?3:0);
+  vs.sort((a,b)=>score(b)-score(a));
+  const cur=$('voice').value;
+  $('voice').innerHTML=vs.map(v=>'<option value="'+esc(v.name)+'">'+esc(v.name+' ('+v.lang+')')+'</option>').join('');
+  if(cur) $('voice').value=cur;
+}
+if(synth){ pickVoices(); synth.onvoiceschanged=pickVoices; }
+function speak(text, done){
+  if(!synth || !$('aloud').checked){ done&&done(null); return; }
+  synth.cancel();
+  const u=new SpeechSynthesisUtterance(text.replace(/[\u2018\u2019]/g,"'"));
+  const v=synth.getVoices().find(v=>v.name===$('voice').value); if(v){ u.voice=v; u.lang=v.lang; } else u.lang='en-AU';
+  u.rate=1.02; const t0=performance.now(); let started=null;
+  u.onstart=()=>{ started=Math.round(performance.now()-t0); };
+  u.onend=u.onerror=()=>done&&done(started);
+  synth.speak(u);
+}
+function startMic(){
+  if(!SR || listening) return;
+  if(synth) synth.cancel();
+  rec=new SR(); rec.lang='en-AU'; rec.interimResults=true; rec.continuous=false; rec.maxAlternatives=1;
+  heardText=''; micStart=performance.now(); listening=true; $('mic').classList.add('on'); $('mic').setAttribute('aria-label','Stop listening');
+  const before=$('say').value.trim();
+  rec.onresult=e=>{ let t=''; for(const r of e.results) t+=r[0].transcript; heardText=t.trim(); $('say').value=(before?before+' ':'')+heardText; };
+  rec.onerror=e=>{ if(e.error==='not-allowed'||e.error==='service-not-allowed') alert('Wrimble needs microphone permission for the voice test. Check the mic icon in the address bar.'); };
+  rec.onend=()=>{ listening=false; micEnd=performance.now(); $('mic').classList.remove('on'); $('mic').setAttribute('aria-label','Talk out loud');
+    if(heardText){ spokenTurn=true; if($('autosend').checked) send(); else $('say').focus(); } };
+  try{ rec.start(); }catch(e){ listening=false; $('mic').classList.remove('on'); }
+}
+$('mic').onclick=()=>{ if(listening){ rec.stop(); } else startMic(); };
+$('vlog').onclick=()=>{
+  const blob=new Blob([JSON.stringify({ran:new Date().toISOString(), browser:navigator.userAgent, voice:$('voice').value, level:$('lvl').value, engine:$('eng').value, turns:vlog},null,2)],{type:'application/json'});
+  const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='wrimble-voice-test-'+Date.now()+'.json'; a.click();
+};
 $('send').onclick=send;
 $('say').addEventListener('keydown', e=>{ if(e.key==='Enter' && !e.shiftKey){ e.preventDefault(); send(); } });
 </script>
