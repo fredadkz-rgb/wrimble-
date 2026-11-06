@@ -59,7 +59,32 @@ const Why = z.object({
 const Teach = z.object({
   verdict: z.enum(["got_it", "partly", "not_yet"]).describe("Does their explanation show they understand WHY the technique works on a reader?"),
   got_right: z.string().describe("What they explained well, in their own words, one sentence. Quote at most a few of their words. Empty if nothing yet."),
+  missing: z.string().describe("If partly or not_yet: what is missing from their explanation AND why that idea matters, one or two plain sentences, without giving the full answer. Empty if got_it."),
   nudge: z.string().describe("If partly or not_yet: one question that points them at the missing idea without giving it away. If got_it: one question that stretches them, like when breaking the technique works better."),
+});
+const Score = z.object({
+  score: z.number().int().min(1).max(4).describe("1 = not yet, 2 = getting there, 3 = solid, 4 = excellent for this writer's level."),
+  why: z.string().describe("One short sentence, quoting a few of their words where possible."),
+});
+const Assess = z.object({
+  purpose_met: z.enum(["yes", "partly", "not_yet"]).describe("Does the piece do what the challenge asked AND have the effect it is going for (funny pieces amuse, stories make us care, persuasive pieces convince)?"),
+  purpose_why: z.string().describe("Why, in one or two plain sentences."),
+  purpose: Score.describe("Achieves its purpose for the challenge."),
+  reader: Score.describe("Grabs and holds a reader."),
+  choices: Score.describe("Deliberate choices that suit this piece. Spare, minimal writing can score 4 if every choice works. Decoration that doesn't serve the piece scores low."),
+  voice: Score.describe("Sounds like a real person, not generic."),
+  strongest_quote: z.string().describe("The single strongest phrase, copied exactly from their text, max 15 words. Empty if none."),
+  growth: z.string().describe("If an earlier no-help piece is given: one honest sentence on what has changed in what the writing achieves. Else empty."),
+  next_focus: z.string().describe("The one thing that would most help this piece achieve its purpose next time. Never write words for them."),
+});
+const Demo = z.object({
+  results: z.array(z.object({
+    key: z.string().describe("The technique key you were given."),
+    demonstrated: z.enum(["yes", "partly", "not_yet"]).describe("Does the piece use this technique EFFECTIVELY, so it actually helps the piece do its job? Avoiding a bad habit is not enough on its own."),
+    evidence_quote: z.string().describe("Exact words from their piece that show it, max 15 words. Empty if none."),
+    missing: z.string().describe("If partly or not_yet: what is missing, in one plain sentence. Never give them words. Empty if yes."),
+    why_it_matters: z.string().describe("Why it matters for THIS piece's reader, one sentence."),
+  })),
 });
 const Notes = z.object({
   mission_status: z.enum(["done", "not_yet", "none"]).describe("Did this round do the mission? 'none' if there was no mission."),
@@ -162,6 +187,53 @@ ${text}
       if (!r.parsed_output) return json({ error: "No answer" }, 502);
       return json(r.parsed_output);
     }
+    if (b.mode === "assess") {
+      const r = await client.messages.parse({
+        model: NOTES_MODEL,
+        max_tokens: 2500,
+        thinking: { type: "adaptive" },
+        output_config: { effort: "medium", format: zodOutputFormat(Assess) },
+        system: RULES + "\n\nWho you're coaching: " + levelOf(b),
+        messages: [{ role: "user", content:
+`No-help round assessment. The writer wrote this with no coach, hints or word ideas, to show what they can do on their own.
+Judge whether the writing ACHIEVES ITS PURPOSE, not whether it follows rules. Don't reward sensory detail, long words or variety for their own sake: a plain, minimalist piece can be excellent, and a descriptive one can fail. Ask: does it do what the challenge asked, and does it land on a reader? Be honest and kind. Never rewrite.
+Challenge: ${clip(b.prompt, 300)}
+Challenge rule: ${clip(b.rule, 200)}
+<piece>
+${text}
+</piece>
+${b.first ? "<earlier_no_help_piece>\n" + clip(b.first, 3000) + "\n</earlier_no_help_piece>\nEarlier challenge: " + clip(b.first_prompt, 300) : ""}` }],
+      });
+      const a = r.parsed_output;
+      if (!a) return json({ error: "No answer" }, 502);
+      if (a.strongest_quote && !text.includes(a.strongest_quote)) a.strongest_quote = "";
+      return json(a);
+    }
+    if (b.mode === "demo") {
+      const list = (Array.isArray(b.techniques) ? b.techniques : []).slice(0, 3).map((t) => `- key "${clip(t.key, 20)}": ${clip(t.name, 80)} (about ${clip(t.about, 160)})`).join("\n");
+      if (!list) return json({ error: "No techniques" }, 400);
+      const r = await client.messages.parse({
+        model: NOTES_MODEL,
+        max_tokens: 2500,
+        thinking: { type: "adaptive" },
+        output_config: { effort: "medium", format: zodOutputFormat(Demo) },
+        system: RULES + "\n\nWho you're coaching: " + levelOf(b),
+        messages: [{ role: "user", content:
+`Skill check. ${b.solo ? "The writer wrote this in a NEW challenge with NO coach, hints or word ideas." : "The writer wrote this with the coach available, aiming to use the technique."}
+For each technique, judge whether the writer genuinely DEMONSTRATES it: used well, in a way that helps this piece achieve its purpose for a reader. Don't award it for word counts, adjectives, sensory words or simply avoiding a habit. A technique crammed in that doesn't serve the piece is "partly". Be honest and kind. Never rewrite or suggest their words.
+Challenge: ${clip(b.prompt, 300)}
+Challenge rule: ${clip(b.rule, 200)}
+Techniques:
+${list}
+<piece>
+${text}
+</piece>` }],
+      });
+      const d = r.parsed_output;
+      if (!d) return json({ error: "No answer" }, 502);
+      d.results.forEach((x) => { if (x.evidence_quote && !text.includes(x.evidence_quote)) x.evidence_quote = ""; });
+      return json(d);
+    }
     if (b.mode === "teach") {
       const r = await client.messages.parse({
         model: BUBBLE_MODEL,
@@ -173,7 +245,7 @@ ${text}
 `Teach It Back. The writer has just practised this technique and is explaining, in their own words, why it works.
 Technique: ${clip(b.technique, 120)}
 Question they were asked: ${clip(b.question, 200)}
-Judge understanding, not spelling or grammar. Reward their own words and examples over textbook phrasing. A good answer says what it does to the reader. Be honest but warm. Never write the explanation for them.
+Only say got_it if they explain, in their own words, WHY the technique works on a reader (not just what it is). Judge understanding, not spelling or grammar. Reward their own words and examples over textbook phrasing. A good answer says what it does to the reader. Be honest but warm. Never write the explanation for them.
 <their_explanation>
 ${clip(b.answer, 1200)}
 </their_explanation>` }],

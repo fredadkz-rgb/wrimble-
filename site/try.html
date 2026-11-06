@@ -13,6 +13,9 @@
 .tib .tibfb.ok{border-left-color:#2e7d32}.tib .tibfb.part{border-left-color:#c79100}
 .tib .tibmodel{margin-top:10px;font-size:.93rem}
 body.solomode .tib{display:none!important}
+.note2.assess .asrow{display:grid;grid-template-columns:1fr auto;gap:2px 10px;align-items:baseline;margin-top:8px;font-size:.9rem}.note2.assess .asrow span:last-child{grid-column:1/-1;color:var(--ink-soft)}
+.note2.assess .dots{letter-spacing:2px;color:#2e7d32;white-space:nowrap}.note2.assess .asgrow{margin:8px 0 0;font-size:.92rem}
+
 .tib .tibstages{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0}.tib .tibstages span{padding:2px 9px;border-radius:99px;border:1.5px dashed var(--ink-soft);font-size:.78rem;color:var(--ink-soft)}.tib .tibstages span.on{border-style:solid;border-color:#2e7d32;background:#e5f4e4;color:#1b5e20;font-weight:700}
 
 .tib .tibline{margin:0 0 6px}.tib .tibsoft{color:var(--ink-soft);font-size:.88rem;margin:0}
@@ -1036,7 +1039,9 @@ async function aiNotes(text, missionText){
   if(r.flat_quote||r.flat_why) n.push(['','Goes flat',(r.flat_quote?'<q>'+esc(r.flat_quote)+'</q>':'')+esc(r.flat_why)+' I won’t rewrite it. You decide what to do.']);
   n.push(['c','Next mission',esc(r.next_mission)+(r.example?'<span class="exline"><b>Example from a different story:</b> '+esc(r.example)+'</span>':'')]);
   aiMission=r.next_mission; pastMissions.push(r.next_mission);
+  const keep=[...box.querySelectorAll('.assess,.stagecheck')];
   box.innerHTML=n.map(([c,t,h])=>'<div class="note2"><span class="tag '+c+'">'+t+'</span><div>'+h+'</div></div>').join('');
+  keep.reverse().forEach(k=>box.prepend(k));
 }
 /* ---------- Teach It Back: explain the technique in your own words. Checks understanding, never writes it for you. ---------- */
 const R=(x)=>new RegExp(x,'i');
@@ -1071,23 +1076,23 @@ function setupTeach(k){
 }
 function tibShowModel(){ const T=TEACH[tibKey]; $('tw-tibm').innerHTML='<b>How a writer explains it:</b> '+esc(T[3])+'<br><b>Break it when:</b> '+esc(T[5]); $('tw-tibm').hidden=false; $('tw-tibshow').hidden=true; }
 function tibFeedback(cls, html){ const f=$('tw-tibfb'); f.className='tibfb '+cls; f.innerHTML=html; f.hidden=false; }
-function tibResult(verdict, got, missing){
+function tibResult(verdict, got, missing, confirmed, why){
   const T=TEACH[tibKey];
   if(verdict==='got_it'){
-    setStage(tibKey,1);
+    if(confirmed) setStage(tibKey,1);
     $('tw-tiba').hidden=true; $('tw-tibgo').hidden=true; $('tw-tibskip').hidden=true; $('tw-tibq').hidden=true;
-    tibFeedback('ok','<div class="tibdone"><span class="tibtick">\u2713 Step 1 of 3: Understood</span><b class="tibname">'+esc(T[0])+'</b>'+stageBar(tibKey)
+    tibFeedback('ok','<div class="tibdone">'+(confirmed?'<span class="tibtick">\u2713 Step 1 of 3: Understood</span>':'<span class="tibtick">Looks right</span>')+'<b class="tibname">'+esc(T[0])+'</b>'+stageBar(tibKey)
       +'<p>'+esc(got)+'</p>'
       +'<p class="tibstretch"><b>Stretch:</b> '+esc(missing||'When might breaking this rule work better?')+'</p>'
       +'<p class="tibnext"><b>Next step, Applied:</b> use it in your own writing, in a different story. After that, <b>Independent</b>: use it in a no-help round, with no coach at all.</p>'
       +'<div class="tibrow"><button class="btn sm" type="button" id="tw-tibnew">Give me a different story</button></div>'
-      +'<p class="tibcount">'+stageLine()+'</p></div>');
+      +'<p class="tibcount">'+(confirmed?stageLine():'Practice mode: the coach confirms each step and saves your progress once it\u2019s switched on.')+'</p></div>');
     $('tw-tibnew').addEventListener('click', ()=>{ const k=tibKey; setPrompt(randPrompt(pi)); resetAll(); mission=k; $('tw-label').textContent='Round 1 · use it on your own: '+MISSIONS[k].t; ta.focus(); window.scrollTo({top: ta.getBoundingClientRect().top + scrollY - 140, behavior:'auto'}); });
     $('tw-tibshow').hidden=false;
   } else {
     tibFeedback(verdict==='partly'?'part':'',
-      (got?'<p class="tibline"><b>What you\u2019ve got:</b> '+esc(got)+'</p>':'<p class="tibline"><b>Not yet.</b> Your answer doesn\u2019t explain the key idea yet. This technique is about '+esc(T[6])+'.</p>')
-      +'<p class="tibline"><b>What’s missing:</b> '+esc(missing)+'</p>'
+      (got?'<p class="tibline"><b>What you\u2019ve got:</b> '+esc(got)+'</p>':why?'<p class="tibline"><b>Not yet.</b></p>':'<p class="tibline"><b>Not yet.</b> Your answer doesn\u2019t explain the key idea yet. This technique is about '+esc(T[6])+'.</p>')
+      +(why?'<p class="tibline"><b>What\u2019s missing:</b> '+esc(why)+'</p><p class="tibline"><b>Think about:</b> '+esc(missing)+'</p>':'<p class="tibline"><b>What\u2019s missing:</b> '+esc(missing)+'</p>')
       +'<p class="tibline tibsoft">Add to your answer above and try again.</p>');
     $('tw-tibgo').textContent='Try again'; $('tw-tibshow').hidden = tibTries<2;
     $('tw-tiba').focus();
@@ -1103,23 +1108,37 @@ $('tw-tibgo').addEventListener('click', async ()=>{
     const r=await askAI({mode:'teach', level:LEVEL, technique:T[0], question:T[1], answer:ans, text:ans}, 8000);
     $('tw-tibgo').disabled=false;
     if(k!==tibKey) return;
-    if(r && r.verdict){ tibResult(r.verdict, r.got_right, r.nudge); return; }
+    if(r && r.verdict){ tibResult(r.verdict, r.got_right, r.nudge, true, r.missing); return; }
   }
   const hit=T[2].filter(([re])=>re.test(ans));
   const got=hit.length ? 'You explained that '+hit.map(h=>h[1].trim()).join(' and ')+'.' : '';
   const verdict = hit.length===T[2].length ? 'got_it' : hit.length ? 'partly' : 'not_yet';
-  tibResult(verdict, got, verdict==='got_it' ? 'When might breaking this rule work better? Think of one, then tap “How a writer explains it” to compare.' : T[4]);
+  tibResult(verdict, got, verdict==='got_it' ? 'When might breaking this rule work better? Think of one, then tap “How a writer explains it” to compare.' : T[4], false);
 });
 $('tw-tibshow').addEventListener('click', tibShowModel);
 $('tw-tibskip').addEventListener('click', ()=>{ $('tw-tib').hidden=true; });
-function stageCheck(text, tried, prev, solo){
-  const t=lsTaught(); let msg='';
-  const ok=k=>{ if(k==='cut'&&!prev) return false; try{ return MISSIONS[k].ok(text, prev||text) && words(text).length>=15; }catch(e){ return false; } };
-  if(solo){ const ks=Object.keys(t).filter(k=>t[k]===2 && ok(k)); ks.forEach(k=>setStage(k,3)); if(ks.length) msg='Independent! You used '+ks.map(k=>'“'+TEACH[k][0]+'”').join(', ')+' with no coach at all.'; }
-  else if(tried && TEACH[tried] && t[tried]===1 && ok(tried) && setStage(tried,2)) msg='Applied! You used “'+TEACH[tried][0]+'” in your own writing. Next: do it in a no-help round.';
-  stageMsg=msg; if(msg) toast(msg);
+function stageNote(tag, html, ok){ const box=$('tw-notes'); if(box) box.insertAdjacentHTML('afterbegin','<div class="note2 stagecheck"><span class="tag '+(ok?'c':'')+'">'+tag+'</span><div>'+html+'</div></div>'); }
+let retryTech=null;
+async function stageCheck(text, tried, prev, solo){
+  const t=lsTaught();
+  const keys = solo ? Object.keys(t).filter(k=>t[k]===2&&TEACH[k]).slice(-3) : (tried && TEACH[tried] && t[tried]===1 ? [tried] : []);
+  if(!keys.length) return;
+  if(!aiOK){ stageNote(solo?'Independent':'Applied','The coach checks whether you really used “'+esc(TEACH[keys[0]][0])+'” well. It isn’t switched on yet, so this round wasn’t checked and nothing was marked.',false); return; }
+  const r=await askAI({mode:'demo', level:LEVEL, solo:!!solo, prompt:CUR.p, rule:CUR.rule, text, techniques:keys.map(k=>({key:k,name:TEACH[k][0],about:TEACH[k][6]}))}, 25000);
+  if(!r || !Array.isArray(r.results)) return;
+  const msgs=[];
+  r.results.filter(x=>keys.includes(x.key)).forEach(x=>{
+    const name=TEACH[x.key][0], stage=solo?3:2, tag=solo?'Independent':'Applied';
+    if(x.demonstrated==='yes'){
+      setStage(x.key,stage); msgs.push(tag+': '+name);
+      stageNote(tag+' ✓', '<b>'+esc(name)+'</b>'+(x.evidence_quote?'<q>'+esc(x.evidence_quote)+'</q>':' ')+esc(x.why_it_matters)+(solo?' You did it with no coach at all.':' Next: do it in a no-help round, with no coach.'), true);
+    } else {
+      if(!solo) retryTech=x.key;
+      stageNote('Not '+tag.toLowerCase()+' yet', '<b>'+esc(name)+'.</b> '+esc(x.missing)+' <b>Why it matters:</b> '+esc(x.why_it_matters)+(solo?' You’ll get another go in your next no-help round.':' Press Play again to have another go at it.')+(x.evidence_quote?'<q>'+esc(x.evidence_quote)+'</q>':''), false);
+    }
+  });
+  if(msgs.length) toast(msgs.join(' · ')+' ✓');
 }
-let stageMsg='';
 function renderVersions(){
   $('tw-versions').innerHTML = versions.map((v,i)=>'<div class="ver"><div class="vh"><span>Round '+(i+1)+'</span><span>'+words(v).length+' words</span></div><p>'+esc(v)+'</p></div>').join('');
   $('tw-versions').scrollLeft = 99999;
@@ -1131,10 +1150,9 @@ $('tw-done').addEventListener('click', ()=>{
   countProgress();
   const wasSolo=SOLO, tried=mission, prevV=versions.length>1?versions[versions.length-2]:null;
   soloDone(text);
-  stageCheck(text, tried, prevV, wasSolo);
   $('tw-res-h').textContent = round===1 ? "Here's the why." : "Round "+round+". Here's the why this time.";
   const askedMission = aiMission || (mission?MISSIONS[mission].t:''); usedAiMission=!!aiMission; aiMission=null;
-  showNotes(text); if(stageMsg) $('tw-notes').insertAdjacentHTML('afterbegin','<div class="note2"><span class="tag c">'+(stageMsg.startsWith('Independent')?'Independent':'Applied')+'</span><div>'+esc(stageMsg)+'</div></div>'); renderVersions(); if(document.body.classList.contains('solomode')) $('tw-tib').hidden=true; else setupTeach(mission);
+  showNotes(text); renderVersions(); retryTech=null; stageCheck(text, tried, prevV, wasSolo); if(document.body.classList.contains('solomode')) $('tw-tib').hidden=true; else setupTeach(mission);
   aiNotes(text, askedMission);
   $('tw-badge').hidden = round<10;
   $('tw-results').hidden=false; $('tw-notes').hidden=true; $('tw-results').querySelectorAll('.lede').forEach(x=>x.classList.add('res-hide')); $('tw-res-h').textContent='Your versions, side by side';
@@ -1163,6 +1181,7 @@ function openWhy(){
 function closeWhy(){ $('tw-whypanel').hidden=true; document.querySelector('.daycard').classList.remove('showwhy'); }
 $('tw-back').addEventListener('click', ()=>{ window.scrollTo({top: ta.getBoundingClientRect().top + scrollY - 140, behavior:'smooth'}); ta.focus({preventScroll:true}); });
 $('tw-again').addEventListener('click', ()=>{
+  if(retryTech){ mission=retryTech; aiMission=null; }
   closeWhy(); round++; ta.value=''; asked=new Set(); sentenceCount=0; hideBubble(); $('tw-count').textContent='0 words'; stopTimer();
   $('tw-label').textContent='Round '+round+' \u00b7 your mission: '+(aiMission||(mission?MISSIONS[mission].t:'try it a new way.'));
   ta.focus(); window.scrollTo({top: ta.getBoundingClientRect().top + scrollY - 140, behavior:'auto'});
@@ -1322,12 +1341,30 @@ function soloStats(text){
     tell:(text.match(new RegExp(TELL.source,'gi'))||[]).length,
     vary:Math.round(sd*10)/10 };
 }
+async function soloAssess(text, nth, first){
+  if(!aiOK) return;
+  const r=await askAI({mode:'assess', level:LEVEL, prompt:CUR.p, rule:CUR.rule, text, first:first?first.t:'', first_prompt:first?first.p:''}, 25000);
+  if(!r || !r.purpose_met) return;
+  const h=soloHist(); if(h[nth-1]){ h[nth-1].ai={p:r.purpose.score,r:r.reader.score,c:r.choices.score,v:r.voice.score,m:r.purpose_met}; lsW('wrimble-solo', h); }
+  const label={yes:'It does its job.',partly:'It partly does its job.',not_yet:'Not doing its job yet.'}[r.purpose_met];
+  const dots=n=>'●'.repeat(n)+'○'.repeat(4-n);
+  const rows=[['Does what it set out to do',r.purpose],['Grabs a reader',r.reader],['Choices that suit it',r.choices],['Sounds like you',r.voice]].map(([k,x])=>'<div class="asrow"><b>'+k+'</b> <span class="dots" aria-label="'+x.score+' of 4">'+dots(x.score)+'</span><span>'+esc(x.why)+'</span></div>').join('');
+  const html='<div class="note2 assess"><span class="tag c">No-help round '+nth+'</span><div><b>'+esc(label)+'</b> '+esc(r.purpose_why)
+    +(r.strongest_quote?'<q>'+esc(r.strongest_quote)+'</q>':'')+rows
+    +(r.growth?'<p class="asgrow"><b>Since your first no-help round:</b> '+esc(r.growth)+'</p>':'')
+    +'<p class="asgrow"><b>Next focus:</b> '+esc(r.next_focus)+'</p></div></div>';
+  const box=$('tw-notes'); if(box){ const old=box.querySelector('.assess'); if(old) old.remove(); box.insertAdjacentHTML('afterbegin', html); }
+  toast('The coach has read your no-help round. Open the why to see it.');
+}
 function soloDone(text){
   if(!SOLO){ lsW('wrimble-solo-since', lsJ('wrimble-solo-since',0)+1); return; }
   const st=soloStats(text), h=soloHist(), first=h[0], prev=h[h.length-1];
-  h.push(Object.assign({d:Date.now(), g:GROUP}, st)); lsW('wrimble-solo', h.slice(-60)); lsW('wrimble-solo-since',0); lsW('wrimble-solo-snooze',0);
+  const met=!challengeCheck(text, sentences(text));
+  h.push(Object.assign({d:Date.now(), g:GROUP, met}, st)); lsW('wrimble-solo', h.slice(-60));
+  soloAssess(text, h.length, lsJ('wrimble-solo-first',null));
+  if(!first){ lsW('wrimble-solo-first', {t:text.slice(0,3000), p:CUR.p}); } lsW('wrimble-solo-since',0); lsW('wrimble-solo-snooze',0);
   endSolo();
-  if(!first){ soloMsg={who:'Coach · your starting point', q:'That’s your first no-help round. Nice work.', h:'It’s saved as your starting point. Every few challenges you’ll do another one, and Wrimble will show you what’s changed: more specific details, fewer vague words, more variety in your sentences.'}; return; }
+  if(!first){ soloMsg={who:'Coach · your starting point', q:'That’s your first no-help round. Nice work.', h:'It’s saved as your starting point. Every few challenges you’ll do another one, and Wrimble will show you what’s changed.'}; return; }
   const ups=[], per=x=>x.w?x:{w:1};
   const r=(a,k)=>a[k]/Math.max(a.w,1)*100;
   if(r(st,'spec')>r(first,'spec')+0.5) ups.push('more specific details ('+first.spec+' then, '+st.spec+' now)');
@@ -1335,8 +1372,9 @@ function soloDone(text){
   if(st.tell<first.tell) ups.push('less telling, more showing');
   if(st.vary>first.vary+0.8) ups.push('more variety in your sentence lengths');
   const nth=h.length;
-  soloMsg={who:'Coach · no-help round '+nth, q: ups.length?'You did that on your own, and it shows.':'Done, all on your own.',
-    h: ups.length ? 'Compared with your first no-help round: '+ups.slice(0,3).join(', ')+'. That’s you getting better without the coach.' : 'No big change from your first no-help round yet. That’s normal: independent skill grows over weeks, not days. Keep going.'};
+  const task = met ? 'You stuck to the challenge. ' : 'This one drifted from the challenge (check the rule). ';
+  soloMsg={who:'Coach · no-help round '+nth, q: ups.length?'You did that on your own.':'Done, all on your own.',
+    h: task + (ups.length ? 'Habits that changed since your first no-help round: '+ups.slice(0,3).join(', ')+'.' : 'No big change in your habits since your first no-help round. Independent skill grows over weeks, not days.') + ' These are simple signals, not a mark: they can\u2019t tell whether a piece works.'+(aiOK?' The coach is reading it properly now\u2026':'')};
 }
 window.__soloReady=true; soloCheckDue();
 </script>
