@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Talk to Wrimble</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Caveat:wght@600&display=swap">
+<style>
+:root{
+  --paper:#FBFBF6; --paper-2:#F1F3EC; --ink:#1D2858; --ink-soft:#4B557F; --rule:#D3DDEE; --margin:#E0474C;
+  --pencil:#F6C51B; --card:#FFFFFF; --good:#1F7A4D;
+  --font-display:"Bricolage Grotesque","Arial Black",system-ui,sans-serif;
+  --font-body:"Atkinson Hyperlegible","Segoe UI",system-ui,sans-serif;
+  --font-hand:"Caveat","Comic Sans MS",cursive;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ --paper:#141932; --paper-2:#1B2140; --ink:#E9ECF8; --ink-soft:#A9B0D3; --rule:#262E55; --margin:#FF6B6F; --card:#1C2246; --good:#5CD39A; color-scheme:dark; }
+}
+:root[data-theme="dark"]{ --paper:#141932; --paper-2:#1B2140; --ink:#E9ECF8; --ink-soft:#A9B0D3; --rule:#262E55; --margin:#FF6B6F; --card:#1C2246; --good:#5CD39A; color-scheme:dark; }
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.55 var(--font-body);
+  background-image:linear-gradient(to right,transparent 46px,var(--margin) 46px,var(--margin) 48px,transparent 48px),repeating-linear-gradient(to bottom,transparent 0,transparent 31px,var(--rule) 31px,var(--rule) 32px);}
+main{max-width:760px;margin:0 auto;padding:20px 16px 40px 64px}
+@media (max-width:560px){ main{padding-left:58px;padding-right:14px} }
+.top{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.logo{font:800 1.5rem/1 var(--font-display);color:var(--ink);text-decoration:none}
+.badge{font:700 .75rem/1 var(--font-body);letter-spacing:.06em;text-transform:uppercase;padding:5px 10px;border-radius:99px;background:var(--pencil);color:#1D2858}
+h1{font:800 clamp(1.9rem,6vw,2.6rem)/1.05 var(--font-display);margin:18px 0 6px}
+.lead{margin:0 0 14px;color:var(--ink-soft)}
+.hand{font:600 1.35rem/1 var(--font-hand);color:var(--margin)}
+.setup{display:grid;grid-template-columns:1fr 1fr;gap:10px;background:var(--card);border:2px solid var(--ink);border-radius:14px;padding:14px;margin:12px 0 16px}
+@media (max-width:560px){ .setup{grid-template-columns:1fr} }
+.setup label{font:700 .8rem/1.2 var(--font-body);color:var(--ink-soft);display:block;margin-bottom:4px}
+.setup select,.setup input{width:100%;font:inherit;padding:8px 10px;border:1.5px solid var(--ink-soft);border-radius:8px;background:var(--paper);color:var(--ink)}
+.setup .full{grid-column:1/-1}
+.small{font-size:.82rem;color:var(--ink-soft)}
+.chat{display:flex;flex-direction:column;gap:12px;margin:8px 0 12px}
+.msg{max-width:88%;padding:10px 14px;border-radius:14px;border:2px solid var(--ink);background:var(--card);white-space:pre-wrap;overflow-wrap:anywhere}
+.msg.w{align-self:flex-start;border-top-left-radius:4px}
+.msg.u{align-self:flex-end;background:var(--paper-2);border-top-right-radius:4px}
+.msg .who{display:block;font:700 .72rem/1 var(--font-body);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:5px}
+.msg .move{font-weight:400;text-transform:none;letter-spacing:0;margin-left:6px;opacity:.8}
+.msg .note{display:block;margin-bottom:6px;font-style:italic}
+.pin{margin-top:6px;font:700 .8rem var(--font-body);border:1.5px dashed var(--ink-soft);background:transparent;color:var(--ink);border-radius:99px;padding:3px 10px;cursor:pointer}
+.pin.on{border-style:solid;border-color:var(--good);color:var(--good)}
+.thinking{align-self:flex-start;color:var(--ink-soft);font-style:italic}
+.composer{display:flex;gap:8px;align-items:flex-end;position:sticky;bottom:0;background:var(--paper);padding:10px 0;border-top:2px solid var(--rule)}
+.composer textarea{flex:1;min-height:52px;max-height:160px;resize:vertical;font:inherit;padding:10px 12px;border:2px solid var(--ink);border-radius:12px;background:var(--card);color:var(--ink)}
+.btn{font:700 1rem var(--font-body);padding:11px 18px;border-radius:12px;border:2px solid var(--ink);background:var(--ink);color:var(--paper);cursor:pointer}
+.btn.alt{background:var(--card);color:var(--ink)}
+.btn.go{background:var(--pencil);color:#1D2858;border-color:#1D2858}
+.btn:disabled{opacity:.45;cursor:default}
+.ideas{background:var(--card);border:2px solid var(--ink);border-radius:14px;padding:14px;margin:14px 0}
+.ideas h2,.write h2{font:800 1.2rem/1.1 var(--font-display);margin:0 0 6px}
+.ideas ul{margin:8px 0 10px;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:8px}
+.ideas li,.notes li{background:#FFF6C9;color:#1D2858;padding:8px 10px;border-radius:4px;box-shadow:2px 2px 0 rgba(0,0,0,.12);max-width:100%;font-size:.95rem}
+.nudge{margin:6px 0 0;padding:8px 12px;border-left:4px solid var(--pencil);background:var(--paper-2);border-radius:6px}
+.write{margin-top:18px}
+.notes{margin:8px 0 10px;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
+.notes li{display:flex;justify-content:space-between;gap:10px;align-items:center}
+.notes button{font:700 .78rem var(--font-body);white-space:nowrap;border:1.5px solid #1D2858;background:#fff;color:#1D2858;border-radius:99px;padding:3px 10px;cursor:pointer}
+.write textarea{width:100%;min-height:220px;font:inherit;line-height:32px;padding:0 12px;border:2px solid var(--ink);border-radius:12px;background:var(--card);color:var(--ink)}
+.care{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(20,24,48,.45)}
+.care .carebox{max-width:460px;width:100%;max-height:90vh;overflow:auto;background:#fff;color:#1D2858;border-radius:16px;padding:22px;border:2px solid #1D2858}
+.care h3{margin:0 0 8px;font-size:1.3rem}.care p{margin:0 0 12px}.care ul{list-style:none;padding:0;margin:0 0 12px}
+.care li{padding:10px 12px;border-radius:10px;background:#e7f1fb;margin-bottom:8px}.care li b{display:block}.care .careout{font-size:.88rem;color:#4B557F}
+</style>
+</head>
+<body>
+<main>
+  <div class="top"><a class="logo" href="/">Wrimble</a><span class="badge">Preview · not public</span></div>
+  <h1>Talk to Wrimble</h1>
+  <p class="lead">Talk your idea through first. Wrimble asks, reacts and pushes back, but it never writes your piece. When you're ready, keep the ideas that are yours and start writing. <span class="hand">your words, always.</span></p>
+
+  <div class="setup">
+    <div><label for="lvl">Who's writing?</label>
+      <select id="lvl"><option value="kids">Kid (8 to 12)</option><option value="teens">Teen (13 to 15)</option><option value="hsc">Senior / HSC</option><option value="uni">Uni</option><option value="everyday" selected>Adult</option></select></div>
+    <div><label for="eng">Coach brain (testing only)</label>
+      <select id="eng"><option value="haiku" selected>Fast (Haiku 5.5)</option><option value="sonnet">Deeper (Sonnet 5.5)</option></select></div>
+    <div class="full"><label for="topic">What do you want to write? (optional)</label>
+      <input id="topic" maxlength="200" placeholder="A funny story, a speech, an HSC piece, no idea yet…"></div>
+  </div>
+
+  <div class="chat" id="chat" aria-live="polite">
+    <div class="msg w"><span class="who">Wrimble</span>What are we writing today? Tell me anything: a half idea, a memory, a topic you've been given, or "no idea". We'll work it out together.</div>
+  </div>
+  <p class="nudge" id="nudge" hidden></p>
+
+  <div class="composer">
+    <textarea id="say" placeholder="Type to Wrimble…" aria-label="Your message"></textarea>
+    <button class="btn" id="send" type="button">Send</button>
+  </div>
+
+  <section class="ideas" id="ideas">
+    <h2>Your ideas</h2>
+    <p class="small" id="ideahint">Tap “Keep this idea” on anything <b>you</b> said. Only your own words can go into your writing.</p>
+    <ul id="pinned"></ul>
+    <button class="btn go" id="start" type="button" disabled>Start writing</button>
+  </section>
+
+  <section class="write" id="write" hidden>
+    <h2>Write with Wrimble</h2>
+    <p class="small">Your kept ideas are here. Tap “Put in” to drop one into your writing, then make it better. Wrimble can't add words here.</p>
+    <ul class="notes" id="notes"></ul>
+    <textarea id="draft" placeholder="Start anywhere. Messy is fine."></textarea>
+    <p class="small" id="wc">0 words</p>
+  </section>
+</main>
+<script>
+const $ = id => document.getElementById(id);
+const esc = s => String(s==null?'':s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const history = [];           // {role:'user'|'assistant', text}
+const pinned = [];            // the writer's own messages only
+let busy = false, userTurns = 0;
+const MOVES = {ask:'asked',react:'reacted',explain:'explained',challenge:'pushed back',experiment:'set a try',directions:'gave directions',reflect:'summed up',space:'gave you room'};
+
+/* Safety: same check as the writing room. If someone may be at risk, stop and show help. */
+const CARE_RX=/\b(kill(ing)? my ?self|end(ing)? (my life|it all)|suicid\w*|(want|wanted|wanna) to die|don['’]?t want to (live|be alive|be here anymore)|better off (dead|without me)|(nobody|no one|no-one) would (care|notice|miss me)(?! about)|hurt(ing)? my ?self|self[- ]?harm\w*|cut(ting)? my ?self|(he|she|they|someone|mum|mom|dad|uncle|aunt|aunty|brother|sister|step\w*|teacher|coach|boyfriend|girlfriend|grandpa|grandma|cousin) (keeps? |always )?(hits?|hurts?|beats?|touch(es)?) me)\b/i;
+const LOCAL_CARE={care:'wellbeing',care_title:'Hey, that sounds really hard.',care_note:'What you wrote matters more than any writing tip, and so do you. Please tell someone you trust how you’re feeling, like a parent, a teacher or another adult you feel safe with.',help:[{name:'Kids Helpline (ages 5 to 25)',how:'Call 1800 55 1800. Free, any time.',url:'https://kidshelpline.com.au'},{name:'Lifeline',how:'Call 13 11 14 or text 0477 13 11 14. Any time.',url:'https://www.lifeline.org.au'},{name:'In danger right now?',how:'Call 000.'}],outside:'Not in Australia? findahelpline.com lists free help in your country.'};
+function showCare(c){
+  c=(c&&c.help)?c:LOCAL_CARE; if($('care')) return;
+  const d=document.createElement('div'); d.className='care'; d.id='care'; d.setAttribute('role','dialog'); d.setAttribute('aria-modal','true');
+  d.innerHTML='<div class="carebox"><h3>'+esc(c.care_title)+'</h3><p>'+esc(c.care_note)+'</p><ul>'+c.help.map(h=>'<li><b>'+esc(h.name)+'</b>'+esc(h.how)+(h.url?' <a href="'+esc(h.url)+'" target="_blank" rel="noopener">Website</a>':'')+'</li>').join('')+'</ul><p class="careout">'+esc(c.outside)+'</p><button class="btn" type="button" id="careok">Okay</button></div>';
+  document.body.appendChild(d); $('careok').focus(); $('careok').onclick=()=>d.remove();
+}
+
+function addMsg(role, text, extra){
+  const d=document.createElement('div'); d.className='msg '+(role==='user'?'u':'w');
+  if(role==='user'){
+    const i=history.length-1;
+    d.innerHTML='<span class="who">You</span>'+esc(text)+'<br><button class="pin" type="button">Keep this idea</button>';
+    d.querySelector('.pin').onclick=e=>togglePin(i, e.currentTarget);
+  } else {
+    const mv = extra && extra.move && MOVES[extra.move] ? '<span class="move">· '+MOVES[extra.move]+'</span>' : '';
+    d.innerHTML='<span class="who">Wrimble'+mv+'</span>'+(extra&&extra.note?'<span class="note">'+esc(extra.note)+'</span>':'')+esc(text);
+  }
+  $('chat').appendChild(d); d.scrollIntoView({block:'nearest',behavior:'smooth'}); return d;
+}
+function togglePin(i, btn){
+  const t=history[i].text, at=pinned.indexOf(t);
+  if(at>=0){ pinned.splice(at,1); btn.classList.remove('on'); btn.textContent='Keep this idea'; }
+  else { pinned.push(t); btn.classList.add('on'); btn.textContent='Kept ✓'; }
+  renderIdeas();
+}
+function renderIdeas(){
+  $('pinned').innerHTML=pinned.map(t=>'<li>'+esc(t)+'</li>').join('');
+  $('start').disabled = userTurns===0;
+  $('notes').innerHTML=pinned.map((t,i)=>'<li><span>'+esc(t)+'</span><button type="button" data-i="'+i+'">Put in</button></li>').join('');
+  $('notes').querySelectorAll('button').forEach(b=>b.onclick=()=>putIn(pinned[+b.dataset.i]));
+}
+function putIn(t){
+  const ta=$('draft'), s=ta.selectionStart||ta.value.length, pre=ta.value.slice(0,s), post=ta.value.slice(s);
+  const ins=(pre && !/\s$/.test(pre)?' ':'')+t+' ';
+  ta.value=pre+ins+post; ta.focus(); ta.selectionStart=ta.selectionEnd=(pre+ins).length; count();
+}
+function count(){ const n=($('draft').value.trim().match(/\S+/g)||[]).length; $('wc').textContent=n+(n===1?' word':' words'); }
+$('draft').addEventListener('input', ()=>{ count(); if(CARE_RX.test($('draft').value)) showCare(); });
+// Paste only ever brings the writer's own pinned words in via "Put in"; block pasting Wrimble's words.
+$('draft').addEventListener('paste', e=>{ const t=(e.clipboardData||window.clipboardData).getData('text'); if(history.some(m=>m.role==='assistant' && t.trim() && m.text.includes(t.trim()))){ e.preventDefault(); alert('That’s Wrimble’s words, not yours. Write it your way.'); } });
+
+$('start').onclick=()=>{ $('write').hidden=false; renderIdeas(); $('draft').focus(); $('write').scrollIntoView({behavior:'smooth'}); };
+
+async function send(){
+  const text=$('say').value.trim(); if(!text || busy) return;
+  if(CARE_RX.test(text)){ showCare(); return; }
+  busy=true; $('send').disabled=true; $('say').value='';
+  history.push({role:'user', text}); userTurns++; const mine=addMsg('user', text); renderIdeas();
+  const th=document.createElement('div'); th.className='thinking'; th.textContent='Wrimble is thinking…'; $('chat').appendChild(th);
+  let r=null, status=0;
+  try{
+    const ctl=new AbortController(); const t=setTimeout(()=>ctl.abort(), 30000);
+    const res=await fetch('/api/coach',{method:'POST',headers:{'Content-Type':'application/json'},signal:ctl.signal,
+      body:JSON.stringify({mode:'talk', level:$('lvl').value, engine:$('eng').value, prompt:$('topic').value.trim(), text, history})});
+    clearTimeout(t); status=res.status; r=await res.json().catch(()=>null);
+  }catch(e){ r=null; }
+  th.remove();
+  if(r && r.care==='wellbeing'){ history.pop(); userTurns--; mine.remove(); showCare(r); }
+  else if(r && r.reply){
+    history.push({role:'assistant', text:r.reply});
+    addMsg('assistant', r.reply, {move:r.move, note:(r.care && r.care!=='none') ? r.care_note : ''});
+    if(r.ready_to_write){ $('start').disabled=false; $('start').textContent='Start writing ✨'; $('nudge').hidden=false; $('nudge').textContent='Sounds like you’ve got enough to start. Keep the ideas that are yours, then press Start writing.'; }
+  } else {
+    history.pop(); userTurns--; mine.remove();
+    addMsg('assistant', status===429 ? 'Easy, tiger. Have a breather and try again in a bit.' : 'Hmm, I lost my train of thought. Try sending that again.');
+    $('say').value=text;
+  }
+  if(userTurns>=12 && $('write').hidden){ $('nudge').hidden=false; $('nudge').textContent='Lots of good talking. Writing is where it gets real: start with what you’ve got, even if it’s messy.'; }
+  busy=false; $('send').disabled=false; $('say').focus();
+}
+$('send').onclick=send;
+$('say').addEventListener('keydown', e=>{ if(e.key==='Enter' && !e.shiftKey){ e.preventDefault(); send(); } });
+</script>
+</body>
+</html>
