@@ -22,6 +22,10 @@ body.solomode .tib{display:none!important}
 .tib .tibtick{display:inline-block;padding:2px 10px;border-radius:99px;background:#e5f4e4;color:#1b5e20;font:700 .78rem/1.6 system-ui,sans-serif}
 .tib .tibname{display:block;font-size:1.15rem;margin:8px 0 4px}.tib .tibdone p{margin:6px 0}.tib .tibcount{font-size:.82rem;color:var(--ink-soft)}
 
+.care{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(20,24,48,.45)}
+.care .carebox{max-width:460px;width:100%;max-height:90vh;overflow:auto;background:#fff;border-radius:16px;padding:22px 22px 18px;border:2px solid var(--ink,#1d2340);box-shadow:0 10px 40px rgba(0,0,0,.25)}
+.care h3{margin:0 0 8px;font-size:1.3rem}.care p{margin:0 0 12px}.care ul{list-style:none;padding:0;margin:0 0 12px}
+.care li{padding:10px 12px;border-radius:10px;background:#e7f1fb;margin-bottom:8px}.care li b{display:block}.care .careout{font-size:.88rem;color:var(--ink-soft,#5b6080)}
 </style>
 <title>Try a Wrimble</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -677,8 +681,8 @@ async function pasteReview(){
   }
   let head='I read what you pasted. Questions for you:';
   if(aiOK){
-    const ai=await askAI({mode:'bubble', level:LEVEL, prompt:CUR.p, text:v.slice(-1500), asked:[...asked].slice(-24)}, 4000);
-    if(ai && ai.question && ta.value===v){ items.unshift(ai.question); asked.add('q: '+ai.question); }
+    const ai=await askAI({mode:'bubble', level:LEVEL, prompt:CUR.p, text:v.slice(-1500), asked:[...asked].slice(-24)}, 8000);
+    if(ai && ai.question && ta.value===v){ items.unshift((ai.care_note&&ai.care!=='none'?ai.care_note+' ':'')+ai.question); asked.add('q: '+ai.question); }
   }
   if(ta.value!==v) return;
   if(!items.length) items.push('Which line here is the most yours? Start your rewrite from that one.');
@@ -825,15 +829,33 @@ function walkHook(frag, all){
   return null;
 }
 
+
+/* Safety first: if someone may be at risk, stop coaching and show care and help lines instead. */
+const CARE_RX=/\b(kill(ing)? my ?self|end(ing)? (my life|it all)|suicid\w*|(want|wanted|wanna) to die|don['\u2019]?t want to (live|be alive|be here anymore)|better off (dead|without me)|(nobody|no one|no-one) would (care|notice|miss me)(?! about)|hurt(ing)? my ?self|self[- ]?harm\w*|cut(ting)? my ?self|(he|she|they|someone|mum|mom|dad|uncle|aunt|aunty|brother|sister|step\w*|teacher|coach|boyfriend|girlfriend|grandpa|grandma|cousin) (keeps? |always )?(hits?|hurts?|beats?|touch(es)?) me)\b/i;
+const LOCAL_CARE={care:'wellbeing',care_title:'Hey, that sounds really hard.',care_note:'What you wrote matters more than any writing tip, and so do you. Please tell someone you trust how you\u2019re feeling, like a parent, a teacher or another adult you feel safe with.',help:[{name:'Kids Helpline (ages 5 to 25)',how:'Call 1800 55 1800. Free, any time.',url:'https://kidshelpline.com.au'},{name:'Lifeline',how:'Call 13 11 14 or text 0477 13 11 14. Any time.',url:'https://www.lifeline.org.au'},{name:'In danger right now?',how:'Call 000.'}],outside:'Not in Australia? findahelpline.com lists free help in your country.'};
+let careShownAt=0;
+function atRisk(t){ return CARE_RX.test(String(t||'')); }
+function showCare(c){
+  c=(c&&c.care==='wellbeing'&&c.help)?c:LOCAL_CARE;
+  if(document.getElementById('tw-care') || Date.now()-careShownAt<5*60*1000) return;
+  careShownAt=Date.now(); try{ hideBubble(); }catch(e){}
+  const e=s=>String(s||'').replace(/[&<>"]/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch]));
+  const d=document.createElement('div'); d.className='care'; d.id='tw-care'; d.setAttribute('role','dialog'); d.setAttribute('aria-modal','true');
+  d.innerHTML='<div class="carebox"><h3>'+e(c.care_title)+'</h3><p>'+e(c.care_note)+'</p><ul>'+c.help.map(h=>'<li><b>'+e(h.name)+'</b>'+e(h.how)+(h.url?' <a href="'+e(h.url)+'" target="_blank" rel="noopener">Website</a>':'')+'</li>').join('')+'</ul><p class="careout">'+e(c.outside)+'</p><button class="btn sm" type="button" id="tw-careok">Okay</button></div>';
+  document.body.appendChild(d); const ok=document.getElementById('tw-careok'); ok.focus();
+  ok.addEventListener('click',()=>d.remove());
+}
+
 /* Optional real AI coach. If /api/coach isn't there (preview, Drop deploy, no key), we quietly use the built-in coach. */
 let aiOK = /netlify\.app$|wrimble\.com\.au$/.test(location.hostname);
 async function askAI(body, ms){
+  if(atRisk(body.text)||atRisk(body.answer)||atRisk(body.line)){ showCare(); return null; }
   if(!aiOK) return null;
   const ctl=new AbortController(); const t=setTimeout(()=>ctl.abort(), ms);
   try{
     const r=await fetch('/api/coach',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body),signal:ctl.signal});
     if(r.status===404||r.status===501) aiOK=false;
-    if(!r.ok) return null; return await r.json();
+    if(!r.ok) return null; const j=await r.json(); if(j&&j.care==='wellbeing'){ showCare(j); return null; } return j;
   }catch(e){ return null; } finally{ clearTimeout(t); }
 }
 let walkSeq=0;
@@ -841,6 +863,7 @@ async function walkCheck(force){
   if(!$('tw-coach').checked) return;
   if(!force && !autoCoach(ta.value)) return;
   const v=ta.value, pos=ta.selectionStart; if(!v.trim()) return;
+  if(atRisk(v)){ showCare(); return; }
   if(v.slice(pos).trim()){ return editCheck(v, pos); }
   if(!force && Date.now()-lastBubbleAt<3500) return;
   const all=sentences(v); const endsSentence=/[.!?]["”]?\s*$/.test(v);
@@ -855,9 +878,9 @@ async function walkCheck(force){
   if(force && !q){ const d=DEEPER.find(d=>!deeperUsed.has(d[0]))||THINK.find(t=>!asked.has('think:'+t[0]))||DEEPER[0]; deeperUsed.add(d[0]); q={k:'deep:'+d[0], who:'Coach', q:d[0], h:d[1], ex:''}; }
   if(q) showBubble(q, Math.min(anchor, ta.value.replace(/\s+$/,'').length));
   if(aiOK){
-    const ai=await askAI({mode:'bubble', level:LEVEL, prompt:CUR.p, text:v.slice(-1500), asked:[...asked].slice(-24)}, 3500);
+    const ai=await askAI({mode:'bubble', level:LEVEL, prompt:CUR.p, text:v.slice(-1500), asked:[...asked].slice(-24)}, 8000);
     if(seq!==walkSeq || ta.value.length-v.length>12) return;
-    if(ai && ai.question){ asked.add('q: '+ai.question); asked.add('ex: '+(ai.example||'').slice(0,60)); showBubble({k:'ai:'+ai.question.slice(0,40), q:ai.question, h:ai.idea||'', ex:ai.example||''}, Math.min(anchor, ta.value.replace(/\s+$/,'').length)); }
+    if(ai && ai.question){ asked.add('q: '+ai.question); asked.add('ex: '+(ai.example||'').slice(0,60)); showBubble({k:'ai:'+ai.question.slice(0,40), q:(ai.care_note&&ai.care!=='none'?ai.care_note+' ':'')+ai.question, h:ai.idea||'', ex:ai.example||''}, Math.min(anchor, ta.value.replace(/\s+$/,'').length)); }
   }
 }
 
@@ -1101,11 +1124,12 @@ function tibResult(verdict, got, missing, confirmed, why){
 $('tw-tibgo').addEventListener('click', async ()=>{
   const T=TEACH[tibKey]; const a=$('tw-tiba').value.trim(); if(!T) return;
   if(words(a).length<6){ tibFeedback('part','Give it a sentence or two. Pretend you’re explaining it to a friend who missed the lesson.'); return; }
+  if(atRisk(a)){ careShownAt=0; showCare(); return; }
   tibTries++;
   const k=tibKey, ans=a;
   if(aiOK){
     $('tw-tibgo').disabled=true; tibFeedback('','The coach is reading your explanation…');
-    const r=await askAI({mode:'teach', level:LEVEL, technique:T[0], question:T[1], answer:ans, text:ans}, 8000);
+    const r=await askAI({mode:'teach', level:LEVEL, technique:T[0], question:T[1], answer:ans, text:ans}, 12000);
     $('tw-tibgo').disabled=false;
     if(k!==tibKey) return;
     if(r && r.verdict){ tibResult(r.verdict, r.got_right, r.nudge, true, r.missing); return; }
@@ -1146,6 +1170,7 @@ function renderVersions(){
 $('tw-done').addEventListener('click', ()=>{
   const text=ta.value.trim();
   if(words(text).length<5){ toast("Give it at least a sentence or two. Ugly counts."); ta.focus(); return; }
+  if(atRisk(text)){ careShownAt=0; showCare(); return; }
   versions.push(text); clearInterval(timerId); timerId=null; hideBubble();
   countProgress();
   const wasSolo=SOLO, tried=mission, prevV=versions.length>1?versions[versions.length-2]:null;
@@ -1308,7 +1333,7 @@ $('tw-wlq').addEventListener('click', async e=>{
   $('tw-wlq').querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed', x===b));
   const rule=WHY[q].find(r=>r[0](wlLine));
   wlRender({diagnosis:rule[1], technique:rule[2], why_it_works:rule[3], example_flat:rule[4], example_works:rule[5], try_it:rule[6], when_not:rule[7]});
-  if(aiOK){ const line=wlLine; const ai=await askAI({mode:'why', level:LEVEL, question:b.textContent, line, text:ta.value.slice(-2500)}, 7000);
+  if(aiOK){ const line=wlLine; const ai=await askAI({mode:'why', level:LEVEL, question:b.textContent, line, text:ta.value.slice(-2500)}, 12000);
     if(ai && ai.diagnosis && line===wlLine && b.getAttribute('aria-pressed')==='true') wlRender(ai); }
 });
 
